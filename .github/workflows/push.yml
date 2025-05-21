@@ -1,0 +1,99 @@
+# Enable the CI triggers when you are ready.
+#
+on:
+  workflow_dispatch:
+
+#   push:
+#     branches:
+#       - main
+#     paths-ignore:
+#       - "CHANGELOG.md"
+
+#   pull_request:
+#     branches:
+#       - main
+#     paths-ignore:
+#       - "CHANGELOG.md"
+
+env:
+  GOLANG_CI_LINT_VERSION: v1.61.0
+  PROVIDER: "xyz"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Unshallow clone for tags
+        run: git fetch --prune --unshallow --tags
+
+      - name: Install Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.24.x
+
+      - name: Lint
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin $GOLANG_CI_LINT_VERSION
+          make lint
+
+      - name: Test
+        run: make test
+
+  assert-clean-tree:
+    name: Check if working tree is clean
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Unshallow clone for tags
+        run: git fetch --prune --unshallow --tags
+
+      - name: Install Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.24.x
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      - name: Setup DotNet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 6.x
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - name: Install pulumictl
+        uses: jaxxstorm/action-install-gh-release@v2.1.0
+        with:
+          repo: pulumi/pulumictl
+          tag: "latest"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Pulumi CLI
+        uses: pulumi/actions@v6
+        with:
+          pulumi-version: latest
+
+      - name: Generate schema and build SDKs
+        run: make gen generate_schema build
+
+      - name: Check worktree clean
+        run: |
+          git update-index -q --refresh
+          if ! git diff-files --quiet; then
+              >&2 echo "error: working tree is not clean, aborting!"
+              git status
+              git diff
+              exit 1
+          fi

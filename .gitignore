@@ -1,0 +1,17 @@
+**/.DS_Store
+
+/vendor/
+/.idea/
+/nuget/
+**/bin/
+**/obj/
+**/node_modules/
+yarn.lock
+
+.pulumi
+Pulumi.*.yaml
+
+/sdk/dotnet/version.txt
+**/dist
+
+go.work.sum
