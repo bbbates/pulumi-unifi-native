@@ -2,7 +2,7 @@ on:
   workflow_dispatch:
 
 env:
-  PROVIDER: "xyz"
+  PROVIDER: "pulumi-unifi-native"
 
 jobs:
   publish-binary:

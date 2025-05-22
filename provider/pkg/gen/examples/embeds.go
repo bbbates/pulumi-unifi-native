@@ -9,5 +9,5 @@ var service string
 // ResourceExample contains Markdown-formatted examples
 // corresponding to a resource's type token.
 var ResourceExample = map[string]string{
-	"xyz": service,
+	"unifi-native": service,
 }

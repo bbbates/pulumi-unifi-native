@@ -6,7 +6,7 @@ on:
       - "!v*.*.*-**"
 env:
   GOLANG_CI_LINT_VERSION: v1.61.0
-  PROVIDER: "xyz"
+  PROVIDER: "pulumi-unifi-native"
   NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
   PUBLISH_NPM: true
   NPM_REGISTRY_URL: https://registry.npmjs.org

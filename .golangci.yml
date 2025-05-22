@@ -1,9 +1,9 @@
 run:
   skip-files:
-    - pulumi-resource-xyz/schema.go
+    - pulumi-resource-pulumi-unifi-native/schema.go
     # Ignore the generated config.go file temporarily because it contains
     # an unused import that the linter will complain about.
-    - go/xyz/config/config.go
+    - go/pulumi-unifi-native/config/config.go
 
 linters:
   enable-all: false

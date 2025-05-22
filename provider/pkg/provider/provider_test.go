@@ -44,7 +44,7 @@ const testCreateJSONPayload = `{
 func readFileFromProviderResourceDir(t *testing.T, filename string) []byte {
 	t.Helper()
 
-	b, err := os.ReadFile(filepath.Join("..", "..", "cmd", "pulumi-resource-xyz", filename))
+	b, err := os.ReadFile(filepath.Join("..", "..", "cmd", "pulumi-resource-unifi-native", filename))
 	if err != nil {
 		t.Fatalf("Failed reading openapi.yml: %v", err)
 	}
@@ -70,7 +70,7 @@ func makeTestProvider(ctx context.Context, t *testing.T) pulumirpc.ResourceProvi
 	}
 
 	_, err = p.Configure(ctx, &pulumirpc.ConfigureRequest{
-		Variables: map[string]string{"xyz:config:apiKey": "fakeapikey"},
+		Variables: map[string]string{"unifi:config:apiKey": "fakeapikey"},
 	})
 
 	if err != nil {
@@ -93,7 +93,7 @@ func TestDiff(t *testing.T) {
 	news["name"] = "Test2"
 	newsStruct, _ := plugin.MarshalProperties(resource.NewPropertyMapFromMap(news), state.DefaultMarshalOpts)
 
-	resp, err := p.Diff(ctx, &pulumirpc.DiffRequest{Id: "", Urn: "urn:pulumi:some-stack::some-project::xyz:services:StaticSite::someResourceName", Olds: oldsStruct, News: newsStruct})
+	resp, err := p.Diff(ctx, &pulumirpc.DiffRequest{Id: "", Urn: "urn:pulumi:some-stack::some-project::unifi:services:StaticSite::someResourceName", Olds: oldsStruct, News: newsStruct})
 	assert.Nil(t, err)
 	assert.Equal(t, pulumirpc.DiffResponse_DIFF_SOME, resp.Changes)
 	assert.NotEmpty(t, resp.Diffs)
@@ -114,7 +114,7 @@ func TestCreate(t *testing.T) {
 	inputProperties, _ := plugin.MarshalProperties(resource.NewPropertyMapFromMap(inputs), state.DefaultMarshalOpts)
 
 	_, err := p.Create(ctx, &pulumirpc.CreateRequest{
-		Urn:        "urn:pulumi:dev::xyz-ts::xyz:services:WebService::webservice",
+		Urn:        "urn:pulumi:dev::unifi-ts::unifi:services:WebService::webservice",
 		Properties: inputProperties,
 	})
 

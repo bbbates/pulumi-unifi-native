@@ -13,8 +13,8 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	providerSchemaGen "github.com/cloudy-sky-software/pulumi-xyz/provider/pkg/gen"
-	providerVersion "github.com/cloudy-sky-software/pulumi-xyz/provider/pkg/version"
+	providerSchemaGen "github.com/bbbates/pulumi-unifi-native/provider/pkg/gen"
+	providerVersion "github.com/bbbates/pulumi-unifi-native/provider/pkg/version"
 
 	"github.com/cloudy-sky-software/pulumi-provider-framework/openapi"
 
@@ -75,7 +75,7 @@ func main() {
 		}
 
 		schemaSpec, metadata, updatedOpenAPIDoc := providerSchemaGen.PulumiSchema(*openAPIDoc)
-		providerDir := filepath.Join(".", "provider", "cmd", "pulumi-resource-xyz")
+		providerDir := filepath.Join(".", "provider", "cmd", "pulumi-resource-unifi-native")
 		mustWritePulumiSchema(schemaSpec, providerDir)
 
 		// Write the metadata.json file as well.

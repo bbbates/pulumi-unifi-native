@@ -5,11 +5,11 @@ package main
 import (
 	_ "embed"
 
-	"github.com/cloudy-sky-software/pulumi-xyz/provider/pkg/provider"
-	"github.com/cloudy-sky-software/pulumi-xyz/provider/pkg/version"
+	"github.com/bbbates/pulumi-unifi-native/provider/pkg/provider"
+	"github.com/bbbates/pulumi-unifi-native/provider/pkg/version"
 )
 
-var providerName = "xyz"
+var providerName = "unifi"
 
 //go:embed schema.json
 var pulumiSchema []byte

@@ -22,7 +22,7 @@ to [Terraform-based providers](https://github.com/pulumi/pulumi-tf-provider-boil
 
 ## Authoring a Pulumi Native Provider
 
-This boilerplate creates a working Pulumi-owned provider named `xyz`.
+This boilerplate creates a working Pulumi-owned provider named `unifi-native`.
 
 ### Prerequisites
 
@@ -43,7 +43,7 @@ Pulumi offers this repository as a [GitHub template repository](https://docs.git
 1. Click "Use this template".
 1. Set the following options:
    - Owner: `<your GH organization>`
-   - Repository name: pulumi-xyz (replace "xyz" with the name of your provider)
+   - Repository name: pulumi-unifi-native (replace "xyz" with the name of your provider)
      - Providers built from Cloudy Sky Software's templates are _always_ native providers, by default.
      - However, if there is already a TF-bridged provider with that name, you should add the suffix `-native` so that the package name in some package registries do not conflict with the other providers.
    - Description: Pulumi provider for xyz

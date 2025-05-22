@@ -14,17 +14,17 @@ import (
 
 	openapigen "github.com/cloudy-sky-software/pulschema/pkg"
 
-	"github.com/cloudy-sky-software/pulumi-xyz/provider/pkg/gen/examples"
+	"github.com/bbbates/pulumi-unifi-native/provider/pkg/gen/examples"
 )
 
-const packageName = "xyz"
+const packageName = "unifi"
 
 // PulumiSchema will generate a Pulumi schema for the given k8s schema.
 func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.ProviderMetadata, openapi3.T) {
 	pkg := pschema.PackageSpec{
 		Name:        packageName,
-		Description: "A Pulumi package for creating and managing Xyz resources.",
-		DisplayName: "Xyz",
+		Description: "A Pulumi package for creating and managing Unifi resources.",
+		DisplayName: "Unifi",
 		License:     "Apache-2.0",
 		Keywords: []string{
 			"pulumi",
@@ -34,7 +34,7 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 		},
 		Homepage:   "https://cloudysky.software",
 		Publisher:  "Cloudy Sky Software",
-		Repository: "https://github.com/cloudy-sky-software/pulumi-xyz",
+		Repository: "https://github.com/bbbates/pulumi-unifi-native",
 
 		Config: pschema.ConfigSpec{
 			Variables: map[string]pschema.PropertySpec{
@@ -53,17 +53,17 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 
 		Provider: pschema.ResourceSpec{
 			ObjectTypeSpec: pschema.ObjectTypeSpec{
-				Description: "The provider type for the Xyz package.",
+				Description: "The provider type for the Unifi package.",
 				Type:        "object",
 			},
 			InputProperties: map[string]pschema.PropertySpec{
 				"apiKey": {
 					DefaultInfo: &pschema.DefaultSpec{
 						Environment: []string{
-							"XYZ_APIKEY",
+							"UNIFI_APIKEY",
 						},
 					},
-					Description: "The Xyz API key.",
+					Description: "The Unifi API key.",
 					TypeSpec:    pschema.TypeSpec{Type: "string"},
 					Language: map[string]pschema.RawMessage{
 						"csharp": rawMessage(map[string]interface{}{
@@ -75,7 +75,7 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 			},
 		},
 
-		PluginDownloadURL: "github://api.github.com/cloudy-sky-software/pulumi-xyz",
+		PluginDownloadURL: "github://api.github.com/bbbates/pulumi-unifi-native",
 		Types:             map[string]pschema.ComplexTypeSpec{},
 		Resources:         map[string]pschema.ResourceSpec{},
 		Functions:         map[string]pschema.FunctionSpec{},
@@ -83,7 +83,7 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 	}
 
 	csharpNamespaces := map[string]string{
-		"xyz": "XYZ",
+		"unifi": "UNIFI",
 		// TODO: Is this needed?
 		"": "Provider",
 	}
@@ -118,13 +118,13 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 	})
 
 	pkg.Language["go"] = rawMessage(map[string]interface{}{
-		"importBasePath": "github.com/cloudy-sky-software/pulumi-xyz/sdk/go/xyz",
+		"importBasePath": "github.com/bbbates/pulumi-unifi-native/sdk/go/unifi-native",
 	})
 	pkg.Language["nodejs"] = rawMessage(map[string]interface{}{
-		"packageName": "@cloudyskysoftware/pulumi-xyz",
+		"packageName": "@cloudyskysoftware/pulumi-unifi-native",
 	})
 	pkg.Language["python"] = rawMessage(map[string]interface{}{
-		"packageName": "pulumi_x_y_z",
+		"packageName": "pulumi_unifi",
 		"requires": map[string]string{
 			"pulumi": ">=3.0.0,<4.0.0",
 		},

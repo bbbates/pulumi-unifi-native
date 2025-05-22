@@ -17,7 +17,7 @@ on:
 
 env:
   GOLANG_CI_LINT_VERSION: v1.61.0
-  PROVIDER: "xyz"
+  PROVIDER: "pulumi-unifi-native"
 
 jobs:
   lint:

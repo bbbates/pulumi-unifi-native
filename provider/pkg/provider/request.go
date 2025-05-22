@@ -12,7 +12,7 @@ const (
 	authSchemePrefix = "Bearer"
 )
 
-func (p *xyzProvider) determineDiffsAndReplacements(d *resource.ObjectDiff, properties openapi3.Schemas) ([]string, []string) {
+func (p *unifiNativeProvider) determineDiffsAndReplacements(d *resource.ObjectDiff, properties openapi3.Schemas) ([]string, []string) {
 	replaces := make([]string, 0)
 	diffs := make([]string, 0)
 
