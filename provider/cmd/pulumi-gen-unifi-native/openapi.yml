@@ -1541,6 +1541,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -2045,6 +2051,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BroadcastGroupResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -2549,6 +2561,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelPlanResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -3053,6 +3071,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -3878,6 +3902,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DHCPOptionResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -4382,6 +4412,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DpiAppResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -4886,6 +4922,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DpiGroupResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -5390,6 +5432,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DynamicDNSResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -5894,6 +5942,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirewallGroupResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -6398,6 +6452,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirewallRuleResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -6902,6 +6962,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HeatMapResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -7069,6 +7135,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HeatMapResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -7406,6 +7478,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HeatMapPointResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -7573,6 +7651,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HeatMapPointResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -7910,6 +7994,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hotspot2ConfResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -8414,6 +8504,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HotspotOpResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -8918,6 +9014,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HotspotPackageResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -9422,6 +9524,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MapResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -9926,6 +10034,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaFileResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -10430,6 +10544,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -10934,6 +11054,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortProfileResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -11438,6 +11564,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortForwardResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -11942,6 +12074,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RADIUSProfileResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -12446,6 +12584,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutingResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -12950,6 +13094,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleTaskResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -13454,6 +13604,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpatialRecordResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -13958,6 +14114,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -14462,6 +14624,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -14966,6 +15134,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGroupResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -15133,6 +15307,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGroupResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -15470,6 +15650,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualDeviceResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -15974,6 +16160,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WLANResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -16478,6 +16670,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WLANGroupResponse'
+          description: OK
         "400":
           content:
             application/json:
@@ -23240,6 +23438,12 @@ paths:
         schema:
           type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceResponse'
+          description: OK
         "400":
           content:
             application/json:
