@@ -29,8 +29,12 @@ gen::
 
 generate_schema::
 	echo "Generating Pulumi schema..."
-	$(WORKING_DIR)/bin/$(CODEGEN) -v=3 --logtostderr schema
+	$(WORKING_DIR)/bin/$(CODEGEN) -v=9 --logtostderr schema
 	echo "Finished generating schema."
+
+debug_generate_schema::
+	echo "Debugging generate schema with delve"
+	cd $(WORKING_DIR)/provider/cmd/$(CODEGEN) && dlv debug -- -v=9 --logtostderr schema
 
 provider::
 	(cd provider && go build -o $(WORKING_DIR)/bin/${PROVIDER} -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" $(PROJECT)/${PROVIDER_PATH}/cmd/$(PROVIDER))
