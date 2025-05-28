@@ -93,7 +93,7 @@ lint::
 	done
 
 
-install:: install_nodejs_sdk install_dotnet_sdk
+install:: # install_nodejs_sdk install_dotnet_sdk
 	cp $(WORKING_DIR)/bin/${PROVIDER} ${GOPATH}/bin
 
 

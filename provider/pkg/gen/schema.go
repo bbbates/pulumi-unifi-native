@@ -1,5 +1,3 @@
-// Copyright 2022, Cloudy Sky Software LLC.
-
 package gen
 
 import (
@@ -17,29 +15,28 @@ import (
 	"github.com/bbbates/pulumi-unifi-native/provider/pkg/gen/examples"
 )
 
-const packageName = "unifi"
+const packageName = "unifi-native"
 
 // PulumiSchema will generate a Pulumi schema for the given k8s schema.
 func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.ProviderMetadata, openapi3.T) {
 	pkg := pschema.PackageSpec{
 		Name:        packageName,
-		Description: "A Pulumi package for creating and managing Unifi resources.",
+		Description: "A Pulumi package for creating and managing Unifi OS resources.",
 		DisplayName: "Unifi",
 		License:     "Apache-2.0",
 		Keywords: []string{
 			"pulumi",
 			packageName,
-			"category/cloud",
+			"category/network",
 			"kind/native",
 		},
-		Homepage:   "https://cloudysky.software",
-		Publisher:  "Cloudy Sky Software",
-		Repository: "https://github.com/bbbates/pulumi-unifi-native",
+		Homepage:  "https://github.com/bbbates/pulumi-unifi-native",
+		Publisher: "bbbates",
 
 		Config: pschema.ConfigSpec{
 			Variables: map[string]pschema.PropertySpec{
 				"apiKey": {
-					Description: "The API key",
+					Description: "The API key for an admin user, generated from the Unifi admin console",
 					TypeSpec:    pschema.TypeSpec{Type: "string"},
 					Language: map[string]pschema.RawMessage{
 						"csharp": rawMessage(map[string]interface{}{
@@ -47,6 +44,26 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 						}),
 					},
 					Secret: true,
+				},
+				"apiUrl": {
+					Description: "The Base URL for the Unifi API, e.g. https://10.1.1.1",
+					TypeSpec:    pschema.TypeSpec{Type: "string"},
+					Language: map[string]pschema.RawMessage{
+						"csharp": rawMessage(map[string]interface{}{
+							"name": "ApiUrl",
+						}),
+					},
+					Secret: false,
+				},
+				"allowInsecure": {
+					Description: "Implicitly trust the Unifi API server's TLS certificate. This is useful for testing, but should not be used in production.",
+					TypeSpec:    pschema.TypeSpec{Type: "boolean"},
+					Language: map[string]pschema.RawMessage{
+						"csharp": rawMessage(map[string]interface{}{
+							"name": "AllowInsecure",
+						}),
+					},
+					Secret: false,
 				},
 			},
 		},
@@ -72,6 +89,36 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 					},
 					Secret: true,
 				},
+				"apiUrl": {
+					DefaultInfo: &pschema.DefaultSpec{
+						Environment: []string{
+							"UNIFI_APIURL",
+						},
+					},
+					Description: "The base URL for the Unifi API, e.g. https://10.1.1.1.",
+					TypeSpec:    pschema.TypeSpec{Type: "string"},
+					Language: map[string]pschema.RawMessage{
+						"csharp": rawMessage(map[string]interface{}{
+							"name": "ApiUrl",
+						}),
+					},
+					Secret: false,
+				},
+				"allowInsecure": {
+					DefaultInfo: &pschema.DefaultSpec{
+						Environment: []string{
+							"UNIFI_ALLOW_INSECURE",
+						},
+					},
+					Description: "Implicitly trust the Unifi API server's TLS certificate. This is useful for testing, but should not be used in production.",
+					TypeSpec:    pschema.TypeSpec{Type: "boolean"},
+					Language: map[string]pschema.RawMessage{
+						"csharp": rawMessage(map[string]interface{}{
+							"name": "AllowInsecure",
+						}),
+					},
+					Secret: false,
+				},
 			},
 		},
 
@@ -89,9 +136,14 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 	}
 
 	openAPICtx := &openapigen.OpenAPIContext{
-		Doc:           openapiDoc,
-		Pkg:           &pkg,
-		ExcludedPaths: []string{},
+		Doc:                       openapiDoc,
+		Pkg:                       &pkg,
+		ExcludedPaths:             []string{},
+		UseParentResourceAsModule: true,
+		AllowedPluralResources: []string{
+			"Ips",
+			"SettingIps",
+		},
 	}
 
 	providerMetadata, updatedOpenAPIDoc, err := openAPICtx.GatherResourcesFromAPI(csharpNamespaces)
@@ -121,10 +173,10 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 		"importBasePath": "github.com/bbbates/pulumi-unifi-native/sdk/go/unifi-native",
 	})
 	pkg.Language["nodejs"] = rawMessage(map[string]interface{}{
-		"packageName": "@cloudyskysoftware/pulumi-unifi-native",
+		"packageName": "@bbbates/pulumi-unifi-native",
 	})
 	pkg.Language["python"] = rawMessage(map[string]interface{}{
-		"packageName": "pulumi_unifi",
+		"packageName": "pulumi_unifi_native",
 		"requires": map[string]string{
 			"pulumi": ">=3.0.0,<4.0.0",
 		},

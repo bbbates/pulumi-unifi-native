@@ -6,6 +6,7 @@ import (
 
 // FixOpenAPIDoc applies patches to the raw OpenAPI spec
 // before passing it to pulschema.
+// TODO: remove null types, maybe fix default -> 200s?
 func FixOpenAPIDoc(openAPIDoc *openapi3.T) error {
 	// TODO: Fill me in if there are patches to be made!
 	return nil

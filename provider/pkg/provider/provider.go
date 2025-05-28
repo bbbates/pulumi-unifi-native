@@ -24,7 +24,9 @@ type unifiNativeProvider struct {
 	name    string
 	version string
 
-	apiKey string
+	apiKey        string
+	apiUrl        string
+	allowInsecure bool
 }
 
 var (
@@ -61,7 +63,7 @@ func (p *unifiNativeProvider) OnPostInvoke(ctx context.Context, req *pulumirpc.I
 // OnConfigure is called by the provider framework when Pulumi calls Configure on
 // the resource provider server.
 func (p *unifiNativeProvider) OnConfigure(_ context.Context, req *pulumirpc.ConfigureRequest) (*pulumirpc.ConfigureResponse, error) {
-	apiKey, ok := req.GetVariables()["unifi:config:apiKey"]
+	apiKey, ok := req.GetVariables()["unifi-native:config:apiKey"]
 	if !ok {
 		// Check if it's set as an env var.
 		envVarNames := handler.GetSchemaSpec().Provider.InputProperties["apiKey"].DefaultInfo.Environment
@@ -74,12 +76,47 @@ func (p *unifiNativeProvider) OnConfigure(_ context.Context, req *pulumirpc.Conf
 
 		// Return an error if the API key is still empty.
 		if apiKey == "" {
-			return nil, errors.New("api key is required")
+			return nil, errors.New("apiKey is required")
 		}
 	}
 
 	logging.V(3).Info("Configuring UnifiNative API key")
 	p.apiKey = apiKey
+
+	apiUrl, ok := req.GetVariables()["unifi-native:config:apiUrl"]
+	if !ok {
+		// Check if it's set as an env var.
+		envVarNames := handler.GetSchemaSpec().Provider.InputProperties["apiUrl"].DefaultInfo.Environment
+		for _, n := range envVarNames {
+			v := os.Getenv(n)
+			if v != "" {
+				apiUrl = v
+			}
+		}
+
+		// Return an error if the API URL is still empty.
+		if apiUrl == "" {
+			return nil, errors.New("apiUrl is required")
+		}
+	}
+
+	logging.V(3).Info("Configuring Unifi API URL", apiUrl)
+	p.apiUrl = apiUrl
+
+	allowInsecure, ok := req.GetVariables()["unifi-native:config:allowInsecure"]
+	if !ok {
+		// Check if it's set as an env var.
+		envVarNames := handler.GetSchemaSpec().Provider.InputProperties["allowInsecure"].DefaultInfo.Environment
+		for _, n := range envVarNames {
+			v := os.Getenv(n)
+			if v != "" {
+				allowInsecure = v
+			}
+		}
+	}
+
+	logging.V(3).Info("Configuring AllowInsecure setting", allowInsecure)
+	p.allowInsecure = allowInsecure == "true"
 
 	return &pulumirpc.ConfigureResponse{
 		AcceptSecrets: true,
