@@ -2,9 +2,11 @@ package provider
 
 import (
 	"context"
+	"crypto/tls"
 	"fmt"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/getkin/kin-openapi/openapi3"
 
@@ -45,13 +47,11 @@ func makeProvider(host *provider.HostClient, name, version string, pulumiSchemaB
 
 	handler = rp.(*fwRest.Provider)
 
-	logging.V(3).Infof("Setting Provider base URL -> %s", handler.GetBaseURL())
-
 	return rp, err
 }
 
 func (p *unifiNativeProvider) GetAuthorizationHeader() string {
-	return fmt.Sprintf("%s %s", authSchemePrefix, p.apiKey)
+	return p.apiKey
 }
 
 func (p *unifiNativeProvider) OnPreInvoke(ctx context.Context, req *pulumirpc.InvokeRequest, httpReq *http.Request) error {
@@ -105,6 +105,10 @@ func (p *unifiNativeProvider) OnConfigure(_ context.Context, req *pulumirpc.Conf
 	logging.V(3).Info("Configuring Unifi API Host", apiHost)
 	p.apiHost = apiHost
 
+	logging.V(3).Infof("Fixing the base URL for the provider to use the configured API host: %s", p.apiHost)
+	handler.SetBaseURL(fmt.Sprintf("https://%s%s", p.apiHost, handler.GetBaseURL()))
+	logging.V(3).Infof("Base URL set to: %s", handler.GetBaseURL())
+
 	allowInsecure, ok := req.GetVariables()["unifi-native:config:allowInsecure"]
 	if !ok {
 		// Check if it's set as an env var.
@@ -120,9 +124,17 @@ func (p *unifiNativeProvider) OnConfigure(_ context.Context, req *pulumirpc.Conf
 	logging.V(3).Info("Configuring AllowInsecure setting", allowInsecure)
 	p.allowInsecure = allowInsecure == "true"
 
-	logging.V(3).Infof("Fixing the base URL for the provider to use the configured API host: %s", p.apiHost)
-	handler.SetBaseURL(fmt.Sprintf("https://%s%s", p.apiHost, handler.GetBaseURL()))
-	logging.V(3).Infof("Base URL set to: %s", handler.GetBaseURL())
+	handler.GetHTTPClient().Transport = &http.Transport{
+		Proxy:                 http.ProxyFromEnvironment,
+		ForceAttemptHTTP2:     false,
+		MaxIdleConns:          100,
+		IdleConnTimeout:       90 * time.Second,
+		TLSHandshakeTimeout:   10 * time.Second,
+		ExpectContinueTimeout: 1 * time.Second,
+		TLSClientConfig: &tls.Config{
+			InsecureSkipVerify: p.allowInsecure,
+		},
+	}
 
 	return &pulumirpc.ConfigureResponse{
 		AcceptSecrets: true,
@@ -135,6 +147,7 @@ func (p *unifiNativeProvider) OnDiff(ctx context.Context, req *pulumirpc.DiffReq
 }
 
 func (p *unifiNativeProvider) OnPreCreate(ctx context.Context, req *pulumirpc.CreateRequest, httpReq *http.Request) error {
+
 	return nil
 }
 

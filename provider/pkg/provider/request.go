@@ -1,15 +1,9 @@
-// Copyright 2022, Cloudy Sky Software LLC.
-
 package provider
 
 import (
 	"github.com/getkin/kin-openapi/openapi3"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
-)
-
-const (
-	authSchemePrefix = "Bearer"
 )
 
 func (p *unifiNativeProvider) determineDiffsAndReplacements(d *resource.ObjectDiff, properties openapi3.Schemas) ([]string, []string) {
