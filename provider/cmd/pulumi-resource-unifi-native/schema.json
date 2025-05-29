@@ -122,6 +122,15 @@
                     }
                 }
             },
+            "apiHost": {
+                "type": "string",
+                "description": "The URL Host name or IP Address for the Unifi API, e.g. 10.1.1.1",
+                "language": {
+                    "csharp": {
+                        "name": "ApiHost"
+                    }
+                }
+            },
             "apiKey": {
                 "type": "string",
                 "description": "The API key for an admin user, generated from the Unifi admin console",
@@ -131,15 +140,6 @@
                     }
                 },
                 "secret": true
-            },
-            "apiUrl": {
-                "type": "string",
-                "description": "The Base URL for the Unifi API, e.g. https://10.1.1.1",
-                "language": {
-                    "csharp": {
-                        "name": "ApiUrl"
-                    }
-                }
             }
         }
     },
@@ -8802,6 +8802,20 @@
                     }
                 }
             },
+            "apiHost": {
+                "type": "string",
+                "description": "The URL Host name or IP Address for the Unifi API, e.g. 10.1.1.1.",
+                "defaultInfo": {
+                    "environment": [
+                        "UNIFI_API_HOST"
+                    ]
+                },
+                "language": {
+                    "csharp": {
+                        "name": "ApiHost"
+                    }
+                }
+            },
             "apiKey": {
                 "type": "string",
                 "description": "The Unifi API key.",
@@ -8816,20 +8830,6 @@
                     }
                 },
                 "secret": true
-            },
-            "apiUrl": {
-                "type": "string",
-                "description": "The base URL for the Unifi API, e.g. https://10.1.1.1.",
-                "defaultInfo": {
-                    "environment": [
-                        "UNIFI_APIURL"
-                    ]
-                },
-                "language": {
-                    "csharp": {
-                        "name": "ApiUrl"
-                    }
-                }
             }
         }
     },
@@ -8943,7 +8943,7 @@
                 }
             }
         },
-        "unifi-native:auto_speedtest:SettingAutoSpeedtest": {
+        "unifi-native:auto_speedtest:TingAutoSpeedtest": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -9004,7 +9004,7 @@
                 }
             }
         },
-        "unifi-native:baresip:SettingBaresip": {
+        "unifi-native:baresip:TingBaresip": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -9077,7 +9077,7 @@
                 }
             }
         },
-        "unifi-native:broadcast:SettingBroadcast": {
+        "unifi-native:broadcast:TingBroadcast": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -9362,7 +9362,7 @@
                 }
             }
         },
-        "unifi-native:connectivity:SettingConnectivity": {
+        "unifi-native:connectivity:TingConnectivity": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -9447,7 +9447,7 @@
                 }
             }
         },
-        "unifi-native:country:SettingCountry": {
+        "unifi-native:country:TingCountry": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -9581,7 +9581,7 @@
                 }
             }
         },
-        "unifi-native:dashboard:SettingDashboard": {
+        "unifi-native:dashboard:TingDashboard": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -10292,7 +10292,7 @@
                 }
             }
         },
-        "unifi-native:doh:SettingDoh": {
+        "unifi-native:doh:TingDoh": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -10371,7 +10371,7 @@
                 }
             }
         },
-        "unifi-native:dpi:SettingDpi": {
+        "unifi-native:dpi:TingDpi": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -10699,7 +10699,7 @@
                 }
             }
         },
-        "unifi-native:element_adopt:SettingElementAdopt": {
+        "unifi-native:element_adopt:TingElementAdopt": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -10766,7 +10766,7 @@
                 }
             }
         },
-        "unifi-native:ether_lighting:SettingEtherLighting": {
+        "unifi-native:ether_lighting:TingEtherLighting": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -10839,7 +10839,7 @@
                 }
             }
         },
-        "unifi-native:evaluation_score:SettingEvaluationScore": {
+        "unifi-native:evaluation_score:TingEvaluationScore": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -11202,7 +11202,7 @@
                 }
             }
         },
-        "unifi-native:global_ap:SettingGlobalAp": {
+        "unifi-native:global_ap:TingGlobalAp": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -11317,7 +11317,7 @@
                 }
             }
         },
-        "unifi-native:global_nat:SettingGlobalNat": {
+        "unifi-native:global_nat:TingGlobalNat": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -11384,7 +11384,7 @@
                 }
             }
         },
-        "unifi-native:global_switch:SettingGlobalSwitch": {
+        "unifi-native:global_switch:TingGlobalSwitch": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -11523,7 +11523,7 @@
                 }
             }
         },
-        "unifi-native:guest_access:SettingGuestAcces": {
+        "unifi-native:guest_access:TingGuestAcces": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -12993,7 +12993,7 @@
                 }
             }
         },
-        "unifi-native:ips:SettingIps": {
+        "unifi-native:ips:TingIps": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -13150,7 +13150,7 @@
                 }
             }
         },
-        "unifi-native:lcm:SettingLcm": {
+        "unifi-native:lcm:TingLcm": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -13229,7 +13229,7 @@
                 }
             }
         },
-        "unifi-native:locale:SettingLocale": {
+        "unifi-native:locale:TingLocale": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -13284,7 +13284,7 @@
                 }
             }
         },
-        "unifi-native:magic_site_to_site_vpn:SettingMagicSiteToSiteVpn": {
+        "unifi-native:magic_site_to_site_vpn:TingMagicSiteToSiteVpn": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -13460,7 +13460,7 @@
                 }
             }
         },
-        "unifi-native:mdns:SettingMdn": {
+        "unifi-native:mdns:TingMdn": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -13582,7 +13582,7 @@
                 }
             }
         },
-        "unifi-native:mgmt:SettingMgmt": {
+        "unifi-native:mgmt:TingMgmt": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -13757,7 +13757,7 @@
                 }
             }
         },
-        "unifi-native:netflow:SettingNetflow": {
+        "unifi-native:netflow:TingNetflow": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -13878,7 +13878,7 @@
                 }
             }
         },
-        "unifi-native:network_optimization:SettingNetworkOptimization": {
+        "unifi-native:network_optimization:TingNetworkOptimization": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -15440,7 +15440,7 @@
                 }
             }
         },
-        "unifi-native:ntp:SettingNtp": {
+        "unifi-native:ntp:TingNtp": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -15519,7 +15519,7 @@
                 }
             }
         },
-        "unifi-native:porta:SettingPorta": {
+        "unifi-native:porta:TingPorta": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -16008,7 +16008,7 @@
                 }
             }
         },
-        "unifi-native:radio_ai:SettingRadioAi": {
+        "unifi-native:radio_ai:TingRadioAi": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -16219,7 +16219,7 @@
                 }
             }
         },
-        "unifi-native:radius:SettingRadiu": {
+        "unifi-native:radius:TingRadiu": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -16582,7 +16582,7 @@
                 }
             }
         },
-        "unifi-native:rsyslogd:SettingRsyslogd": {
+        "unifi-native:rsyslogd:TingRsyslogd": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -16782,7 +16782,7 @@
                 }
             }
         },
-        "unifi-native:snmp:SettingSnmp": {
+        "unifi-native:snmp:TingSnmp": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -16922,7 +16922,7 @@
                 }
             }
         },
-        "unifi-native:ssl_inspection:SettingSslInspection": {
+        "unifi-native:ssl_inspection:TingSslInspection": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -16977,7 +16977,7 @@
                 }
             }
         },
-        "unifi-native:super_cloudaccess:SettingSuperCloudacces": {
+        "unifi-native:super_cloudaccess:TingSuperCloudacces": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17068,7 +17068,7 @@
                 }
             }
         },
-        "unifi-native:super_events:SettingSuperEvent": {
+        "unifi-native:super_events:TingSuperEvent": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17123,7 +17123,7 @@
                 }
             }
         },
-        "unifi-native:super_fwupdate:SettingSuperFw": {
+        "unifi-native:super_fwupdate:TingSuperFw": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17190,7 +17190,7 @@
                 }
             }
         },
-        "unifi-native:super_identity:SettingSuperIdentity": {
+        "unifi-native:super_identity:TingSuperIdentity": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17251,7 +17251,7 @@
                 }
             }
         },
-        "unifi-native:super_mail:SettingSuperMail": {
+        "unifi-native:super_mail:TingSuperMail": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17306,7 +17306,7 @@
                 }
             }
         },
-        "unifi-native:super_mgmt:SettingSuperMgmt": {
+        "unifi-native:super_mgmt:TingSuperMgmt": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17625,7 +17625,7 @@
                 }
             }
         },
-        "unifi-native:super_sdn:SettingSuperSdn": {
+        "unifi-native:super_sdn:TingSuperSdn": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17710,7 +17710,7 @@
                 }
             }
         },
-        "unifi-native:super_smtp:SettingSuperSmtp": {
+        "unifi-native:super_smtp:TingSuperSmtp": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17874,7 +17874,7 @@
                 }
             }
         },
-        "unifi-native:teleport:SettingTeleport": {
+        "unifi-native:teleport:TingTeleport": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17935,7 +17935,7 @@
                 }
             }
         },
-        "unifi-native:traffic_flow:SettingTrafficFlow": {
+        "unifi-native:traffic_flow:TingTrafficFlow": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -18220,7 +18220,7 @@
                 }
             }
         },
-        "unifi-native:usg:SettingUsg": {
+        "unifi-native:usg:TingUsg": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -18599,7 +18599,7 @@
                 }
             }
         },
-        "unifi-native:usw:SettingUsw": {
+        "unifi-native:usw:TingUsw": {
             "properties": {
                 "Id": {
                     "type": "string"

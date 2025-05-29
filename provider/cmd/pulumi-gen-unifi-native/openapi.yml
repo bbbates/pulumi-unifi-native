@@ -5,19 +5,9 @@ info:
   version: 9.1.120
 servers:
 - description: Unifi Controller API
-  url: https://{host}:{port}/proxy/network/api
-  variables:
-    host:
-      default: unifi.ui.com
-    port:
-      default: "4443"
+  url: /proxy/network/api
 - description: Unifi Controller API
-  url: https://{host}:{port}/api
-  variables:
-    host:
-      default: unifi.ui.com
-    port:
-      default: "4443"
+  url: /api
 paths:
   /s/{siteId}/get/setting/auto_speedtest:
     get:

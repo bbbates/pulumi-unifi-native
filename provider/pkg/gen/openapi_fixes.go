@@ -7,7 +7,10 @@ import (
 // FixOpenAPIDoc applies patches to the raw OpenAPI spec
 // before passing it to pulschema.
 // TODO: remove null types, maybe fix default -> 200s?
+// TODO: make the server URLs relative and remove the host and port vars
 func FixOpenAPIDoc(openAPIDoc *openapi3.T) error {
-	// TODO: Fill me in if there are patches to be made!
+	// So the hosts can be configured, change the server URLs to relative paths.
+	// This will satisfy the Router.FindRoute method
+
 	return nil
 }

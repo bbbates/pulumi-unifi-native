@@ -45,12 +45,12 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 					},
 					Secret: true,
 				},
-				"apiUrl": {
-					Description: "The Base URL for the Unifi API, e.g. https://10.1.1.1",
+				"apiHost": {
+					Description: "The URL Host name or IP Address for the Unifi API, e.g. 10.1.1.1",
 					TypeSpec:    pschema.TypeSpec{Type: "string"},
 					Language: map[string]pschema.RawMessage{
 						"csharp": rawMessage(map[string]interface{}{
-							"name": "ApiUrl",
+							"name": "ApiHost",
 						}),
 					},
 					Secret: false,
@@ -89,17 +89,17 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 					},
 					Secret: true,
 				},
-				"apiUrl": {
+				"apiHost": {
 					DefaultInfo: &pschema.DefaultSpec{
 						Environment: []string{
-							"UNIFI_APIURL",
+							"UNIFI_API_HOST",
 						},
 					},
-					Description: "The base URL for the Unifi API, e.g. https://10.1.1.1.",
+					Description: "The URL Host name or IP Address for the Unifi API, e.g. 10.1.1.1.",
 					TypeSpec:    pschema.TypeSpec{Type: "string"},
 					Language: map[string]pschema.RawMessage{
 						"csharp": rawMessage(map[string]interface{}{
-							"name": "ApiUrl",
+							"name": "ApiHost",
 						}),
 					},
 					Secret: false,

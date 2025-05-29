@@ -13,7 +13,7 @@ require (
 require github.com/stretchr/testify v1.10.0
 
 require (
-	github.com/cloudy-sky-software/pulschema v0.0.0-20250508171849-a58e9062dcc1
+	github.com/cloudy-sky-software/pulschema v0.0.0-20250522005418-45117469ec55
 	github.com/cloudy-sky-software/pulumi-provider-framework v0.0.0-20250508215029-29488d47016e
 	github.com/pkg/errors v0.9.1
 	gopkg.in/yaml.v3 v3.0.1
@@ -117,10 +117,12 @@ require (
 	golang.org/x/text v0.25.0 // indirect
 	golang.org/x/tools v0.31.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250324211829-b45e905df463 // indirect
-	google.golang.org/grpc v1.72.0 // indirect
+	google.golang.org/grpc v1.72.2 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	lukechampine.com/frand v1.5.1 // indirect
 )
 
 replace github.com/cloudy-sky-software/pulschema v0.0.0-20250508171849-a58e9062dcc1 => ../../pulschema
+
+replace github.com/cloudy-sky-software/pulumi-provider-framework v0.0.0-20250508215029-29488d47016e => ../../pulumi-provider-framework

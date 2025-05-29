@@ -25,7 +25,7 @@ type unifiNativeProvider struct {
 	version string
 
 	apiKey        string
-	apiUrl        string
+	apiHost       string
 	allowInsecure bool
 }
 
@@ -44,6 +44,8 @@ func makeProvider(host *provider.HostClient, name, version string, pulumiSchemaB
 	rp, err := fwRest.MakeProvider(host, name, version, pulumiSchemaBytes, openapiDocBytes, metadataBytes, callback)
 
 	handler = rp.(*fwRest.Provider)
+
+	logging.V(3).Infof("Setting Provider base URL -> %s", handler.GetBaseURL())
 
 	return rp, err
 }
@@ -83,25 +85,25 @@ func (p *unifiNativeProvider) OnConfigure(_ context.Context, req *pulumirpc.Conf
 	logging.V(3).Info("Configuring UnifiNative API key")
 	p.apiKey = apiKey
 
-	apiUrl, ok := req.GetVariables()["unifi-native:config:apiUrl"]
+	apiHost, ok := req.GetVariables()["unifi-native:config:apiHost"]
 	if !ok {
 		// Check if it's set as an env var.
-		envVarNames := handler.GetSchemaSpec().Provider.InputProperties["apiUrl"].DefaultInfo.Environment
+		envVarNames := handler.GetSchemaSpec().Provider.InputProperties["apiHost"].DefaultInfo.Environment
 		for _, n := range envVarNames {
 			v := os.Getenv(n)
 			if v != "" {
-				apiUrl = v
+				apiHost = v
 			}
 		}
 
 		// Return an error if the API URL is still empty.
-		if apiUrl == "" {
-			return nil, errors.New("apiUrl is required")
+		if apiHost == "" {
+			return nil, errors.New("apiHost is required")
 		}
 	}
 
-	logging.V(3).Info("Configuring Unifi API URL", apiUrl)
-	p.apiUrl = apiUrl
+	logging.V(3).Info("Configuring Unifi API Host", apiHost)
+	p.apiHost = apiHost
 
 	allowInsecure, ok := req.GetVariables()["unifi-native:config:allowInsecure"]
 	if !ok {
@@ -117,6 +119,10 @@ func (p *unifiNativeProvider) OnConfigure(_ context.Context, req *pulumirpc.Conf
 
 	logging.V(3).Info("Configuring AllowInsecure setting", allowInsecure)
 	p.allowInsecure = allowInsecure == "true"
+
+	logging.V(3).Infof("Fixing the base URL for the provider to use the configured API host: %s", p.apiHost)
+	handler.SetBaseURL(fmt.Sprintf("https://%s%s", p.apiHost, handler.GetBaseURL()))
+	logging.V(3).Infof("Base URL set to: %s", handler.GetBaseURL())
 
 	return &pulumirpc.ConfigureResponse{
 		AcceptSecrets: true,
