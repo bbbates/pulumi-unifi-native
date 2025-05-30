@@ -50,6 +50,28 @@ func makeProvider(host *provider.HostClient, name, version string, pulumiSchemaB
 	return rp, err
 }
 
+func extractOutput(outputs interface{}) (map[string]interface{}, error) {
+	// All create/read/update endpoints return the object under the top-level "data" object.
+	// For example, if creating a `Server` resource, then the response
+	// is under a `server` property.
+	//for _, v := range outputs.(map[string]interface{}) {
+	//	logging.V(3).Infof("Extracting output: %s", v)
+	//	return v.(map[string]interface{}), nil
+	//}
+	var result = outputs.(map[string]interface{})
+	if result["data"] != nil {
+		logging.V(3).Infof("Data: %v", result["data"])
+		var data = (result["data"].([]interface{}))[0].(map[string]interface{})
+		if data["_id"] == nil {
+			return nil, errors.New("output did not contain an '_id' field")
+		}
+		data["id"] = data["_id"] // need to massage the _id from unifi to match Pulumi's expectations
+		return data, nil
+	}
+
+	return nil, errors.New("output did not contain a 'data' object")
+}
+
 func (p *unifiNativeProvider) GetAuthorizationHeader() string {
 	return p.apiKey
 }
@@ -147,13 +169,12 @@ func (p *unifiNativeProvider) OnDiff(ctx context.Context, req *pulumirpc.DiffReq
 }
 
 func (p *unifiNativeProvider) OnPreCreate(ctx context.Context, req *pulumirpc.CreateRequest, httpReq *http.Request) error {
-
 	return nil
 }
 
 // OnPostCreate allocates a new instance of the provided resource and returns its unique ID afterwards.
 func (p *unifiNativeProvider) OnPostCreate(ctx context.Context, req *pulumirpc.CreateRequest, outputs interface{}) (map[string]interface{}, error) {
-	return outputs.(map[string]interface{}), nil
+	return extractOutput(outputs)
 }
 
 func (p *unifiNativeProvider) OnPreRead(ctx context.Context, req *pulumirpc.ReadRequest, httpReq *http.Request) error {
@@ -161,7 +182,7 @@ func (p *unifiNativeProvider) OnPreRead(ctx context.Context, req *pulumirpc.Read
 }
 
 func (p *unifiNativeProvider) OnPostRead(ctx context.Context, req *pulumirpc.ReadRequest, outputs interface{}) (map[string]interface{}, error) {
-	return outputs.(map[string]interface{}), nil
+	return extractOutput(outputs)
 }
 
 func (p *unifiNativeProvider) OnPreUpdate(ctx context.Context, req *pulumirpc.UpdateRequest, httpReq *http.Request) error {
@@ -169,7 +190,7 @@ func (p *unifiNativeProvider) OnPreUpdate(ctx context.Context, req *pulumirpc.Up
 }
 
 func (p *unifiNativeProvider) OnPostUpdate(ctx context.Context, req *pulumirpc.UpdateRequest, httpReq http.Request, outputs interface{}) (map[string]interface{}, error) {
-	return outputs.(map[string]interface{}), nil
+	return extractOutput(outputs)
 }
 
 func (p *unifiNativeProvider) OnPreDelete(ctx context.Context, req *pulumirpc.DeleteRequest, httpReq *http.Request) error {
