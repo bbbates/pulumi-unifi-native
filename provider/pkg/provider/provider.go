@@ -240,7 +240,9 @@ func (p *unifiNativeProvider) OnPostRead(ctx context.Context, req *pulumirpc.Rea
 	// as well, but does not transform them first, which ends up causing
 	// the API-named properties to be stored in the input state, and the next `plumumi up` call will
 	// try and update the resource again
+	logging.V(3).Infof("Transforming output map from API names to SDK names: %v", outputMap)
 	handler.TransformBody(ctx, outputMap, handler.GetMetadata().APIToSDKNameMap)
+	logging.V(3).Infof("Transformed output map from API names to SDK names: %v", outputMap)
 	return outputMap, nil
 }
 
