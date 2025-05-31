@@ -35,6 +35,17 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 
 		Config: pschema.ConfigSpec{
 			Variables: map[string]pschema.PropertySpec{
+				"siteId": {
+					Description: "The Human readable Stack identifier (e.g. 'notDefault') for the Unifi site to manage. Defaults to 'default'",
+					TypeSpec:    pschema.TypeSpec{Type: "string"},
+					Language: map[string]pschema.RawMessage{
+						"csharp": rawMessage(map[string]interface{}{
+							"name": "SiteId",
+						}),
+					},
+					Default: "default",
+					Secret:  false,
+				},
 				"apiKey": {
 					Description: "The API key for an admin user, generated from the Unifi admin console",
 					TypeSpec:    pschema.TypeSpec{Type: "string"},
@@ -74,6 +85,22 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 				Type:        "object",
 			},
 			InputProperties: map[string]pschema.PropertySpec{
+				"siteId": {
+					DefaultInfo: &pschema.DefaultSpec{
+						Environment: []string{
+							"UNIFI_SITE",
+						},
+					},
+					Description: "The Human readable Stack identifier (e.g. 'notDefault') for the Unifi site to manage. Defaults to 'default'",
+					TypeSpec:    pschema.TypeSpec{Type: "string"},
+					Language: map[string]pschema.RawMessage{
+						"csharp": rawMessage(map[string]interface{}{
+							"name": "SiteId",
+						}),
+					},
+					Default: "default",
+					Secret:  false,
+				},
 				"apiKey": {
 					DefaultInfo: &pschema.DefaultSpec{
 						Environment: []string{

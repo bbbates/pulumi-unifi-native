@@ -26,6 +26,7 @@ type unifiNativeProvider struct {
 	name    string
 	version string
 
+	siteId        string
 	apiKey        string
 	apiHost       string
 	allowInsecure bool
@@ -50,7 +51,7 @@ func makeProvider(host *provider.HostClient, name, version string, pulumiSchemaB
 	return rp, err
 }
 
-func extractOutput(outputs interface{}) (map[string]interface{}, error) {
+func extractOutput(p *unifiNativeProvider, outputs interface{}) (map[string]interface{}, error) {
 	// All create/read/update endpoints return the object under the top-level "data" object.
 	// For example, if creating a `Server` resource, then the response
 	// is under a `server` property.
@@ -65,7 +66,9 @@ func extractOutput(outputs interface{}) (map[string]interface{}, error) {
 		if data["_id"] == nil {
 			return nil, errors.New("output did not contain an '_id' field")
 		}
-		data["id"] = data["_id"] // need to massage the _id from unifi to match Pulumi's expectations
+		data["id"] = data["_id"]   // need to massage the _id from unifi to match Pulumi's expectations
+		data["site_id"] = p.siteId // site_id will just be set to the long byte value in the output, this should be the human-readable siteId
+		data["siteId"] = p.siteId
 		return data, nil
 	}
 
@@ -76,17 +79,41 @@ func (p *unifiNativeProvider) GetAuthorizationHeader() string {
 	return p.apiKey
 }
 
-func (p *unifiNativeProvider) OnPreInvoke(ctx context.Context, req *pulumirpc.InvokeRequest, httpReq *http.Request) error {
+func (p *unifiNativeProvider) OnPreInvoke(_ context.Context, _ *pulumirpc.InvokeRequest, _ *http.Request) error {
 	return nil
 }
 
-func (p *unifiNativeProvider) OnPostInvoke(ctx context.Context, req *pulumirpc.InvokeRequest, outputs interface{}) (map[string]interface{}, error) {
+func (p *unifiNativeProvider) OnPostInvoke(_ context.Context, _ *pulumirpc.InvokeRequest, outputs interface{}) (map[string]interface{}, error) {
 	return outputs.(map[string]interface{}), nil
 }
 
 // OnConfigure is called by the provider framework when Pulumi calls Configure on
 // the resource provider server.
 func (p *unifiNativeProvider) OnConfigure(_ context.Context, req *pulumirpc.ConfigureRequest) (*pulumirpc.ConfigureResponse, error) {
+	siteId, ok := req.GetVariables()["unifi-native:config:siteId"]
+	if !ok {
+		// Check if it's set as an env var.
+		envVarNames := handler.GetSchemaSpec().Provider.InputProperties["siteId"].DefaultInfo.Environment
+		for _, n := range envVarNames {
+			v := os.Getenv(n)
+			if v != "" {
+				siteId = v
+				ok = true
+			}
+		}
+
+		// else use the default value
+		if !ok {
+			siteId = handler.GetSchemaSpec().Config.Variables["siteId"].Default.(string)
+		}
+	}
+
+	logging.V(3).Infof("Configuring Site Id: %s", siteId)
+	p.siteId = siteId
+	if p.siteId != "" {
+		handler.GetGlobalPathParams()["siteId"] = p.siteId
+	}
+
 	apiKey, ok := req.GetVariables()["unifi-native:config:apiKey"]
 	if !ok {
 		// Check if it's set as an env var.
@@ -146,6 +173,7 @@ func (p *unifiNativeProvider) OnConfigure(_ context.Context, req *pulumirpc.Conf
 	logging.V(3).Info("Configuring AllowInsecure setting", allowInsecure)
 	p.allowInsecure = allowInsecure == "true"
 
+	// Need to override the HTTP Client Transport to ensure we can set the InsecureSkipVerify flag, if needed
 	handler.GetHTTPClient().Transport = &http.Transport{
 		Proxy:                 http.ProxyFromEnvironment,
 		ForceAttemptHTTP2:     false,
@@ -174,7 +202,7 @@ func (p *unifiNativeProvider) OnPreCreate(ctx context.Context, req *pulumirpc.Cr
 
 // OnPostCreate allocates a new instance of the provided resource and returns its unique ID afterwards.
 func (p *unifiNativeProvider) OnPostCreate(ctx context.Context, req *pulumirpc.CreateRequest, outputs interface{}) (map[string]interface{}, error) {
-	return extractOutput(outputs)
+	return extractOutput(p, outputs)
 }
 
 func (p *unifiNativeProvider) OnPreRead(ctx context.Context, req *pulumirpc.ReadRequest, httpReq *http.Request) error {
@@ -182,7 +210,7 @@ func (p *unifiNativeProvider) OnPreRead(ctx context.Context, req *pulumirpc.Read
 }
 
 func (p *unifiNativeProvider) OnPostRead(ctx context.Context, req *pulumirpc.ReadRequest, outputs interface{}) (map[string]interface{}, error) {
-	return extractOutput(outputs)
+	return extractOutput(p, outputs)
 }
 
 func (p *unifiNativeProvider) OnPreUpdate(ctx context.Context, req *pulumirpc.UpdateRequest, httpReq *http.Request) error {
@@ -190,7 +218,7 @@ func (p *unifiNativeProvider) OnPreUpdate(ctx context.Context, req *pulumirpc.Up
 }
 
 func (p *unifiNativeProvider) OnPostUpdate(ctx context.Context, req *pulumirpc.UpdateRequest, httpReq http.Request, outputs interface{}) (map[string]interface{}, error) {
-	return extractOutput(outputs)
+	return extractOutput(p, outputs)
 }
 
 func (p *unifiNativeProvider) OnPreDelete(ctx context.Context, req *pulumirpc.DeleteRequest, httpReq *http.Request) error {

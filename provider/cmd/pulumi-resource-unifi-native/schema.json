@@ -140,6 +140,16 @@
                     }
                 },
                 "secret": true
+            },
+            "siteId": {
+                "type": "string",
+                "description": "The Human readable Stack identifier (e.g. 'notDefault') for the Unifi site to manage. Defaults to 'default'",
+                "default": "default",
+                "language": {
+                    "csharp": {
+                        "name": "SiteId"
+                    }
+                }
             }
         }
     },
@@ -8830,6 +8840,21 @@
                     }
                 },
                 "secret": true
+            },
+            "siteId": {
+                "type": "string",
+                "description": "The Human readable Stack identifier (e.g. 'notDefault') for the Unifi site to manage. Defaults to 'default'",
+                "default": "default",
+                "defaultInfo": {
+                    "environment": [
+                        "UNIFI_SITE"
+                    ]
+                },
+                "language": {
+                    "csharp": {
+                        "name": "SiteId"
+                    }
+                }
             }
         }
     },
