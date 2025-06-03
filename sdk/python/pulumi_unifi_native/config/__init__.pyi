@@ -20,13 +20,18 @@ allowInsecure: Optional[bool]
 Implicitly trust the Unifi API server's TLS certificate. This is useful for testing, but should not be used in production.
 """
 
+apiHost: Optional[str]
+"""
+The URL Host name or IP Address for the Unifi API, e.g. 10.1.1.1
+"""
+
 apiKey: Optional[str]
 """
 The API key for an admin user, generated from the Unifi admin console
 """
 
-apiUrl: Optional[str]
+siteId: str
 """
-The Base URL for the Unifi API, e.g. https://10.1.1.1
+The Human readable Stack identifier (e.g. 'notDefault') for the Unifi site to manage. Defaults to 'default'
 """
 

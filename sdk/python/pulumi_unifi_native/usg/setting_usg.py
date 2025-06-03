@@ -23,8 +23,6 @@ __all__ = ['SettingUsgArgs', 'SettingUsg']
 class SettingUsgArgs:
     def __init__(__self__, *,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _h323_module: Optional[pulumi.Input[builtins.bool]] = None,
-                 _offload_l2_blocking: Optional[pulumi.Input[builtins.bool]] = None,
                  arp_cache_base_reachable: Optional[pulumi.Input[builtins.int]] = None,
                  arp_cache_timeout: Optional[pulumi.Input[builtins.str]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
@@ -52,6 +50,7 @@ class SettingUsgArgs:
                  geo_ip_filtering_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  geo_ip_filtering_traffic_direction: Optional[pulumi.Input[builtins.str]] = None,
                  gre_module: Optional[pulumi.Input[builtins.bool]] = None,
+                 h323_module: Optional[pulumi.Input[builtins.bool]] = None,
                  icmp_timeout: Optional[pulumi.Input[builtins.int]] = None,
                  key: Optional[pulumi.Input[builtins.str]] = None,
                  lldp_enable_all: Optional[pulumi.Input[builtins.bool]] = None,
@@ -59,6 +58,7 @@ class SettingUsgArgs:
                  mss_clamp: Optional[pulumi.Input[builtins.str]] = None,
                  mss_clamp_mss: Optional[pulumi.Input[builtins.int]] = None,
                  offload_accounting: Optional[pulumi.Input[builtins.bool]] = None,
+                 offload_l2_blocking: Optional[pulumi.Input[builtins.bool]] = None,
                  offload_sch: Optional[pulumi.Input[builtins.bool]] = None,
                  other_timeout: Optional[pulumi.Input[builtins.int]] = None,
                  pptp_module: Optional[pulumi.Input[builtins.bool]] = None,
@@ -89,10 +89,6 @@ class SettingUsgArgs:
         """
         if id is not None:
             pulumi.set(__self__, "id", id)
-        if _h323_module is not None:
-            pulumi.set(__self__, "_h323_module", _h323_module)
-        if _offload_l2_blocking is not None:
-            pulumi.set(__self__, "_offload_l2_blocking", _offload_l2_blocking)
         if arp_cache_base_reachable is not None:
             pulumi.set(__self__, "arp_cache_base_reachable", arp_cache_base_reachable)
         if arp_cache_timeout is not None:
@@ -147,6 +143,8 @@ class SettingUsgArgs:
             pulumi.set(__self__, "geo_ip_filtering_traffic_direction", geo_ip_filtering_traffic_direction)
         if gre_module is not None:
             pulumi.set(__self__, "gre_module", gre_module)
+        if h323_module is not None:
+            pulumi.set(__self__, "h323_module", h323_module)
         if icmp_timeout is not None:
             pulumi.set(__self__, "icmp_timeout", icmp_timeout)
         if key is not None:
@@ -161,6 +159,8 @@ class SettingUsgArgs:
             pulumi.set(__self__, "mss_clamp_mss", mss_clamp_mss)
         if offload_accounting is not None:
             pulumi.set(__self__, "offload_accounting", offload_accounting)
+        if offload_l2_blocking is not None:
+            pulumi.set(__self__, "offload_l2_blocking", offload_l2_blocking)
         if offload_sch is not None:
             pulumi.set(__self__, "offload_sch", offload_sch)
         if other_timeout is not None:
@@ -220,24 +220,6 @@ class SettingUsgArgs:
     @id.setter
     def id(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "id", value)
-
-    @property
-    @pulumi.getter(name="_h323Module")
-    def _h323_module(self) -> Optional[pulumi.Input[builtins.bool]]:
-        return pulumi.get(self, "_h323_module")
-
-    @_h323_module.setter
-    def _h323_module(self, value: Optional[pulumi.Input[builtins.bool]]):
-        pulumi.set(self, "_h323_module", value)
-
-    @property
-    @pulumi.getter(name="_offloadL2Blocking")
-    def _offload_l2_blocking(self) -> Optional[pulumi.Input[builtins.bool]]:
-        return pulumi.get(self, "_offload_l2_blocking")
-
-    @_offload_l2_blocking.setter
-    def _offload_l2_blocking(self, value: Optional[pulumi.Input[builtins.bool]]):
-        pulumi.set(self, "_offload_l2_blocking", value)
 
     @property
     @pulumi.getter(name="arpCacheBaseReachable")
@@ -483,6 +465,15 @@ class SettingUsgArgs:
         pulumi.set(self, "gre_module", value)
 
     @property
+    @pulumi.getter(name="h323Module")
+    def h323_module(self) -> Optional[pulumi.Input[builtins.bool]]:
+        return pulumi.get(self, "h323_module")
+
+    @h323_module.setter
+    def h323_module(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "h323_module", value)
+
+    @property
     @pulumi.getter(name="icmpTimeout")
     def icmp_timeout(self) -> Optional[pulumi.Input[builtins.int]]:
         return pulumi.get(self, "icmp_timeout")
@@ -544,6 +535,15 @@ class SettingUsgArgs:
     @offload_accounting.setter
     def offload_accounting(self, value: Optional[pulumi.Input[builtins.bool]]):
         pulumi.set(self, "offload_accounting", value)
+
+    @property
+    @pulumi.getter(name="offloadL2Blocking")
+    def offload_l2_blocking(self) -> Optional[pulumi.Input[builtins.bool]]:
+        return pulumi.get(self, "offload_l2_blocking")
+
+    @offload_l2_blocking.setter
+    def offload_l2_blocking(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "offload_l2_blocking", value)
 
     @property
     @pulumi.getter(name="offloadSch")
@@ -778,8 +778,6 @@ class SettingUsg(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _h323_module: Optional[pulumi.Input[builtins.bool]] = None,
-                 _offload_l2_blocking: Optional[pulumi.Input[builtins.bool]] = None,
                  arp_cache_base_reachable: Optional[pulumi.Input[builtins.int]] = None,
                  arp_cache_timeout: Optional[pulumi.Input[builtins.str]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
@@ -807,6 +805,7 @@ class SettingUsg(pulumi.CustomResource):
                  geo_ip_filtering_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  geo_ip_filtering_traffic_direction: Optional[pulumi.Input[builtins.str]] = None,
                  gre_module: Optional[pulumi.Input[builtins.bool]] = None,
+                 h323_module: Optional[pulumi.Input[builtins.bool]] = None,
                  icmp_timeout: Optional[pulumi.Input[builtins.int]] = None,
                  key: Optional[pulumi.Input[builtins.str]] = None,
                  lldp_enable_all: Optional[pulumi.Input[builtins.bool]] = None,
@@ -814,6 +813,7 @@ class SettingUsg(pulumi.CustomResource):
                  mss_clamp: Optional[pulumi.Input[builtins.str]] = None,
                  mss_clamp_mss: Optional[pulumi.Input[builtins.int]] = None,
                  offload_accounting: Optional[pulumi.Input[builtins.bool]] = None,
+                 offload_l2_blocking: Optional[pulumi.Input[builtins.bool]] = None,
                  offload_sch: Optional[pulumi.Input[builtins.bool]] = None,
                  other_timeout: Optional[pulumi.Input[builtins.int]] = None,
                  pptp_module: Optional[pulumi.Input[builtins.bool]] = None,
@@ -869,8 +869,6 @@ class SettingUsg(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _h323_module: Optional[pulumi.Input[builtins.bool]] = None,
-                 _offload_l2_blocking: Optional[pulumi.Input[builtins.bool]] = None,
                  arp_cache_base_reachable: Optional[pulumi.Input[builtins.int]] = None,
                  arp_cache_timeout: Optional[pulumi.Input[builtins.str]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
@@ -898,6 +896,7 @@ class SettingUsg(pulumi.CustomResource):
                  geo_ip_filtering_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  geo_ip_filtering_traffic_direction: Optional[pulumi.Input[builtins.str]] = None,
                  gre_module: Optional[pulumi.Input[builtins.bool]] = None,
+                 h323_module: Optional[pulumi.Input[builtins.bool]] = None,
                  icmp_timeout: Optional[pulumi.Input[builtins.int]] = None,
                  key: Optional[pulumi.Input[builtins.str]] = None,
                  lldp_enable_all: Optional[pulumi.Input[builtins.bool]] = None,
@@ -905,6 +904,7 @@ class SettingUsg(pulumi.CustomResource):
                  mss_clamp: Optional[pulumi.Input[builtins.str]] = None,
                  mss_clamp_mss: Optional[pulumi.Input[builtins.int]] = None,
                  offload_accounting: Optional[pulumi.Input[builtins.bool]] = None,
+                 offload_l2_blocking: Optional[pulumi.Input[builtins.bool]] = None,
                  offload_sch: Optional[pulumi.Input[builtins.bool]] = None,
                  other_timeout: Optional[pulumi.Input[builtins.int]] = None,
                  pptp_module: Optional[pulumi.Input[builtins.bool]] = None,
@@ -940,8 +940,6 @@ class SettingUsg(pulumi.CustomResource):
             __props__ = SettingUsgArgs.__new__(SettingUsgArgs)
 
             __props__.__dict__["id"] = id
-            __props__.__dict__["_h323_module"] = _h323_module
-            __props__.__dict__["_offload_l2_blocking"] = _offload_l2_blocking
             __props__.__dict__["arp_cache_base_reachable"] = arp_cache_base_reachable
             __props__.__dict__["arp_cache_timeout"] = arp_cache_timeout
             __props__.__dict__["attr_hidden"] = attr_hidden
@@ -969,6 +967,7 @@ class SettingUsg(pulumi.CustomResource):
             __props__.__dict__["geo_ip_filtering_enabled"] = geo_ip_filtering_enabled
             __props__.__dict__["geo_ip_filtering_traffic_direction"] = geo_ip_filtering_traffic_direction
             __props__.__dict__["gre_module"] = gre_module
+            __props__.__dict__["h323_module"] = h323_module
             __props__.__dict__["icmp_timeout"] = icmp_timeout
             __props__.__dict__["key"] = key
             __props__.__dict__["lldp_enable_all"] = lldp_enable_all
@@ -976,6 +975,7 @@ class SettingUsg(pulumi.CustomResource):
             __props__.__dict__["mss_clamp"] = mss_clamp
             __props__.__dict__["mss_clamp_mss"] = mss_clamp_mss
             __props__.__dict__["offload_accounting"] = offload_accounting
+            __props__.__dict__["offload_l2_blocking"] = offload_l2_blocking
             __props__.__dict__["offload_sch"] = offload_sch
             __props__.__dict__["other_timeout"] = other_timeout
             __props__.__dict__["pptp_module"] = pptp_module
@@ -1024,8 +1024,6 @@ class SettingUsg(pulumi.CustomResource):
         __props__ = SettingUsgArgs.__new__(SettingUsgArgs)
 
         __props__.__dict__["id"] = None
-        __props__.__dict__["_h323_module"] = None
-        __props__.__dict__["_offload_l2_blocking"] = None
         __props__.__dict__["arp_cache_base_reachable"] = None
         __props__.__dict__["arp_cache_timeout"] = None
         __props__.__dict__["attr_hidden"] = None
@@ -1053,6 +1051,7 @@ class SettingUsg(pulumi.CustomResource):
         __props__.__dict__["geo_ip_filtering_enabled"] = None
         __props__.__dict__["geo_ip_filtering_traffic_direction"] = None
         __props__.__dict__["gre_module"] = None
+        __props__.__dict__["h323_module"] = None
         __props__.__dict__["icmp_timeout"] = None
         __props__.__dict__["key"] = None
         __props__.__dict__["lldp_enable_all"] = None
@@ -1060,6 +1059,7 @@ class SettingUsg(pulumi.CustomResource):
         __props__.__dict__["mss_clamp"] = None
         __props__.__dict__["mss_clamp_mss"] = None
         __props__.__dict__["offload_accounting"] = None
+        __props__.__dict__["offload_l2_blocking"] = None
         __props__.__dict__["offload_sch"] = None
         __props__.__dict__["other_timeout"] = None
         __props__.__dict__["pptp_module"] = None
@@ -1091,16 +1091,6 @@ class SettingUsg(pulumi.CustomResource):
     @pulumi.getter(name="Id")
     def id(self) -> pulumi.Output[Optional[builtins.str]]:
         return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter(name="_h323Module")
-    def _h323_module(self) -> pulumi.Output[Optional[builtins.bool]]:
-        return pulumi.get(self, "_h323_module")
-
-    @property
-    @pulumi.getter(name="_offloadL2Blocking")
-    def _offload_l2_blocking(self) -> pulumi.Output[Optional[builtins.bool]]:
-        return pulumi.get(self, "_offload_l2_blocking")
 
     @property
     @pulumi.getter(name="arpCacheBaseReachable")
@@ -1238,6 +1228,11 @@ class SettingUsg(pulumi.CustomResource):
         return pulumi.get(self, "gre_module")
 
     @property
+    @pulumi.getter(name="h323Module")
+    def h323_module(self) -> pulumi.Output[Optional[builtins.bool]]:
+        return pulumi.get(self, "h323_module")
+
+    @property
     @pulumi.getter(name="icmpTimeout")
     def icmp_timeout(self) -> pulumi.Output[Optional[builtins.int]]:
         return pulumi.get(self, "icmp_timeout")
@@ -1271,6 +1266,11 @@ class SettingUsg(pulumi.CustomResource):
     @pulumi.getter(name="offloadAccounting")
     def offload_accounting(self) -> pulumi.Output[Optional[builtins.bool]]:
         return pulumi.get(self, "offload_accounting")
+
+    @property
+    @pulumi.getter(name="offloadL2Blocking")
+    def offload_l2_blocking(self) -> pulumi.Output[Optional[builtins.bool]]:
+        return pulumi.get(self, "offload_l2_blocking")
 
     @property
     @pulumi.getter(name="offloadSch")

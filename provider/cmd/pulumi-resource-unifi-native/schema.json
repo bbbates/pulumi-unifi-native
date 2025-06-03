@@ -924,12 +924,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_dot1xFallbackNetworkconfId": {
-                    "type": "string"
-                },
-                "_dot1xPortctrlEnabled": {
-                    "type": "boolean"
-                },
                 "adopted": {
                     "type": "boolean"
                 },
@@ -967,6 +961,12 @@
                     "$ref": "#/types/unifi-native:device:DeviceConfigNetwork"
                 },
                 "disabled": {
+                    "type": "boolean"
+                },
+                "dot1xFallbackNetworkconfId": {
+                    "type": "string"
+                },
+                "dot1xPortctrlEnabled": {
                     "type": "boolean"
                 },
                 "dpiEnabled": {
@@ -1285,29 +1285,17 @@
         },
         "unifi-native:device:DevicePortOverrides": {
             "properties": {
-                "_dot1xCtrl": {
-                    "type": "string"
-                },
-                "_dot1xIdleTimeout": {
-                    "type": "integer"
-                },
-                "_priorityQueue1Level": {
-                    "type": "integer"
-                },
-                "_priorityQueue2Level": {
-                    "type": "integer"
-                },
-                "_priorityQueue3Level": {
-                    "type": "integer"
-                },
-                "_priorityQueue4Level": {
-                    "type": "integer"
-                },
                 "aggregateNumPorts": {
                     "type": "integer"
                 },
                 "autoneg": {
                     "type": "boolean"
+                },
+                "dot1xCtrl": {
+                    "type": "string"
+                },
+                "dot1xIdleTimeout": {
+                    "type": "integer"
                 },
                 "egressRateLimitKbps": {
                     "type": "integer"
@@ -1377,6 +1365,18 @@
                 },
                 "portconfId": {
                     "type": "string"
+                },
+                "priorityQueue1Level": {
+                    "type": "integer"
+                },
+                "priorityQueue2Level": {
+                    "type": "integer"
+                },
+                "priorityQueue3Level": {
+                    "type": "integer"
+                },
+                "priorityQueue4Level": {
+                    "type": "integer"
                 },
                 "qosProfile": {
                     "$ref": "#/types/unifi-native:device:DeviceQOSProfile"
@@ -2306,9 +2306,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_icmpv6Typename": {
-                    "type": "string"
-                },
                 "action": {
                     "type": "string"
                 },
@@ -2349,6 +2346,9 @@
                     "type": "boolean"
                 },
                 "icmpTypename": {
+                    "type": "string"
+                },
+                "icmpv6Typename": {
                     "type": "string"
                 },
                 "ipsec": {
@@ -2605,22 +2605,16 @@
                 "Id": {
                     "type": "string"
                 },
-                "_aclL3Isolation": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/unifi-native:global_switch:SettingGlobalSwitchAclL3Isolation"
-                    }
-                },
-                "_dot1xFallbackNetworkconfId": {
-                    "type": "string"
-                },
-                "_dot1xPortctrlEnabled": {
-                    "type": "boolean"
-                },
                 "aclDeviceIsolation": {
                     "type": "array",
                     "items": {
                         "type": "string"
+                    }
+                },
+                "aclL3Isolation": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/unifi-native:global_switch:SettingGlobalSwitchAclL3Isolation"
                     }
                 },
                 "attrHidden": {
@@ -2636,6 +2630,12 @@
                     "type": "boolean"
                 },
                 "dhcpSnoop": {
+                    "type": "boolean"
+                },
+                "dot1xFallbackNetworkconfId": {
+                    "type": "string"
+                },
+                "dot1xPortctrlEnabled": {
                     "type": "boolean"
                 },
                 "floodKnownProtocols": {
@@ -4437,12 +4437,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_xSshMd5passwd": {
-                    "type": "string"
-                },
-                "_xSshSha512passwd": {
-                    "type": "string"
-                },
                 "advancedFeatureEnabled": {
                     "type": "boolean"
                 },
@@ -4512,7 +4506,13 @@
                         "$ref": "#/types/unifi-native:mgmt:SettingMgmtXSshKeys"
                     }
                 },
+                "xSshMd5passwd": {
+                    "type": "string"
+                },
                 "xSshPassword": {
+                    "type": "string"
+                },
+                "xSshSha512passwd": {
                     "type": "string"
                 },
                 "xSshUsername": {
@@ -4715,105 +4715,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_dhcpdv6AllowSlaac": {
-                    "type": "boolean"
-                },
-                "_dhcpdv6Dns1": {
-                    "type": "string"
-                },
-                "_dhcpdv6Dns2": {
-                    "type": "string"
-                },
-                "_dhcpdv6Dns3": {
-                    "type": "string"
-                },
-                "_dhcpdv6Dns4": {
-                    "type": "string"
-                },
-                "_dhcpdv6DnsAuto": {
-                    "type": "boolean"
-                },
-                "_dhcpdv6Enabled": {
-                    "type": "boolean"
-                },
-                "_dhcpdv6Leasetime": {
-                    "type": "integer"
-                },
-                "_dhcpdv6Start": {
-                    "type": "string"
-                },
-                "_dhcpdv6Stop": {
-                    "type": "string"
-                },
-                "_ipsecSeparateIkev2Networks": {
-                    "type": "boolean"
-                },
-                "_ipv6ClientAddressAssignment": {
-                    "type": "string"
-                },
-                "_ipv6InterfaceType": {
-                    "type": "string"
-                },
-                "_ipv6PdAutoPrefixidEnabled": {
-                    "type": "boolean"
-                },
-                "_ipv6PdInterface": {
-                    "type": "string"
-                },
-                "_ipv6PdPrefixid": {
-                    "type": "string"
-                },
-                "_ipv6PdStart": {
-                    "type": "string"
-                },
-                "_ipv6PdStop": {
-                    "type": "string"
-                },
-                "_ipv6RaEnabled": {
-                    "type": "boolean"
-                },
-                "_ipv6RaPreferredLifetime": {
-                    "type": "integer"
-                },
-                "_ipv6RaPriority": {
-                    "type": "string"
-                },
-                "_ipv6RaValidLifetime": {
-                    "type": "integer"
-                },
-                "_ipv6SettingPreference": {
-                    "type": "string"
-                },
-                "_ipv6SingleNetworkInterface": {
-                    "type": "string"
-                },
-                "_ipv6Subnet": {
-                    "type": "string"
-                },
-                "_ipv6WanDelegationType": {
-                    "type": "string"
-                },
-                "_l2tpAllowWeakCiphers": {
-                    "type": "boolean"
-                },
-                "_l2tpInterface": {
-                    "type": "string"
-                },
-                "_l2tpLocalWanIp": {
-                    "type": "string"
-                },
-                "_wanDhcpv6PdSize": {
-                    "type": "integer"
-                },
-                "_wanIpv6Dns1": {
-                    "type": "string"
-                },
-                "_wanIpv6Dns2": {
-                    "type": "string"
-                },
-                "_wanIpv6DnsPreference": {
-                    "type": "string"
-                },
                 "attrHidden": {
                     "type": "boolean"
                 },
@@ -4926,6 +4827,36 @@
                     "type": "boolean"
                 },
                 "dhcpdWpadUrl": {
+                    "type": "string"
+                },
+                "dhcpdv6AllowSlaac": {
+                    "type": "boolean"
+                },
+                "dhcpdv6Dns1": {
+                    "type": "string"
+                },
+                "dhcpdv6Dns2": {
+                    "type": "string"
+                },
+                "dhcpdv6Dns3": {
+                    "type": "string"
+                },
+                "dhcpdv6Dns4": {
+                    "type": "string"
+                },
+                "dhcpdv6DnsAuto": {
+                    "type": "boolean"
+                },
+                "dhcpdv6Enabled": {
+                    "type": "boolean"
+                },
+                "dhcpdv6Leasetime": {
+                    "type": "integer"
+                },
+                "dhcpdv6Start": {
+                    "type": "string"
+                },
+                "dhcpdv6Stop": {
                     "type": "string"
                 },
                 "dhcpguardEnabled": {
@@ -5072,14 +5003,71 @@
                 "ipsecRemoteIdentifierEnabled": {
                     "type": "boolean"
                 },
+                "ipsecSeparateIkev2Networks": {
+                    "type": "boolean"
+                },
                 "ipsecTunnelIp": {
                     "type": "string"
                 },
                 "ipsecTunnelIpEnabled": {
                     "type": "boolean"
                 },
+                "ipv6ClientAddressAssignment": {
+                    "type": "string"
+                },
+                "ipv6InterfaceType": {
+                    "type": "string"
+                },
+                "ipv6PdAutoPrefixidEnabled": {
+                    "type": "boolean"
+                },
+                "ipv6PdInterface": {
+                    "type": "string"
+                },
+                "ipv6PdPrefixid": {
+                    "type": "string"
+                },
+                "ipv6PdStart": {
+                    "type": "string"
+                },
+                "ipv6PdStop": {
+                    "type": "string"
+                },
+                "ipv6RaEnabled": {
+                    "type": "boolean"
+                },
+                "ipv6RaPreferredLifetime": {
+                    "type": "integer"
+                },
+                "ipv6RaPriority": {
+                    "type": "string"
+                },
+                "ipv6RaValidLifetime": {
+                    "type": "integer"
+                },
+                "ipv6SettingPreference": {
+                    "type": "string"
+                },
+                "ipv6SingleNetworkInterface": {
+                    "type": "string"
+                },
+                "ipv6Subnet": {
+                    "type": "string"
+                },
+                "ipv6WanDelegationType": {
+                    "type": "string"
+                },
                 "isNat": {
                     "type": "boolean"
+                },
+                "l2tpAllowWeakCiphers": {
+                    "type": "boolean"
+                },
+                "l2tpInterface": {
+                    "type": "string"
+                },
+                "l2tpLocalWanIp": {
+                    "type": "string"
                 },
                 "localPort": {
                     "type": "integer"
@@ -5297,6 +5285,9 @@
                         "$ref": "#/types/unifi-native:networkconf:NetworkWANDHCPOptions"
                     }
                 },
+                "wanDhcpv6PdSize": {
+                    "type": "integer"
+                },
                 "wanDns1": {
                     "type": "string"
                 },
@@ -5337,6 +5328,15 @@
                     }
                 },
                 "wanIpv6": {
+                    "type": "string"
+                },
+                "wanIpv6Dns1": {
+                    "type": "string"
+                },
+                "wanIpv6Dns2": {
+                    "type": "string"
+                },
+                "wanIpv6DnsPreference": {
                     "type": "string"
                 },
                 "wanLoadBalanceType": {
@@ -5614,9 +5614,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_ugw3Wan2Enabled": {
-                    "type": "boolean"
-                },
                 "attrHidden": {
                     "type": "boolean"
                 },
@@ -5634,6 +5631,9 @@
                 },
                 "siteId": {
                     "type": "string"
+                },
+                "ugw3Wan2Enabled": {
+                    "type": "boolean"
                 }
             },
             "type": "object"
@@ -5668,24 +5668,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_dot1xCtrl": {
-                    "type": "string"
-                },
-                "_dot1xIdleTimeout": {
-                    "type": "integer"
-                },
-                "_priorityQueue1Level": {
-                    "type": "integer"
-                },
-                "_priorityQueue2Level": {
-                    "type": "integer"
-                },
-                "_priorityQueue3Level": {
-                    "type": "integer"
-                },
-                "_priorityQueue4Level": {
-                    "type": "integer"
-                },
                 "attrHidden": {
                     "type": "boolean"
                 },
@@ -5700,6 +5682,12 @@
                 },
                 "autoneg": {
                     "type": "boolean"
+                },
+                "dot1xCtrl": {
+                    "type": "string"
+                },
+                "dot1xIdleTimeout": {
+                    "type": "integer"
                 },
                 "egressRateLimitKbps": {
                     "type": "integer"
@@ -5760,6 +5748,18 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "priorityQueue1Level": {
+                    "type": "integer"
+                },
+                "priorityQueue2Level": {
+                    "type": "integer"
+                },
+                "priorityQueue3Level": {
+                    "type": "integer"
+                },
+                "priorityQueue4Level": {
+                    "type": "integer"
                 },
                 "qosProfile": {
                     "$ref": "#/types/unifi-native:portconf:PortProfileQOSProfile"
@@ -6014,12 +6014,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_channels6e": {
-                    "type": "array",
-                    "items": {
-                        "type": "integer"
-                    }
-                },
                 "attrHidden": {
                     "type": "boolean"
                 },
@@ -6037,6 +6031,12 @@
                 },
                 "autoChannelPresetsType": {
                     "type": "string"
+                },
+                "channels6e": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
                 },
                 "channelsBlacklist": {
                     "type": "array",
@@ -7134,9 +7134,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_dataRetentionTimeInHoursFor5minutesScale": {
-                    "type": "integer"
-                },
                 "analyticsDisapprovedFor": {
                     "type": "string"
                 },
@@ -7217,6 +7214,9 @@
                 },
                 "dataRetentionSettingPreference": {
                     "type": "string"
+                },
+                "dataRetentionTimeInHoursFor5minutesScale": {
+                    "type": "integer"
                 },
                 "dataRetentionTimeInHoursForDailyScale": {
                     "type": "integer"
@@ -7803,12 +7803,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_h323Module": {
-                    "type": "boolean"
-                },
-                "_offloadL2Blocking": {
-                    "type": "boolean"
-                },
                 "arpCacheBaseReachable": {
                     "type": "integer"
                 },
@@ -7890,6 +7884,9 @@
                 "greModule": {
                     "type": "boolean"
                 },
+                "h323Module": {
+                    "type": "boolean"
+                },
                 "icmpTimeout": {
                     "type": "integer"
                 },
@@ -7909,6 +7906,9 @@
                     "type": "integer"
                 },
                 "offloadAccounting": {
+                    "type": "boolean"
+                },
+                "offloadL2Blocking": {
                     "type": "boolean"
                 },
                 "offloadSch": {
@@ -8421,36 +8421,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_dtim6e": {
-                    "type": "integer"
-                },
-                "_hotspot2confEnabled": {
-                    "type": "boolean"
-                },
-                "_l2Isolation": {
-                    "type": "boolean"
-                },
-                "_no2ghzOui": {
-                    "type": "boolean"
-                },
-                "_p2p": {
-                    "type": "boolean"
-                },
-                "_p2pCrossConnect": {
-                    "type": "boolean"
-                },
-                "_wpa3Enhanced192": {
-                    "type": "boolean"
-                },
-                "_wpa3FastRoaming": {
-                    "type": "boolean"
-                },
-                "_wpa3Support": {
-                    "type": "boolean"
-                },
-                "_wpa3Transition": {
-                    "type": "boolean"
-                },
                 "apGroupIds": {
                     "type": "array",
                     "items": {
@@ -8499,6 +8469,9 @@
                 "dpigroupId": {
                     "type": "string"
                 },
+                "dtim6e": {
+                    "type": "integer"
+                },
                 "dtimMode": {
                     "type": "string"
                 },
@@ -8529,10 +8502,16 @@
                 "hotspot2": {
                     "$ref": "#/types/unifi-native:wlanconf:WLANHotspot2"
                 },
+                "hotspot2confEnabled": {
+                    "type": "boolean"
+                },
                 "iappEnabled": {
                     "type": "boolean"
                 },
                 "isGuest": {
+                    "type": "boolean"
+                },
+                "l2Isolation": {
                     "type": "boolean"
                 },
                 "logLevel": {
@@ -8595,7 +8574,16 @@
                 "networkconfId": {
                     "type": "string"
                 },
+                "no2ghzOui": {
+                    "type": "boolean"
+                },
                 "optimizeIotWifiConnectivity": {
+                    "type": "boolean"
+                },
+                "p2p": {
+                    "type": "boolean"
+                },
+                "p2pCrossConnect": {
                     "type": "boolean"
                 },
                 "pmfCipher": {
@@ -8720,6 +8708,18 @@
                 },
                 "wlangroupId": {
                     "type": "string"
+                },
+                "wpa3Enhanced192": {
+                    "type": "boolean"
+                },
+                "wpa3FastRoaming": {
+                    "type": "boolean"
+                },
+                "wpa3Support": {
+                    "type": "boolean"
+                },
+                "wpa3Transition": {
+                    "type": "boolean"
                 },
                 "wpaEnc": {
                     "type": "string"
@@ -8968,7 +8968,7 @@
                 }
             }
         },
-        "unifi-native:auto_speedtest:TingAutoSpeedtest": {
+        "unifi-native:auto_speedtest:SettingAutoSpeedtest": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -9029,7 +9029,7 @@
                 }
             }
         },
-        "unifi-native:baresip:TingBaresip": {
+        "unifi-native:baresip:SettingBaresip": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -9102,7 +9102,7 @@
                 }
             }
         },
-        "unifi-native:broadcast:TingBroadcast": {
+        "unifi-native:broadcast:SettingBroadcast": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -9387,7 +9387,7 @@
                 }
             }
         },
-        "unifi-native:connectivity:TingConnectivity": {
+        "unifi-native:connectivity:SettingConnectivity": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -9472,7 +9472,7 @@
                 }
             }
         },
-        "unifi-native:country:TingCountry": {
+        "unifi-native:country:SettingCountry": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -9606,7 +9606,7 @@
                 }
             }
         },
-        "unifi-native:dashboard:TingDashboard": {
+        "unifi-native:dashboard:SettingDashboard": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -9678,12 +9678,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_dot1xFallbackNetworkconfId": {
-                    "type": "string"
-                },
-                "_dot1xPortctrlEnabled": {
-                    "type": "boolean"
-                },
                 "adopted": {
                     "type": "boolean"
                 },
@@ -9721,6 +9715,12 @@
                     "$ref": "#/types/unifi-native:device:DeviceConfigNetwork"
                 },
                 "disabled": {
+                    "type": "boolean"
+                },
+                "dot1xFallbackNetworkconfId": {
+                    "type": "string"
+                },
+                "dot1xPortctrlEnabled": {
                     "type": "boolean"
                 },
                 "dpiEnabled": {
@@ -9963,12 +9963,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_dot1xFallbackNetworkconfId": {
-                    "type": "string"
-                },
-                "_dot1xPortctrlEnabled": {
-                    "type": "boolean"
-                },
                 "adopted": {
                     "type": "boolean"
                 },
@@ -10006,6 +10000,12 @@
                     "$ref": "#/types/unifi-native:device:DeviceConfigNetwork"
                 },
                 "disabled": {
+                    "type": "boolean"
+                },
+                "dot1xFallbackNetworkconfId": {
+                    "type": "string"
+                },
+                "dot1xPortctrlEnabled": {
                     "type": "boolean"
                 },
                 "dpiEnabled": {
@@ -10317,7 +10317,7 @@
                 }
             }
         },
-        "unifi-native:doh:TingDoh": {
+        "unifi-native:doh:SettingDoh": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -10396,7 +10396,7 @@
                 }
             }
         },
-        "unifi-native:dpi:TingDpi": {
+        "unifi-native:dpi:SettingDpi": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -10724,7 +10724,7 @@
                 }
             }
         },
-        "unifi-native:element_adopt:TingElementAdopt": {
+        "unifi-native:element_adopt:SettingElementAdopt": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -10791,7 +10791,7 @@
                 }
             }
         },
-        "unifi-native:ether_lighting:TingEtherLighting": {
+        "unifi-native:ether_lighting:SettingEtherLighting": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -10864,7 +10864,7 @@
                 }
             }
         },
-        "unifi-native:evaluation_score:TingEvaluationScore": {
+        "unifi-native:evaluation_score:SettingEvaluationScore": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -10997,9 +10997,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_icmpv6Typename": {
-                    "type": "string"
-                },
                 "action": {
                     "type": "string"
                 },
@@ -11040,6 +11037,9 @@
                     "type": "boolean"
                 },
                 "icmpTypename": {
+                    "type": "string"
+                },
+                "icmpv6Typename": {
                     "type": "string"
                 },
                 "ipsec": {
@@ -11114,9 +11114,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_icmpv6Typename": {
-                    "type": "string"
-                },
                 "action": {
                     "type": "string"
                 },
@@ -11157,6 +11154,9 @@
                     "type": "boolean"
                 },
                 "icmpTypename": {
+                    "type": "string"
+                },
+                "icmpv6Typename": {
                     "type": "string"
                 },
                 "ipsec": {
@@ -11227,7 +11227,7 @@
                 }
             }
         },
-        "unifi-native:global_ap:TingGlobalAp": {
+        "unifi-native:global_ap:SettingGlobalAp": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -11342,7 +11342,7 @@
                 }
             }
         },
-        "unifi-native:global_nat:TingGlobalNat": {
+        "unifi-native:global_nat:SettingGlobalNat": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -11409,27 +11409,21 @@
                 }
             }
         },
-        "unifi-native:global_switch:TingGlobalSwitch": {
+        "unifi-native:global_switch:SettingGlobalSwitch": {
             "properties": {
                 "Id": {
                     "type": "string"
-                },
-                "_aclL3Isolation": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/unifi-native:global_switch:SettingGlobalSwitchAclL3Isolation"
-                    }
-                },
-                "_dot1xFallbackNetworkconfId": {
-                    "type": "string"
-                },
-                "_dot1xPortctrlEnabled": {
-                    "type": "boolean"
                 },
                 "aclDeviceIsolation": {
                     "type": "array",
                     "items": {
                         "type": "string"
+                    }
+                },
+                "aclL3Isolation": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/unifi-native:global_switch:SettingGlobalSwitchAclL3Isolation"
                     }
                 },
                 "attrHidden": {
@@ -11445,6 +11439,12 @@
                     "type": "boolean"
                 },
                 "dhcpSnoop": {
+                    "type": "boolean"
+                },
+                "dot1xFallbackNetworkconfId": {
+                    "type": "string"
+                },
+                "dot1xPortctrlEnabled": {
                     "type": "boolean"
                 },
                 "floodKnownProtocols": {
@@ -11483,22 +11483,16 @@
                 "Id": {
                     "type": "string"
                 },
-                "_aclL3Isolation": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/unifi-native:global_switch:SettingGlobalSwitchAclL3Isolation"
-                    }
-                },
-                "_dot1xFallbackNetworkconfId": {
-                    "type": "string"
-                },
-                "_dot1xPortctrlEnabled": {
-                    "type": "boolean"
-                },
                 "aclDeviceIsolation": {
                     "type": "array",
                     "items": {
                         "type": "string"
+                    }
+                },
+                "aclL3Isolation": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/unifi-native:global_switch:SettingGlobalSwitchAclL3Isolation"
                     }
                 },
                 "attrHidden": {
@@ -11514,6 +11508,12 @@
                     "type": "boolean"
                 },
                 "dhcpSnoop": {
+                    "type": "boolean"
+                },
+                "dot1xFallbackNetworkconfId": {
+                    "type": "string"
+                },
+                "dot1xPortctrlEnabled": {
                     "type": "boolean"
                 },
                 "floodKnownProtocols": {
@@ -11548,7 +11548,7 @@
                 }
             }
         },
-        "unifi-native:guest_access:TingGuestAcces": {
+        "unifi-native:guest_access:SettingGuestAcces": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -13018,7 +13018,7 @@
                 }
             }
         },
-        "unifi-native:ips:TingIps": {
+        "unifi-native:ips:SettingIps": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -13175,7 +13175,7 @@
                 }
             }
         },
-        "unifi-native:lcm:TingLcm": {
+        "unifi-native:lcm:SettingLcm": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -13254,7 +13254,7 @@
                 }
             }
         },
-        "unifi-native:locale:TingLocale": {
+        "unifi-native:locale:SettingLocale": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -13309,7 +13309,7 @@
                 }
             }
         },
-        "unifi-native:magic_site_to_site_vpn:TingMagicSiteToSiteVpn": {
+        "unifi-native:magic_site_to_site_vpn:SettingMagicSiteToSiteVpn": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -13485,7 +13485,7 @@
                 }
             }
         },
-        "unifi-native:mdns:TingMdn": {
+        "unifi-native:mdns:SettingMdn": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -13607,15 +13607,9 @@
                 }
             }
         },
-        "unifi-native:mgmt:TingMgmt": {
+        "unifi-native:mgmt:SettingMgmt": {
             "properties": {
                 "Id": {
-                    "type": "string"
-                },
-                "_xSshMd5passwd": {
-                    "type": "string"
-                },
-                "_xSshSha512passwd": {
                     "type": "string"
                 },
                 "advancedFeatureEnabled": {
@@ -13687,7 +13681,13 @@
                         "$ref": "#/types/unifi-native:mgmt:SettingMgmtXSshKeys"
                     }
                 },
+                "xSshMd5passwd": {
+                    "type": "string"
+                },
                 "xSshPassword": {
+                    "type": "string"
+                },
+                "xSshSha512passwd": {
                     "type": "string"
                 },
                 "xSshUsername": {
@@ -13699,12 +13699,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_xSshMd5passwd": {
-                    "type": "string"
-                },
-                "_xSshSha512passwd": {
-                    "type": "string"
-                },
                 "advancedFeatureEnabled": {
                     "type": "boolean"
                 },
@@ -13774,7 +13768,13 @@
                         "$ref": "#/types/unifi-native:mgmt:SettingMgmtXSshKeys"
                     }
                 },
+                "xSshMd5passwd": {
+                    "type": "string"
+                },
                 "xSshPassword": {
+                    "type": "string"
+                },
+                "xSshSha512passwd": {
                     "type": "string"
                 },
                 "xSshUsername": {
@@ -13782,7 +13782,7 @@
                 }
             }
         },
-        "unifi-native:netflow:TingNetflow": {
+        "unifi-native:netflow:SettingNetflow": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -13903,7 +13903,7 @@
                 }
             }
         },
-        "unifi-native:network_optimization:TingNetworkOptimization": {
+        "unifi-native:network_optimization:SettingNetworkOptimization": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -13963,105 +13963,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_dhcpdv6AllowSlaac": {
-                    "type": "boolean"
-                },
-                "_dhcpdv6Dns1": {
-                    "type": "string"
-                },
-                "_dhcpdv6Dns2": {
-                    "type": "string"
-                },
-                "_dhcpdv6Dns3": {
-                    "type": "string"
-                },
-                "_dhcpdv6Dns4": {
-                    "type": "string"
-                },
-                "_dhcpdv6DnsAuto": {
-                    "type": "boolean"
-                },
-                "_dhcpdv6Enabled": {
-                    "type": "boolean"
-                },
-                "_dhcpdv6Leasetime": {
-                    "type": "integer"
-                },
-                "_dhcpdv6Start": {
-                    "type": "string"
-                },
-                "_dhcpdv6Stop": {
-                    "type": "string"
-                },
-                "_ipsecSeparateIkev2Networks": {
-                    "type": "boolean"
-                },
-                "_ipv6ClientAddressAssignment": {
-                    "type": "string"
-                },
-                "_ipv6InterfaceType": {
-                    "type": "string"
-                },
-                "_ipv6PdAutoPrefixidEnabled": {
-                    "type": "boolean"
-                },
-                "_ipv6PdInterface": {
-                    "type": "string"
-                },
-                "_ipv6PdPrefixid": {
-                    "type": "string"
-                },
-                "_ipv6PdStart": {
-                    "type": "string"
-                },
-                "_ipv6PdStop": {
-                    "type": "string"
-                },
-                "_ipv6RaEnabled": {
-                    "type": "boolean"
-                },
-                "_ipv6RaPreferredLifetime": {
-                    "type": "integer"
-                },
-                "_ipv6RaPriority": {
-                    "type": "string"
-                },
-                "_ipv6RaValidLifetime": {
-                    "type": "integer"
-                },
-                "_ipv6SettingPreference": {
-                    "type": "string"
-                },
-                "_ipv6SingleNetworkInterface": {
-                    "type": "string"
-                },
-                "_ipv6Subnet": {
-                    "type": "string"
-                },
-                "_ipv6WanDelegationType": {
-                    "type": "string"
-                },
-                "_l2tpAllowWeakCiphers": {
-                    "type": "boolean"
-                },
-                "_l2tpInterface": {
-                    "type": "string"
-                },
-                "_l2tpLocalWanIp": {
-                    "type": "string"
-                },
-                "_wanDhcpv6PdSize": {
-                    "type": "integer"
-                },
-                "_wanIpv6Dns1": {
-                    "type": "string"
-                },
-                "_wanIpv6Dns2": {
-                    "type": "string"
-                },
-                "_wanIpv6DnsPreference": {
-                    "type": "string"
-                },
                 "attrHidden": {
                     "type": "boolean"
                 },
@@ -14174,6 +14075,36 @@
                     "type": "boolean"
                 },
                 "dhcpdWpadUrl": {
+                    "type": "string"
+                },
+                "dhcpdv6AllowSlaac": {
+                    "type": "boolean"
+                },
+                "dhcpdv6Dns1": {
+                    "type": "string"
+                },
+                "dhcpdv6Dns2": {
+                    "type": "string"
+                },
+                "dhcpdv6Dns3": {
+                    "type": "string"
+                },
+                "dhcpdv6Dns4": {
+                    "type": "string"
+                },
+                "dhcpdv6DnsAuto": {
+                    "type": "boolean"
+                },
+                "dhcpdv6Enabled": {
+                    "type": "boolean"
+                },
+                "dhcpdv6Leasetime": {
+                    "type": "integer"
+                },
+                "dhcpdv6Start": {
+                    "type": "string"
+                },
+                "dhcpdv6Stop": {
                     "type": "string"
                 },
                 "dhcpguardEnabled": {
@@ -14320,14 +14251,71 @@
                 "ipsecRemoteIdentifierEnabled": {
                     "type": "boolean"
                 },
+                "ipsecSeparateIkev2Networks": {
+                    "type": "boolean"
+                },
                 "ipsecTunnelIp": {
                     "type": "string"
                 },
                 "ipsecTunnelIpEnabled": {
                     "type": "boolean"
                 },
+                "ipv6ClientAddressAssignment": {
+                    "type": "string"
+                },
+                "ipv6InterfaceType": {
+                    "type": "string"
+                },
+                "ipv6PdAutoPrefixidEnabled": {
+                    "type": "boolean"
+                },
+                "ipv6PdInterface": {
+                    "type": "string"
+                },
+                "ipv6PdPrefixid": {
+                    "type": "string"
+                },
+                "ipv6PdStart": {
+                    "type": "string"
+                },
+                "ipv6PdStop": {
+                    "type": "string"
+                },
+                "ipv6RaEnabled": {
+                    "type": "boolean"
+                },
+                "ipv6RaPreferredLifetime": {
+                    "type": "integer"
+                },
+                "ipv6RaPriority": {
+                    "type": "string"
+                },
+                "ipv6RaValidLifetime": {
+                    "type": "integer"
+                },
+                "ipv6SettingPreference": {
+                    "type": "string"
+                },
+                "ipv6SingleNetworkInterface": {
+                    "type": "string"
+                },
+                "ipv6Subnet": {
+                    "type": "string"
+                },
+                "ipv6WanDelegationType": {
+                    "type": "string"
+                },
                 "isNat": {
                     "type": "boolean"
+                },
+                "l2tpAllowWeakCiphers": {
+                    "type": "boolean"
+                },
+                "l2tpInterface": {
+                    "type": "string"
+                },
+                "l2tpLocalWanIp": {
+                    "type": "string"
                 },
                 "localPort": {
                     "type": "integer"
@@ -14545,6 +14533,9 @@
                         "$ref": "#/types/unifi-native:networkconf:NetworkWANDHCPOptions"
                     }
                 },
+                "wanDhcpv6PdSize": {
+                    "type": "integer"
+                },
                 "wanDns1": {
                     "type": "string"
                 },
@@ -14585,6 +14576,15 @@
                     }
                 },
                 "wanIpv6": {
+                    "type": "string"
+                },
+                "wanIpv6Dns1": {
+                    "type": "string"
+                },
+                "wanIpv6Dns2": {
+                    "type": "string"
+                },
+                "wanIpv6DnsPreference": {
                     "type": "string"
                 },
                 "wanLoadBalanceType": {
@@ -14716,105 +14716,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_dhcpdv6AllowSlaac": {
-                    "type": "boolean"
-                },
-                "_dhcpdv6Dns1": {
-                    "type": "string"
-                },
-                "_dhcpdv6Dns2": {
-                    "type": "string"
-                },
-                "_dhcpdv6Dns3": {
-                    "type": "string"
-                },
-                "_dhcpdv6Dns4": {
-                    "type": "string"
-                },
-                "_dhcpdv6DnsAuto": {
-                    "type": "boolean"
-                },
-                "_dhcpdv6Enabled": {
-                    "type": "boolean"
-                },
-                "_dhcpdv6Leasetime": {
-                    "type": "integer"
-                },
-                "_dhcpdv6Start": {
-                    "type": "string"
-                },
-                "_dhcpdv6Stop": {
-                    "type": "string"
-                },
-                "_ipsecSeparateIkev2Networks": {
-                    "type": "boolean"
-                },
-                "_ipv6ClientAddressAssignment": {
-                    "type": "string"
-                },
-                "_ipv6InterfaceType": {
-                    "type": "string"
-                },
-                "_ipv6PdAutoPrefixidEnabled": {
-                    "type": "boolean"
-                },
-                "_ipv6PdInterface": {
-                    "type": "string"
-                },
-                "_ipv6PdPrefixid": {
-                    "type": "string"
-                },
-                "_ipv6PdStart": {
-                    "type": "string"
-                },
-                "_ipv6PdStop": {
-                    "type": "string"
-                },
-                "_ipv6RaEnabled": {
-                    "type": "boolean"
-                },
-                "_ipv6RaPreferredLifetime": {
-                    "type": "integer"
-                },
-                "_ipv6RaPriority": {
-                    "type": "string"
-                },
-                "_ipv6RaValidLifetime": {
-                    "type": "integer"
-                },
-                "_ipv6SettingPreference": {
-                    "type": "string"
-                },
-                "_ipv6SingleNetworkInterface": {
-                    "type": "string"
-                },
-                "_ipv6Subnet": {
-                    "type": "string"
-                },
-                "_ipv6WanDelegationType": {
-                    "type": "string"
-                },
-                "_l2tpAllowWeakCiphers": {
-                    "type": "boolean"
-                },
-                "_l2tpInterface": {
-                    "type": "string"
-                },
-                "_l2tpLocalWanIp": {
-                    "type": "string"
-                },
-                "_wanDhcpv6PdSize": {
-                    "type": "integer"
-                },
-                "_wanIpv6Dns1": {
-                    "type": "string"
-                },
-                "_wanIpv6Dns2": {
-                    "type": "string"
-                },
-                "_wanIpv6DnsPreference": {
-                    "type": "string"
-                },
                 "attrHidden": {
                     "type": "boolean"
                 },
@@ -14927,6 +14828,36 @@
                     "type": "boolean"
                 },
                 "dhcpdWpadUrl": {
+                    "type": "string"
+                },
+                "dhcpdv6AllowSlaac": {
+                    "type": "boolean"
+                },
+                "dhcpdv6Dns1": {
+                    "type": "string"
+                },
+                "dhcpdv6Dns2": {
+                    "type": "string"
+                },
+                "dhcpdv6Dns3": {
+                    "type": "string"
+                },
+                "dhcpdv6Dns4": {
+                    "type": "string"
+                },
+                "dhcpdv6DnsAuto": {
+                    "type": "boolean"
+                },
+                "dhcpdv6Enabled": {
+                    "type": "boolean"
+                },
+                "dhcpdv6Leasetime": {
+                    "type": "integer"
+                },
+                "dhcpdv6Start": {
+                    "type": "string"
+                },
+                "dhcpdv6Stop": {
                     "type": "string"
                 },
                 "dhcpguardEnabled": {
@@ -15073,14 +15004,71 @@
                 "ipsecRemoteIdentifierEnabled": {
                     "type": "boolean"
                 },
+                "ipsecSeparateIkev2Networks": {
+                    "type": "boolean"
+                },
                 "ipsecTunnelIp": {
                     "type": "string"
                 },
                 "ipsecTunnelIpEnabled": {
                     "type": "boolean"
                 },
+                "ipv6ClientAddressAssignment": {
+                    "type": "string"
+                },
+                "ipv6InterfaceType": {
+                    "type": "string"
+                },
+                "ipv6PdAutoPrefixidEnabled": {
+                    "type": "boolean"
+                },
+                "ipv6PdInterface": {
+                    "type": "string"
+                },
+                "ipv6PdPrefixid": {
+                    "type": "string"
+                },
+                "ipv6PdStart": {
+                    "type": "string"
+                },
+                "ipv6PdStop": {
+                    "type": "string"
+                },
+                "ipv6RaEnabled": {
+                    "type": "boolean"
+                },
+                "ipv6RaPreferredLifetime": {
+                    "type": "integer"
+                },
+                "ipv6RaPriority": {
+                    "type": "string"
+                },
+                "ipv6RaValidLifetime": {
+                    "type": "integer"
+                },
+                "ipv6SettingPreference": {
+                    "type": "string"
+                },
+                "ipv6SingleNetworkInterface": {
+                    "type": "string"
+                },
+                "ipv6Subnet": {
+                    "type": "string"
+                },
+                "ipv6WanDelegationType": {
+                    "type": "string"
+                },
                 "isNat": {
                     "type": "boolean"
+                },
+                "l2tpAllowWeakCiphers": {
+                    "type": "boolean"
+                },
+                "l2tpInterface": {
+                    "type": "string"
+                },
+                "l2tpLocalWanIp": {
+                    "type": "string"
                 },
                 "localPort": {
                     "type": "integer"
@@ -15298,6 +15286,9 @@
                         "$ref": "#/types/unifi-native:networkconf:NetworkWANDHCPOptions"
                     }
                 },
+                "wanDhcpv6PdSize": {
+                    "type": "integer"
+                },
                 "wanDns1": {
                     "type": "string"
                 },
@@ -15338,6 +15329,15 @@
                     }
                 },
                 "wanIpv6": {
+                    "type": "string"
+                },
+                "wanIpv6Dns1": {
+                    "type": "string"
+                },
+                "wanIpv6Dns2": {
+                    "type": "string"
+                },
+                "wanIpv6DnsPreference": {
                     "type": "string"
                 },
                 "wanLoadBalanceType": {
@@ -15465,7 +15465,7 @@
                 }
             }
         },
-        "unifi-native:ntp:TingNtp": {
+        "unifi-native:ntp:SettingNtp": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -15544,13 +15544,10 @@
                 }
             }
         },
-        "unifi-native:porta:TingPorta": {
+        "unifi-native:porta:SettingPorta": {
             "properties": {
                 "Id": {
                     "type": "string"
-                },
-                "_ugw3Wan2Enabled": {
-                    "type": "boolean"
                 },
                 "attrHidden": {
                     "type": "boolean"
@@ -15569,6 +15566,9 @@
                 },
                 "siteId": {
                     "type": "string"
+                },
+                "ugw3Wan2Enabled": {
+                    "type": "boolean"
                 }
             },
             "type": "object",
@@ -15576,9 +15576,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_ugw3Wan2Enabled": {
-                    "type": "boolean"
-                },
                 "attrHidden": {
                     "type": "boolean"
                 },
@@ -15596,6 +15593,9 @@
                 },
                 "siteId": {
                     "type": "string"
+                },
+                "ugw3Wan2Enabled": {
+                    "type": "boolean"
                 }
             }
         },
@@ -15603,24 +15603,6 @@
             "properties": {
                 "Id": {
                     "type": "string"
-                },
-                "_dot1xCtrl": {
-                    "type": "string"
-                },
-                "_dot1xIdleTimeout": {
-                    "type": "integer"
-                },
-                "_priorityQueue1Level": {
-                    "type": "integer"
-                },
-                "_priorityQueue2Level": {
-                    "type": "integer"
-                },
-                "_priorityQueue3Level": {
-                    "type": "integer"
-                },
-                "_priorityQueue4Level": {
-                    "type": "integer"
                 },
                 "attrHidden": {
                     "type": "boolean"
@@ -15636,6 +15618,12 @@
                 },
                 "autoneg": {
                     "type": "boolean"
+                },
+                "dot1xCtrl": {
+                    "type": "string"
+                },
+                "dot1xIdleTimeout": {
+                    "type": "integer"
                 },
                 "egressRateLimitKbps": {
                     "type": "integer"
@@ -15696,6 +15684,18 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "priorityQueue1Level": {
+                    "type": "integer"
+                },
+                "priorityQueue2Level": {
+                    "type": "integer"
+                },
+                "priorityQueue3Level": {
+                    "type": "integer"
+                },
+                "priorityQueue4Level": {
+                    "type": "integer"
                 },
                 "qosProfile": {
                     "$ref": "#/types/unifi-native:portconf:PortProfileQOSProfile"
@@ -15754,24 +15754,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_dot1xCtrl": {
-                    "type": "string"
-                },
-                "_dot1xIdleTimeout": {
-                    "type": "integer"
-                },
-                "_priorityQueue1Level": {
-                    "type": "integer"
-                },
-                "_priorityQueue2Level": {
-                    "type": "integer"
-                },
-                "_priorityQueue3Level": {
-                    "type": "integer"
-                },
-                "_priorityQueue4Level": {
-                    "type": "integer"
-                },
                 "attrHidden": {
                     "type": "boolean"
                 },
@@ -15786,6 +15768,12 @@
                 },
                 "autoneg": {
                     "type": "boolean"
+                },
+                "dot1xCtrl": {
+                    "type": "string"
+                },
+                "dot1xIdleTimeout": {
+                    "type": "integer"
                 },
                 "egressRateLimitKbps": {
                     "type": "integer"
@@ -15846,6 +15834,18 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "priorityQueue1Level": {
+                    "type": "integer"
+                },
+                "priorityQueue2Level": {
+                    "type": "integer"
+                },
+                "priorityQueue3Level": {
+                    "type": "integer"
+                },
+                "priorityQueue4Level": {
+                    "type": "integer"
                 },
                 "qosProfile": {
                     "$ref": "#/types/unifi-native:portconf:PortProfileQOSProfile"
@@ -16033,16 +16033,10 @@
                 }
             }
         },
-        "unifi-native:radio_ai:TingRadioAi": {
+        "unifi-native:radio_ai:SettingRadioAi": {
             "properties": {
                 "Id": {
                     "type": "string"
-                },
-                "_channels6e": {
-                    "type": "array",
-                    "items": {
-                        "type": "integer"
-                    }
                 },
                 "attrHidden": {
                     "type": "boolean"
@@ -16061,6 +16055,12 @@
                 },
                 "autoChannelPresetsType": {
                     "type": "string"
+                },
+                "channels6e": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
                 },
                 "channelsBlacklist": {
                     "type": "array",
@@ -16143,12 +16143,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_channels6e": {
-                    "type": "array",
-                    "items": {
-                        "type": "integer"
-                    }
-                },
                 "attrHidden": {
                     "type": "boolean"
                 },
@@ -16166,6 +16160,12 @@
                 },
                 "autoChannelPresetsType": {
                     "type": "string"
+                },
+                "channels6e": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
                 },
                 "channelsBlacklist": {
                     "type": "array",
@@ -16244,7 +16244,7 @@
                 }
             }
         },
-        "unifi-native:radius:TingRadiu": {
+        "unifi-native:radius:SettingRadiu": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -16607,7 +16607,7 @@
                 }
             }
         },
-        "unifi-native:rsyslogd:TingRsyslogd": {
+        "unifi-native:rsyslogd:SettingRsyslogd": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -16807,7 +16807,7 @@
                 }
             }
         },
-        "unifi-native:snmp:TingSnmp": {
+        "unifi-native:snmp:SettingSnmp": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -16947,7 +16947,7 @@
                 }
             }
         },
-        "unifi-native:ssl_inspection:TingSslInspection": {
+        "unifi-native:ssl_inspection:SettingSslInspection": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17002,7 +17002,7 @@
                 }
             }
         },
-        "unifi-native:super_cloudaccess:TingSuperCloudacces": {
+        "unifi-native:super_cloudaccess:SettingSuperCloudacces": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17093,7 +17093,7 @@
                 }
             }
         },
-        "unifi-native:super_events:TingSuperEvent": {
+        "unifi-native:super_events:SettingSuperEvent": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17148,7 +17148,7 @@
                 }
             }
         },
-        "unifi-native:super_fwupdate:TingSuperFw": {
+        "unifi-native:super_fwupdate:SettingSuperFw": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17215,7 +17215,7 @@
                 }
             }
         },
-        "unifi-native:super_identity:TingSuperIdentity": {
+        "unifi-native:super_identity:SettingSuperIdentity": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17276,7 +17276,7 @@
                 }
             }
         },
-        "unifi-native:super_mail:TingSuperMail": {
+        "unifi-native:super_mail:SettingSuperMail": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17331,13 +17331,10 @@
                 }
             }
         },
-        "unifi-native:super_mgmt:TingSuperMgmt": {
+        "unifi-native:super_mgmt:SettingSuperMgmt": {
             "properties": {
                 "Id": {
                     "type": "string"
-                },
-                "_dataRetentionTimeInHoursFor5minutesScale": {
-                    "type": "integer"
                 },
                 "analyticsDisapprovedFor": {
                     "type": "string"
@@ -17420,6 +17417,9 @@
                 "dataRetentionSettingPreference": {
                     "type": "string"
                 },
+                "dataRetentionTimeInHoursFor5minutesScale": {
+                    "type": "integer"
+                },
                 "dataRetentionTimeInHoursForDailyScale": {
                     "type": "integer"
                 },
@@ -17494,9 +17494,6 @@
             "inputProperties": {
                 "Id": {
                     "type": "string"
-                },
-                "_dataRetentionTimeInHoursFor5minutesScale": {
-                    "type": "integer"
                 },
                 "analyticsDisapprovedFor": {
                     "type": "string"
@@ -17579,6 +17576,9 @@
                 "dataRetentionSettingPreference": {
                     "type": "string"
                 },
+                "dataRetentionTimeInHoursFor5minutesScale": {
+                    "type": "integer"
+                },
                 "dataRetentionTimeInHoursForDailyScale": {
                     "type": "integer"
                 },
@@ -17650,7 +17650,7 @@
                 }
             }
         },
-        "unifi-native:super_sdn:TingSuperSdn": {
+        "unifi-native:super_sdn:SettingSuperSdn": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17735,7 +17735,7 @@
                 }
             }
         },
-        "unifi-native:super_smtp:TingSuperSmtp": {
+        "unifi-native:super_smtp:SettingSuperSmtp": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17899,7 +17899,7 @@
                 }
             }
         },
-        "unifi-native:teleport:TingTeleport": {
+        "unifi-native:teleport:SettingTeleport": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -17960,7 +17960,7 @@
                 }
             }
         },
-        "unifi-native:traffic_flow:TingTrafficFlow": {
+        "unifi-native:traffic_flow:SettingTrafficFlow": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -18245,16 +18245,10 @@
                 }
             }
         },
-        "unifi-native:usg:TingUsg": {
+        "unifi-native:usg:SettingUsg": {
             "properties": {
                 "Id": {
                     "type": "string"
-                },
-                "_h323Module": {
-                    "type": "boolean"
-                },
-                "_offloadL2Blocking": {
-                    "type": "boolean"
                 },
                 "arpCacheBaseReachable": {
                     "type": "integer"
@@ -18337,6 +18331,9 @@
                 "greModule": {
                     "type": "boolean"
                 },
+                "h323Module": {
+                    "type": "boolean"
+                },
                 "icmpTimeout": {
                     "type": "integer"
                 },
@@ -18356,6 +18353,9 @@
                     "type": "integer"
                 },
                 "offloadAccounting": {
+                    "type": "boolean"
+                },
+                "offloadL2Blocking": {
                     "type": "boolean"
                 },
                 "offloadSch": {
@@ -18439,12 +18439,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_h323Module": {
-                    "type": "boolean"
-                },
-                "_offloadL2Blocking": {
-                    "type": "boolean"
-                },
                 "arpCacheBaseReachable": {
                     "type": "integer"
                 },
@@ -18526,6 +18520,9 @@
                 "greModule": {
                     "type": "boolean"
                 },
+                "h323Module": {
+                    "type": "boolean"
+                },
                 "icmpTimeout": {
                     "type": "integer"
                 },
@@ -18545,6 +18542,9 @@
                     "type": "integer"
                 },
                 "offloadAccounting": {
+                    "type": "boolean"
+                },
+                "offloadL2Blocking": {
                     "type": "boolean"
                 },
                 "offloadSch": {
@@ -18624,7 +18624,7 @@
                 }
             }
         },
-        "unifi-native:usw:TingUsw": {
+        "unifi-native:usw:SettingUsw": {
             "properties": {
                 "Id": {
                     "type": "string"
@@ -18763,36 +18763,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_dtim6e": {
-                    "type": "integer"
-                },
-                "_hotspot2confEnabled": {
-                    "type": "boolean"
-                },
-                "_l2Isolation": {
-                    "type": "boolean"
-                },
-                "_no2ghzOui": {
-                    "type": "boolean"
-                },
-                "_p2p": {
-                    "type": "boolean"
-                },
-                "_p2pCrossConnect": {
-                    "type": "boolean"
-                },
-                "_wpa3Enhanced192": {
-                    "type": "boolean"
-                },
-                "_wpa3FastRoaming": {
-                    "type": "boolean"
-                },
-                "_wpa3Support": {
-                    "type": "boolean"
-                },
-                "_wpa3Transition": {
-                    "type": "boolean"
-                },
                 "apGroupIds": {
                     "type": "array",
                     "items": {
@@ -18841,6 +18811,9 @@
                 "dpigroupId": {
                     "type": "string"
                 },
+                "dtim6e": {
+                    "type": "integer"
+                },
                 "dtimMode": {
                     "type": "string"
                 },
@@ -18871,10 +18844,16 @@
                 "hotspot2": {
                     "$ref": "#/types/unifi-native:wlanconf:WLANHotspot2"
                 },
+                "hotspot2confEnabled": {
+                    "type": "boolean"
+                },
                 "iappEnabled": {
                     "type": "boolean"
                 },
                 "isGuest": {
+                    "type": "boolean"
+                },
+                "l2Isolation": {
                     "type": "boolean"
                 },
                 "logLevel": {
@@ -18937,7 +18916,16 @@
                 "networkconfId": {
                     "type": "string"
                 },
+                "no2ghzOui": {
+                    "type": "boolean"
+                },
                 "optimizeIotWifiConnectivity": {
+                    "type": "boolean"
+                },
+                "p2p": {
+                    "type": "boolean"
+                },
+                "p2pCrossConnect": {
                     "type": "boolean"
                 },
                 "pmfCipher": {
@@ -19062,6 +19050,18 @@
                 },
                 "wlangroupId": {
                     "type": "string"
+                },
+                "wpa3Enhanced192": {
+                    "type": "boolean"
+                },
+                "wpa3FastRoaming": {
+                    "type": "boolean"
+                },
+                "wpa3Support": {
+                    "type": "boolean"
+                },
+                "wpa3Transition": {
+                    "type": "boolean"
                 },
                 "wpaEnc": {
                     "type": "string"
@@ -19087,36 +19087,6 @@
                 "Id": {
                     "type": "string"
                 },
-                "_dtim6e": {
-                    "type": "integer"
-                },
-                "_hotspot2confEnabled": {
-                    "type": "boolean"
-                },
-                "_l2Isolation": {
-                    "type": "boolean"
-                },
-                "_no2ghzOui": {
-                    "type": "boolean"
-                },
-                "_p2p": {
-                    "type": "boolean"
-                },
-                "_p2pCrossConnect": {
-                    "type": "boolean"
-                },
-                "_wpa3Enhanced192": {
-                    "type": "boolean"
-                },
-                "_wpa3FastRoaming": {
-                    "type": "boolean"
-                },
-                "_wpa3Support": {
-                    "type": "boolean"
-                },
-                "_wpa3Transition": {
-                    "type": "boolean"
-                },
                 "apGroupIds": {
                     "type": "array",
                     "items": {
@@ -19165,6 +19135,9 @@
                 "dpigroupId": {
                     "type": "string"
                 },
+                "dtim6e": {
+                    "type": "integer"
+                },
                 "dtimMode": {
                     "type": "string"
                 },
@@ -19195,10 +19168,16 @@
                 "hotspot2": {
                     "$ref": "#/types/unifi-native:wlanconf:WLANHotspot2"
                 },
+                "hotspot2confEnabled": {
+                    "type": "boolean"
+                },
                 "iappEnabled": {
                     "type": "boolean"
                 },
                 "isGuest": {
+                    "type": "boolean"
+                },
+                "l2Isolation": {
                     "type": "boolean"
                 },
                 "logLevel": {
@@ -19261,7 +19240,16 @@
                 "networkconfId": {
                     "type": "string"
                 },
+                "no2ghzOui": {
+                    "type": "boolean"
+                },
                 "optimizeIotWifiConnectivity": {
+                    "type": "boolean"
+                },
+                "p2p": {
+                    "type": "boolean"
+                },
+                "p2pCrossConnect": {
                     "type": "boolean"
                 },
                 "pmfCipher": {
@@ -19386,6 +19374,18 @@
                 },
                 "wlangroupId": {
                     "type": "string"
+                },
+                "wpa3Enhanced192": {
+                    "type": "boolean"
+                },
+                "wpa3FastRoaming": {
+                    "type": "boolean"
+                },
+                "wpa3Support": {
+                    "type": "boolean"
+                },
+                "wpa3Transition": {
+                    "type": "boolean"
                 },
                 "wpaEnc": {
                     "type": "string"

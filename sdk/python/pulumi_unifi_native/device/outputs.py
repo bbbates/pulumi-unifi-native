@@ -38,8 +38,6 @@ __all__ = [
 class Device(dict):
     def __init__(__self__, *,
                  id: Optional[builtins.str] = None,
-                 _dot1x_fallback_networkconf_id: Optional[builtins.str] = None,
-                 _dot1x_portctrl_enabled: Optional[builtins.bool] = None,
                  adopted: Optional[builtins.bool] = None,
                  afc_enabled: Optional[builtins.bool] = None,
                  atf_enabled: Optional[builtins.bool] = None,
@@ -53,6 +51,8 @@ class Device(dict):
                  baresip_extension: Optional[builtins.str] = None,
                  config_network: Optional['outputs.DeviceConfigNetwork'] = None,
                  disabled: Optional[builtins.bool] = None,
+                 dot1x_fallback_networkconf_id: Optional[builtins.str] = None,
+                 dot1x_portctrl_enabled: Optional[builtins.bool] = None,
                  dpi_enabled: Optional[builtins.bool] = None,
                  ether_lighting: Optional['outputs.DeviceEtherLighting'] = None,
                  ethernet_overrides: Optional[Sequence['outputs.DeviceEthernetOverrides']] = None,
@@ -129,10 +129,6 @@ class Device(dict):
                  y: Optional[builtins.float] = None):
         if id is not None:
             pulumi.set(__self__, "id", id)
-        if _dot1x_fallback_networkconf_id is not None:
-            pulumi.set(__self__, "_dot1x_fallback_networkconf_id", _dot1x_fallback_networkconf_id)
-        if _dot1x_portctrl_enabled is not None:
-            pulumi.set(__self__, "_dot1x_portctrl_enabled", _dot1x_portctrl_enabled)
         if adopted is not None:
             pulumi.set(__self__, "adopted", adopted)
         if afc_enabled is not None:
@@ -159,6 +155,10 @@ class Device(dict):
             pulumi.set(__self__, "config_network", config_network)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
+        if dot1x_fallback_networkconf_id is not None:
+            pulumi.set(__self__, "dot1x_fallback_networkconf_id", dot1x_fallback_networkconf_id)
+        if dot1x_portctrl_enabled is not None:
+            pulumi.set(__self__, "dot1x_portctrl_enabled", dot1x_portctrl_enabled)
         if dpi_enabled is not None:
             pulumi.set(__self__, "dpi_enabled", dpi_enabled)
         if ether_lighting is not None:
@@ -314,16 +314,6 @@ class Device(dict):
         return pulumi.get(self, "id")
 
     @property
-    @pulumi.getter(name="_dot1xFallbackNetworkconfId")
-    def _dot1x_fallback_networkconf_id(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_dot1x_fallback_networkconf_id")
-
-    @property
-    @pulumi.getter(name="_dot1xPortctrlEnabled")
-    def _dot1x_portctrl_enabled(self) -> Optional[builtins.bool]:
-        return pulumi.get(self, "_dot1x_portctrl_enabled")
-
-    @property
     @pulumi.getter
     def adopted(self) -> Optional[builtins.bool]:
         return pulumi.get(self, "adopted")
@@ -387,6 +377,16 @@ class Device(dict):
     @pulumi.getter
     def disabled(self) -> Optional[builtins.bool]:
         return pulumi.get(self, "disabled")
+
+    @property
+    @pulumi.getter(name="dot1xFallbackNetworkconfId")
+    def dot1x_fallback_networkconf_id(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "dot1x_fallback_networkconf_id")
+
+    @property
+    @pulumi.getter(name="dot1xPortctrlEnabled")
+    def dot1x_portctrl_enabled(self) -> Optional[builtins.bool]:
+        return pulumi.get(self, "dot1x_portctrl_enabled")
 
     @property
     @pulumi.getter(name="dpiEnabled")
@@ -989,20 +989,12 @@ class DevicePortOverrides(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "_dot1xCtrl":
-            suggest = "_dot1x_ctrl"
-        elif key == "_dot1xIdleTimeout":
-            suggest = "_dot1x_idle_timeout"
-        elif key == "_priorityQueue1Level":
-            suggest = "_priority_queue1_level"
-        elif key == "_priorityQueue2Level":
-            suggest = "_priority_queue2_level"
-        elif key == "_priorityQueue3Level":
-            suggest = "_priority_queue3_level"
-        elif key == "_priorityQueue4Level":
-            suggest = "_priority_queue4_level"
-        elif key == "aggregateNumPorts":
+        if key == "aggregateNumPorts":
             suggest = "aggregate_num_ports"
+        elif key == "dot1xCtrl":
+            suggest = "dot1x_ctrl"
+        elif key == "dot1xIdleTimeout":
+            suggest = "dot1x_idle_timeout"
         elif key == "egressRateLimitKbps":
             suggest = "egress_rate_limit_kbps"
         elif key == "egressRateLimitKbpsEnabled":
@@ -1037,6 +1029,14 @@ class DevicePortOverrides(dict):
             suggest = "port_security_mac_address"
         elif key == "portconfId":
             suggest = "portconf_id"
+        elif key == "priorityQueue1Level":
+            suggest = "priority_queue1_level"
+        elif key == "priorityQueue2Level":
+            suggest = "priority_queue2_level"
+        elif key == "priorityQueue3Level":
+            suggest = "priority_queue3_level"
+        elif key == "priorityQueue4Level":
+            suggest = "priority_queue4_level"
         elif key == "qosProfile":
             suggest = "qos_profile"
         elif key == "settingPreference":
@@ -1080,14 +1080,10 @@ class DevicePortOverrides(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 _dot1x_ctrl: Optional[builtins.str] = None,
-                 _dot1x_idle_timeout: Optional[builtins.int] = None,
-                 _priority_queue1_level: Optional[builtins.int] = None,
-                 _priority_queue2_level: Optional[builtins.int] = None,
-                 _priority_queue3_level: Optional[builtins.int] = None,
-                 _priority_queue4_level: Optional[builtins.int] = None,
                  aggregate_num_ports: Optional[builtins.int] = None,
                  autoneg: Optional[builtins.bool] = None,
+                 dot1x_ctrl: Optional[builtins.str] = None,
+                 dot1x_idle_timeout: Optional[builtins.int] = None,
                  egress_rate_limit_kbps: Optional[builtins.int] = None,
                  egress_rate_limit_kbps_enabled: Optional[builtins.bool] = None,
                  excluded_networkconf_ids: Optional[Sequence[builtins.str]] = None,
@@ -1108,6 +1104,10 @@ class DevicePortOverrides(dict):
                  port_security_enabled: Optional[builtins.bool] = None,
                  port_security_mac_address: Optional[Sequence[builtins.str]] = None,
                  portconf_id: Optional[builtins.str] = None,
+                 priority_queue1_level: Optional[builtins.int] = None,
+                 priority_queue2_level: Optional[builtins.int] = None,
+                 priority_queue3_level: Optional[builtins.int] = None,
+                 priority_queue4_level: Optional[builtins.int] = None,
                  qos_profile: Optional['outputs.DeviceQOSProfile'] = None,
                  setting_preference: Optional[builtins.str] = None,
                  speed: Optional[builtins.int] = None,
@@ -1124,22 +1124,14 @@ class DevicePortOverrides(dict):
                  stp_port_mode: Optional[builtins.bool] = None,
                  tagged_vlan_mgmt: Optional[builtins.str] = None,
                  voice_networkconf_id: Optional[builtins.str] = None):
-        if _dot1x_ctrl is not None:
-            pulumi.set(__self__, "_dot1x_ctrl", _dot1x_ctrl)
-        if _dot1x_idle_timeout is not None:
-            pulumi.set(__self__, "_dot1x_idle_timeout", _dot1x_idle_timeout)
-        if _priority_queue1_level is not None:
-            pulumi.set(__self__, "_priority_queue1_level", _priority_queue1_level)
-        if _priority_queue2_level is not None:
-            pulumi.set(__self__, "_priority_queue2_level", _priority_queue2_level)
-        if _priority_queue3_level is not None:
-            pulumi.set(__self__, "_priority_queue3_level", _priority_queue3_level)
-        if _priority_queue4_level is not None:
-            pulumi.set(__self__, "_priority_queue4_level", _priority_queue4_level)
         if aggregate_num_ports is not None:
             pulumi.set(__self__, "aggregate_num_ports", aggregate_num_ports)
         if autoneg is not None:
             pulumi.set(__self__, "autoneg", autoneg)
+        if dot1x_ctrl is not None:
+            pulumi.set(__self__, "dot1x_ctrl", dot1x_ctrl)
+        if dot1x_idle_timeout is not None:
+            pulumi.set(__self__, "dot1x_idle_timeout", dot1x_idle_timeout)
         if egress_rate_limit_kbps is not None:
             pulumi.set(__self__, "egress_rate_limit_kbps", egress_rate_limit_kbps)
         if egress_rate_limit_kbps_enabled is not None:
@@ -1180,6 +1172,14 @@ class DevicePortOverrides(dict):
             pulumi.set(__self__, "port_security_mac_address", port_security_mac_address)
         if portconf_id is not None:
             pulumi.set(__self__, "portconf_id", portconf_id)
+        if priority_queue1_level is not None:
+            pulumi.set(__self__, "priority_queue1_level", priority_queue1_level)
+        if priority_queue2_level is not None:
+            pulumi.set(__self__, "priority_queue2_level", priority_queue2_level)
+        if priority_queue3_level is not None:
+            pulumi.set(__self__, "priority_queue3_level", priority_queue3_level)
+        if priority_queue4_level is not None:
+            pulumi.set(__self__, "priority_queue4_level", priority_queue4_level)
         if qos_profile is not None:
             pulumi.set(__self__, "qos_profile", qos_profile)
         if setting_preference is not None:
@@ -1214,36 +1214,6 @@ class DevicePortOverrides(dict):
             pulumi.set(__self__, "voice_networkconf_id", voice_networkconf_id)
 
     @property
-    @pulumi.getter(name="_dot1xCtrl")
-    def _dot1x_ctrl(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_dot1x_ctrl")
-
-    @property
-    @pulumi.getter(name="_dot1xIdleTimeout")
-    def _dot1x_idle_timeout(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "_dot1x_idle_timeout")
-
-    @property
-    @pulumi.getter(name="_priorityQueue1Level")
-    def _priority_queue1_level(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "_priority_queue1_level")
-
-    @property
-    @pulumi.getter(name="_priorityQueue2Level")
-    def _priority_queue2_level(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "_priority_queue2_level")
-
-    @property
-    @pulumi.getter(name="_priorityQueue3Level")
-    def _priority_queue3_level(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "_priority_queue3_level")
-
-    @property
-    @pulumi.getter(name="_priorityQueue4Level")
-    def _priority_queue4_level(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "_priority_queue4_level")
-
-    @property
     @pulumi.getter(name="aggregateNumPorts")
     def aggregate_num_ports(self) -> Optional[builtins.int]:
         return pulumi.get(self, "aggregate_num_ports")
@@ -1252,6 +1222,16 @@ class DevicePortOverrides(dict):
     @pulumi.getter
     def autoneg(self) -> Optional[builtins.bool]:
         return pulumi.get(self, "autoneg")
+
+    @property
+    @pulumi.getter(name="dot1xCtrl")
+    def dot1x_ctrl(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "dot1x_ctrl")
+
+    @property
+    @pulumi.getter(name="dot1xIdleTimeout")
+    def dot1x_idle_timeout(self) -> Optional[builtins.int]:
+        return pulumi.get(self, "dot1x_idle_timeout")
 
     @property
     @pulumi.getter(name="egressRateLimitKbps")
@@ -1352,6 +1332,26 @@ class DevicePortOverrides(dict):
     @pulumi.getter(name="portconfId")
     def portconf_id(self) -> Optional[builtins.str]:
         return pulumi.get(self, "portconf_id")
+
+    @property
+    @pulumi.getter(name="priorityQueue1Level")
+    def priority_queue1_level(self) -> Optional[builtins.int]:
+        return pulumi.get(self, "priority_queue1_level")
+
+    @property
+    @pulumi.getter(name="priorityQueue2Level")
+    def priority_queue2_level(self) -> Optional[builtins.int]:
+        return pulumi.get(self, "priority_queue2_level")
+
+    @property
+    @pulumi.getter(name="priorityQueue3Level")
+    def priority_queue3_level(self) -> Optional[builtins.int]:
+        return pulumi.get(self, "priority_queue3_level")
+
+    @property
+    @pulumi.getter(name="priorityQueue4Level")
+    def priority_queue4_level(self) -> Optional[builtins.int]:
+        return pulumi.get(self, "priority_queue4_level")
 
     @property
     @pulumi.getter(name="qosProfile")

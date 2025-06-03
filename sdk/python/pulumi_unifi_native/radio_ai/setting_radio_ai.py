@@ -23,13 +23,13 @@ __all__ = ['SettingRadioAiArgs', 'SettingRadioAi']
 class SettingRadioAiArgs:
     def __init__(__self__, *,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _channels6e: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_hidden_id: Optional[pulumi.Input[builtins.str]] = None,
                  attr_no_delete: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_no_edit: Optional[pulumi.Input[builtins.bool]] = None,
                  auto_adjust_channels_to_country: Optional[pulumi.Input[builtins.bool]] = None,
                  auto_channel_presets_type: Optional[pulumi.Input[builtins.str]] = None,
+                 channels6e: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]] = None,
                  channels_blacklist: Optional[pulumi.Input[Sequence[pulumi.Input['SettingRadioAiChannelsBlacklistArgs']]]] = None,
                  channels_na: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]] = None,
                  channels_ng: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]] = None,
@@ -51,8 +51,6 @@ class SettingRadioAiArgs:
         """
         if id is not None:
             pulumi.set(__self__, "id", id)
-        if _channels6e is not None:
-            pulumi.set(__self__, "_channels6e", _channels6e)
         if attr_hidden is not None:
             pulumi.set(__self__, "attr_hidden", attr_hidden)
         if attr_hidden_id is not None:
@@ -65,6 +63,8 @@ class SettingRadioAiArgs:
             pulumi.set(__self__, "auto_adjust_channels_to_country", auto_adjust_channels_to_country)
         if auto_channel_presets_type is not None:
             pulumi.set(__self__, "auto_channel_presets_type", auto_channel_presets_type)
+        if channels6e is not None:
+            pulumi.set(__self__, "channels6e", channels6e)
         if channels_blacklist is not None:
             pulumi.set(__self__, "channels_blacklist", channels_blacklist)
         if channels_na is not None:
@@ -106,15 +106,6 @@ class SettingRadioAiArgs:
     @id.setter
     def id(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "id", value)
-
-    @property
-    @pulumi.getter
-    def _channels6e(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]]:
-        return pulumi.get(self, "_channels6e")
-
-    @_channels6e.setter
-    def _channels6e(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]]):
-        pulumi.set(self, "_channels6e", value)
 
     @property
     @pulumi.getter(name="attrHidden")
@@ -169,6 +160,15 @@ class SettingRadioAiArgs:
     @auto_channel_presets_type.setter
     def auto_channel_presets_type(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "auto_channel_presets_type", value)
+
+    @property
+    @pulumi.getter
+    def channels6e(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]]:
+        return pulumi.get(self, "channels6e")
+
+    @channels6e.setter
+    def channels6e(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]]):
+        pulumi.set(self, "channels6e", value)
 
     @property
     @pulumi.getter(name="channelsBlacklist")
@@ -322,13 +322,13 @@ class SettingRadioAi(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _channels6e: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_hidden_id: Optional[pulumi.Input[builtins.str]] = None,
                  attr_no_delete: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_no_edit: Optional[pulumi.Input[builtins.bool]] = None,
                  auto_adjust_channels_to_country: Optional[pulumi.Input[builtins.bool]] = None,
                  auto_channel_presets_type: Optional[pulumi.Input[builtins.str]] = None,
+                 channels6e: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]] = None,
                  channels_blacklist: Optional[pulumi.Input[Sequence[pulumi.Input[Union['SettingRadioAiChannelsBlacklistArgs', 'SettingRadioAiChannelsBlacklistArgsDict']]]]] = None,
                  channels_na: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]] = None,
                  channels_ng: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]] = None,
@@ -375,13 +375,13 @@ class SettingRadioAi(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _channels6e: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_hidden_id: Optional[pulumi.Input[builtins.str]] = None,
                  attr_no_delete: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_no_edit: Optional[pulumi.Input[builtins.bool]] = None,
                  auto_adjust_channels_to_country: Optional[pulumi.Input[builtins.bool]] = None,
                  auto_channel_presets_type: Optional[pulumi.Input[builtins.str]] = None,
+                 channels6e: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]] = None,
                  channels_blacklist: Optional[pulumi.Input[Sequence[pulumi.Input[Union['SettingRadioAiChannelsBlacklistArgs', 'SettingRadioAiChannelsBlacklistArgsDict']]]]] = None,
                  channels_na: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]] = None,
                  channels_ng: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.int]]]] = None,
@@ -408,13 +408,13 @@ class SettingRadioAi(pulumi.CustomResource):
             __props__ = SettingRadioAiArgs.__new__(SettingRadioAiArgs)
 
             __props__.__dict__["id"] = id
-            __props__.__dict__["_channels6e"] = _channels6e
             __props__.__dict__["attr_hidden"] = attr_hidden
             __props__.__dict__["attr_hidden_id"] = attr_hidden_id
             __props__.__dict__["attr_no_delete"] = attr_no_delete
             __props__.__dict__["attr_no_edit"] = attr_no_edit
             __props__.__dict__["auto_adjust_channels_to_country"] = auto_adjust_channels_to_country
             __props__.__dict__["auto_channel_presets_type"] = auto_channel_presets_type
+            __props__.__dict__["channels6e"] = channels6e
             __props__.__dict__["channels_blacklist"] = channels_blacklist
             __props__.__dict__["channels_na"] = channels_na
             __props__.__dict__["channels_ng"] = channels_ng
@@ -454,13 +454,13 @@ class SettingRadioAi(pulumi.CustomResource):
         __props__ = SettingRadioAiArgs.__new__(SettingRadioAiArgs)
 
         __props__.__dict__["id"] = None
-        __props__.__dict__["_channels6e"] = None
         __props__.__dict__["attr_hidden"] = None
         __props__.__dict__["attr_hidden_id"] = None
         __props__.__dict__["attr_no_delete"] = None
         __props__.__dict__["attr_no_edit"] = None
         __props__.__dict__["auto_adjust_channels_to_country"] = None
         __props__.__dict__["auto_channel_presets_type"] = None
+        __props__.__dict__["channels6e"] = None
         __props__.__dict__["channels_blacklist"] = None
         __props__.__dict__["channels_na"] = None
         __props__.__dict__["channels_ng"] = None
@@ -483,11 +483,6 @@ class SettingRadioAi(pulumi.CustomResource):
     @pulumi.getter(name="Id")
     def id(self) -> pulumi.Output[Optional[builtins.str]]:
         return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter
-    def _channels6e(self) -> pulumi.Output[Optional[Sequence[builtins.int]]]:
-        return pulumi.get(self, "_channels6e")
 
     @property
     @pulumi.getter(name="attrHidden")
@@ -518,6 +513,11 @@ class SettingRadioAi(pulumi.CustomResource):
     @pulumi.getter(name="autoChannelPresetsType")
     def auto_channel_presets_type(self) -> pulumi.Output[Optional[builtins.str]]:
         return pulumi.get(self, "auto_channel_presets_type")
+
+    @property
+    @pulumi.getter
+    def channels6e(self) -> pulumi.Output[Optional[Sequence[builtins.int]]]:
+        return pulumi.get(self, "channels6e")
 
     @property
     @pulumi.getter(name="channelsBlacklist")

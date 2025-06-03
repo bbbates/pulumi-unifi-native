@@ -47,8 +47,6 @@ class Meta(dict):
 class SettingUsg(dict):
     def __init__(__self__, *,
                  id: Optional[builtins.str] = None,
-                 _h323_module: Optional[builtins.bool] = None,
-                 _offload_l2_blocking: Optional[builtins.bool] = None,
                  arp_cache_base_reachable: Optional[builtins.int] = None,
                  arp_cache_timeout: Optional[builtins.str] = None,
                  attr_hidden: Optional[builtins.bool] = None,
@@ -76,6 +74,7 @@ class SettingUsg(dict):
                  geo_ip_filtering_enabled: Optional[builtins.bool] = None,
                  geo_ip_filtering_traffic_direction: Optional[builtins.str] = None,
                  gre_module: Optional[builtins.bool] = None,
+                 h323_module: Optional[builtins.bool] = None,
                  icmp_timeout: Optional[builtins.int] = None,
                  key: Optional[builtins.str] = None,
                  lldp_enable_all: Optional[builtins.bool] = None,
@@ -83,6 +82,7 @@ class SettingUsg(dict):
                  mss_clamp: Optional[builtins.str] = None,
                  mss_clamp_mss: Optional[builtins.int] = None,
                  offload_accounting: Optional[builtins.bool] = None,
+                 offload_l2_blocking: Optional[builtins.bool] = None,
                  offload_sch: Optional[builtins.bool] = None,
                  other_timeout: Optional[builtins.int] = None,
                  pptp_module: Optional[builtins.bool] = None,
@@ -110,10 +110,6 @@ class SettingUsg(dict):
                  upnp_wan_interface: Optional[builtins.str] = None):
         if id is not None:
             pulumi.set(__self__, "id", id)
-        if _h323_module is not None:
-            pulumi.set(__self__, "_h323_module", _h323_module)
-        if _offload_l2_blocking is not None:
-            pulumi.set(__self__, "_offload_l2_blocking", _offload_l2_blocking)
         if arp_cache_base_reachable is not None:
             pulumi.set(__self__, "arp_cache_base_reachable", arp_cache_base_reachable)
         if arp_cache_timeout is not None:
@@ -168,6 +164,8 @@ class SettingUsg(dict):
             pulumi.set(__self__, "geo_ip_filtering_traffic_direction", geo_ip_filtering_traffic_direction)
         if gre_module is not None:
             pulumi.set(__self__, "gre_module", gre_module)
+        if h323_module is not None:
+            pulumi.set(__self__, "h323_module", h323_module)
         if icmp_timeout is not None:
             pulumi.set(__self__, "icmp_timeout", icmp_timeout)
         if key is not None:
@@ -182,6 +180,8 @@ class SettingUsg(dict):
             pulumi.set(__self__, "mss_clamp_mss", mss_clamp_mss)
         if offload_accounting is not None:
             pulumi.set(__self__, "offload_accounting", offload_accounting)
+        if offload_l2_blocking is not None:
+            pulumi.set(__self__, "offload_l2_blocking", offload_l2_blocking)
         if offload_sch is not None:
             pulumi.set(__self__, "offload_sch", offload_sch)
         if other_timeout is not None:
@@ -237,16 +237,6 @@ class SettingUsg(dict):
     @pulumi.getter(name="Id")
     def id(self) -> Optional[builtins.str]:
         return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter(name="_h323Module")
-    def _h323_module(self) -> Optional[builtins.bool]:
-        return pulumi.get(self, "_h323_module")
-
-    @property
-    @pulumi.getter(name="_offloadL2Blocking")
-    def _offload_l2_blocking(self) -> Optional[builtins.bool]:
-        return pulumi.get(self, "_offload_l2_blocking")
 
     @property
     @pulumi.getter(name="arpCacheBaseReachable")
@@ -384,6 +374,11 @@ class SettingUsg(dict):
         return pulumi.get(self, "gre_module")
 
     @property
+    @pulumi.getter(name="h323Module")
+    def h323_module(self) -> Optional[builtins.bool]:
+        return pulumi.get(self, "h323_module")
+
+    @property
     @pulumi.getter(name="icmpTimeout")
     def icmp_timeout(self) -> Optional[builtins.int]:
         return pulumi.get(self, "icmp_timeout")
@@ -417,6 +412,11 @@ class SettingUsg(dict):
     @pulumi.getter(name="offloadAccounting")
     def offload_accounting(self) -> Optional[builtins.bool]:
         return pulumi.get(self, "offload_accounting")
+
+    @property
+    @pulumi.getter(name="offloadL2Blocking")
+    def offload_l2_blocking(self) -> Optional[builtins.bool]:
+        return pulumi.get(self, "offload_l2_blocking")
 
     @property
     @pulumi.getter(name="offloadSch")

@@ -47,8 +47,6 @@ class Meta(dict):
 class SettingMgmt(dict):
     def __init__(__self__, *,
                  id: Optional[builtins.str] = None,
-                 _x_ssh_md5passwd: Optional[builtins.str] = None,
-                 _x_ssh_sha512passwd: Optional[builtins.str] = None,
                  advanced_feature_enabled: Optional[builtins.bool] = None,
                  alert_enabled: Optional[builtins.bool] = None,
                  attr_hidden: Optional[builtins.bool] = None,
@@ -71,14 +69,12 @@ class SettingMgmt(dict):
                  x_ssh_bind_wildcard: Optional[builtins.bool] = None,
                  x_ssh_enabled: Optional[builtins.bool] = None,
                  x_ssh_keys: Optional[Sequence['outputs.SettingMgmtXSshKeys']] = None,
+                 x_ssh_md5passwd: Optional[builtins.str] = None,
                  x_ssh_password: Optional[builtins.str] = None,
+                 x_ssh_sha512passwd: Optional[builtins.str] = None,
                  x_ssh_username: Optional[builtins.str] = None):
         if id is not None:
             pulumi.set(__self__, "id", id)
-        if _x_ssh_md5passwd is not None:
-            pulumi.set(__self__, "_x_ssh_md5passwd", _x_ssh_md5passwd)
-        if _x_ssh_sha512passwd is not None:
-            pulumi.set(__self__, "_x_ssh_sha512passwd", _x_ssh_sha512passwd)
         if advanced_feature_enabled is not None:
             pulumi.set(__self__, "advanced_feature_enabled", advanced_feature_enabled)
         if alert_enabled is not None:
@@ -123,8 +119,12 @@ class SettingMgmt(dict):
             pulumi.set(__self__, "x_ssh_enabled", x_ssh_enabled)
         if x_ssh_keys is not None:
             pulumi.set(__self__, "x_ssh_keys", x_ssh_keys)
+        if x_ssh_md5passwd is not None:
+            pulumi.set(__self__, "x_ssh_md5passwd", x_ssh_md5passwd)
         if x_ssh_password is not None:
             pulumi.set(__self__, "x_ssh_password", x_ssh_password)
+        if x_ssh_sha512passwd is not None:
+            pulumi.set(__self__, "x_ssh_sha512passwd", x_ssh_sha512passwd)
         if x_ssh_username is not None:
             pulumi.set(__self__, "x_ssh_username", x_ssh_username)
 
@@ -132,16 +132,6 @@ class SettingMgmt(dict):
     @pulumi.getter(name="Id")
     def id(self) -> Optional[builtins.str]:
         return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter(name="_xSshMd5passwd")
-    def _x_ssh_md5passwd(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_x_ssh_md5passwd")
-
-    @property
-    @pulumi.getter(name="_xSshSha512passwd")
-    def _x_ssh_sha512passwd(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_x_ssh_sha512passwd")
 
     @property
     @pulumi.getter(name="advancedFeatureEnabled")
@@ -254,9 +244,19 @@ class SettingMgmt(dict):
         return pulumi.get(self, "x_ssh_keys")
 
     @property
+    @pulumi.getter(name="xSshMd5passwd")
+    def x_ssh_md5passwd(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "x_ssh_md5passwd")
+
+    @property
     @pulumi.getter(name="xSshPassword")
     def x_ssh_password(self) -> Optional[builtins.str]:
         return pulumi.get(self, "x_ssh_password")
+
+    @property
+    @pulumi.getter(name="xSshSha512passwd")
+    def x_ssh_sha512passwd(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "x_ssh_sha512passwd")
 
     @property
     @pulumi.getter(name="xSshUsername")

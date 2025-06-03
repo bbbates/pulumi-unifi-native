@@ -45,7 +45,6 @@ class Meta(dict):
 class SettingSuperMgmt(dict):
     def __init__(__self__, *,
                  id: Optional[builtins.str] = None,
-                 _data_retention_time_in_hours_for5minutes_scale: Optional[builtins.int] = None,
                  analytics_disapproved_for: Optional[builtins.str] = None,
                  attr_hidden: Optional[builtins.bool] = None,
                  attr_hidden_id: Optional[builtins.str] = None,
@@ -72,6 +71,7 @@ class SettingSuperMgmt(dict):
                  contact_info_state: Optional[builtins.str] = None,
                  contact_info_zip: Optional[builtins.str] = None,
                  data_retention_setting_preference: Optional[builtins.str] = None,
+                 data_retention_time_in_hours_for5minutes_scale: Optional[builtins.int] = None,
                  data_retention_time_in_hours_for_daily_scale: Optional[builtins.int] = None,
                  data_retention_time_in_hours_for_hourly_scale: Optional[builtins.int] = None,
                  data_retention_time_in_hours_for_monthly_scale: Optional[builtins.int] = None,
@@ -97,8 +97,6 @@ class SettingSuperMgmt(dict):
                  x_ssh_username: Optional[builtins.str] = None):
         if id is not None:
             pulumi.set(__self__, "id", id)
-        if _data_retention_time_in_hours_for5minutes_scale is not None:
-            pulumi.set(__self__, "_data_retention_time_in_hours_for5minutes_scale", _data_retention_time_in_hours_for5minutes_scale)
         if analytics_disapproved_for is not None:
             pulumi.set(__self__, "analytics_disapproved_for", analytics_disapproved_for)
         if attr_hidden is not None:
@@ -151,6 +149,8 @@ class SettingSuperMgmt(dict):
             pulumi.set(__self__, "contact_info_zip", contact_info_zip)
         if data_retention_setting_preference is not None:
             pulumi.set(__self__, "data_retention_setting_preference", data_retention_setting_preference)
+        if data_retention_time_in_hours_for5minutes_scale is not None:
+            pulumi.set(__self__, "data_retention_time_in_hours_for5minutes_scale", data_retention_time_in_hours_for5minutes_scale)
         if data_retention_time_in_hours_for_daily_scale is not None:
             pulumi.set(__self__, "data_retention_time_in_hours_for_daily_scale", data_retention_time_in_hours_for_daily_scale)
         if data_retention_time_in_hours_for_hourly_scale is not None:
@@ -202,11 +202,6 @@ class SettingSuperMgmt(dict):
     @pulumi.getter(name="Id")
     def id(self) -> Optional[builtins.str]:
         return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter(name="_dataRetentionTimeInHoursFor5minutesScale")
-    def _data_retention_time_in_hours_for5minutes_scale(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "_data_retention_time_in_hours_for5minutes_scale")
 
     @property
     @pulumi.getter(name="analyticsDisapprovedFor")
@@ -337,6 +332,11 @@ class SettingSuperMgmt(dict):
     @pulumi.getter(name="dataRetentionSettingPreference")
     def data_retention_setting_preference(self) -> Optional[builtins.str]:
         return pulumi.get(self, "data_retention_setting_preference")
+
+    @property
+    @pulumi.getter(name="dataRetentionTimeInHoursFor5minutesScale")
+    def data_retention_time_in_hours_for5minutes_scale(self) -> Optional[builtins.int]:
+        return pulumi.get(self, "data_retention_time_in_hours_for5minutes_scale")
 
     @property
     @pulumi.getter(name="dataRetentionTimeInHoursForDailyScale")

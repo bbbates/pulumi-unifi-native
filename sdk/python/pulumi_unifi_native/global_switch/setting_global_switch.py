@@ -23,15 +23,15 @@ __all__ = ['SettingGlobalSwitchArgs', 'SettingGlobalSwitch']
 class SettingGlobalSwitchArgs:
     def __init__(__self__, *,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _acl_l3_isolation: Optional[pulumi.Input[Sequence[pulumi.Input['SettingGlobalSwitchAclL3IsolationArgs']]]] = None,
-                 _dot1x_fallback_networkconf_id: Optional[pulumi.Input[builtins.str]] = None,
-                 _dot1x_portctrl_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  acl_device_isolation: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
+                 acl_l3_isolation: Optional[pulumi.Input[Sequence[pulumi.Input['SettingGlobalSwitchAclL3IsolationArgs']]]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_hidden_id: Optional[pulumi.Input[builtins.str]] = None,
                  attr_no_delete: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_no_edit: Optional[pulumi.Input[builtins.bool]] = None,
                  dhcp_snoop: Optional[pulumi.Input[builtins.bool]] = None,
+                 dot1x_fallback_networkconf_id: Optional[pulumi.Input[builtins.str]] = None,
+                 dot1x_portctrl_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  flood_known_protocols: Optional[pulumi.Input[builtins.bool]] = None,
                  flowctrl_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  forward_unknown_mcast_router_ports: Optional[pulumi.Input[builtins.bool]] = None,
@@ -46,14 +46,10 @@ class SettingGlobalSwitchArgs:
         """
         if id is not None:
             pulumi.set(__self__, "id", id)
-        if _acl_l3_isolation is not None:
-            pulumi.set(__self__, "_acl_l3_isolation", _acl_l3_isolation)
-        if _dot1x_fallback_networkconf_id is not None:
-            pulumi.set(__self__, "_dot1x_fallback_networkconf_id", _dot1x_fallback_networkconf_id)
-        if _dot1x_portctrl_enabled is not None:
-            pulumi.set(__self__, "_dot1x_portctrl_enabled", _dot1x_portctrl_enabled)
         if acl_device_isolation is not None:
             pulumi.set(__self__, "acl_device_isolation", acl_device_isolation)
+        if acl_l3_isolation is not None:
+            pulumi.set(__self__, "acl_l3_isolation", acl_l3_isolation)
         if attr_hidden is not None:
             pulumi.set(__self__, "attr_hidden", attr_hidden)
         if attr_hidden_id is not None:
@@ -64,6 +60,10 @@ class SettingGlobalSwitchArgs:
             pulumi.set(__self__, "attr_no_edit", attr_no_edit)
         if dhcp_snoop is not None:
             pulumi.set(__self__, "dhcp_snoop", dhcp_snoop)
+        if dot1x_fallback_networkconf_id is not None:
+            pulumi.set(__self__, "dot1x_fallback_networkconf_id", dot1x_fallback_networkconf_id)
+        if dot1x_portctrl_enabled is not None:
+            pulumi.set(__self__, "dot1x_portctrl_enabled", dot1x_portctrl_enabled)
         if flood_known_protocols is not None:
             pulumi.set(__self__, "flood_known_protocols", flood_known_protocols)
         if flowctrl_enabled is not None:
@@ -93,33 +93,6 @@ class SettingGlobalSwitchArgs:
         pulumi.set(self, "id", value)
 
     @property
-    @pulumi.getter(name="_aclL3Isolation")
-    def _acl_l3_isolation(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SettingGlobalSwitchAclL3IsolationArgs']]]]:
-        return pulumi.get(self, "_acl_l3_isolation")
-
-    @_acl_l3_isolation.setter
-    def _acl_l3_isolation(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['SettingGlobalSwitchAclL3IsolationArgs']]]]):
-        pulumi.set(self, "_acl_l3_isolation", value)
-
-    @property
-    @pulumi.getter(name="_dot1xFallbackNetworkconfId")
-    def _dot1x_fallback_networkconf_id(self) -> Optional[pulumi.Input[builtins.str]]:
-        return pulumi.get(self, "_dot1x_fallback_networkconf_id")
-
-    @_dot1x_fallback_networkconf_id.setter
-    def _dot1x_fallback_networkconf_id(self, value: Optional[pulumi.Input[builtins.str]]):
-        pulumi.set(self, "_dot1x_fallback_networkconf_id", value)
-
-    @property
-    @pulumi.getter(name="_dot1xPortctrlEnabled")
-    def _dot1x_portctrl_enabled(self) -> Optional[pulumi.Input[builtins.bool]]:
-        return pulumi.get(self, "_dot1x_portctrl_enabled")
-
-    @_dot1x_portctrl_enabled.setter
-    def _dot1x_portctrl_enabled(self, value: Optional[pulumi.Input[builtins.bool]]):
-        pulumi.set(self, "_dot1x_portctrl_enabled", value)
-
-    @property
     @pulumi.getter(name="aclDeviceIsolation")
     def acl_device_isolation(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]]:
         return pulumi.get(self, "acl_device_isolation")
@@ -127,6 +100,15 @@ class SettingGlobalSwitchArgs:
     @acl_device_isolation.setter
     def acl_device_isolation(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]]):
         pulumi.set(self, "acl_device_isolation", value)
+
+    @property
+    @pulumi.getter(name="aclL3Isolation")
+    def acl_l3_isolation(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SettingGlobalSwitchAclL3IsolationArgs']]]]:
+        return pulumi.get(self, "acl_l3_isolation")
+
+    @acl_l3_isolation.setter
+    def acl_l3_isolation(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['SettingGlobalSwitchAclL3IsolationArgs']]]]):
+        pulumi.set(self, "acl_l3_isolation", value)
 
     @property
     @pulumi.getter(name="attrHidden")
@@ -172,6 +154,24 @@ class SettingGlobalSwitchArgs:
     @dhcp_snoop.setter
     def dhcp_snoop(self, value: Optional[pulumi.Input[builtins.bool]]):
         pulumi.set(self, "dhcp_snoop", value)
+
+    @property
+    @pulumi.getter(name="dot1xFallbackNetworkconfId")
+    def dot1x_fallback_networkconf_id(self) -> Optional[pulumi.Input[builtins.str]]:
+        return pulumi.get(self, "dot1x_fallback_networkconf_id")
+
+    @dot1x_fallback_networkconf_id.setter
+    def dot1x_fallback_networkconf_id(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "dot1x_fallback_networkconf_id", value)
+
+    @property
+    @pulumi.getter(name="dot1xPortctrlEnabled")
+    def dot1x_portctrl_enabled(self) -> Optional[pulumi.Input[builtins.bool]]:
+        return pulumi.get(self, "dot1x_portctrl_enabled")
+
+    @dot1x_portctrl_enabled.setter
+    def dot1x_portctrl_enabled(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "dot1x_portctrl_enabled", value)
 
     @property
     @pulumi.getter(name="floodKnownProtocols")
@@ -262,15 +262,15 @@ class SettingGlobalSwitch(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _acl_l3_isolation: Optional[pulumi.Input[Sequence[pulumi.Input[Union['SettingGlobalSwitchAclL3IsolationArgs', 'SettingGlobalSwitchAclL3IsolationArgsDict']]]]] = None,
-                 _dot1x_fallback_networkconf_id: Optional[pulumi.Input[builtins.str]] = None,
-                 _dot1x_portctrl_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  acl_device_isolation: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
+                 acl_l3_isolation: Optional[pulumi.Input[Sequence[pulumi.Input[Union['SettingGlobalSwitchAclL3IsolationArgs', 'SettingGlobalSwitchAclL3IsolationArgsDict']]]]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_hidden_id: Optional[pulumi.Input[builtins.str]] = None,
                  attr_no_delete: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_no_edit: Optional[pulumi.Input[builtins.bool]] = None,
                  dhcp_snoop: Optional[pulumi.Input[builtins.bool]] = None,
+                 dot1x_fallback_networkconf_id: Optional[pulumi.Input[builtins.str]] = None,
+                 dot1x_portctrl_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  flood_known_protocols: Optional[pulumi.Input[builtins.bool]] = None,
                  flowctrl_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  forward_unknown_mcast_router_ports: Optional[pulumi.Input[builtins.bool]] = None,
@@ -310,15 +310,15 @@ class SettingGlobalSwitch(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _acl_l3_isolation: Optional[pulumi.Input[Sequence[pulumi.Input[Union['SettingGlobalSwitchAclL3IsolationArgs', 'SettingGlobalSwitchAclL3IsolationArgsDict']]]]] = None,
-                 _dot1x_fallback_networkconf_id: Optional[pulumi.Input[builtins.str]] = None,
-                 _dot1x_portctrl_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  acl_device_isolation: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
+                 acl_l3_isolation: Optional[pulumi.Input[Sequence[pulumi.Input[Union['SettingGlobalSwitchAclL3IsolationArgs', 'SettingGlobalSwitchAclL3IsolationArgsDict']]]]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_hidden_id: Optional[pulumi.Input[builtins.str]] = None,
                  attr_no_delete: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_no_edit: Optional[pulumi.Input[builtins.bool]] = None,
                  dhcp_snoop: Optional[pulumi.Input[builtins.bool]] = None,
+                 dot1x_fallback_networkconf_id: Optional[pulumi.Input[builtins.str]] = None,
+                 dot1x_portctrl_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  flood_known_protocols: Optional[pulumi.Input[builtins.bool]] = None,
                  flowctrl_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  forward_unknown_mcast_router_ports: Optional[pulumi.Input[builtins.bool]] = None,
@@ -338,15 +338,15 @@ class SettingGlobalSwitch(pulumi.CustomResource):
             __props__ = SettingGlobalSwitchArgs.__new__(SettingGlobalSwitchArgs)
 
             __props__.__dict__["id"] = id
-            __props__.__dict__["_acl_l3_isolation"] = _acl_l3_isolation
-            __props__.__dict__["_dot1x_fallback_networkconf_id"] = _dot1x_fallback_networkconf_id
-            __props__.__dict__["_dot1x_portctrl_enabled"] = _dot1x_portctrl_enabled
             __props__.__dict__["acl_device_isolation"] = acl_device_isolation
+            __props__.__dict__["acl_l3_isolation"] = acl_l3_isolation
             __props__.__dict__["attr_hidden"] = attr_hidden
             __props__.__dict__["attr_hidden_id"] = attr_hidden_id
             __props__.__dict__["attr_no_delete"] = attr_no_delete
             __props__.__dict__["attr_no_edit"] = attr_no_edit
             __props__.__dict__["dhcp_snoop"] = dhcp_snoop
+            __props__.__dict__["dot1x_fallback_networkconf_id"] = dot1x_fallback_networkconf_id
+            __props__.__dict__["dot1x_portctrl_enabled"] = dot1x_portctrl_enabled
             __props__.__dict__["flood_known_protocols"] = flood_known_protocols
             __props__.__dict__["flowctrl_enabled"] = flowctrl_enabled
             __props__.__dict__["forward_unknown_mcast_router_ports"] = forward_unknown_mcast_router_ports
@@ -379,15 +379,15 @@ class SettingGlobalSwitch(pulumi.CustomResource):
         __props__ = SettingGlobalSwitchArgs.__new__(SettingGlobalSwitchArgs)
 
         __props__.__dict__["id"] = None
-        __props__.__dict__["_acl_l3_isolation"] = None
-        __props__.__dict__["_dot1x_fallback_networkconf_id"] = None
-        __props__.__dict__["_dot1x_portctrl_enabled"] = None
         __props__.__dict__["acl_device_isolation"] = None
+        __props__.__dict__["acl_l3_isolation"] = None
         __props__.__dict__["attr_hidden"] = None
         __props__.__dict__["attr_hidden_id"] = None
         __props__.__dict__["attr_no_delete"] = None
         __props__.__dict__["attr_no_edit"] = None
         __props__.__dict__["dhcp_snoop"] = None
+        __props__.__dict__["dot1x_fallback_networkconf_id"] = None
+        __props__.__dict__["dot1x_portctrl_enabled"] = None
         __props__.__dict__["flood_known_protocols"] = None
         __props__.__dict__["flowctrl_enabled"] = None
         __props__.__dict__["forward_unknown_mcast_router_ports"] = None
@@ -405,24 +405,14 @@ class SettingGlobalSwitch(pulumi.CustomResource):
         return pulumi.get(self, "id")
 
     @property
-    @pulumi.getter(name="_aclL3Isolation")
-    def _acl_l3_isolation(self) -> pulumi.Output[Optional[Sequence['outputs.SettingGlobalSwitchAclL3Isolation']]]:
-        return pulumi.get(self, "_acl_l3_isolation")
-
-    @property
-    @pulumi.getter(name="_dot1xFallbackNetworkconfId")
-    def _dot1x_fallback_networkconf_id(self) -> pulumi.Output[Optional[builtins.str]]:
-        return pulumi.get(self, "_dot1x_fallback_networkconf_id")
-
-    @property
-    @pulumi.getter(name="_dot1xPortctrlEnabled")
-    def _dot1x_portctrl_enabled(self) -> pulumi.Output[Optional[builtins.bool]]:
-        return pulumi.get(self, "_dot1x_portctrl_enabled")
-
-    @property
     @pulumi.getter(name="aclDeviceIsolation")
     def acl_device_isolation(self) -> pulumi.Output[Optional[Sequence[builtins.str]]]:
         return pulumi.get(self, "acl_device_isolation")
+
+    @property
+    @pulumi.getter(name="aclL3Isolation")
+    def acl_l3_isolation(self) -> pulumi.Output[Optional[Sequence['outputs.SettingGlobalSwitchAclL3Isolation']]]:
+        return pulumi.get(self, "acl_l3_isolation")
 
     @property
     @pulumi.getter(name="attrHidden")
@@ -448,6 +438,16 @@ class SettingGlobalSwitch(pulumi.CustomResource):
     @pulumi.getter(name="dhcpSnoop")
     def dhcp_snoop(self) -> pulumi.Output[Optional[builtins.bool]]:
         return pulumi.get(self, "dhcp_snoop")
+
+    @property
+    @pulumi.getter(name="dot1xFallbackNetworkconfId")
+    def dot1x_fallback_networkconf_id(self) -> pulumi.Output[Optional[builtins.str]]:
+        return pulumi.get(self, "dot1x_fallback_networkconf_id")
+
+    @property
+    @pulumi.getter(name="dot1xPortctrlEnabled")
+    def dot1x_portctrl_enabled(self) -> pulumi.Output[Optional[builtins.bool]]:
+        return pulumi.get(self, "dot1x_portctrl_enabled")
 
     @property
     @pulumi.getter(name="floodKnownProtocols")

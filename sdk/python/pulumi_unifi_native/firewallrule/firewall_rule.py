@@ -21,7 +21,6 @@ __all__ = ['FirewallRuleArgs', 'FirewallRule']
 class FirewallRuleArgs:
     def __init__(__self__, *,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _icmpv6_typename: Optional[pulumi.Input[builtins.str]] = None,
                  action: Optional[pulumi.Input[builtins.str]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_hidden_id: Optional[pulumi.Input[builtins.str]] = None,
@@ -35,6 +34,7 @@ class FirewallRuleArgs:
                  dst_port: Optional[pulumi.Input[builtins.str]] = None,
                  enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  icmp_typename: Optional[pulumi.Input[builtins.str]] = None,
+                 icmpv6_typename: Optional[pulumi.Input[builtins.str]] = None,
                  ipsec: Optional[pulumi.Input[builtins.str]] = None,
                  logging: Optional[pulumi.Input[builtins.bool]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
@@ -61,8 +61,6 @@ class FirewallRuleArgs:
         """
         if id is not None:
             pulumi.set(__self__, "id", id)
-        if _icmpv6_typename is not None:
-            pulumi.set(__self__, "_icmpv6_typename", _icmpv6_typename)
         if action is not None:
             pulumi.set(__self__, "action", action)
         if attr_hidden is not None:
@@ -89,6 +87,8 @@ class FirewallRuleArgs:
             pulumi.set(__self__, "enabled", enabled)
         if icmp_typename is not None:
             pulumi.set(__self__, "icmp_typename", icmp_typename)
+        if icmpv6_typename is not None:
+            pulumi.set(__self__, "icmpv6_typename", icmpv6_typename)
         if ipsec is not None:
             pulumi.set(__self__, "ipsec", ipsec)
         if logging is not None:
@@ -140,15 +140,6 @@ class FirewallRuleArgs:
     @id.setter
     def id(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "id", value)
-
-    @property
-    @pulumi.getter(name="_icmpv6Typename")
-    def _icmpv6_typename(self) -> Optional[pulumi.Input[builtins.str]]:
-        return pulumi.get(self, "_icmpv6_typename")
-
-    @_icmpv6_typename.setter
-    def _icmpv6_typename(self, value: Optional[pulumi.Input[builtins.str]]):
-        pulumi.set(self, "_icmpv6_typename", value)
 
     @property
     @pulumi.getter
@@ -266,6 +257,15 @@ class FirewallRuleArgs:
     @icmp_typename.setter
     def icmp_typename(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "icmp_typename", value)
+
+    @property
+    @pulumi.getter(name="icmpv6Typename")
+    def icmpv6_typename(self) -> Optional[pulumi.Input[builtins.str]]:
+        return pulumi.get(self, "icmpv6_typename")
+
+    @icmpv6_typename.setter
+    def icmpv6_typename(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "icmpv6_typename", value)
 
     @property
     @pulumi.getter
@@ -464,7 +464,6 @@ class FirewallRule(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _icmpv6_typename: Optional[pulumi.Input[builtins.str]] = None,
                  action: Optional[pulumi.Input[builtins.str]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_hidden_id: Optional[pulumi.Input[builtins.str]] = None,
@@ -478,6 +477,7 @@ class FirewallRule(pulumi.CustomResource):
                  dst_port: Optional[pulumi.Input[builtins.str]] = None,
                  enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  icmp_typename: Optional[pulumi.Input[builtins.str]] = None,
+                 icmpv6_typename: Optional[pulumi.Input[builtins.str]] = None,
                  ipsec: Optional[pulumi.Input[builtins.str]] = None,
                  logging: Optional[pulumi.Input[builtins.bool]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
@@ -529,7 +529,6 @@ class FirewallRule(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _icmpv6_typename: Optional[pulumi.Input[builtins.str]] = None,
                  action: Optional[pulumi.Input[builtins.str]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_hidden_id: Optional[pulumi.Input[builtins.str]] = None,
@@ -543,6 +542,7 @@ class FirewallRule(pulumi.CustomResource):
                  dst_port: Optional[pulumi.Input[builtins.str]] = None,
                  enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  icmp_typename: Optional[pulumi.Input[builtins.str]] = None,
+                 icmpv6_typename: Optional[pulumi.Input[builtins.str]] = None,
                  ipsec: Optional[pulumi.Input[builtins.str]] = None,
                  logging: Optional[pulumi.Input[builtins.bool]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
@@ -574,7 +574,6 @@ class FirewallRule(pulumi.CustomResource):
             __props__ = FirewallRuleArgs.__new__(FirewallRuleArgs)
 
             __props__.__dict__["id"] = id
-            __props__.__dict__["_icmpv6_typename"] = _icmpv6_typename
             __props__.__dict__["action"] = action
             __props__.__dict__["attr_hidden"] = attr_hidden
             __props__.__dict__["attr_hidden_id"] = attr_hidden_id
@@ -588,6 +587,7 @@ class FirewallRule(pulumi.CustomResource):
             __props__.__dict__["dst_port"] = dst_port
             __props__.__dict__["enabled"] = enabled
             __props__.__dict__["icmp_typename"] = icmp_typename
+            __props__.__dict__["icmpv6_typename"] = icmpv6_typename
             __props__.__dict__["ipsec"] = ipsec
             __props__.__dict__["logging"] = logging
             __props__.__dict__["name"] = name
@@ -632,7 +632,6 @@ class FirewallRule(pulumi.CustomResource):
         __props__ = FirewallRuleArgs.__new__(FirewallRuleArgs)
 
         __props__.__dict__["id"] = None
-        __props__.__dict__["_icmpv6_typename"] = None
         __props__.__dict__["action"] = None
         __props__.__dict__["attr_hidden"] = None
         __props__.__dict__["attr_hidden_id"] = None
@@ -646,6 +645,7 @@ class FirewallRule(pulumi.CustomResource):
         __props__.__dict__["dst_port"] = None
         __props__.__dict__["enabled"] = None
         __props__.__dict__["icmp_typename"] = None
+        __props__.__dict__["icmpv6_typename"] = None
         __props__.__dict__["ipsec"] = None
         __props__.__dict__["logging"] = None
         __props__.__dict__["name"] = None
@@ -673,11 +673,6 @@ class FirewallRule(pulumi.CustomResource):
     @pulumi.getter(name="Id")
     def id(self) -> pulumi.Output[Optional[builtins.str]]:
         return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter(name="_icmpv6Typename")
-    def _icmpv6_typename(self) -> pulumi.Output[Optional[builtins.str]]:
-        return pulumi.get(self, "_icmpv6_typename")
 
     @property
     @pulumi.getter
@@ -743,6 +738,11 @@ class FirewallRule(pulumi.CustomResource):
     @pulumi.getter(name="icmpTypename")
     def icmp_typename(self) -> pulumi.Output[Optional[builtins.str]]:
         return pulumi.get(self, "icmp_typename")
+
+    @property
+    @pulumi.getter(name="icmpv6Typename")
+    def icmpv6_typename(self) -> pulumi.Output[Optional[builtins.str]]:
+        return pulumi.get(self, "icmpv6_typename")
 
     @property
     @pulumi.getter

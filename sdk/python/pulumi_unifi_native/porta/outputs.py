@@ -45,17 +45,15 @@ class Meta(dict):
 class SettingPorta(dict):
     def __init__(__self__, *,
                  id: Optional[builtins.str] = None,
-                 _ugw3_wan2_enabled: Optional[builtins.bool] = None,
                  attr_hidden: Optional[builtins.bool] = None,
                  attr_hidden_id: Optional[builtins.str] = None,
                  attr_no_delete: Optional[builtins.bool] = None,
                  attr_no_edit: Optional[builtins.bool] = None,
                  key: Optional[builtins.str] = None,
-                 site_id: Optional[builtins.str] = None):
+                 site_id: Optional[builtins.str] = None,
+                 ugw3_wan2_enabled: Optional[builtins.bool] = None):
         if id is not None:
             pulumi.set(__self__, "id", id)
-        if _ugw3_wan2_enabled is not None:
-            pulumi.set(__self__, "_ugw3_wan2_enabled", _ugw3_wan2_enabled)
         if attr_hidden is not None:
             pulumi.set(__self__, "attr_hidden", attr_hidden)
         if attr_hidden_id is not None:
@@ -68,16 +66,13 @@ class SettingPorta(dict):
             pulumi.set(__self__, "key", key)
         if site_id is not None:
             pulumi.set(__self__, "site_id", site_id)
+        if ugw3_wan2_enabled is not None:
+            pulumi.set(__self__, "ugw3_wan2_enabled", ugw3_wan2_enabled)
 
     @property
     @pulumi.getter(name="Id")
     def id(self) -> Optional[builtins.str]:
         return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter(name="_ugw3Wan2Enabled")
-    def _ugw3_wan2_enabled(self) -> Optional[builtins.bool]:
-        return pulumi.get(self, "_ugw3_wan2_enabled")
 
     @property
     @pulumi.getter(name="attrHidden")
@@ -108,5 +103,10 @@ class SettingPorta(dict):
     @pulumi.getter(name="siteId")
     def site_id(self) -> Optional[builtins.str]:
         return pulumi.get(self, "site_id")
+
+    @property
+    @pulumi.getter(name="ugw3Wan2Enabled")
+    def ugw3_wan2_enabled(self) -> Optional[builtins.bool]:
+        return pulumi.get(self, "ugw3_wan2_enabled")
 
 

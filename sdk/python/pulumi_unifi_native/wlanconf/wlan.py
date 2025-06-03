@@ -23,16 +23,6 @@ __all__ = ['WlanArgs', 'Wlan']
 class WlanArgs:
     def __init__(__self__, *,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _dtim6e: Optional[pulumi.Input[builtins.int]] = None,
-                 _hotspot2conf_enabled: Optional[pulumi.Input[builtins.bool]] = None,
-                 _l2_isolation: Optional[pulumi.Input[builtins.bool]] = None,
-                 _no2ghz_oui: Optional[pulumi.Input[builtins.bool]] = None,
-                 _p2p: Optional[pulumi.Input[builtins.bool]] = None,
-                 _p2p_cross_connect: Optional[pulumi.Input[builtins.bool]] = None,
-                 _wpa3_enhanced192: Optional[pulumi.Input[builtins.bool]] = None,
-                 _wpa3_fast_roaming: Optional[pulumi.Input[builtins.bool]] = None,
-                 _wpa3_support: Optional[pulumi.Input[builtins.bool]] = None,
-                 _wpa3_transition: Optional[pulumi.Input[builtins.bool]] = None,
                  ap_group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  ap_group_mode: Optional[pulumi.Input[builtins.str]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
@@ -47,6 +37,7 @@ class WlanArgs:
                  country_beacon: Optional[pulumi.Input[builtins.bool]] = None,
                  dpi_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  dpigroup_id: Optional[pulumi.Input[builtins.str]] = None,
+                 dtim6e: Optional[pulumi.Input[builtins.int]] = None,
                  dtim_mode: Optional[pulumi.Input[builtins.str]] = None,
                  dtim_na: Optional[pulumi.Input[builtins.int]] = None,
                  dtim_ng: Optional[pulumi.Input[builtins.int]] = None,
@@ -57,8 +48,10 @@ class WlanArgs:
                  group_rekey: Optional[pulumi.Input[builtins.int]] = None,
                  hide_ssid: Optional[pulumi.Input[builtins.bool]] = None,
                  hotspot2: Optional[pulumi.Input['WLANHotspot2Args']] = None,
+                 hotspot2conf_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  iapp_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  is_guest: Optional[pulumi.Input[builtins.bool]] = None,
+                 l2_isolation: Optional[pulumi.Input[builtins.bool]] = None,
                  log_level: Optional[pulumi.Input[builtins.str]] = None,
                  mac_filter_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  mac_filter_list: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
@@ -78,7 +71,10 @@ class WlanArgs:
                  nas_identifier: Optional[pulumi.Input[builtins.str]] = None,
                  nas_identifier_type: Optional[pulumi.Input[builtins.str]] = None,
                  networkconf_id: Optional[pulumi.Input[builtins.str]] = None,
+                 no2ghz_oui: Optional[pulumi.Input[builtins.bool]] = None,
                  optimize_iot_wifi_connectivity: Optional[pulumi.Input[builtins.bool]] = None,
+                 p2p: Optional[pulumi.Input[builtins.bool]] = None,
+                 p2p_cross_connect: Optional[pulumi.Input[builtins.bool]] = None,
                  pmf_cipher: Optional[pulumi.Input[builtins.str]] = None,
                  pmf_mode: Optional[pulumi.Input[builtins.str]] = None,
                  priority: Optional[pulumi.Input[builtins.str]] = None,
@@ -114,6 +110,10 @@ class WlanArgs:
                  wlan_band: Optional[pulumi.Input[builtins.str]] = None,
                  wlan_bands: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  wlangroup_id: Optional[pulumi.Input[builtins.str]] = None,
+                 wpa3_enhanced192: Optional[pulumi.Input[builtins.bool]] = None,
+                 wpa3_fast_roaming: Optional[pulumi.Input[builtins.bool]] = None,
+                 wpa3_support: Optional[pulumi.Input[builtins.bool]] = None,
+                 wpa3_transition: Optional[pulumi.Input[builtins.bool]] = None,
                  wpa_enc: Optional[pulumi.Input[builtins.str]] = None,
                  wpa_mode: Optional[pulumi.Input[builtins.str]] = None,
                  wpa_psk_radius: Optional[pulumi.Input[builtins.str]] = None,
@@ -125,26 +125,6 @@ class WlanArgs:
         """
         if id is not None:
             pulumi.set(__self__, "id", id)
-        if _dtim6e is not None:
-            pulumi.set(__self__, "_dtim6e", _dtim6e)
-        if _hotspot2conf_enabled is not None:
-            pulumi.set(__self__, "_hotspot2conf_enabled", _hotspot2conf_enabled)
-        if _l2_isolation is not None:
-            pulumi.set(__self__, "_l2_isolation", _l2_isolation)
-        if _no2ghz_oui is not None:
-            pulumi.set(__self__, "_no2ghz_oui", _no2ghz_oui)
-        if _p2p is not None:
-            pulumi.set(__self__, "_p2p", _p2p)
-        if _p2p_cross_connect is not None:
-            pulumi.set(__self__, "_p2p_cross_connect", _p2p_cross_connect)
-        if _wpa3_enhanced192 is not None:
-            pulumi.set(__self__, "_wpa3_enhanced192", _wpa3_enhanced192)
-        if _wpa3_fast_roaming is not None:
-            pulumi.set(__self__, "_wpa3_fast_roaming", _wpa3_fast_roaming)
-        if _wpa3_support is not None:
-            pulumi.set(__self__, "_wpa3_support", _wpa3_support)
-        if _wpa3_transition is not None:
-            pulumi.set(__self__, "_wpa3_transition", _wpa3_transition)
         if ap_group_ids is not None:
             pulumi.set(__self__, "ap_group_ids", ap_group_ids)
         if ap_group_mode is not None:
@@ -173,6 +153,8 @@ class WlanArgs:
             pulumi.set(__self__, "dpi_enabled", dpi_enabled)
         if dpigroup_id is not None:
             pulumi.set(__self__, "dpigroup_id", dpigroup_id)
+        if dtim6e is not None:
+            pulumi.set(__self__, "dtim6e", dtim6e)
         if dtim_mode is not None:
             pulumi.set(__self__, "dtim_mode", dtim_mode)
         if dtim_na is not None:
@@ -193,10 +175,14 @@ class WlanArgs:
             pulumi.set(__self__, "hide_ssid", hide_ssid)
         if hotspot2 is not None:
             pulumi.set(__self__, "hotspot2", hotspot2)
+        if hotspot2conf_enabled is not None:
+            pulumi.set(__self__, "hotspot2conf_enabled", hotspot2conf_enabled)
         if iapp_enabled is not None:
             pulumi.set(__self__, "iapp_enabled", iapp_enabled)
         if is_guest is not None:
             pulumi.set(__self__, "is_guest", is_guest)
+        if l2_isolation is not None:
+            pulumi.set(__self__, "l2_isolation", l2_isolation)
         if log_level is not None:
             pulumi.set(__self__, "log_level", log_level)
         if mac_filter_enabled is not None:
@@ -235,8 +221,14 @@ class WlanArgs:
             pulumi.set(__self__, "nas_identifier_type", nas_identifier_type)
         if networkconf_id is not None:
             pulumi.set(__self__, "networkconf_id", networkconf_id)
+        if no2ghz_oui is not None:
+            pulumi.set(__self__, "no2ghz_oui", no2ghz_oui)
         if optimize_iot_wifi_connectivity is not None:
             pulumi.set(__self__, "optimize_iot_wifi_connectivity", optimize_iot_wifi_connectivity)
+        if p2p is not None:
+            pulumi.set(__self__, "p2p", p2p)
+        if p2p_cross_connect is not None:
+            pulumi.set(__self__, "p2p_cross_connect", p2p_cross_connect)
         if pmf_cipher is not None:
             pulumi.set(__self__, "pmf_cipher", pmf_cipher)
         if pmf_mode is not None:
@@ -307,6 +299,14 @@ class WlanArgs:
             pulumi.set(__self__, "wlan_bands", wlan_bands)
         if wlangroup_id is not None:
             pulumi.set(__self__, "wlangroup_id", wlangroup_id)
+        if wpa3_enhanced192 is not None:
+            pulumi.set(__self__, "wpa3_enhanced192", wpa3_enhanced192)
+        if wpa3_fast_roaming is not None:
+            pulumi.set(__self__, "wpa3_fast_roaming", wpa3_fast_roaming)
+        if wpa3_support is not None:
+            pulumi.set(__self__, "wpa3_support", wpa3_support)
+        if wpa3_transition is not None:
+            pulumi.set(__self__, "wpa3_transition", wpa3_transition)
         if wpa_enc is not None:
             pulumi.set(__self__, "wpa_enc", wpa_enc)
         if wpa_mode is not None:
@@ -328,96 +328,6 @@ class WlanArgs:
     @id.setter
     def id(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "id", value)
-
-    @property
-    @pulumi.getter
-    def _dtim6e(self) -> Optional[pulumi.Input[builtins.int]]:
-        return pulumi.get(self, "_dtim6e")
-
-    @_dtim6e.setter
-    def _dtim6e(self, value: Optional[pulumi.Input[builtins.int]]):
-        pulumi.set(self, "_dtim6e", value)
-
-    @property
-    @pulumi.getter(name="_hotspot2confEnabled")
-    def _hotspot2conf_enabled(self) -> Optional[pulumi.Input[builtins.bool]]:
-        return pulumi.get(self, "_hotspot2conf_enabled")
-
-    @_hotspot2conf_enabled.setter
-    def _hotspot2conf_enabled(self, value: Optional[pulumi.Input[builtins.bool]]):
-        pulumi.set(self, "_hotspot2conf_enabled", value)
-
-    @property
-    @pulumi.getter(name="_l2Isolation")
-    def _l2_isolation(self) -> Optional[pulumi.Input[builtins.bool]]:
-        return pulumi.get(self, "_l2_isolation")
-
-    @_l2_isolation.setter
-    def _l2_isolation(self, value: Optional[pulumi.Input[builtins.bool]]):
-        pulumi.set(self, "_l2_isolation", value)
-
-    @property
-    @pulumi.getter(name="_no2ghzOui")
-    def _no2ghz_oui(self) -> Optional[pulumi.Input[builtins.bool]]:
-        return pulumi.get(self, "_no2ghz_oui")
-
-    @_no2ghz_oui.setter
-    def _no2ghz_oui(self, value: Optional[pulumi.Input[builtins.bool]]):
-        pulumi.set(self, "_no2ghz_oui", value)
-
-    @property
-    @pulumi.getter
-    def _p2p(self) -> Optional[pulumi.Input[builtins.bool]]:
-        return pulumi.get(self, "_p2p")
-
-    @_p2p.setter
-    def _p2p(self, value: Optional[pulumi.Input[builtins.bool]]):
-        pulumi.set(self, "_p2p", value)
-
-    @property
-    @pulumi.getter(name="_p2pCrossConnect")
-    def _p2p_cross_connect(self) -> Optional[pulumi.Input[builtins.bool]]:
-        return pulumi.get(self, "_p2p_cross_connect")
-
-    @_p2p_cross_connect.setter
-    def _p2p_cross_connect(self, value: Optional[pulumi.Input[builtins.bool]]):
-        pulumi.set(self, "_p2p_cross_connect", value)
-
-    @property
-    @pulumi.getter(name="_wpa3Enhanced192")
-    def _wpa3_enhanced192(self) -> Optional[pulumi.Input[builtins.bool]]:
-        return pulumi.get(self, "_wpa3_enhanced192")
-
-    @_wpa3_enhanced192.setter
-    def _wpa3_enhanced192(self, value: Optional[pulumi.Input[builtins.bool]]):
-        pulumi.set(self, "_wpa3_enhanced192", value)
-
-    @property
-    @pulumi.getter(name="_wpa3FastRoaming")
-    def _wpa3_fast_roaming(self) -> Optional[pulumi.Input[builtins.bool]]:
-        return pulumi.get(self, "_wpa3_fast_roaming")
-
-    @_wpa3_fast_roaming.setter
-    def _wpa3_fast_roaming(self, value: Optional[pulumi.Input[builtins.bool]]):
-        pulumi.set(self, "_wpa3_fast_roaming", value)
-
-    @property
-    @pulumi.getter(name="_wpa3Support")
-    def _wpa3_support(self) -> Optional[pulumi.Input[builtins.bool]]:
-        return pulumi.get(self, "_wpa3_support")
-
-    @_wpa3_support.setter
-    def _wpa3_support(self, value: Optional[pulumi.Input[builtins.bool]]):
-        pulumi.set(self, "_wpa3_support", value)
-
-    @property
-    @pulumi.getter(name="_wpa3Transition")
-    def _wpa3_transition(self) -> Optional[pulumi.Input[builtins.bool]]:
-        return pulumi.get(self, "_wpa3_transition")
-
-    @_wpa3_transition.setter
-    def _wpa3_transition(self, value: Optional[pulumi.Input[builtins.bool]]):
-        pulumi.set(self, "_wpa3_transition", value)
 
     @property
     @pulumi.getter(name="apGroupIds")
@@ -546,6 +456,15 @@ class WlanArgs:
         pulumi.set(self, "dpigroup_id", value)
 
     @property
+    @pulumi.getter
+    def dtim6e(self) -> Optional[pulumi.Input[builtins.int]]:
+        return pulumi.get(self, "dtim6e")
+
+    @dtim6e.setter
+    def dtim6e(self, value: Optional[pulumi.Input[builtins.int]]):
+        pulumi.set(self, "dtim6e", value)
+
+    @property
     @pulumi.getter(name="dtimMode")
     def dtim_mode(self) -> Optional[pulumi.Input[builtins.str]]:
         return pulumi.get(self, "dtim_mode")
@@ -636,6 +555,15 @@ class WlanArgs:
         pulumi.set(self, "hotspot2", value)
 
     @property
+    @pulumi.getter(name="hotspot2confEnabled")
+    def hotspot2conf_enabled(self) -> Optional[pulumi.Input[builtins.bool]]:
+        return pulumi.get(self, "hotspot2conf_enabled")
+
+    @hotspot2conf_enabled.setter
+    def hotspot2conf_enabled(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "hotspot2conf_enabled", value)
+
+    @property
     @pulumi.getter(name="iappEnabled")
     def iapp_enabled(self) -> Optional[pulumi.Input[builtins.bool]]:
         return pulumi.get(self, "iapp_enabled")
@@ -652,6 +580,15 @@ class WlanArgs:
     @is_guest.setter
     def is_guest(self, value: Optional[pulumi.Input[builtins.bool]]):
         pulumi.set(self, "is_guest", value)
+
+    @property
+    @pulumi.getter(name="l2Isolation")
+    def l2_isolation(self) -> Optional[pulumi.Input[builtins.bool]]:
+        return pulumi.get(self, "l2_isolation")
+
+    @l2_isolation.setter
+    def l2_isolation(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "l2_isolation", value)
 
     @property
     @pulumi.getter(name="logLevel")
@@ -825,6 +762,15 @@ class WlanArgs:
         pulumi.set(self, "networkconf_id", value)
 
     @property
+    @pulumi.getter(name="no2ghzOui")
+    def no2ghz_oui(self) -> Optional[pulumi.Input[builtins.bool]]:
+        return pulumi.get(self, "no2ghz_oui")
+
+    @no2ghz_oui.setter
+    def no2ghz_oui(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "no2ghz_oui", value)
+
+    @property
     @pulumi.getter(name="optimizeIotWifiConnectivity")
     def optimize_iot_wifi_connectivity(self) -> Optional[pulumi.Input[builtins.bool]]:
         return pulumi.get(self, "optimize_iot_wifi_connectivity")
@@ -832,6 +778,24 @@ class WlanArgs:
     @optimize_iot_wifi_connectivity.setter
     def optimize_iot_wifi_connectivity(self, value: Optional[pulumi.Input[builtins.bool]]):
         pulumi.set(self, "optimize_iot_wifi_connectivity", value)
+
+    @property
+    @pulumi.getter
+    def p2p(self) -> Optional[pulumi.Input[builtins.bool]]:
+        return pulumi.get(self, "p2p")
+
+    @p2p.setter
+    def p2p(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "p2p", value)
+
+    @property
+    @pulumi.getter(name="p2pCrossConnect")
+    def p2p_cross_connect(self) -> Optional[pulumi.Input[builtins.bool]]:
+        return pulumi.get(self, "p2p_cross_connect")
+
+    @p2p_cross_connect.setter
+    def p2p_cross_connect(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "p2p_cross_connect", value)
 
     @property
     @pulumi.getter(name="pmfCipher")
@@ -1149,6 +1113,42 @@ class WlanArgs:
         pulumi.set(self, "wlangroup_id", value)
 
     @property
+    @pulumi.getter(name="wpa3Enhanced192")
+    def wpa3_enhanced192(self) -> Optional[pulumi.Input[builtins.bool]]:
+        return pulumi.get(self, "wpa3_enhanced192")
+
+    @wpa3_enhanced192.setter
+    def wpa3_enhanced192(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "wpa3_enhanced192", value)
+
+    @property
+    @pulumi.getter(name="wpa3FastRoaming")
+    def wpa3_fast_roaming(self) -> Optional[pulumi.Input[builtins.bool]]:
+        return pulumi.get(self, "wpa3_fast_roaming")
+
+    @wpa3_fast_roaming.setter
+    def wpa3_fast_roaming(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "wpa3_fast_roaming", value)
+
+    @property
+    @pulumi.getter(name="wpa3Support")
+    def wpa3_support(self) -> Optional[pulumi.Input[builtins.bool]]:
+        return pulumi.get(self, "wpa3_support")
+
+    @wpa3_support.setter
+    def wpa3_support(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "wpa3_support", value)
+
+    @property
+    @pulumi.getter(name="wpa3Transition")
+    def wpa3_transition(self) -> Optional[pulumi.Input[builtins.bool]]:
+        return pulumi.get(self, "wpa3_transition")
+
+    @wpa3_transition.setter
+    def wpa3_transition(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "wpa3_transition", value)
+
+    @property
     @pulumi.getter(name="wpaEnc")
     def wpa_enc(self) -> Optional[pulumi.Input[builtins.str]]:
         return pulumi.get(self, "wpa_enc")
@@ -1210,16 +1210,6 @@ class Wlan(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _dtim6e: Optional[pulumi.Input[builtins.int]] = None,
-                 _hotspot2conf_enabled: Optional[pulumi.Input[builtins.bool]] = None,
-                 _l2_isolation: Optional[pulumi.Input[builtins.bool]] = None,
-                 _no2ghz_oui: Optional[pulumi.Input[builtins.bool]] = None,
-                 _p2p: Optional[pulumi.Input[builtins.bool]] = None,
-                 _p2p_cross_connect: Optional[pulumi.Input[builtins.bool]] = None,
-                 _wpa3_enhanced192: Optional[pulumi.Input[builtins.bool]] = None,
-                 _wpa3_fast_roaming: Optional[pulumi.Input[builtins.bool]] = None,
-                 _wpa3_support: Optional[pulumi.Input[builtins.bool]] = None,
-                 _wpa3_transition: Optional[pulumi.Input[builtins.bool]] = None,
                  ap_group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  ap_group_mode: Optional[pulumi.Input[builtins.str]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
@@ -1234,6 +1224,7 @@ class Wlan(pulumi.CustomResource):
                  country_beacon: Optional[pulumi.Input[builtins.bool]] = None,
                  dpi_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  dpigroup_id: Optional[pulumi.Input[builtins.str]] = None,
+                 dtim6e: Optional[pulumi.Input[builtins.int]] = None,
                  dtim_mode: Optional[pulumi.Input[builtins.str]] = None,
                  dtim_na: Optional[pulumi.Input[builtins.int]] = None,
                  dtim_ng: Optional[pulumi.Input[builtins.int]] = None,
@@ -1244,8 +1235,10 @@ class Wlan(pulumi.CustomResource):
                  group_rekey: Optional[pulumi.Input[builtins.int]] = None,
                  hide_ssid: Optional[pulumi.Input[builtins.bool]] = None,
                  hotspot2: Optional[pulumi.Input[Union['WLANHotspot2Args', 'WLANHotspot2ArgsDict']]] = None,
+                 hotspot2conf_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  iapp_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  is_guest: Optional[pulumi.Input[builtins.bool]] = None,
+                 l2_isolation: Optional[pulumi.Input[builtins.bool]] = None,
                  log_level: Optional[pulumi.Input[builtins.str]] = None,
                  mac_filter_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  mac_filter_list: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
@@ -1265,7 +1258,10 @@ class Wlan(pulumi.CustomResource):
                  nas_identifier: Optional[pulumi.Input[builtins.str]] = None,
                  nas_identifier_type: Optional[pulumi.Input[builtins.str]] = None,
                  networkconf_id: Optional[pulumi.Input[builtins.str]] = None,
+                 no2ghz_oui: Optional[pulumi.Input[builtins.bool]] = None,
                  optimize_iot_wifi_connectivity: Optional[pulumi.Input[builtins.bool]] = None,
+                 p2p: Optional[pulumi.Input[builtins.bool]] = None,
+                 p2p_cross_connect: Optional[pulumi.Input[builtins.bool]] = None,
                  pmf_cipher: Optional[pulumi.Input[builtins.str]] = None,
                  pmf_mode: Optional[pulumi.Input[builtins.str]] = None,
                  priority: Optional[pulumi.Input[builtins.str]] = None,
@@ -1301,6 +1297,10 @@ class Wlan(pulumi.CustomResource):
                  wlan_band: Optional[pulumi.Input[builtins.str]] = None,
                  wlan_bands: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  wlangroup_id: Optional[pulumi.Input[builtins.str]] = None,
+                 wpa3_enhanced192: Optional[pulumi.Input[builtins.bool]] = None,
+                 wpa3_fast_roaming: Optional[pulumi.Input[builtins.bool]] = None,
+                 wpa3_support: Optional[pulumi.Input[builtins.bool]] = None,
+                 wpa3_transition: Optional[pulumi.Input[builtins.bool]] = None,
                  wpa_enc: Optional[pulumi.Input[builtins.str]] = None,
                  wpa_mode: Optional[pulumi.Input[builtins.str]] = None,
                  wpa_psk_radius: Optional[pulumi.Input[builtins.str]] = None,
@@ -1337,16 +1337,6 @@ class Wlan(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _dtim6e: Optional[pulumi.Input[builtins.int]] = None,
-                 _hotspot2conf_enabled: Optional[pulumi.Input[builtins.bool]] = None,
-                 _l2_isolation: Optional[pulumi.Input[builtins.bool]] = None,
-                 _no2ghz_oui: Optional[pulumi.Input[builtins.bool]] = None,
-                 _p2p: Optional[pulumi.Input[builtins.bool]] = None,
-                 _p2p_cross_connect: Optional[pulumi.Input[builtins.bool]] = None,
-                 _wpa3_enhanced192: Optional[pulumi.Input[builtins.bool]] = None,
-                 _wpa3_fast_roaming: Optional[pulumi.Input[builtins.bool]] = None,
-                 _wpa3_support: Optional[pulumi.Input[builtins.bool]] = None,
-                 _wpa3_transition: Optional[pulumi.Input[builtins.bool]] = None,
                  ap_group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  ap_group_mode: Optional[pulumi.Input[builtins.str]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
@@ -1361,6 +1351,7 @@ class Wlan(pulumi.CustomResource):
                  country_beacon: Optional[pulumi.Input[builtins.bool]] = None,
                  dpi_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  dpigroup_id: Optional[pulumi.Input[builtins.str]] = None,
+                 dtim6e: Optional[pulumi.Input[builtins.int]] = None,
                  dtim_mode: Optional[pulumi.Input[builtins.str]] = None,
                  dtim_na: Optional[pulumi.Input[builtins.int]] = None,
                  dtim_ng: Optional[pulumi.Input[builtins.int]] = None,
@@ -1371,8 +1362,10 @@ class Wlan(pulumi.CustomResource):
                  group_rekey: Optional[pulumi.Input[builtins.int]] = None,
                  hide_ssid: Optional[pulumi.Input[builtins.bool]] = None,
                  hotspot2: Optional[pulumi.Input[Union['WLANHotspot2Args', 'WLANHotspot2ArgsDict']]] = None,
+                 hotspot2conf_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  iapp_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  is_guest: Optional[pulumi.Input[builtins.bool]] = None,
+                 l2_isolation: Optional[pulumi.Input[builtins.bool]] = None,
                  log_level: Optional[pulumi.Input[builtins.str]] = None,
                  mac_filter_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  mac_filter_list: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
@@ -1392,7 +1385,10 @@ class Wlan(pulumi.CustomResource):
                  nas_identifier: Optional[pulumi.Input[builtins.str]] = None,
                  nas_identifier_type: Optional[pulumi.Input[builtins.str]] = None,
                  networkconf_id: Optional[pulumi.Input[builtins.str]] = None,
+                 no2ghz_oui: Optional[pulumi.Input[builtins.bool]] = None,
                  optimize_iot_wifi_connectivity: Optional[pulumi.Input[builtins.bool]] = None,
+                 p2p: Optional[pulumi.Input[builtins.bool]] = None,
+                 p2p_cross_connect: Optional[pulumi.Input[builtins.bool]] = None,
                  pmf_cipher: Optional[pulumi.Input[builtins.str]] = None,
                  pmf_mode: Optional[pulumi.Input[builtins.str]] = None,
                  priority: Optional[pulumi.Input[builtins.str]] = None,
@@ -1428,6 +1424,10 @@ class Wlan(pulumi.CustomResource):
                  wlan_band: Optional[pulumi.Input[builtins.str]] = None,
                  wlan_bands: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  wlangroup_id: Optional[pulumi.Input[builtins.str]] = None,
+                 wpa3_enhanced192: Optional[pulumi.Input[builtins.bool]] = None,
+                 wpa3_fast_roaming: Optional[pulumi.Input[builtins.bool]] = None,
+                 wpa3_support: Optional[pulumi.Input[builtins.bool]] = None,
+                 wpa3_transition: Optional[pulumi.Input[builtins.bool]] = None,
                  wpa_enc: Optional[pulumi.Input[builtins.str]] = None,
                  wpa_mode: Optional[pulumi.Input[builtins.str]] = None,
                  wpa_psk_radius: Optional[pulumi.Input[builtins.str]] = None,
@@ -1444,16 +1444,6 @@ class Wlan(pulumi.CustomResource):
             __props__ = WlanArgs.__new__(WlanArgs)
 
             __props__.__dict__["id"] = id
-            __props__.__dict__["_dtim6e"] = _dtim6e
-            __props__.__dict__["_hotspot2conf_enabled"] = _hotspot2conf_enabled
-            __props__.__dict__["_l2_isolation"] = _l2_isolation
-            __props__.__dict__["_no2ghz_oui"] = _no2ghz_oui
-            __props__.__dict__["_p2p"] = _p2p
-            __props__.__dict__["_p2p_cross_connect"] = _p2p_cross_connect
-            __props__.__dict__["_wpa3_enhanced192"] = _wpa3_enhanced192
-            __props__.__dict__["_wpa3_fast_roaming"] = _wpa3_fast_roaming
-            __props__.__dict__["_wpa3_support"] = _wpa3_support
-            __props__.__dict__["_wpa3_transition"] = _wpa3_transition
             __props__.__dict__["ap_group_ids"] = ap_group_ids
             __props__.__dict__["ap_group_mode"] = ap_group_mode
             __props__.__dict__["attr_hidden"] = attr_hidden
@@ -1468,6 +1458,7 @@ class Wlan(pulumi.CustomResource):
             __props__.__dict__["country_beacon"] = country_beacon
             __props__.__dict__["dpi_enabled"] = dpi_enabled
             __props__.__dict__["dpigroup_id"] = dpigroup_id
+            __props__.__dict__["dtim6e"] = dtim6e
             __props__.__dict__["dtim_mode"] = dtim_mode
             __props__.__dict__["dtim_na"] = dtim_na
             __props__.__dict__["dtim_ng"] = dtim_ng
@@ -1478,8 +1469,10 @@ class Wlan(pulumi.CustomResource):
             __props__.__dict__["group_rekey"] = group_rekey
             __props__.__dict__["hide_ssid"] = hide_ssid
             __props__.__dict__["hotspot2"] = hotspot2
+            __props__.__dict__["hotspot2conf_enabled"] = hotspot2conf_enabled
             __props__.__dict__["iapp_enabled"] = iapp_enabled
             __props__.__dict__["is_guest"] = is_guest
+            __props__.__dict__["l2_isolation"] = l2_isolation
             __props__.__dict__["log_level"] = log_level
             __props__.__dict__["mac_filter_enabled"] = mac_filter_enabled
             __props__.__dict__["mac_filter_list"] = mac_filter_list
@@ -1499,7 +1492,10 @@ class Wlan(pulumi.CustomResource):
             __props__.__dict__["nas_identifier"] = nas_identifier
             __props__.__dict__["nas_identifier_type"] = nas_identifier_type
             __props__.__dict__["networkconf_id"] = networkconf_id
+            __props__.__dict__["no2ghz_oui"] = no2ghz_oui
             __props__.__dict__["optimize_iot_wifi_connectivity"] = optimize_iot_wifi_connectivity
+            __props__.__dict__["p2p"] = p2p
+            __props__.__dict__["p2p_cross_connect"] = p2p_cross_connect
             __props__.__dict__["pmf_cipher"] = pmf_cipher
             __props__.__dict__["pmf_mode"] = pmf_mode
             __props__.__dict__["priority"] = priority
@@ -1535,6 +1531,10 @@ class Wlan(pulumi.CustomResource):
             __props__.__dict__["wlan_band"] = wlan_band
             __props__.__dict__["wlan_bands"] = wlan_bands
             __props__.__dict__["wlangroup_id"] = wlangroup_id
+            __props__.__dict__["wpa3_enhanced192"] = wpa3_enhanced192
+            __props__.__dict__["wpa3_fast_roaming"] = wpa3_fast_roaming
+            __props__.__dict__["wpa3_support"] = wpa3_support
+            __props__.__dict__["wpa3_transition"] = wpa3_transition
             __props__.__dict__["wpa_enc"] = wpa_enc
             __props__.__dict__["wpa_mode"] = wpa_mode
             __props__.__dict__["wpa_psk_radius"] = wpa_psk_radius
@@ -1564,16 +1564,6 @@ class Wlan(pulumi.CustomResource):
         __props__ = WlanArgs.__new__(WlanArgs)
 
         __props__.__dict__["id"] = None
-        __props__.__dict__["_dtim6e"] = None
-        __props__.__dict__["_hotspot2conf_enabled"] = None
-        __props__.__dict__["_l2_isolation"] = None
-        __props__.__dict__["_no2ghz_oui"] = None
-        __props__.__dict__["_p2p"] = None
-        __props__.__dict__["_p2p_cross_connect"] = None
-        __props__.__dict__["_wpa3_enhanced192"] = None
-        __props__.__dict__["_wpa3_fast_roaming"] = None
-        __props__.__dict__["_wpa3_support"] = None
-        __props__.__dict__["_wpa3_transition"] = None
         __props__.__dict__["ap_group_ids"] = None
         __props__.__dict__["ap_group_mode"] = None
         __props__.__dict__["attr_hidden"] = None
@@ -1588,6 +1578,7 @@ class Wlan(pulumi.CustomResource):
         __props__.__dict__["country_beacon"] = None
         __props__.__dict__["dpi_enabled"] = None
         __props__.__dict__["dpigroup_id"] = None
+        __props__.__dict__["dtim6e"] = None
         __props__.__dict__["dtim_mode"] = None
         __props__.__dict__["dtim_na"] = None
         __props__.__dict__["dtim_ng"] = None
@@ -1598,8 +1589,10 @@ class Wlan(pulumi.CustomResource):
         __props__.__dict__["group_rekey"] = None
         __props__.__dict__["hide_ssid"] = None
         __props__.__dict__["hotspot2"] = None
+        __props__.__dict__["hotspot2conf_enabled"] = None
         __props__.__dict__["iapp_enabled"] = None
         __props__.__dict__["is_guest"] = None
+        __props__.__dict__["l2_isolation"] = None
         __props__.__dict__["log_level"] = None
         __props__.__dict__["mac_filter_enabled"] = None
         __props__.__dict__["mac_filter_list"] = None
@@ -1619,7 +1612,10 @@ class Wlan(pulumi.CustomResource):
         __props__.__dict__["nas_identifier"] = None
         __props__.__dict__["nas_identifier_type"] = None
         __props__.__dict__["networkconf_id"] = None
+        __props__.__dict__["no2ghz_oui"] = None
         __props__.__dict__["optimize_iot_wifi_connectivity"] = None
+        __props__.__dict__["p2p"] = None
+        __props__.__dict__["p2p_cross_connect"] = None
         __props__.__dict__["pmf_cipher"] = None
         __props__.__dict__["pmf_mode"] = None
         __props__.__dict__["priority"] = None
@@ -1655,6 +1651,10 @@ class Wlan(pulumi.CustomResource):
         __props__.__dict__["wlan_band"] = None
         __props__.__dict__["wlan_bands"] = None
         __props__.__dict__["wlangroup_id"] = None
+        __props__.__dict__["wpa3_enhanced192"] = None
+        __props__.__dict__["wpa3_fast_roaming"] = None
+        __props__.__dict__["wpa3_support"] = None
+        __props__.__dict__["wpa3_transition"] = None
         __props__.__dict__["wpa_enc"] = None
         __props__.__dict__["wpa_mode"] = None
         __props__.__dict__["wpa_psk_radius"] = None
@@ -1667,56 +1667,6 @@ class Wlan(pulumi.CustomResource):
     @pulumi.getter(name="Id")
     def id(self) -> pulumi.Output[Optional[builtins.str]]:
         return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter
-    def _dtim6e(self) -> pulumi.Output[Optional[builtins.int]]:
-        return pulumi.get(self, "_dtim6e")
-
-    @property
-    @pulumi.getter(name="_hotspot2confEnabled")
-    def _hotspot2conf_enabled(self) -> pulumi.Output[Optional[builtins.bool]]:
-        return pulumi.get(self, "_hotspot2conf_enabled")
-
-    @property
-    @pulumi.getter(name="_l2Isolation")
-    def _l2_isolation(self) -> pulumi.Output[Optional[builtins.bool]]:
-        return pulumi.get(self, "_l2_isolation")
-
-    @property
-    @pulumi.getter(name="_no2ghzOui")
-    def _no2ghz_oui(self) -> pulumi.Output[Optional[builtins.bool]]:
-        return pulumi.get(self, "_no2ghz_oui")
-
-    @property
-    @pulumi.getter
-    def _p2p(self) -> pulumi.Output[Optional[builtins.bool]]:
-        return pulumi.get(self, "_p2p")
-
-    @property
-    @pulumi.getter(name="_p2pCrossConnect")
-    def _p2p_cross_connect(self) -> pulumi.Output[Optional[builtins.bool]]:
-        return pulumi.get(self, "_p2p_cross_connect")
-
-    @property
-    @pulumi.getter(name="_wpa3Enhanced192")
-    def _wpa3_enhanced192(self) -> pulumi.Output[Optional[builtins.bool]]:
-        return pulumi.get(self, "_wpa3_enhanced192")
-
-    @property
-    @pulumi.getter(name="_wpa3FastRoaming")
-    def _wpa3_fast_roaming(self) -> pulumi.Output[Optional[builtins.bool]]:
-        return pulumi.get(self, "_wpa3_fast_roaming")
-
-    @property
-    @pulumi.getter(name="_wpa3Support")
-    def _wpa3_support(self) -> pulumi.Output[Optional[builtins.bool]]:
-        return pulumi.get(self, "_wpa3_support")
-
-    @property
-    @pulumi.getter(name="_wpa3Transition")
-    def _wpa3_transition(self) -> pulumi.Output[Optional[builtins.bool]]:
-        return pulumi.get(self, "_wpa3_transition")
 
     @property
     @pulumi.getter(name="apGroupIds")
@@ -1789,6 +1739,11 @@ class Wlan(pulumi.CustomResource):
         return pulumi.get(self, "dpigroup_id")
 
     @property
+    @pulumi.getter
+    def dtim6e(self) -> pulumi.Output[Optional[builtins.int]]:
+        return pulumi.get(self, "dtim6e")
+
+    @property
     @pulumi.getter(name="dtimMode")
     def dtim_mode(self) -> pulumi.Output[Optional[builtins.str]]:
         return pulumi.get(self, "dtim_mode")
@@ -1839,6 +1794,11 @@ class Wlan(pulumi.CustomResource):
         return pulumi.get(self, "hotspot2")
 
     @property
+    @pulumi.getter(name="hotspot2confEnabled")
+    def hotspot2conf_enabled(self) -> pulumi.Output[Optional[builtins.bool]]:
+        return pulumi.get(self, "hotspot2conf_enabled")
+
+    @property
     @pulumi.getter(name="iappEnabled")
     def iapp_enabled(self) -> pulumi.Output[Optional[builtins.bool]]:
         return pulumi.get(self, "iapp_enabled")
@@ -1847,6 +1807,11 @@ class Wlan(pulumi.CustomResource):
     @pulumi.getter(name="isGuest")
     def is_guest(self) -> pulumi.Output[Optional[builtins.bool]]:
         return pulumi.get(self, "is_guest")
+
+    @property
+    @pulumi.getter(name="l2Isolation")
+    def l2_isolation(self) -> pulumi.Output[Optional[builtins.bool]]:
+        return pulumi.get(self, "l2_isolation")
 
     @property
     @pulumi.getter(name="logLevel")
@@ -1944,9 +1909,24 @@ class Wlan(pulumi.CustomResource):
         return pulumi.get(self, "networkconf_id")
 
     @property
+    @pulumi.getter(name="no2ghzOui")
+    def no2ghz_oui(self) -> pulumi.Output[Optional[builtins.bool]]:
+        return pulumi.get(self, "no2ghz_oui")
+
+    @property
     @pulumi.getter(name="optimizeIotWifiConnectivity")
     def optimize_iot_wifi_connectivity(self) -> pulumi.Output[Optional[builtins.bool]]:
         return pulumi.get(self, "optimize_iot_wifi_connectivity")
+
+    @property
+    @pulumi.getter
+    def p2p(self) -> pulumi.Output[Optional[builtins.bool]]:
+        return pulumi.get(self, "p2p")
+
+    @property
+    @pulumi.getter(name="p2pCrossConnect")
+    def p2p_cross_connect(self) -> pulumi.Output[Optional[builtins.bool]]:
+        return pulumi.get(self, "p2p_cross_connect")
 
     @property
     @pulumi.getter(name="pmfCipher")
@@ -2122,6 +2102,26 @@ class Wlan(pulumi.CustomResource):
     @pulumi.getter(name="wlangroupId")
     def wlangroup_id(self) -> pulumi.Output[Optional[builtins.str]]:
         return pulumi.get(self, "wlangroup_id")
+
+    @property
+    @pulumi.getter(name="wpa3Enhanced192")
+    def wpa3_enhanced192(self) -> pulumi.Output[Optional[builtins.bool]]:
+        return pulumi.get(self, "wpa3_enhanced192")
+
+    @property
+    @pulumi.getter(name="wpa3FastRoaming")
+    def wpa3_fast_roaming(self) -> pulumi.Output[Optional[builtins.bool]]:
+        return pulumi.get(self, "wpa3_fast_roaming")
+
+    @property
+    @pulumi.getter(name="wpa3Support")
+    def wpa3_support(self) -> pulumi.Output[Optional[builtins.bool]]:
+        return pulumi.get(self, "wpa3_support")
+
+    @property
+    @pulumi.getter(name="wpa3Transition")
+    def wpa3_transition(self) -> pulumi.Output[Optional[builtins.bool]]:
+        return pulumi.get(self, "wpa3_transition")
 
     @property
     @pulumi.getter(name="wpaEnc")

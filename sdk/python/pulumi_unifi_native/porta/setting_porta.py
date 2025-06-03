@@ -21,20 +21,18 @@ __all__ = ['SettingPortaArgs', 'SettingPorta']
 class SettingPortaArgs:
     def __init__(__self__, *,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _ugw3_wan2_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_hidden_id: Optional[pulumi.Input[builtins.str]] = None,
                  attr_no_delete: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_no_edit: Optional[pulumi.Input[builtins.bool]] = None,
                  key: Optional[pulumi.Input[builtins.str]] = None,
-                 site_id: Optional[pulumi.Input[builtins.str]] = None):
+                 site_id: Optional[pulumi.Input[builtins.str]] = None,
+                 ugw3_wan2_enabled: Optional[pulumi.Input[builtins.bool]] = None):
         """
         The set of arguments for constructing a SettingPorta resource.
         """
         if id is not None:
             pulumi.set(__self__, "id", id)
-        if _ugw3_wan2_enabled is not None:
-            pulumi.set(__self__, "_ugw3_wan2_enabled", _ugw3_wan2_enabled)
         if attr_hidden is not None:
             pulumi.set(__self__, "attr_hidden", attr_hidden)
         if attr_hidden_id is not None:
@@ -47,6 +45,8 @@ class SettingPortaArgs:
             pulumi.set(__self__, "key", key)
         if site_id is not None:
             pulumi.set(__self__, "site_id", site_id)
+        if ugw3_wan2_enabled is not None:
+            pulumi.set(__self__, "ugw3_wan2_enabled", ugw3_wan2_enabled)
 
     @property
     @pulumi.getter(name="Id")
@@ -56,15 +56,6 @@ class SettingPortaArgs:
     @id.setter
     def id(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "id", value)
-
-    @property
-    @pulumi.getter(name="_ugw3Wan2Enabled")
-    def _ugw3_wan2_enabled(self) -> Optional[pulumi.Input[builtins.bool]]:
-        return pulumi.get(self, "_ugw3_wan2_enabled")
-
-    @_ugw3_wan2_enabled.setter
-    def _ugw3_wan2_enabled(self, value: Optional[pulumi.Input[builtins.bool]]):
-        pulumi.set(self, "_ugw3_wan2_enabled", value)
 
     @property
     @pulumi.getter(name="attrHidden")
@@ -120,6 +111,15 @@ class SettingPortaArgs:
     def site_id(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "site_id", value)
 
+    @property
+    @pulumi.getter(name="ugw3Wan2Enabled")
+    def ugw3_wan2_enabled(self) -> Optional[pulumi.Input[builtins.bool]]:
+        return pulumi.get(self, "ugw3_wan2_enabled")
+
+    @ugw3_wan2_enabled.setter
+    def ugw3_wan2_enabled(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "ugw3_wan2_enabled", value)
+
 
 @pulumi.type_token("unifi-native:porta:SettingPorta")
 class SettingPorta(pulumi.CustomResource):
@@ -128,13 +128,13 @@ class SettingPorta(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _ugw3_wan2_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_hidden_id: Optional[pulumi.Input[builtins.str]] = None,
                  attr_no_delete: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_no_edit: Optional[pulumi.Input[builtins.bool]] = None,
                  key: Optional[pulumi.Input[builtins.str]] = None,
                  site_id: Optional[pulumi.Input[builtins.str]] = None,
+                 ugw3_wan2_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  __props__=None):
         """
         Create a SettingPorta resource with the given unique name, props, and options.
@@ -165,13 +165,13 @@ class SettingPorta(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _ugw3_wan2_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_hidden: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_hidden_id: Optional[pulumi.Input[builtins.str]] = None,
                  attr_no_delete: Optional[pulumi.Input[builtins.bool]] = None,
                  attr_no_edit: Optional[pulumi.Input[builtins.bool]] = None,
                  key: Optional[pulumi.Input[builtins.str]] = None,
                  site_id: Optional[pulumi.Input[builtins.str]] = None,
+                 ugw3_wan2_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -182,13 +182,13 @@ class SettingPorta(pulumi.CustomResource):
             __props__ = SettingPortaArgs.__new__(SettingPortaArgs)
 
             __props__.__dict__["id"] = id
-            __props__.__dict__["_ugw3_wan2_enabled"] = _ugw3_wan2_enabled
             __props__.__dict__["attr_hidden"] = attr_hidden
             __props__.__dict__["attr_hidden_id"] = attr_hidden_id
             __props__.__dict__["attr_no_delete"] = attr_no_delete
             __props__.__dict__["attr_no_edit"] = attr_no_edit
             __props__.__dict__["key"] = key
             __props__.__dict__["site_id"] = site_id
+            __props__.__dict__["ugw3_wan2_enabled"] = ugw3_wan2_enabled
         super(SettingPorta, __self__).__init__(
             'unifi-native:porta:SettingPorta',
             resource_name,
@@ -212,24 +212,19 @@ class SettingPorta(pulumi.CustomResource):
         __props__ = SettingPortaArgs.__new__(SettingPortaArgs)
 
         __props__.__dict__["id"] = None
-        __props__.__dict__["_ugw3_wan2_enabled"] = None
         __props__.__dict__["attr_hidden"] = None
         __props__.__dict__["attr_hidden_id"] = None
         __props__.__dict__["attr_no_delete"] = None
         __props__.__dict__["attr_no_edit"] = None
         __props__.__dict__["key"] = None
         __props__.__dict__["site_id"] = None
+        __props__.__dict__["ugw3_wan2_enabled"] = None
         return SettingPorta(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter(name="Id")
     def id(self) -> pulumi.Output[Optional[builtins.str]]:
         return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter(name="_ugw3Wan2Enabled")
-    def _ugw3_wan2_enabled(self) -> pulumi.Output[Optional[builtins.bool]]:
-        return pulumi.get(self, "_ugw3_wan2_enabled")
 
     @property
     @pulumi.getter(name="attrHidden")
@@ -260,4 +255,9 @@ class SettingPorta(pulumi.CustomResource):
     @pulumi.getter(name="siteId")
     def site_id(self) -> pulumi.Output[Optional[builtins.str]]:
         return pulumi.get(self, "site_id")
+
+    @property
+    @pulumi.getter(name="ugw3Wan2Enabled")
+    def ugw3_wan2_enabled(self) -> pulumi.Output[Optional[builtins.bool]]:
+        return pulumi.get(self, "ugw3_wan2_enabled")
 

@@ -50,17 +50,13 @@ class Meta(dict):
 class PortProfile(dict):
     def __init__(__self__, *,
                  id: Optional[builtins.str] = None,
-                 _dot1x_ctrl: Optional[builtins.str] = None,
-                 _dot1x_idle_timeout: Optional[builtins.int] = None,
-                 _priority_queue1_level: Optional[builtins.int] = None,
-                 _priority_queue2_level: Optional[builtins.int] = None,
-                 _priority_queue3_level: Optional[builtins.int] = None,
-                 _priority_queue4_level: Optional[builtins.int] = None,
                  attr_hidden: Optional[builtins.bool] = None,
                  attr_hidden_id: Optional[builtins.str] = None,
                  attr_no_delete: Optional[builtins.bool] = None,
                  attr_no_edit: Optional[builtins.bool] = None,
                  autoneg: Optional[builtins.bool] = None,
+                 dot1x_ctrl: Optional[builtins.str] = None,
+                 dot1x_idle_timeout: Optional[builtins.int] = None,
                  egress_rate_limit_kbps: Optional[builtins.int] = None,
                  egress_rate_limit_kbps_enabled: Optional[builtins.bool] = None,
                  excluded_networkconf_ids: Optional[Sequence[builtins.str]] = None,
@@ -78,6 +74,10 @@ class PortProfile(dict):
                  port_keepalive_enabled: Optional[builtins.bool] = None,
                  port_security_enabled: Optional[builtins.bool] = None,
                  port_security_mac_address: Optional[Sequence[builtins.str]] = None,
+                 priority_queue1_level: Optional[builtins.int] = None,
+                 priority_queue2_level: Optional[builtins.int] = None,
+                 priority_queue3_level: Optional[builtins.int] = None,
+                 priority_queue4_level: Optional[builtins.int] = None,
                  qos_profile: Optional['outputs.PortProfileQOSProfile'] = None,
                  setting_preference: Optional[builtins.str] = None,
                  site_id: Optional[builtins.str] = None,
@@ -97,18 +97,6 @@ class PortProfile(dict):
                  voice_networkconf_id: Optional[builtins.str] = None):
         if id is not None:
             pulumi.set(__self__, "id", id)
-        if _dot1x_ctrl is not None:
-            pulumi.set(__self__, "_dot1x_ctrl", _dot1x_ctrl)
-        if _dot1x_idle_timeout is not None:
-            pulumi.set(__self__, "_dot1x_idle_timeout", _dot1x_idle_timeout)
-        if _priority_queue1_level is not None:
-            pulumi.set(__self__, "_priority_queue1_level", _priority_queue1_level)
-        if _priority_queue2_level is not None:
-            pulumi.set(__self__, "_priority_queue2_level", _priority_queue2_level)
-        if _priority_queue3_level is not None:
-            pulumi.set(__self__, "_priority_queue3_level", _priority_queue3_level)
-        if _priority_queue4_level is not None:
-            pulumi.set(__self__, "_priority_queue4_level", _priority_queue4_level)
         if attr_hidden is not None:
             pulumi.set(__self__, "attr_hidden", attr_hidden)
         if attr_hidden_id is not None:
@@ -119,6 +107,10 @@ class PortProfile(dict):
             pulumi.set(__self__, "attr_no_edit", attr_no_edit)
         if autoneg is not None:
             pulumi.set(__self__, "autoneg", autoneg)
+        if dot1x_ctrl is not None:
+            pulumi.set(__self__, "dot1x_ctrl", dot1x_ctrl)
+        if dot1x_idle_timeout is not None:
+            pulumi.set(__self__, "dot1x_idle_timeout", dot1x_idle_timeout)
         if egress_rate_limit_kbps is not None:
             pulumi.set(__self__, "egress_rate_limit_kbps", egress_rate_limit_kbps)
         if egress_rate_limit_kbps_enabled is not None:
@@ -153,6 +145,14 @@ class PortProfile(dict):
             pulumi.set(__self__, "port_security_enabled", port_security_enabled)
         if port_security_mac_address is not None:
             pulumi.set(__self__, "port_security_mac_address", port_security_mac_address)
+        if priority_queue1_level is not None:
+            pulumi.set(__self__, "priority_queue1_level", priority_queue1_level)
+        if priority_queue2_level is not None:
+            pulumi.set(__self__, "priority_queue2_level", priority_queue2_level)
+        if priority_queue3_level is not None:
+            pulumi.set(__self__, "priority_queue3_level", priority_queue3_level)
+        if priority_queue4_level is not None:
+            pulumi.set(__self__, "priority_queue4_level", priority_queue4_level)
         if qos_profile is not None:
             pulumi.set(__self__, "qos_profile", qos_profile)
         if setting_preference is not None:
@@ -194,36 +194,6 @@ class PortProfile(dict):
         return pulumi.get(self, "id")
 
     @property
-    @pulumi.getter(name="_dot1xCtrl")
-    def _dot1x_ctrl(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_dot1x_ctrl")
-
-    @property
-    @pulumi.getter(name="_dot1xIdleTimeout")
-    def _dot1x_idle_timeout(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "_dot1x_idle_timeout")
-
-    @property
-    @pulumi.getter(name="_priorityQueue1Level")
-    def _priority_queue1_level(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "_priority_queue1_level")
-
-    @property
-    @pulumi.getter(name="_priorityQueue2Level")
-    def _priority_queue2_level(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "_priority_queue2_level")
-
-    @property
-    @pulumi.getter(name="_priorityQueue3Level")
-    def _priority_queue3_level(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "_priority_queue3_level")
-
-    @property
-    @pulumi.getter(name="_priorityQueue4Level")
-    def _priority_queue4_level(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "_priority_queue4_level")
-
-    @property
     @pulumi.getter(name="attrHidden")
     def attr_hidden(self) -> Optional[builtins.bool]:
         return pulumi.get(self, "attr_hidden")
@@ -247,6 +217,16 @@ class PortProfile(dict):
     @pulumi.getter
     def autoneg(self) -> Optional[builtins.bool]:
         return pulumi.get(self, "autoneg")
+
+    @property
+    @pulumi.getter(name="dot1xCtrl")
+    def dot1x_ctrl(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "dot1x_ctrl")
+
+    @property
+    @pulumi.getter(name="dot1xIdleTimeout")
+    def dot1x_idle_timeout(self) -> Optional[builtins.int]:
+        return pulumi.get(self, "dot1x_idle_timeout")
 
     @property
     @pulumi.getter(name="egressRateLimitKbps")
@@ -332,6 +312,26 @@ class PortProfile(dict):
     @pulumi.getter(name="portSecurityMacAddress")
     def port_security_mac_address(self) -> Optional[Sequence[builtins.str]]:
         return pulumi.get(self, "port_security_mac_address")
+
+    @property
+    @pulumi.getter(name="priorityQueue1Level")
+    def priority_queue1_level(self) -> Optional[builtins.int]:
+        return pulumi.get(self, "priority_queue1_level")
+
+    @property
+    @pulumi.getter(name="priorityQueue2Level")
+    def priority_queue2_level(self) -> Optional[builtins.int]:
+        return pulumi.get(self, "priority_queue2_level")
+
+    @property
+    @pulumi.getter(name="priorityQueue3Level")
+    def priority_queue3_level(self) -> Optional[builtins.int]:
+        return pulumi.get(self, "priority_queue3_level")
+
+    @property
+    @pulumi.getter(name="priorityQueue4Level")
+    def priority_queue4_level(self) -> Optional[builtins.int]:
+        return pulumi.get(self, "priority_queue4_level")
 
     @property
     @pulumi.getter(name="qosProfile")

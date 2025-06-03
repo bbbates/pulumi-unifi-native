@@ -335,14 +335,10 @@ class DeviceOutletOverridesArgs:
 
 if not MYPY:
     class DevicePortOverridesArgsDict(TypedDict):
-        _dot1x_ctrl: NotRequired[pulumi.Input[builtins.str]]
-        _dot1x_idle_timeout: NotRequired[pulumi.Input[builtins.int]]
-        _priority_queue1_level: NotRequired[pulumi.Input[builtins.int]]
-        _priority_queue2_level: NotRequired[pulumi.Input[builtins.int]]
-        _priority_queue3_level: NotRequired[pulumi.Input[builtins.int]]
-        _priority_queue4_level: NotRequired[pulumi.Input[builtins.int]]
         aggregate_num_ports: NotRequired[pulumi.Input[builtins.int]]
         autoneg: NotRequired[pulumi.Input[builtins.bool]]
+        dot1x_ctrl: NotRequired[pulumi.Input[builtins.str]]
+        dot1x_idle_timeout: NotRequired[pulumi.Input[builtins.int]]
         egress_rate_limit_kbps: NotRequired[pulumi.Input[builtins.int]]
         egress_rate_limit_kbps_enabled: NotRequired[pulumi.Input[builtins.bool]]
         excluded_networkconf_ids: NotRequired[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]]
@@ -363,6 +359,10 @@ if not MYPY:
         port_security_enabled: NotRequired[pulumi.Input[builtins.bool]]
         port_security_mac_address: NotRequired[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]]
         portconf_id: NotRequired[pulumi.Input[builtins.str]]
+        priority_queue1_level: NotRequired[pulumi.Input[builtins.int]]
+        priority_queue2_level: NotRequired[pulumi.Input[builtins.int]]
+        priority_queue3_level: NotRequired[pulumi.Input[builtins.int]]
+        priority_queue4_level: NotRequired[pulumi.Input[builtins.int]]
         qos_profile: NotRequired[pulumi.Input['DeviceQOSProfileArgsDict']]
         setting_preference: NotRequired[pulumi.Input[builtins.str]]
         speed: NotRequired[pulumi.Input[builtins.int]]
@@ -385,14 +385,10 @@ elif False:
 @pulumi.input_type
 class DevicePortOverridesArgs:
     def __init__(__self__, *,
-                 _dot1x_ctrl: Optional[pulumi.Input[builtins.str]] = None,
-                 _dot1x_idle_timeout: Optional[pulumi.Input[builtins.int]] = None,
-                 _priority_queue1_level: Optional[pulumi.Input[builtins.int]] = None,
-                 _priority_queue2_level: Optional[pulumi.Input[builtins.int]] = None,
-                 _priority_queue3_level: Optional[pulumi.Input[builtins.int]] = None,
-                 _priority_queue4_level: Optional[pulumi.Input[builtins.int]] = None,
                  aggregate_num_ports: Optional[pulumi.Input[builtins.int]] = None,
                  autoneg: Optional[pulumi.Input[builtins.bool]] = None,
+                 dot1x_ctrl: Optional[pulumi.Input[builtins.str]] = None,
+                 dot1x_idle_timeout: Optional[pulumi.Input[builtins.int]] = None,
                  egress_rate_limit_kbps: Optional[pulumi.Input[builtins.int]] = None,
                  egress_rate_limit_kbps_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  excluded_networkconf_ids: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
@@ -413,6 +409,10 @@ class DevicePortOverridesArgs:
                  port_security_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  port_security_mac_address: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  portconf_id: Optional[pulumi.Input[builtins.str]] = None,
+                 priority_queue1_level: Optional[pulumi.Input[builtins.int]] = None,
+                 priority_queue2_level: Optional[pulumi.Input[builtins.int]] = None,
+                 priority_queue3_level: Optional[pulumi.Input[builtins.int]] = None,
+                 priority_queue4_level: Optional[pulumi.Input[builtins.int]] = None,
                  qos_profile: Optional[pulumi.Input['DeviceQOSProfileArgs']] = None,
                  setting_preference: Optional[pulumi.Input[builtins.str]] = None,
                  speed: Optional[pulumi.Input[builtins.int]] = None,
@@ -429,22 +429,14 @@ class DevicePortOverridesArgs:
                  stp_port_mode: Optional[pulumi.Input[builtins.bool]] = None,
                  tagged_vlan_mgmt: Optional[pulumi.Input[builtins.str]] = None,
                  voice_networkconf_id: Optional[pulumi.Input[builtins.str]] = None):
-        if _dot1x_ctrl is not None:
-            pulumi.set(__self__, "_dot1x_ctrl", _dot1x_ctrl)
-        if _dot1x_idle_timeout is not None:
-            pulumi.set(__self__, "_dot1x_idle_timeout", _dot1x_idle_timeout)
-        if _priority_queue1_level is not None:
-            pulumi.set(__self__, "_priority_queue1_level", _priority_queue1_level)
-        if _priority_queue2_level is not None:
-            pulumi.set(__self__, "_priority_queue2_level", _priority_queue2_level)
-        if _priority_queue3_level is not None:
-            pulumi.set(__self__, "_priority_queue3_level", _priority_queue3_level)
-        if _priority_queue4_level is not None:
-            pulumi.set(__self__, "_priority_queue4_level", _priority_queue4_level)
         if aggregate_num_ports is not None:
             pulumi.set(__self__, "aggregate_num_ports", aggregate_num_ports)
         if autoneg is not None:
             pulumi.set(__self__, "autoneg", autoneg)
+        if dot1x_ctrl is not None:
+            pulumi.set(__self__, "dot1x_ctrl", dot1x_ctrl)
+        if dot1x_idle_timeout is not None:
+            pulumi.set(__self__, "dot1x_idle_timeout", dot1x_idle_timeout)
         if egress_rate_limit_kbps is not None:
             pulumi.set(__self__, "egress_rate_limit_kbps", egress_rate_limit_kbps)
         if egress_rate_limit_kbps_enabled is not None:
@@ -485,6 +477,14 @@ class DevicePortOverridesArgs:
             pulumi.set(__self__, "port_security_mac_address", port_security_mac_address)
         if portconf_id is not None:
             pulumi.set(__self__, "portconf_id", portconf_id)
+        if priority_queue1_level is not None:
+            pulumi.set(__self__, "priority_queue1_level", priority_queue1_level)
+        if priority_queue2_level is not None:
+            pulumi.set(__self__, "priority_queue2_level", priority_queue2_level)
+        if priority_queue3_level is not None:
+            pulumi.set(__self__, "priority_queue3_level", priority_queue3_level)
+        if priority_queue4_level is not None:
+            pulumi.set(__self__, "priority_queue4_level", priority_queue4_level)
         if qos_profile is not None:
             pulumi.set(__self__, "qos_profile", qos_profile)
         if setting_preference is not None:
@@ -519,60 +519,6 @@ class DevicePortOverridesArgs:
             pulumi.set(__self__, "voice_networkconf_id", voice_networkconf_id)
 
     @property
-    @pulumi.getter(name="_dot1xCtrl")
-    def _dot1x_ctrl(self) -> Optional[pulumi.Input[builtins.str]]:
-        return pulumi.get(self, "_dot1x_ctrl")
-
-    @_dot1x_ctrl.setter
-    def _dot1x_ctrl(self, value: Optional[pulumi.Input[builtins.str]]):
-        pulumi.set(self, "_dot1x_ctrl", value)
-
-    @property
-    @pulumi.getter(name="_dot1xIdleTimeout")
-    def _dot1x_idle_timeout(self) -> Optional[pulumi.Input[builtins.int]]:
-        return pulumi.get(self, "_dot1x_idle_timeout")
-
-    @_dot1x_idle_timeout.setter
-    def _dot1x_idle_timeout(self, value: Optional[pulumi.Input[builtins.int]]):
-        pulumi.set(self, "_dot1x_idle_timeout", value)
-
-    @property
-    @pulumi.getter(name="_priorityQueue1Level")
-    def _priority_queue1_level(self) -> Optional[pulumi.Input[builtins.int]]:
-        return pulumi.get(self, "_priority_queue1_level")
-
-    @_priority_queue1_level.setter
-    def _priority_queue1_level(self, value: Optional[pulumi.Input[builtins.int]]):
-        pulumi.set(self, "_priority_queue1_level", value)
-
-    @property
-    @pulumi.getter(name="_priorityQueue2Level")
-    def _priority_queue2_level(self) -> Optional[pulumi.Input[builtins.int]]:
-        return pulumi.get(self, "_priority_queue2_level")
-
-    @_priority_queue2_level.setter
-    def _priority_queue2_level(self, value: Optional[pulumi.Input[builtins.int]]):
-        pulumi.set(self, "_priority_queue2_level", value)
-
-    @property
-    @pulumi.getter(name="_priorityQueue3Level")
-    def _priority_queue3_level(self) -> Optional[pulumi.Input[builtins.int]]:
-        return pulumi.get(self, "_priority_queue3_level")
-
-    @_priority_queue3_level.setter
-    def _priority_queue3_level(self, value: Optional[pulumi.Input[builtins.int]]):
-        pulumi.set(self, "_priority_queue3_level", value)
-
-    @property
-    @pulumi.getter(name="_priorityQueue4Level")
-    def _priority_queue4_level(self) -> Optional[pulumi.Input[builtins.int]]:
-        return pulumi.get(self, "_priority_queue4_level")
-
-    @_priority_queue4_level.setter
-    def _priority_queue4_level(self, value: Optional[pulumi.Input[builtins.int]]):
-        pulumi.set(self, "_priority_queue4_level", value)
-
-    @property
     @pulumi.getter(name="aggregateNumPorts")
     def aggregate_num_ports(self) -> Optional[pulumi.Input[builtins.int]]:
         return pulumi.get(self, "aggregate_num_ports")
@@ -589,6 +535,24 @@ class DevicePortOverridesArgs:
     @autoneg.setter
     def autoneg(self, value: Optional[pulumi.Input[builtins.bool]]):
         pulumi.set(self, "autoneg", value)
+
+    @property
+    @pulumi.getter(name="dot1xCtrl")
+    def dot1x_ctrl(self) -> Optional[pulumi.Input[builtins.str]]:
+        return pulumi.get(self, "dot1x_ctrl")
+
+    @dot1x_ctrl.setter
+    def dot1x_ctrl(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "dot1x_ctrl", value)
+
+    @property
+    @pulumi.getter(name="dot1xIdleTimeout")
+    def dot1x_idle_timeout(self) -> Optional[pulumi.Input[builtins.int]]:
+        return pulumi.get(self, "dot1x_idle_timeout")
+
+    @dot1x_idle_timeout.setter
+    def dot1x_idle_timeout(self, value: Optional[pulumi.Input[builtins.int]]):
+        pulumi.set(self, "dot1x_idle_timeout", value)
 
     @property
     @pulumi.getter(name="egressRateLimitKbps")
@@ -769,6 +733,42 @@ class DevicePortOverridesArgs:
     @portconf_id.setter
     def portconf_id(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "portconf_id", value)
+
+    @property
+    @pulumi.getter(name="priorityQueue1Level")
+    def priority_queue1_level(self) -> Optional[pulumi.Input[builtins.int]]:
+        return pulumi.get(self, "priority_queue1_level")
+
+    @priority_queue1_level.setter
+    def priority_queue1_level(self, value: Optional[pulumi.Input[builtins.int]]):
+        pulumi.set(self, "priority_queue1_level", value)
+
+    @property
+    @pulumi.getter(name="priorityQueue2Level")
+    def priority_queue2_level(self) -> Optional[pulumi.Input[builtins.int]]:
+        return pulumi.get(self, "priority_queue2_level")
+
+    @priority_queue2_level.setter
+    def priority_queue2_level(self, value: Optional[pulumi.Input[builtins.int]]):
+        pulumi.set(self, "priority_queue2_level", value)
+
+    @property
+    @pulumi.getter(name="priorityQueue3Level")
+    def priority_queue3_level(self) -> Optional[pulumi.Input[builtins.int]]:
+        return pulumi.get(self, "priority_queue3_level")
+
+    @priority_queue3_level.setter
+    def priority_queue3_level(self, value: Optional[pulumi.Input[builtins.int]]):
+        pulumi.set(self, "priority_queue3_level", value)
+
+    @property
+    @pulumi.getter(name="priorityQueue4Level")
+    def priority_queue4_level(self) -> Optional[pulumi.Input[builtins.int]]:
+        return pulumi.get(self, "priority_queue4_level")
+
+    @priority_queue4_level.setter
+    def priority_queue4_level(self, value: Optional[pulumi.Input[builtins.int]]):
+        pulumi.set(self, "priority_queue4_level", value)
 
     @property
     @pulumi.getter(name="qosProfile")

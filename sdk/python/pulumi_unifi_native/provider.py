@@ -21,26 +21,32 @@ __all__ = ['ProviderArgs', 'Provider']
 class ProviderArgs:
     def __init__(__self__, *,
                  allow_insecure: Optional[pulumi.Input[builtins.bool]] = None,
+                 api_host: Optional[pulumi.Input[builtins.str]] = None,
                  api_key: Optional[pulumi.Input[builtins.str]] = None,
-                 api_url: Optional[pulumi.Input[builtins.str]] = None):
+                 site_id: Optional[pulumi.Input[builtins.str]] = None):
         """
         The set of arguments for constructing a Provider resource.
         :param pulumi.Input[builtins.bool] allow_insecure: Implicitly trust the Unifi API server's TLS certificate. This is useful for testing, but should not be used in production.
+        :param pulumi.Input[builtins.str] api_host: The URL Host name or IP Address for the Unifi API, e.g. 10.1.1.1.
         :param pulumi.Input[builtins.str] api_key: The Unifi API key.
-        :param pulumi.Input[builtins.str] api_url: The base URL for the Unifi API, e.g. https://10.1.1.1.
+        :param pulumi.Input[builtins.str] site_id: The Human readable Stack identifier (e.g. 'notDefault') for the Unifi site to manage. Defaults to 'default'
         """
         if allow_insecure is None:
             allow_insecure = _utilities.get_env_bool('UNIFI_ALLOW_INSECURE')
         if allow_insecure is not None:
             pulumi.set(__self__, "allow_insecure", allow_insecure)
+        if api_host is None:
+            api_host = _utilities.get_env('UNIFI_API_HOST')
+        if api_host is not None:
+            pulumi.set(__self__, "api_host", api_host)
         if api_key is None:
             api_key = _utilities.get_env('UNIFI_APIKEY')
         if api_key is not None:
             pulumi.set(__self__, "api_key", api_key)
-        if api_url is None:
-            api_url = _utilities.get_env('UNIFI_APIURL')
-        if api_url is not None:
-            pulumi.set(__self__, "api_url", api_url)
+        if site_id is None:
+            site_id = (_utilities.get_env('UNIFI_SITE') or 'default')
+        if site_id is not None:
+            pulumi.set(__self__, "site_id", site_id)
 
     @property
     @pulumi.getter(name="allowInsecure")
@@ -55,6 +61,18 @@ class ProviderArgs:
         pulumi.set(self, "allow_insecure", value)
 
     @property
+    @pulumi.getter(name="apiHost")
+    def api_host(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The URL Host name or IP Address for the Unifi API, e.g. 10.1.1.1.
+        """
+        return pulumi.get(self, "api_host")
+
+    @api_host.setter
+    def api_host(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "api_host", value)
+
+    @property
     @pulumi.getter(name="apiKey")
     def api_key(self) -> Optional[pulumi.Input[builtins.str]]:
         """
@@ -67,16 +85,16 @@ class ProviderArgs:
         pulumi.set(self, "api_key", value)
 
     @property
-    @pulumi.getter(name="apiUrl")
-    def api_url(self) -> Optional[pulumi.Input[builtins.str]]:
+    @pulumi.getter(name="siteId")
+    def site_id(self) -> Optional[pulumi.Input[builtins.str]]:
         """
-        The base URL for the Unifi API, e.g. https://10.1.1.1.
+        The Human readable Stack identifier (e.g. 'notDefault') for the Unifi site to manage. Defaults to 'default'
         """
-        return pulumi.get(self, "api_url")
+        return pulumi.get(self, "site_id")
 
-    @api_url.setter
-    def api_url(self, value: Optional[pulumi.Input[builtins.str]]):
-        pulumi.set(self, "api_url", value)
+    @site_id.setter
+    def site_id(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "site_id", value)
 
 
 @pulumi.type_token("pulumi:providers:unifi-native")
@@ -86,8 +104,9 @@ class Provider(pulumi.ProviderResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  allow_insecure: Optional[pulumi.Input[builtins.bool]] = None,
+                 api_host: Optional[pulumi.Input[builtins.str]] = None,
                  api_key: Optional[pulumi.Input[builtins.str]] = None,
-                 api_url: Optional[pulumi.Input[builtins.str]] = None,
+                 site_id: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
         """
         The provider type for the Unifi package.
@@ -95,8 +114,9 @@ class Provider(pulumi.ProviderResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[builtins.bool] allow_insecure: Implicitly trust the Unifi API server's TLS certificate. This is useful for testing, but should not be used in production.
+        :param pulumi.Input[builtins.str] api_host: The URL Host name or IP Address for the Unifi API, e.g. 10.1.1.1.
         :param pulumi.Input[builtins.str] api_key: The Unifi API key.
-        :param pulumi.Input[builtins.str] api_url: The base URL for the Unifi API, e.g. https://10.1.1.1.
+        :param pulumi.Input[builtins.str] site_id: The Human readable Stack identifier (e.g. 'notDefault') for the Unifi site to manage. Defaults to 'default'
         """
         ...
     @overload
@@ -123,8 +143,9 @@ class Provider(pulumi.ProviderResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  allow_insecure: Optional[pulumi.Input[builtins.bool]] = None,
+                 api_host: Optional[pulumi.Input[builtins.str]] = None,
                  api_key: Optional[pulumi.Input[builtins.str]] = None,
-                 api_url: Optional[pulumi.Input[builtins.str]] = None,
+                 site_id: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -137,12 +158,15 @@ class Provider(pulumi.ProviderResource):
             if allow_insecure is None:
                 allow_insecure = _utilities.get_env_bool('UNIFI_ALLOW_INSECURE')
             __props__.__dict__["allow_insecure"] = pulumi.Output.from_input(allow_insecure).apply(pulumi.runtime.to_json) if allow_insecure is not None else None
+            if api_host is None:
+                api_host = _utilities.get_env('UNIFI_API_HOST')
+            __props__.__dict__["api_host"] = api_host
             if api_key is None:
                 api_key = _utilities.get_env('UNIFI_APIKEY')
             __props__.__dict__["api_key"] = None if api_key is None else pulumi.Output.secret(api_key)
-            if api_url is None:
-                api_url = _utilities.get_env('UNIFI_APIURL')
-            __props__.__dict__["api_url"] = api_url
+            if site_id is None:
+                site_id = (_utilities.get_env('UNIFI_SITE') or 'default')
+            __props__.__dict__["site_id"] = site_id
         super(Provider, __self__).__init__(
             'unifi-native',
             resource_name,

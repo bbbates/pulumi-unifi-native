@@ -50,39 +50,6 @@ class Meta(dict):
 class Network(dict):
     def __init__(__self__, *,
                  id: Optional[builtins.str] = None,
-                 _dhcpdv6_allow_slaac: Optional[builtins.bool] = None,
-                 _dhcpdv6_dns1: Optional[builtins.str] = None,
-                 _dhcpdv6_dns2: Optional[builtins.str] = None,
-                 _dhcpdv6_dns3: Optional[builtins.str] = None,
-                 _dhcpdv6_dns4: Optional[builtins.str] = None,
-                 _dhcpdv6_dns_auto: Optional[builtins.bool] = None,
-                 _dhcpdv6_enabled: Optional[builtins.bool] = None,
-                 _dhcpdv6_leasetime: Optional[builtins.int] = None,
-                 _dhcpdv6_start: Optional[builtins.str] = None,
-                 _dhcpdv6_stop: Optional[builtins.str] = None,
-                 _ipsec_separate_ikev2_networks: Optional[builtins.bool] = None,
-                 _ipv6_client_address_assignment: Optional[builtins.str] = None,
-                 _ipv6_interface_type: Optional[builtins.str] = None,
-                 _ipv6_pd_auto_prefixid_enabled: Optional[builtins.bool] = None,
-                 _ipv6_pd_interface: Optional[builtins.str] = None,
-                 _ipv6_pd_prefixid: Optional[builtins.str] = None,
-                 _ipv6_pd_start: Optional[builtins.str] = None,
-                 _ipv6_pd_stop: Optional[builtins.str] = None,
-                 _ipv6_ra_enabled: Optional[builtins.bool] = None,
-                 _ipv6_ra_preferred_lifetime: Optional[builtins.int] = None,
-                 _ipv6_ra_priority: Optional[builtins.str] = None,
-                 _ipv6_ra_valid_lifetime: Optional[builtins.int] = None,
-                 _ipv6_setting_preference: Optional[builtins.str] = None,
-                 _ipv6_single_network_interface: Optional[builtins.str] = None,
-                 _ipv6_subnet: Optional[builtins.str] = None,
-                 _ipv6_wan_delegation_type: Optional[builtins.str] = None,
-                 _l2tp_allow_weak_ciphers: Optional[builtins.bool] = None,
-                 _l2tp_interface: Optional[builtins.str] = None,
-                 _l2tp_local_wan_ip: Optional[builtins.str] = None,
-                 _wan_dhcpv6_pd_size: Optional[builtins.int] = None,
-                 _wan_ipv6_dns1: Optional[builtins.str] = None,
-                 _wan_ipv6_dns2: Optional[builtins.str] = None,
-                 _wan_ipv6_dns_preference: Optional[builtins.str] = None,
                  attr_hidden: Optional[builtins.bool] = None,
                  attr_hidden_id: Optional[builtins.str] = None,
                  attr_no_delete: Optional[builtins.bool] = None,
@@ -121,6 +88,16 @@ class Network(dict):
                  dhcpd_wins2: Optional[builtins.str] = None,
                  dhcpd_wins_enabled: Optional[builtins.bool] = None,
                  dhcpd_wpad_url: Optional[builtins.str] = None,
+                 dhcpdv6_allow_slaac: Optional[builtins.bool] = None,
+                 dhcpdv6_dns1: Optional[builtins.str] = None,
+                 dhcpdv6_dns2: Optional[builtins.str] = None,
+                 dhcpdv6_dns3: Optional[builtins.str] = None,
+                 dhcpdv6_dns4: Optional[builtins.str] = None,
+                 dhcpdv6_dns_auto: Optional[builtins.bool] = None,
+                 dhcpdv6_enabled: Optional[builtins.bool] = None,
+                 dhcpdv6_leasetime: Optional[builtins.int] = None,
+                 dhcpdv6_start: Optional[builtins.str] = None,
+                 dhcpdv6_stop: Optional[builtins.str] = None,
                  dhcpguard_enabled: Optional[builtins.bool] = None,
                  domain_name: Optional[builtins.str] = None,
                  dpi_enabled: Optional[builtins.bool] = None,
@@ -167,9 +144,28 @@ class Network(dict):
                  ipsec_profile: Optional[builtins.str] = None,
                  ipsec_remote_identifier: Optional[builtins.str] = None,
                  ipsec_remote_identifier_enabled: Optional[builtins.bool] = None,
+                 ipsec_separate_ikev2_networks: Optional[builtins.bool] = None,
                  ipsec_tunnel_ip: Optional[builtins.str] = None,
                  ipsec_tunnel_ip_enabled: Optional[builtins.bool] = None,
+                 ipv6_client_address_assignment: Optional[builtins.str] = None,
+                 ipv6_interface_type: Optional[builtins.str] = None,
+                 ipv6_pd_auto_prefixid_enabled: Optional[builtins.bool] = None,
+                 ipv6_pd_interface: Optional[builtins.str] = None,
+                 ipv6_pd_prefixid: Optional[builtins.str] = None,
+                 ipv6_pd_start: Optional[builtins.str] = None,
+                 ipv6_pd_stop: Optional[builtins.str] = None,
+                 ipv6_ra_enabled: Optional[builtins.bool] = None,
+                 ipv6_ra_preferred_lifetime: Optional[builtins.int] = None,
+                 ipv6_ra_priority: Optional[builtins.str] = None,
+                 ipv6_ra_valid_lifetime: Optional[builtins.int] = None,
+                 ipv6_setting_preference: Optional[builtins.str] = None,
+                 ipv6_single_network_interface: Optional[builtins.str] = None,
+                 ipv6_subnet: Optional[builtins.str] = None,
+                 ipv6_wan_delegation_type: Optional[builtins.str] = None,
                  is_nat: Optional[builtins.bool] = None,
+                 l2tp_allow_weak_ciphers: Optional[builtins.bool] = None,
+                 l2tp_interface: Optional[builtins.str] = None,
+                 l2tp_local_wan_ip: Optional[builtins.str] = None,
                  local_port: Optional[builtins.int] = None,
                  lte_lan_enabled: Optional[builtins.bool] = None,
                  mac_override: Optional[builtins.str] = None,
@@ -236,6 +232,7 @@ class Network(dict):
                  vrrp_vrid: Optional[builtins.int] = None,
                  wan_dhcp_cos: Optional[builtins.int] = None,
                  wan_dhcp_options: Optional[Sequence['outputs.NetworkWANDHCPOptions']] = None,
+                 wan_dhcpv6_pd_size: Optional[builtins.int] = None,
                  wan_dns1: Optional[builtins.str] = None,
                  wan_dns2: Optional[builtins.str] = None,
                  wan_dns3: Optional[builtins.str] = None,
@@ -249,6 +246,9 @@ class Network(dict):
                  wan_ip: Optional[builtins.str] = None,
                  wan_ip_aliases: Optional[Sequence[builtins.str]] = None,
                  wan_ipv6: Optional[builtins.str] = None,
+                 wan_ipv6_dns1: Optional[builtins.str] = None,
+                 wan_ipv6_dns2: Optional[builtins.str] = None,
+                 wan_ipv6_dns_preference: Optional[builtins.str] = None,
                  wan_load_balance_type: Optional[builtins.str] = None,
                  wan_load_balance_weight: Optional[builtins.int] = None,
                  wan_netmask: Optional[builtins.str] = None,
@@ -292,72 +292,6 @@ class Network(dict):
                  x_wireguard_private_key: Optional[builtins.str] = None):
         if id is not None:
             pulumi.set(__self__, "id", id)
-        if _dhcpdv6_allow_slaac is not None:
-            pulumi.set(__self__, "_dhcpdv6_allow_slaac", _dhcpdv6_allow_slaac)
-        if _dhcpdv6_dns1 is not None:
-            pulumi.set(__self__, "_dhcpdv6_dns1", _dhcpdv6_dns1)
-        if _dhcpdv6_dns2 is not None:
-            pulumi.set(__self__, "_dhcpdv6_dns2", _dhcpdv6_dns2)
-        if _dhcpdv6_dns3 is not None:
-            pulumi.set(__self__, "_dhcpdv6_dns3", _dhcpdv6_dns3)
-        if _dhcpdv6_dns4 is not None:
-            pulumi.set(__self__, "_dhcpdv6_dns4", _dhcpdv6_dns4)
-        if _dhcpdv6_dns_auto is not None:
-            pulumi.set(__self__, "_dhcpdv6_dns_auto", _dhcpdv6_dns_auto)
-        if _dhcpdv6_enabled is not None:
-            pulumi.set(__self__, "_dhcpdv6_enabled", _dhcpdv6_enabled)
-        if _dhcpdv6_leasetime is not None:
-            pulumi.set(__self__, "_dhcpdv6_leasetime", _dhcpdv6_leasetime)
-        if _dhcpdv6_start is not None:
-            pulumi.set(__self__, "_dhcpdv6_start", _dhcpdv6_start)
-        if _dhcpdv6_stop is not None:
-            pulumi.set(__self__, "_dhcpdv6_stop", _dhcpdv6_stop)
-        if _ipsec_separate_ikev2_networks is not None:
-            pulumi.set(__self__, "_ipsec_separate_ikev2_networks", _ipsec_separate_ikev2_networks)
-        if _ipv6_client_address_assignment is not None:
-            pulumi.set(__self__, "_ipv6_client_address_assignment", _ipv6_client_address_assignment)
-        if _ipv6_interface_type is not None:
-            pulumi.set(__self__, "_ipv6_interface_type", _ipv6_interface_type)
-        if _ipv6_pd_auto_prefixid_enabled is not None:
-            pulumi.set(__self__, "_ipv6_pd_auto_prefixid_enabled", _ipv6_pd_auto_prefixid_enabled)
-        if _ipv6_pd_interface is not None:
-            pulumi.set(__self__, "_ipv6_pd_interface", _ipv6_pd_interface)
-        if _ipv6_pd_prefixid is not None:
-            pulumi.set(__self__, "_ipv6_pd_prefixid", _ipv6_pd_prefixid)
-        if _ipv6_pd_start is not None:
-            pulumi.set(__self__, "_ipv6_pd_start", _ipv6_pd_start)
-        if _ipv6_pd_stop is not None:
-            pulumi.set(__self__, "_ipv6_pd_stop", _ipv6_pd_stop)
-        if _ipv6_ra_enabled is not None:
-            pulumi.set(__self__, "_ipv6_ra_enabled", _ipv6_ra_enabled)
-        if _ipv6_ra_preferred_lifetime is not None:
-            pulumi.set(__self__, "_ipv6_ra_preferred_lifetime", _ipv6_ra_preferred_lifetime)
-        if _ipv6_ra_priority is not None:
-            pulumi.set(__self__, "_ipv6_ra_priority", _ipv6_ra_priority)
-        if _ipv6_ra_valid_lifetime is not None:
-            pulumi.set(__self__, "_ipv6_ra_valid_lifetime", _ipv6_ra_valid_lifetime)
-        if _ipv6_setting_preference is not None:
-            pulumi.set(__self__, "_ipv6_setting_preference", _ipv6_setting_preference)
-        if _ipv6_single_network_interface is not None:
-            pulumi.set(__self__, "_ipv6_single_network_interface", _ipv6_single_network_interface)
-        if _ipv6_subnet is not None:
-            pulumi.set(__self__, "_ipv6_subnet", _ipv6_subnet)
-        if _ipv6_wan_delegation_type is not None:
-            pulumi.set(__self__, "_ipv6_wan_delegation_type", _ipv6_wan_delegation_type)
-        if _l2tp_allow_weak_ciphers is not None:
-            pulumi.set(__self__, "_l2tp_allow_weak_ciphers", _l2tp_allow_weak_ciphers)
-        if _l2tp_interface is not None:
-            pulumi.set(__self__, "_l2tp_interface", _l2tp_interface)
-        if _l2tp_local_wan_ip is not None:
-            pulumi.set(__self__, "_l2tp_local_wan_ip", _l2tp_local_wan_ip)
-        if _wan_dhcpv6_pd_size is not None:
-            pulumi.set(__self__, "_wan_dhcpv6_pd_size", _wan_dhcpv6_pd_size)
-        if _wan_ipv6_dns1 is not None:
-            pulumi.set(__self__, "_wan_ipv6_dns1", _wan_ipv6_dns1)
-        if _wan_ipv6_dns2 is not None:
-            pulumi.set(__self__, "_wan_ipv6_dns2", _wan_ipv6_dns2)
-        if _wan_ipv6_dns_preference is not None:
-            pulumi.set(__self__, "_wan_ipv6_dns_preference", _wan_ipv6_dns_preference)
         if attr_hidden is not None:
             pulumi.set(__self__, "attr_hidden", attr_hidden)
         if attr_hidden_id is not None:
@@ -434,6 +368,26 @@ class Network(dict):
             pulumi.set(__self__, "dhcpd_wins_enabled", dhcpd_wins_enabled)
         if dhcpd_wpad_url is not None:
             pulumi.set(__self__, "dhcpd_wpad_url", dhcpd_wpad_url)
+        if dhcpdv6_allow_slaac is not None:
+            pulumi.set(__self__, "dhcpdv6_allow_slaac", dhcpdv6_allow_slaac)
+        if dhcpdv6_dns1 is not None:
+            pulumi.set(__self__, "dhcpdv6_dns1", dhcpdv6_dns1)
+        if dhcpdv6_dns2 is not None:
+            pulumi.set(__self__, "dhcpdv6_dns2", dhcpdv6_dns2)
+        if dhcpdv6_dns3 is not None:
+            pulumi.set(__self__, "dhcpdv6_dns3", dhcpdv6_dns3)
+        if dhcpdv6_dns4 is not None:
+            pulumi.set(__self__, "dhcpdv6_dns4", dhcpdv6_dns4)
+        if dhcpdv6_dns_auto is not None:
+            pulumi.set(__self__, "dhcpdv6_dns_auto", dhcpdv6_dns_auto)
+        if dhcpdv6_enabled is not None:
+            pulumi.set(__self__, "dhcpdv6_enabled", dhcpdv6_enabled)
+        if dhcpdv6_leasetime is not None:
+            pulumi.set(__self__, "dhcpdv6_leasetime", dhcpdv6_leasetime)
+        if dhcpdv6_start is not None:
+            pulumi.set(__self__, "dhcpdv6_start", dhcpdv6_start)
+        if dhcpdv6_stop is not None:
+            pulumi.set(__self__, "dhcpdv6_stop", dhcpdv6_stop)
         if dhcpguard_enabled is not None:
             pulumi.set(__self__, "dhcpguard_enabled", dhcpguard_enabled)
         if domain_name is not None:
@@ -526,12 +480,50 @@ class Network(dict):
             pulumi.set(__self__, "ipsec_remote_identifier", ipsec_remote_identifier)
         if ipsec_remote_identifier_enabled is not None:
             pulumi.set(__self__, "ipsec_remote_identifier_enabled", ipsec_remote_identifier_enabled)
+        if ipsec_separate_ikev2_networks is not None:
+            pulumi.set(__self__, "ipsec_separate_ikev2_networks", ipsec_separate_ikev2_networks)
         if ipsec_tunnel_ip is not None:
             pulumi.set(__self__, "ipsec_tunnel_ip", ipsec_tunnel_ip)
         if ipsec_tunnel_ip_enabled is not None:
             pulumi.set(__self__, "ipsec_tunnel_ip_enabled", ipsec_tunnel_ip_enabled)
+        if ipv6_client_address_assignment is not None:
+            pulumi.set(__self__, "ipv6_client_address_assignment", ipv6_client_address_assignment)
+        if ipv6_interface_type is not None:
+            pulumi.set(__self__, "ipv6_interface_type", ipv6_interface_type)
+        if ipv6_pd_auto_prefixid_enabled is not None:
+            pulumi.set(__self__, "ipv6_pd_auto_prefixid_enabled", ipv6_pd_auto_prefixid_enabled)
+        if ipv6_pd_interface is not None:
+            pulumi.set(__self__, "ipv6_pd_interface", ipv6_pd_interface)
+        if ipv6_pd_prefixid is not None:
+            pulumi.set(__self__, "ipv6_pd_prefixid", ipv6_pd_prefixid)
+        if ipv6_pd_start is not None:
+            pulumi.set(__self__, "ipv6_pd_start", ipv6_pd_start)
+        if ipv6_pd_stop is not None:
+            pulumi.set(__self__, "ipv6_pd_stop", ipv6_pd_stop)
+        if ipv6_ra_enabled is not None:
+            pulumi.set(__self__, "ipv6_ra_enabled", ipv6_ra_enabled)
+        if ipv6_ra_preferred_lifetime is not None:
+            pulumi.set(__self__, "ipv6_ra_preferred_lifetime", ipv6_ra_preferred_lifetime)
+        if ipv6_ra_priority is not None:
+            pulumi.set(__self__, "ipv6_ra_priority", ipv6_ra_priority)
+        if ipv6_ra_valid_lifetime is not None:
+            pulumi.set(__self__, "ipv6_ra_valid_lifetime", ipv6_ra_valid_lifetime)
+        if ipv6_setting_preference is not None:
+            pulumi.set(__self__, "ipv6_setting_preference", ipv6_setting_preference)
+        if ipv6_single_network_interface is not None:
+            pulumi.set(__self__, "ipv6_single_network_interface", ipv6_single_network_interface)
+        if ipv6_subnet is not None:
+            pulumi.set(__self__, "ipv6_subnet", ipv6_subnet)
+        if ipv6_wan_delegation_type is not None:
+            pulumi.set(__self__, "ipv6_wan_delegation_type", ipv6_wan_delegation_type)
         if is_nat is not None:
             pulumi.set(__self__, "is_nat", is_nat)
+        if l2tp_allow_weak_ciphers is not None:
+            pulumi.set(__self__, "l2tp_allow_weak_ciphers", l2tp_allow_weak_ciphers)
+        if l2tp_interface is not None:
+            pulumi.set(__self__, "l2tp_interface", l2tp_interface)
+        if l2tp_local_wan_ip is not None:
+            pulumi.set(__self__, "l2tp_local_wan_ip", l2tp_local_wan_ip)
         if local_port is not None:
             pulumi.set(__self__, "local_port", local_port)
         if lte_lan_enabled is not None:
@@ -664,6 +656,8 @@ class Network(dict):
             pulumi.set(__self__, "wan_dhcp_cos", wan_dhcp_cos)
         if wan_dhcp_options is not None:
             pulumi.set(__self__, "wan_dhcp_options", wan_dhcp_options)
+        if wan_dhcpv6_pd_size is not None:
+            pulumi.set(__self__, "wan_dhcpv6_pd_size", wan_dhcpv6_pd_size)
         if wan_dns1 is not None:
             pulumi.set(__self__, "wan_dns1", wan_dns1)
         if wan_dns2 is not None:
@@ -690,6 +684,12 @@ class Network(dict):
             pulumi.set(__self__, "wan_ip_aliases", wan_ip_aliases)
         if wan_ipv6 is not None:
             pulumi.set(__self__, "wan_ipv6", wan_ipv6)
+        if wan_ipv6_dns1 is not None:
+            pulumi.set(__self__, "wan_ipv6_dns1", wan_ipv6_dns1)
+        if wan_ipv6_dns2 is not None:
+            pulumi.set(__self__, "wan_ipv6_dns2", wan_ipv6_dns2)
+        if wan_ipv6_dns_preference is not None:
+            pulumi.set(__self__, "wan_ipv6_dns_preference", wan_ipv6_dns_preference)
         if wan_load_balance_type is not None:
             pulumi.set(__self__, "wan_load_balance_type", wan_load_balance_type)
         if wan_load_balance_weight is not None:
@@ -777,171 +777,6 @@ class Network(dict):
     @pulumi.getter(name="Id")
     def id(self) -> Optional[builtins.str]:
         return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter(name="_dhcpdv6AllowSlaac")
-    def _dhcpdv6_allow_slaac(self) -> Optional[builtins.bool]:
-        return pulumi.get(self, "_dhcpdv6_allow_slaac")
-
-    @property
-    @pulumi.getter(name="_dhcpdv6Dns1")
-    def _dhcpdv6_dns1(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_dhcpdv6_dns1")
-
-    @property
-    @pulumi.getter(name="_dhcpdv6Dns2")
-    def _dhcpdv6_dns2(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_dhcpdv6_dns2")
-
-    @property
-    @pulumi.getter(name="_dhcpdv6Dns3")
-    def _dhcpdv6_dns3(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_dhcpdv6_dns3")
-
-    @property
-    @pulumi.getter(name="_dhcpdv6Dns4")
-    def _dhcpdv6_dns4(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_dhcpdv6_dns4")
-
-    @property
-    @pulumi.getter(name="_dhcpdv6DnsAuto")
-    def _dhcpdv6_dns_auto(self) -> Optional[builtins.bool]:
-        return pulumi.get(self, "_dhcpdv6_dns_auto")
-
-    @property
-    @pulumi.getter(name="_dhcpdv6Enabled")
-    def _dhcpdv6_enabled(self) -> Optional[builtins.bool]:
-        return pulumi.get(self, "_dhcpdv6_enabled")
-
-    @property
-    @pulumi.getter(name="_dhcpdv6Leasetime")
-    def _dhcpdv6_leasetime(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "_dhcpdv6_leasetime")
-
-    @property
-    @pulumi.getter(name="_dhcpdv6Start")
-    def _dhcpdv6_start(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_dhcpdv6_start")
-
-    @property
-    @pulumi.getter(name="_dhcpdv6Stop")
-    def _dhcpdv6_stop(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_dhcpdv6_stop")
-
-    @property
-    @pulumi.getter(name="_ipsecSeparateIkev2Networks")
-    def _ipsec_separate_ikev2_networks(self) -> Optional[builtins.bool]:
-        return pulumi.get(self, "_ipsec_separate_ikev2_networks")
-
-    @property
-    @pulumi.getter(name="_ipv6ClientAddressAssignment")
-    def _ipv6_client_address_assignment(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_ipv6_client_address_assignment")
-
-    @property
-    @pulumi.getter(name="_ipv6InterfaceType")
-    def _ipv6_interface_type(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_ipv6_interface_type")
-
-    @property
-    @pulumi.getter(name="_ipv6PdAutoPrefixidEnabled")
-    def _ipv6_pd_auto_prefixid_enabled(self) -> Optional[builtins.bool]:
-        return pulumi.get(self, "_ipv6_pd_auto_prefixid_enabled")
-
-    @property
-    @pulumi.getter(name="_ipv6PdInterface")
-    def _ipv6_pd_interface(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_ipv6_pd_interface")
-
-    @property
-    @pulumi.getter(name="_ipv6PdPrefixid")
-    def _ipv6_pd_prefixid(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_ipv6_pd_prefixid")
-
-    @property
-    @pulumi.getter(name="_ipv6PdStart")
-    def _ipv6_pd_start(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_ipv6_pd_start")
-
-    @property
-    @pulumi.getter(name="_ipv6PdStop")
-    def _ipv6_pd_stop(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_ipv6_pd_stop")
-
-    @property
-    @pulumi.getter(name="_ipv6RaEnabled")
-    def _ipv6_ra_enabled(self) -> Optional[builtins.bool]:
-        return pulumi.get(self, "_ipv6_ra_enabled")
-
-    @property
-    @pulumi.getter(name="_ipv6RaPreferredLifetime")
-    def _ipv6_ra_preferred_lifetime(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "_ipv6_ra_preferred_lifetime")
-
-    @property
-    @pulumi.getter(name="_ipv6RaPriority")
-    def _ipv6_ra_priority(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_ipv6_ra_priority")
-
-    @property
-    @pulumi.getter(name="_ipv6RaValidLifetime")
-    def _ipv6_ra_valid_lifetime(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "_ipv6_ra_valid_lifetime")
-
-    @property
-    @pulumi.getter(name="_ipv6SettingPreference")
-    def _ipv6_setting_preference(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_ipv6_setting_preference")
-
-    @property
-    @pulumi.getter(name="_ipv6SingleNetworkInterface")
-    def _ipv6_single_network_interface(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_ipv6_single_network_interface")
-
-    @property
-    @pulumi.getter(name="_ipv6Subnet")
-    def _ipv6_subnet(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_ipv6_subnet")
-
-    @property
-    @pulumi.getter(name="_ipv6WanDelegationType")
-    def _ipv6_wan_delegation_type(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_ipv6_wan_delegation_type")
-
-    @property
-    @pulumi.getter(name="_l2tpAllowWeakCiphers")
-    def _l2tp_allow_weak_ciphers(self) -> Optional[builtins.bool]:
-        return pulumi.get(self, "_l2tp_allow_weak_ciphers")
-
-    @property
-    @pulumi.getter(name="_l2tpInterface")
-    def _l2tp_interface(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_l2tp_interface")
-
-    @property
-    @pulumi.getter(name="_l2tpLocalWanIp")
-    def _l2tp_local_wan_ip(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_l2tp_local_wan_ip")
-
-    @property
-    @pulumi.getter(name="_wanDhcpv6PdSize")
-    def _wan_dhcpv6_pd_size(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "_wan_dhcpv6_pd_size")
-
-    @property
-    @pulumi.getter(name="_wanIpv6Dns1")
-    def _wan_ipv6_dns1(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_wan_ipv6_dns1")
-
-    @property
-    @pulumi.getter(name="_wanIpv6Dns2")
-    def _wan_ipv6_dns2(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_wan_ipv6_dns2")
-
-    @property
-    @pulumi.getter(name="_wanIpv6DnsPreference")
-    def _wan_ipv6_dns_preference(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "_wan_ipv6_dns_preference")
 
     @property
     @pulumi.getter(name="attrHidden")
@@ -1132,6 +967,56 @@ class Network(dict):
     @pulumi.getter(name="dhcpdWpadUrl")
     def dhcpd_wpad_url(self) -> Optional[builtins.str]:
         return pulumi.get(self, "dhcpd_wpad_url")
+
+    @property
+    @pulumi.getter(name="dhcpdv6AllowSlaac")
+    def dhcpdv6_allow_slaac(self) -> Optional[builtins.bool]:
+        return pulumi.get(self, "dhcpdv6_allow_slaac")
+
+    @property
+    @pulumi.getter(name="dhcpdv6Dns1")
+    def dhcpdv6_dns1(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "dhcpdv6_dns1")
+
+    @property
+    @pulumi.getter(name="dhcpdv6Dns2")
+    def dhcpdv6_dns2(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "dhcpdv6_dns2")
+
+    @property
+    @pulumi.getter(name="dhcpdv6Dns3")
+    def dhcpdv6_dns3(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "dhcpdv6_dns3")
+
+    @property
+    @pulumi.getter(name="dhcpdv6Dns4")
+    def dhcpdv6_dns4(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "dhcpdv6_dns4")
+
+    @property
+    @pulumi.getter(name="dhcpdv6DnsAuto")
+    def dhcpdv6_dns_auto(self) -> Optional[builtins.bool]:
+        return pulumi.get(self, "dhcpdv6_dns_auto")
+
+    @property
+    @pulumi.getter(name="dhcpdv6Enabled")
+    def dhcpdv6_enabled(self) -> Optional[builtins.bool]:
+        return pulumi.get(self, "dhcpdv6_enabled")
+
+    @property
+    @pulumi.getter(name="dhcpdv6Leasetime")
+    def dhcpdv6_leasetime(self) -> Optional[builtins.int]:
+        return pulumi.get(self, "dhcpdv6_leasetime")
+
+    @property
+    @pulumi.getter(name="dhcpdv6Start")
+    def dhcpdv6_start(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "dhcpdv6_start")
+
+    @property
+    @pulumi.getter(name="dhcpdv6Stop")
+    def dhcpdv6_stop(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "dhcpdv6_stop")
 
     @property
     @pulumi.getter(name="dhcpguardEnabled")
@@ -1364,6 +1249,11 @@ class Network(dict):
         return pulumi.get(self, "ipsec_remote_identifier_enabled")
 
     @property
+    @pulumi.getter(name="ipsecSeparateIkev2Networks")
+    def ipsec_separate_ikev2_networks(self) -> Optional[builtins.bool]:
+        return pulumi.get(self, "ipsec_separate_ikev2_networks")
+
+    @property
     @pulumi.getter(name="ipsecTunnelIp")
     def ipsec_tunnel_ip(self) -> Optional[builtins.str]:
         return pulumi.get(self, "ipsec_tunnel_ip")
@@ -1374,9 +1264,99 @@ class Network(dict):
         return pulumi.get(self, "ipsec_tunnel_ip_enabled")
 
     @property
+    @pulumi.getter(name="ipv6ClientAddressAssignment")
+    def ipv6_client_address_assignment(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "ipv6_client_address_assignment")
+
+    @property
+    @pulumi.getter(name="ipv6InterfaceType")
+    def ipv6_interface_type(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "ipv6_interface_type")
+
+    @property
+    @pulumi.getter(name="ipv6PdAutoPrefixidEnabled")
+    def ipv6_pd_auto_prefixid_enabled(self) -> Optional[builtins.bool]:
+        return pulumi.get(self, "ipv6_pd_auto_prefixid_enabled")
+
+    @property
+    @pulumi.getter(name="ipv6PdInterface")
+    def ipv6_pd_interface(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "ipv6_pd_interface")
+
+    @property
+    @pulumi.getter(name="ipv6PdPrefixid")
+    def ipv6_pd_prefixid(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "ipv6_pd_prefixid")
+
+    @property
+    @pulumi.getter(name="ipv6PdStart")
+    def ipv6_pd_start(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "ipv6_pd_start")
+
+    @property
+    @pulumi.getter(name="ipv6PdStop")
+    def ipv6_pd_stop(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "ipv6_pd_stop")
+
+    @property
+    @pulumi.getter(name="ipv6RaEnabled")
+    def ipv6_ra_enabled(self) -> Optional[builtins.bool]:
+        return pulumi.get(self, "ipv6_ra_enabled")
+
+    @property
+    @pulumi.getter(name="ipv6RaPreferredLifetime")
+    def ipv6_ra_preferred_lifetime(self) -> Optional[builtins.int]:
+        return pulumi.get(self, "ipv6_ra_preferred_lifetime")
+
+    @property
+    @pulumi.getter(name="ipv6RaPriority")
+    def ipv6_ra_priority(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "ipv6_ra_priority")
+
+    @property
+    @pulumi.getter(name="ipv6RaValidLifetime")
+    def ipv6_ra_valid_lifetime(self) -> Optional[builtins.int]:
+        return pulumi.get(self, "ipv6_ra_valid_lifetime")
+
+    @property
+    @pulumi.getter(name="ipv6SettingPreference")
+    def ipv6_setting_preference(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "ipv6_setting_preference")
+
+    @property
+    @pulumi.getter(name="ipv6SingleNetworkInterface")
+    def ipv6_single_network_interface(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "ipv6_single_network_interface")
+
+    @property
+    @pulumi.getter(name="ipv6Subnet")
+    def ipv6_subnet(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "ipv6_subnet")
+
+    @property
+    @pulumi.getter(name="ipv6WanDelegationType")
+    def ipv6_wan_delegation_type(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "ipv6_wan_delegation_type")
+
+    @property
     @pulumi.getter(name="isNat")
     def is_nat(self) -> Optional[builtins.bool]:
         return pulumi.get(self, "is_nat")
+
+    @property
+    @pulumi.getter(name="l2tpAllowWeakCiphers")
+    def l2tp_allow_weak_ciphers(self) -> Optional[builtins.bool]:
+        return pulumi.get(self, "l2tp_allow_weak_ciphers")
+
+    @property
+    @pulumi.getter(name="l2tpInterface")
+    def l2tp_interface(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "l2tp_interface")
+
+    @property
+    @pulumi.getter(name="l2tpLocalWanIp")
+    def l2tp_local_wan_ip(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "l2tp_local_wan_ip")
 
     @property
     @pulumi.getter(name="localPort")
@@ -1709,6 +1689,11 @@ class Network(dict):
         return pulumi.get(self, "wan_dhcp_options")
 
     @property
+    @pulumi.getter(name="wanDhcpv6PdSize")
+    def wan_dhcpv6_pd_size(self) -> Optional[builtins.int]:
+        return pulumi.get(self, "wan_dhcpv6_pd_size")
+
+    @property
     @pulumi.getter(name="wanDns1")
     def wan_dns1(self) -> Optional[builtins.str]:
         return pulumi.get(self, "wan_dns1")
@@ -1772,6 +1757,21 @@ class Network(dict):
     @pulumi.getter(name="wanIpv6")
     def wan_ipv6(self) -> Optional[builtins.str]:
         return pulumi.get(self, "wan_ipv6")
+
+    @property
+    @pulumi.getter(name="wanIpv6Dns1")
+    def wan_ipv6_dns1(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "wan_ipv6_dns1")
+
+    @property
+    @pulumi.getter(name="wanIpv6Dns2")
+    def wan_ipv6_dns2(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "wan_ipv6_dns2")
+
+    @property
+    @pulumi.getter(name="wanIpv6DnsPreference")
+    def wan_ipv6_dns_preference(self) -> Optional[builtins.str]:
+        return pulumi.get(self, "wan_ipv6_dns_preference")
 
     @property
     @pulumi.getter(name="wanLoadBalanceType")

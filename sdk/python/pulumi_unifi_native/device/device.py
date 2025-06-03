@@ -23,8 +23,6 @@ __all__ = ['DeviceArgs', 'Device']
 class DeviceArgs:
     def __init__(__self__, *,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _dot1x_fallback_networkconf_id: Optional[pulumi.Input[builtins.str]] = None,
-                 _dot1x_portctrl_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  adopted: Optional[pulumi.Input[builtins.bool]] = None,
                  afc_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  atf_enabled: Optional[pulumi.Input[builtins.bool]] = None,
@@ -38,6 +36,8 @@ class DeviceArgs:
                  baresip_extension: Optional[pulumi.Input[builtins.str]] = None,
                  config_network: Optional[pulumi.Input['DeviceConfigNetworkArgs']] = None,
                  disabled: Optional[pulumi.Input[builtins.bool]] = None,
+                 dot1x_fallback_networkconf_id: Optional[pulumi.Input[builtins.str]] = None,
+                 dot1x_portctrl_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  dpi_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  ether_lighting: Optional[pulumi.Input['DeviceEtherLightingArgs']] = None,
                  ethernet_overrides: Optional[pulumi.Input[Sequence[pulumi.Input['DeviceEthernetOverridesArgs']]]] = None,
@@ -117,10 +117,6 @@ class DeviceArgs:
         """
         if id is not None:
             pulumi.set(__self__, "id", id)
-        if _dot1x_fallback_networkconf_id is not None:
-            pulumi.set(__self__, "_dot1x_fallback_networkconf_id", _dot1x_fallback_networkconf_id)
-        if _dot1x_portctrl_enabled is not None:
-            pulumi.set(__self__, "_dot1x_portctrl_enabled", _dot1x_portctrl_enabled)
         if adopted is not None:
             pulumi.set(__self__, "adopted", adopted)
         if afc_enabled is not None:
@@ -147,6 +143,10 @@ class DeviceArgs:
             pulumi.set(__self__, "config_network", config_network)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
+        if dot1x_fallback_networkconf_id is not None:
+            pulumi.set(__self__, "dot1x_fallback_networkconf_id", dot1x_fallback_networkconf_id)
+        if dot1x_portctrl_enabled is not None:
+            pulumi.set(__self__, "dot1x_portctrl_enabled", dot1x_portctrl_enabled)
         if dpi_enabled is not None:
             pulumi.set(__self__, "dpi_enabled", dpi_enabled)
         if ether_lighting is not None:
@@ -306,24 +306,6 @@ class DeviceArgs:
         pulumi.set(self, "id", value)
 
     @property
-    @pulumi.getter(name="_dot1xFallbackNetworkconfId")
-    def _dot1x_fallback_networkconf_id(self) -> Optional[pulumi.Input[builtins.str]]:
-        return pulumi.get(self, "_dot1x_fallback_networkconf_id")
-
-    @_dot1x_fallback_networkconf_id.setter
-    def _dot1x_fallback_networkconf_id(self, value: Optional[pulumi.Input[builtins.str]]):
-        pulumi.set(self, "_dot1x_fallback_networkconf_id", value)
-
-    @property
-    @pulumi.getter(name="_dot1xPortctrlEnabled")
-    def _dot1x_portctrl_enabled(self) -> Optional[pulumi.Input[builtins.bool]]:
-        return pulumi.get(self, "_dot1x_portctrl_enabled")
-
-    @_dot1x_portctrl_enabled.setter
-    def _dot1x_portctrl_enabled(self, value: Optional[pulumi.Input[builtins.bool]]):
-        pulumi.set(self, "_dot1x_portctrl_enabled", value)
-
-    @property
     @pulumi.getter
     def adopted(self) -> Optional[pulumi.Input[builtins.bool]]:
         return pulumi.get(self, "adopted")
@@ -439,6 +421,24 @@ class DeviceArgs:
     @disabled.setter
     def disabled(self, value: Optional[pulumi.Input[builtins.bool]]):
         pulumi.set(self, "disabled", value)
+
+    @property
+    @pulumi.getter(name="dot1xFallbackNetworkconfId")
+    def dot1x_fallback_networkconf_id(self) -> Optional[pulumi.Input[builtins.str]]:
+        return pulumi.get(self, "dot1x_fallback_networkconf_id")
+
+    @dot1x_fallback_networkconf_id.setter
+    def dot1x_fallback_networkconf_id(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "dot1x_fallback_networkconf_id", value)
+
+    @property
+    @pulumi.getter(name="dot1xPortctrlEnabled")
+    def dot1x_portctrl_enabled(self) -> Optional[pulumi.Input[builtins.bool]]:
+        return pulumi.get(self, "dot1x_portctrl_enabled")
+
+    @dot1x_portctrl_enabled.setter
+    def dot1x_portctrl_enabled(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "dot1x_portctrl_enabled", value)
 
     @property
     @pulumi.getter(name="dpiEnabled")
@@ -1114,8 +1114,6 @@ class Device(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _dot1x_fallback_networkconf_id: Optional[pulumi.Input[builtins.str]] = None,
-                 _dot1x_portctrl_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  adopted: Optional[pulumi.Input[builtins.bool]] = None,
                  afc_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  atf_enabled: Optional[pulumi.Input[builtins.bool]] = None,
@@ -1129,6 +1127,8 @@ class Device(pulumi.CustomResource):
                  baresip_extension: Optional[pulumi.Input[builtins.str]] = None,
                  config_network: Optional[pulumi.Input[Union['DeviceConfigNetworkArgs', 'DeviceConfigNetworkArgsDict']]] = None,
                  disabled: Optional[pulumi.Input[builtins.bool]] = None,
+                 dot1x_fallback_networkconf_id: Optional[pulumi.Input[builtins.str]] = None,
+                 dot1x_portctrl_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  dpi_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  ether_lighting: Optional[pulumi.Input[Union['DeviceEtherLightingArgs', 'DeviceEtherLightingArgsDict']]] = None,
                  ethernet_overrides: Optional[pulumi.Input[Sequence[pulumi.Input[Union['DeviceEthernetOverridesArgs', 'DeviceEthernetOverridesArgsDict']]]]] = None,
@@ -1233,8 +1233,6 @@ class Device(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
-                 _dot1x_fallback_networkconf_id: Optional[pulumi.Input[builtins.str]] = None,
-                 _dot1x_portctrl_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  adopted: Optional[pulumi.Input[builtins.bool]] = None,
                  afc_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  atf_enabled: Optional[pulumi.Input[builtins.bool]] = None,
@@ -1248,6 +1246,8 @@ class Device(pulumi.CustomResource):
                  baresip_extension: Optional[pulumi.Input[builtins.str]] = None,
                  config_network: Optional[pulumi.Input[Union['DeviceConfigNetworkArgs', 'DeviceConfigNetworkArgsDict']]] = None,
                  disabled: Optional[pulumi.Input[builtins.bool]] = None,
+                 dot1x_fallback_networkconf_id: Optional[pulumi.Input[builtins.str]] = None,
+                 dot1x_portctrl_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  dpi_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  ether_lighting: Optional[pulumi.Input[Union['DeviceEtherLightingArgs', 'DeviceEtherLightingArgsDict']]] = None,
                  ethernet_overrides: Optional[pulumi.Input[Sequence[pulumi.Input[Union['DeviceEthernetOverridesArgs', 'DeviceEthernetOverridesArgsDict']]]]] = None,
@@ -1332,8 +1332,6 @@ class Device(pulumi.CustomResource):
             __props__ = DeviceArgs.__new__(DeviceArgs)
 
             __props__.__dict__["id"] = id
-            __props__.__dict__["_dot1x_fallback_networkconf_id"] = _dot1x_fallback_networkconf_id
-            __props__.__dict__["_dot1x_portctrl_enabled"] = _dot1x_portctrl_enabled
             __props__.__dict__["adopted"] = adopted
             __props__.__dict__["afc_enabled"] = afc_enabled
             __props__.__dict__["atf_enabled"] = atf_enabled
@@ -1347,6 +1345,8 @@ class Device(pulumi.CustomResource):
             __props__.__dict__["baresip_extension"] = baresip_extension
             __props__.__dict__["config_network"] = config_network
             __props__.__dict__["disabled"] = disabled
+            __props__.__dict__["dot1x_fallback_networkconf_id"] = dot1x_fallback_networkconf_id
+            __props__.__dict__["dot1x_portctrl_enabled"] = dot1x_portctrl_enabled
             __props__.__dict__["dpi_enabled"] = dpi_enabled
             __props__.__dict__["ether_lighting"] = ether_lighting
             __props__.__dict__["ethernet_overrides"] = ethernet_overrides
@@ -1444,8 +1444,6 @@ class Device(pulumi.CustomResource):
         __props__ = DeviceArgs.__new__(DeviceArgs)
 
         __props__.__dict__["id"] = None
-        __props__.__dict__["_dot1x_fallback_networkconf_id"] = None
-        __props__.__dict__["_dot1x_portctrl_enabled"] = None
         __props__.__dict__["adopted"] = None
         __props__.__dict__["afc_enabled"] = None
         __props__.__dict__["atf_enabled"] = None
@@ -1459,6 +1457,8 @@ class Device(pulumi.CustomResource):
         __props__.__dict__["baresip_extension"] = None
         __props__.__dict__["config_network"] = None
         __props__.__dict__["disabled"] = None
+        __props__.__dict__["dot1x_fallback_networkconf_id"] = None
+        __props__.__dict__["dot1x_portctrl_enabled"] = None
         __props__.__dict__["dpi_enabled"] = None
         __props__.__dict__["ether_lighting"] = None
         __props__.__dict__["ethernet_overrides"] = None
@@ -1541,16 +1541,6 @@ class Device(pulumi.CustomResource):
         return pulumi.get(self, "id")
 
     @property
-    @pulumi.getter(name="_dot1xFallbackNetworkconfId")
-    def _dot1x_fallback_networkconf_id(self) -> pulumi.Output[Optional[builtins.str]]:
-        return pulumi.get(self, "_dot1x_fallback_networkconf_id")
-
-    @property
-    @pulumi.getter(name="_dot1xPortctrlEnabled")
-    def _dot1x_portctrl_enabled(self) -> pulumi.Output[Optional[builtins.bool]]:
-        return pulumi.get(self, "_dot1x_portctrl_enabled")
-
-    @property
     @pulumi.getter
     def adopted(self) -> pulumi.Output[Optional[builtins.bool]]:
         return pulumi.get(self, "adopted")
@@ -1614,6 +1604,16 @@ class Device(pulumi.CustomResource):
     @pulumi.getter
     def disabled(self) -> pulumi.Output[Optional[builtins.bool]]:
         return pulumi.get(self, "disabled")
+
+    @property
+    @pulumi.getter(name="dot1xFallbackNetworkconfId")
+    def dot1x_fallback_networkconf_id(self) -> pulumi.Output[Optional[builtins.str]]:
+        return pulumi.get(self, "dot1x_fallback_networkconf_id")
+
+    @property
+    @pulumi.getter(name="dot1xPortctrlEnabled")
+    def dot1x_portctrl_enabled(self) -> pulumi.Output[Optional[builtins.bool]]:
+        return pulumi.get(self, "dot1x_portctrl_enabled")
 
     @property
     @pulumi.getter(name="dpiEnabled")

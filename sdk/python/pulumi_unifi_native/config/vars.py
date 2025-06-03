@@ -29,6 +29,13 @@ class _ExportableConfig(types.ModuleType):
         return __config__.get_bool('allowInsecure')
 
     @property
+    def api_host(self) -> Optional[str]:
+        """
+        The URL Host name or IP Address for the Unifi API, e.g. 10.1.1.1
+        """
+        return __config__.get('apiHost')
+
+    @property
     def api_key(self) -> Optional[str]:
         """
         The API key for an admin user, generated from the Unifi admin console
@@ -36,9 +43,9 @@ class _ExportableConfig(types.ModuleType):
         return __config__.get('apiKey')
 
     @property
-    def api_url(self) -> Optional[str]:
+    def site_id(self) -> str:
         """
-        The Base URL for the Unifi API, e.g. https://10.1.1.1
+        The Human readable Stack identifier (e.g. 'notDefault') for the Unifi site to manage. Defaults to 'default'
         """
-        return __config__.get('apiUrl')
+        return __config__.get('siteId') or 'default'
 

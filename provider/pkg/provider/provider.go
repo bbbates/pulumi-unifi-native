@@ -86,6 +86,7 @@ func (p *unifiNativeProvider) extractOutput(outputs interface{}, inputProperties
 			return nil, errors.New("output did not contain an '_id' field")
 		}
 		data["id"] = data["_id"] // need to massage the _id from unifi to match Pulumi's expectations
+		delete(data, "_id")      // leaving the API _id field in the results seems to cause trouble with the refresh operation
 		data["siteId"] = p.siteId
 		data["site_id"] = p.siteId
 		return data, nil
@@ -230,20 +231,7 @@ func (p *unifiNativeProvider) OnPreRead(ctx context.Context, req *pulumirpc.Read
 }
 
 func (p *unifiNativeProvider) OnPostRead(ctx context.Context, req *pulumirpc.ReadRequest, outputs interface{}) (map[string]interface{}, error) {
-	outputMap, err := p.extractOutput(outputs, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	// transform the output map from the API names to the SDK names
-	// because the Provider Framwork uses these values for the input map
-	// as well, but does not transform them first, which ends up causing
-	// the API-named properties to be stored in the input state, and the next `plumumi up` call will
-	// try and update the resource again
-	logging.V(3).Infof("Transforming output map from API names to SDK names: %v", outputMap)
-	handler.TransformBody(ctx, outputMap, handler.GetMetadata().APIToSDKNameMap)
-	logging.V(3).Infof("Transformed output map from API names to SDK names: %v", outputMap)
-	return outputMap, nil
+	return p.extractOutput(outputs, nil)
 }
 
 func (p *unifiNativeProvider) OnPreUpdate(ctx context.Context, req *pulumirpc.UpdateRequest, httpReq *http.Request) error {
