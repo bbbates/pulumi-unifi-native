@@ -55,7 +55,7 @@ func makeProvider(host *provider.HostClient, name, version string, pulumiSchemaB
 	return rp, err
 }
 
-func (p *unifiNativeProvider) extractOutput(outputs interface{}, inputProperties *structpb.Struct) (map[string]interface{}, error) {
+func (p *unifiNativeProvider) extractOutput(outputs interface{}, id string, inputProperties *structpb.Struct) (map[string]interface{}, error) {
 	// All create/read/update endpoints return the object under the top-level "data" object.
 
 	var result = outputs.(map[string]interface{})
@@ -77,7 +77,9 @@ func (p *unifiNativeProvider) extractOutput(outputs interface{}, inputProperties
 				if err != nil {
 					return nil, errors.Wrap(err, "unmarshaling new inputs in check method")
 				}
-				return inputs.Mappable(), nil
+				inputsMap := inputs.Mappable()
+				inputsMap["id"] = id // inputProperties will not contain the id, so we need to add it here
+				return inputsMap, nil
 			}
 		}
 
@@ -104,7 +106,7 @@ func (p *unifiNativeProvider) OnPreInvoke(_ context.Context, _ *pulumirpc.Invoke
 }
 
 func (p *unifiNativeProvider) OnPostInvoke(_ context.Context, _ *pulumirpc.InvokeRequest, outputs interface{}) (map[string]interface{}, error) {
-	return p.extractOutput(outputs, nil)
+	return p.extractOutput(outputs, "", nil)
 }
 
 // OnConfigure is called by the provider framework when Pulumi calls Configure on
@@ -223,7 +225,7 @@ func (p *unifiNativeProvider) OnPreCreate(ctx context.Context, req *pulumirpc.Cr
 
 // OnPostCreate allocates a new instance of the provided resource and returns its unique ID afterwards.
 func (p *unifiNativeProvider) OnPostCreate(ctx context.Context, req *pulumirpc.CreateRequest, outputs interface{}) (map[string]interface{}, error) {
-	return p.extractOutput(outputs, nil)
+	return p.extractOutput(outputs, "", nil)
 }
 
 func (p *unifiNativeProvider) OnPreRead(ctx context.Context, req *pulumirpc.ReadRequest, httpReq *http.Request) error {
@@ -231,7 +233,7 @@ func (p *unifiNativeProvider) OnPreRead(ctx context.Context, req *pulumirpc.Read
 }
 
 func (p *unifiNativeProvider) OnPostRead(ctx context.Context, req *pulumirpc.ReadRequest, outputs interface{}) (map[string]interface{}, error) {
-	return p.extractOutput(outputs, nil)
+	return p.extractOutput(outputs, "", nil)
 }
 
 func (p *unifiNativeProvider) OnPreUpdate(ctx context.Context, req *pulumirpc.UpdateRequest, httpReq *http.Request) error {
@@ -239,7 +241,7 @@ func (p *unifiNativeProvider) OnPreUpdate(ctx context.Context, req *pulumirpc.Up
 }
 
 func (p *unifiNativeProvider) OnPostUpdate(ctx context.Context, req *pulumirpc.UpdateRequest, httpReq http.Request, outputs interface{}) (map[string]interface{}, error) {
-	return p.extractOutput(outputs, req.News)
+	return p.extractOutput(outputs, req.Id, req.News)
 }
 
 func (p *unifiNativeProvider) OnPreDelete(ctx context.Context, req *pulumirpc.DeleteRequest, httpReq *http.Request) error {
