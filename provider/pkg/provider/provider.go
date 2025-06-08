@@ -8,6 +8,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource/plugin"
 	"net/http"
 	"os"
+	"regexp"
 	"time"
 
 	"github.com/getkin/kin-openapi/openapi3"
@@ -55,7 +56,7 @@ func makeProvider(host *provider.HostClient, name, version string, pulumiSchemaB
 	return rp, err
 }
 
-func (p *unifiNativeProvider) extractOutput(outputs interface{}, id string, inputProperties *structpb.Struct) (map[string]interface{}, error) {
+func (p *unifiNativeProvider) extractOutput(outputs interface{}, id string, resourceType string, inputProperties *structpb.Struct) (map[string]interface{}, error) {
 	// All create/read/update endpoints return the object under the top-level "data" object.
 
 	var result = outputs.(map[string]interface{})
@@ -91,6 +92,42 @@ func (p *unifiNativeProvider) extractOutput(outputs interface{}, id string, inpu
 		delete(data, "_id")      // leaving the API _id field in the results seems to cause trouble with the refresh operation
 		data["siteId"] = p.siteId
 		data["site_id"] = p.siteId
+
+		// If the resource type if provided, and the type is a Device, then remove the unnecessary fields
+		// and change the ID field to use the mac field
+		if resourceType == "unifi-native:device:Device" {
+			statPropertiesForRemoval := []string{
+				"active_geo_info",
+				"config_network_lan",
+				"dhcp_excluded_ip_list",
+				"last_uplink",
+				"system-stats",
+				"sys_stats",
+				"detailed_states",
+				"geo_info",
+				"ids_ips_signature",
+				"ipv4_active_leases",
+				"last_geo_info",
+				"last_wan_interfaces",
+				"led_state",
+				"ruleset_interfaces",
+				"speedtest-status",
+				"stat",
+				"switch_caps",
+				"udapi_version",
+				"uplink",
+				"uptime_stats",
+				"wan1",
+				"wan2",
+			}
+			for _, prop := range statPropertiesForRemoval {
+				if _, ok := data[prop]; ok {
+					logging.V(3).Infof("Removing property %s from the output data", prop)
+					delete(data, prop)
+				}
+			}
+		}
+
 		return data, nil
 	}
 
@@ -106,7 +143,7 @@ func (p *unifiNativeProvider) OnPreInvoke(_ context.Context, _ *pulumirpc.Invoke
 }
 
 func (p *unifiNativeProvider) OnPostInvoke(_ context.Context, _ *pulumirpc.InvokeRequest, outputs interface{}) (map[string]interface{}, error) {
-	return p.extractOutput(outputs, "", nil)
+	return p.extractOutput(outputs, "", "", nil)
 }
 
 // OnConfigure is called by the provider framework when Pulumi calls Configure on
@@ -225,15 +262,28 @@ func (p *unifiNativeProvider) OnPreCreate(ctx context.Context, req *pulumirpc.Cr
 
 // OnPostCreate allocates a new instance of the provided resource and returns its unique ID afterwards.
 func (p *unifiNativeProvider) OnPostCreate(ctx context.Context, req *pulumirpc.CreateRequest, outputs interface{}) (map[string]interface{}, error) {
-	return p.extractOutput(outputs, "", nil)
+	return p.extractOutput(outputs, "", req.Type, nil)
 }
 
 func (p *unifiNativeProvider) OnPreRead(ctx context.Context, req *pulumirpc.ReadRequest, httpReq *http.Request) error {
+	// if the request is for a Device, and the ID is NOT a mac address (because the device has been previously imported)
+	// change the last part of the URL path to use the mac address instead of the ID
+	if req.Type == "unifi-native:device:Device" {
+		if req.Id != "" && len(req.Id) > 17 { // mac address is 17 characters long
+			logging.V(3).Infof("Changing the ID in the request from %s to use the mac address", req.Id)
+			re := regexp.MustCompile(`[^/]+$`)
+			httpReq.URL.Path = re.ReplaceAllString(httpReq.URL.Path, req.Properties.Fields["mac"].GetStringValue())
+			logging.V(3).Infof("New URL Path: %s", httpReq.URL.Path)
+		} else {
+			logging.V(3).Infof("Request ID is already a mac address or empty, no change needed")
+		}
+	}
+
 	return nil
 }
 
 func (p *unifiNativeProvider) OnPostRead(ctx context.Context, req *pulumirpc.ReadRequest, outputs interface{}) (map[string]interface{}, error) {
-	return p.extractOutput(outputs, "", nil)
+	return p.extractOutput(outputs, "", req.Type, nil)
 }
 
 func (p *unifiNativeProvider) OnPreUpdate(ctx context.Context, req *pulumirpc.UpdateRequest, httpReq *http.Request) error {
@@ -241,7 +291,7 @@ func (p *unifiNativeProvider) OnPreUpdate(ctx context.Context, req *pulumirpc.Up
 }
 
 func (p *unifiNativeProvider) OnPostUpdate(ctx context.Context, req *pulumirpc.UpdateRequest, httpReq http.Request, outputs interface{}) (map[string]interface{}, error) {
-	return p.extractOutput(outputs, req.Id, req.News)
+	return p.extractOutput(outputs, req.Id, req.Type, req.News)
 }
 
 func (p *unifiNativeProvider) OnPreDelete(ctx context.Context, req *pulumirpc.DeleteRequest, httpReq *http.Request) error {
