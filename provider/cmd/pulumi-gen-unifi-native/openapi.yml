@@ -4,10 +4,10 @@ info:
   title: Unifi API
   version: 9.1.120
 servers:
-- description: Unifi Controller API
-  url: /proxy/network/api
-- description: Unifi Controller API
-  url: /api
+  - description: Unifi Controller API
+    url: /proxy/network/api
+  - description: Unifi Controller API
+    url: /api
 paths:
   /s/{siteId}/get/setting/auto_speedtest:
     get:

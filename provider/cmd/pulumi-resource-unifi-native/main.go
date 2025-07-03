@@ -9,7 +9,7 @@ import (
 	"github.com/bbbates/pulumi-unifi-native/provider/pkg/version"
 )
 
-var providerName = "unifi"
+var providerName = "unifi-native"
 
 //go:embed schema.json
 var pulumiSchema []byte

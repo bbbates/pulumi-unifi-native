@@ -3,7 +3,6 @@ package provider
 import (
 	"context"
 	"crypto/tls"
-	"fmt"
 	"github.com/cloudy-sky-software/pulumi-provider-framework/state"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource/plugin"
 	"net/http"
@@ -28,6 +27,7 @@ import (
 )
 
 type unifiNativeProvider struct {
+	fwCallback.UnimplementedProviderCallback
 	name    string
 	version string
 
@@ -169,10 +169,6 @@ func (p *unifiNativeProvider) OnConfigure(_ context.Context, req *pulumirpc.Conf
 
 	logging.V(3).Infof("Configuring Site Id: %s", siteId)
 	p.siteId = siteId
-	if p.siteId != "" {
-		handler.GetGlobalPathParams()["siteId"] = p.siteId
-		handler.GetGlobalPathParams()["site_id"] = p.siteId
-	}
 
 	apiKey, ok := req.GetVariables()["unifi-native:config:apiKey"]
 	if !ok {
@@ -193,30 +189,6 @@ func (p *unifiNativeProvider) OnConfigure(_ context.Context, req *pulumirpc.Conf
 
 	logging.V(3).Info("Configuring UnifiNative API key")
 	p.apiKey = apiKey
-
-	apiHost, ok := req.GetVariables()["unifi-native:config:apiHost"]
-	if !ok {
-		// Check if it's set as an env var.
-		envVarNames := handler.GetSchemaSpec().Provider.InputProperties["apiHost"].DefaultInfo.Environment
-		for _, n := range envVarNames {
-			v := os.Getenv(n)
-			if v != "" {
-				apiHost = v
-			}
-		}
-
-		// Return an error if the API URL is still empty.
-		if apiHost == "" {
-			return nil, errors.New("apiHost is required")
-		}
-	}
-
-	logging.V(3).Info("Configuring Unifi API Host", apiHost)
-	p.apiHost = apiHost
-
-	logging.V(3).Infof("Fixing the base URL for the provider to use the configured API host: %s", p.apiHost)
-	handler.SetBaseURL(fmt.Sprintf("https://%s%s", p.apiHost, handler.GetBaseURL()))
-	logging.V(3).Infof("Base URL set to: %s", handler.GetBaseURL())
 
 	allowInsecure, ok := req.GetVariables()["unifi-native:config:allowInsecure"]
 	if !ok {
@@ -246,9 +218,18 @@ func (p *unifiNativeProvider) OnConfigure(_ context.Context, req *pulumirpc.Conf
 		},
 	}
 
-	return &pulumirpc.ConfigureResponse{
-		AcceptSecrets: true,
-	}, nil
+	return nil, nil
+}
+
+func (p *unifiNativeProvider) GetGlobalPathParams(_ context.Context, _ *pulumirpc.ConfigureRequest) (map[string]string, error) {
+	if p.siteId != "" {
+		return map[string]string{
+			"siteId":  p.siteId,
+			"site_id": p.siteId,
+		}, nil
+	} else {
+		return nil, nil
+	}
 }
 
 // OnDiff checks what impacts a hypothetical update will have on the resource's properties.
