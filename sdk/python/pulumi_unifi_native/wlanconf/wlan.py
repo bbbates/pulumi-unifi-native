@@ -1538,9 +1538,11 @@ class Wlan(pulumi.CustomResource):
             __props__.__dict__["wpa_enc"] = wpa_enc
             __props__.__dict__["wpa_mode"] = wpa_mode
             __props__.__dict__["wpa_psk_radius"] = wpa_psk_radius
-            __props__.__dict__["x_iapp_key"] = x_iapp_key
-            __props__.__dict__["x_passphrase"] = x_passphrase
-            __props__.__dict__["x_wep"] = x_wep
+            __props__.__dict__["x_iapp_key"] = None if x_iapp_key is None else pulumi.Output.secret(x_iapp_key)
+            __props__.__dict__["x_passphrase"] = None if x_passphrase is None else pulumi.Output.secret(x_passphrase)
+            __props__.__dict__["x_wep"] = None if x_wep is None else pulumi.Output.secret(x_wep)
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["xIappKey", "xPassphrase", "xWep"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(Wlan, __self__).__init__(
             'unifi-native:wlanconf:Wlan',
             resource_name,

@@ -308,7 +308,9 @@ class SettingSuperSmtp(pulumi.CustomResource):
             __props__.__dict__["use_sender"] = use_sender
             __props__.__dict__["use_ssl"] = use_ssl
             __props__.__dict__["username"] = username
-            __props__.__dict__["x_password"] = x_password
+            __props__.__dict__["x_password"] = None if x_password is None else pulumi.Output.secret(x_password)
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["xPassword"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(SettingSuperSmtp, __self__).__init__(
             'unifi-native:super_smtp:SettingSuperSmtp',
             resource_name,

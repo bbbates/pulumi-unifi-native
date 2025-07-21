@@ -205,7 +205,8 @@
                     "type": "integer"
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             },
             "type": "object"
@@ -2009,7 +2010,8 @@
                     "type": "string"
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             },
             "type": "object"
@@ -2974,61 +2976,80 @@
                     "type": "string"
                 },
                 "xAuthorizeLoginid": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xAuthorizeTransactionkey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xFacebookAppSecret": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xFacebookWifiGwSecret": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xGoogleClientSecret": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xIppayTerminalid": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xMerchantwarriorApikey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xMerchantwarriorApipassphrase": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xMerchantwarriorMerchantuuid": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xPaypalPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xPaypalSignature": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xPaypalUsername": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xQuickpayAgreementid": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xQuickpayApikey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xQuickpayMerchantid": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xStripeApiKey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xWechatAppSecret": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xWechatSecretKey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             },
             "type": "object"
@@ -3626,7 +3647,8 @@
                     "type": "string"
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             },
             "type": "object"
@@ -6666,7 +6688,8 @@
                     "type": "string"
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             },
             "type": "object"
@@ -7432,7 +7455,8 @@
                     "type": "string"
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             },
             "type": "object"
@@ -8731,13 +8755,16 @@
                     "type": "string"
                 },
                 "xIappKey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xPassphrase": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xWep": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             },
             "type": "object"
@@ -8910,7 +8937,8 @@
                     "type": "integer"
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             },
             "type": "object",
@@ -8964,7 +8992,8 @@
                     "type": "integer"
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             }
         },
@@ -10672,7 +10701,8 @@
                     "type": "string"
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             },
             "type": "object",
@@ -10720,7 +10750,8 @@
                     "type": "string"
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             }
         },
@@ -11812,61 +11843,80 @@
                     "type": "string"
                 },
                 "xAuthorizeLoginid": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xAuthorizeTransactionkey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xFacebookAppSecret": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xFacebookWifiGwSecret": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xGoogleClientSecret": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xIppayTerminalid": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xMerchantwarriorApikey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xMerchantwarriorApipassphrase": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xMerchantwarriorMerchantuuid": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xPaypalPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xPaypalSignature": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xPaypalUsername": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xQuickpayAgreementid": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xQuickpayApikey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xQuickpayMerchantid": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xStripeApiKey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xWechatAppSecret": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xWechatSecretKey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             },
             "type": "object",
@@ -12133,61 +12183,80 @@
                     "type": "string"
                 },
                 "xAuthorizeLoginid": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xAuthorizeTransactionkey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xFacebookAppSecret": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xFacebookWifiGwSecret": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xGoogleClientSecret": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xIppayTerminalid": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xMerchantwarriorApikey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xMerchantwarriorApipassphrase": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xMerchantwarriorMerchantuuid": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xPaypalPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xPaypalSignature": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xPaypalUsername": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xQuickpayAgreementid": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xQuickpayApikey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xQuickpayMerchantid": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xStripeApiKey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xWechatAppSecret": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xWechatSecretKey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             }
         },
@@ -12767,7 +12836,8 @@
                     "type": "string"
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             },
             "type": "object",
@@ -12797,7 +12867,8 @@
                     "type": "string"
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             }
         },
@@ -16843,7 +16914,8 @@
                     "type": "string"
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             },
             "type": "object",
@@ -16882,7 +16954,8 @@
                     "type": "string"
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             }
         },
@@ -17783,7 +17856,8 @@
                     "type": "string"
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             },
             "type": "object",
@@ -17834,7 +17908,8 @@
                     "type": "string"
                 },
                 "xPassword": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             }
         },
@@ -19073,13 +19148,16 @@
                     "type": "string"
                 },
                 "xIappKey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xPassphrase": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xWep": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             },
             "type": "object",
@@ -19397,13 +19475,16 @@
                     "type": "string"
                 },
                 "xIappKey": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xPassphrase": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 },
                 "xWep": {
-                    "type": "string"
+                    "type": "string",
+                    "secret": true
                 }
             }
         },

@@ -54,14 +54,14 @@ class AwaitableGetDeviceResult(GetDeviceResult):
             meta=self.meta)
 
 
-def get_device(mac: Optional[builtins.str] = None,
+def get_device(id: Optional[builtins.str] = None,
                site_id: Optional[builtins.str] = None,
                opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetDeviceResult:
     """
     Use this data source to access information about an existing resource.
     """
     __args__ = dict()
-    __args__['mac'] = mac
+    __args__['id'] = id
     __args__['siteId'] = site_id
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('unifi-native:device:getDevice', __args__, opts=opts, typ=GetDeviceResult).value
@@ -69,14 +69,14 @@ def get_device(mac: Optional[builtins.str] = None,
     return AwaitableGetDeviceResult(
         data=pulumi.get(__ret__, 'data'),
         meta=pulumi.get(__ret__, 'meta'))
-def get_device_output(mac: Optional[pulumi.Input[builtins.str]] = None,
+def get_device_output(id: Optional[pulumi.Input[builtins.str]] = None,
                       site_id: Optional[pulumi.Input[builtins.str]] = None,
                       opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetDeviceResult]:
     """
     Use this data source to access information about an existing resource.
     """
     __args__ = dict()
-    __args__['mac'] = mac
+    __args__['id'] = id
     __args__['siteId'] = site_id
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('unifi-native:device:getDevice', __args__, opts=opts, typ=GetDeviceResult)

@@ -1610,25 +1610,27 @@ class SettingGuestAcces(pulumi.CustomResource):
             __props__.__dict__["wechat_app_id"] = wechat_app_id
             __props__.__dict__["wechat_enabled"] = wechat_enabled
             __props__.__dict__["wechat_shop_id"] = wechat_shop_id
-            __props__.__dict__["x_authorize_loginid"] = x_authorize_loginid
-            __props__.__dict__["x_authorize_transactionkey"] = x_authorize_transactionkey
-            __props__.__dict__["x_facebook_app_secret"] = x_facebook_app_secret
-            __props__.__dict__["x_facebook_wifi_gw_secret"] = x_facebook_wifi_gw_secret
-            __props__.__dict__["x_google_client_secret"] = x_google_client_secret
-            __props__.__dict__["x_ippay_terminalid"] = x_ippay_terminalid
-            __props__.__dict__["x_merchantwarrior_apikey"] = x_merchantwarrior_apikey
-            __props__.__dict__["x_merchantwarrior_apipassphrase"] = x_merchantwarrior_apipassphrase
-            __props__.__dict__["x_merchantwarrior_merchantuuid"] = x_merchantwarrior_merchantuuid
-            __props__.__dict__["x_password"] = x_password
-            __props__.__dict__["x_paypal_password"] = x_paypal_password
-            __props__.__dict__["x_paypal_signature"] = x_paypal_signature
-            __props__.__dict__["x_paypal_username"] = x_paypal_username
-            __props__.__dict__["x_quickpay_agreementid"] = x_quickpay_agreementid
-            __props__.__dict__["x_quickpay_apikey"] = x_quickpay_apikey
-            __props__.__dict__["x_quickpay_merchantid"] = x_quickpay_merchantid
-            __props__.__dict__["x_stripe_api_key"] = x_stripe_api_key
-            __props__.__dict__["x_wechat_app_secret"] = x_wechat_app_secret
-            __props__.__dict__["x_wechat_secret_key"] = x_wechat_secret_key
+            __props__.__dict__["x_authorize_loginid"] = None if x_authorize_loginid is None else pulumi.Output.secret(x_authorize_loginid)
+            __props__.__dict__["x_authorize_transactionkey"] = None if x_authorize_transactionkey is None else pulumi.Output.secret(x_authorize_transactionkey)
+            __props__.__dict__["x_facebook_app_secret"] = None if x_facebook_app_secret is None else pulumi.Output.secret(x_facebook_app_secret)
+            __props__.__dict__["x_facebook_wifi_gw_secret"] = None if x_facebook_wifi_gw_secret is None else pulumi.Output.secret(x_facebook_wifi_gw_secret)
+            __props__.__dict__["x_google_client_secret"] = None if x_google_client_secret is None else pulumi.Output.secret(x_google_client_secret)
+            __props__.__dict__["x_ippay_terminalid"] = None if x_ippay_terminalid is None else pulumi.Output.secret(x_ippay_terminalid)
+            __props__.__dict__["x_merchantwarrior_apikey"] = None if x_merchantwarrior_apikey is None else pulumi.Output.secret(x_merchantwarrior_apikey)
+            __props__.__dict__["x_merchantwarrior_apipassphrase"] = None if x_merchantwarrior_apipassphrase is None else pulumi.Output.secret(x_merchantwarrior_apipassphrase)
+            __props__.__dict__["x_merchantwarrior_merchantuuid"] = None if x_merchantwarrior_merchantuuid is None else pulumi.Output.secret(x_merchantwarrior_merchantuuid)
+            __props__.__dict__["x_password"] = None if x_password is None else pulumi.Output.secret(x_password)
+            __props__.__dict__["x_paypal_password"] = None if x_paypal_password is None else pulumi.Output.secret(x_paypal_password)
+            __props__.__dict__["x_paypal_signature"] = None if x_paypal_signature is None else pulumi.Output.secret(x_paypal_signature)
+            __props__.__dict__["x_paypal_username"] = None if x_paypal_username is None else pulumi.Output.secret(x_paypal_username)
+            __props__.__dict__["x_quickpay_agreementid"] = None if x_quickpay_agreementid is None else pulumi.Output.secret(x_quickpay_agreementid)
+            __props__.__dict__["x_quickpay_apikey"] = None if x_quickpay_apikey is None else pulumi.Output.secret(x_quickpay_apikey)
+            __props__.__dict__["x_quickpay_merchantid"] = None if x_quickpay_merchantid is None else pulumi.Output.secret(x_quickpay_merchantid)
+            __props__.__dict__["x_stripe_api_key"] = None if x_stripe_api_key is None else pulumi.Output.secret(x_stripe_api_key)
+            __props__.__dict__["x_wechat_app_secret"] = None if x_wechat_app_secret is None else pulumi.Output.secret(x_wechat_app_secret)
+            __props__.__dict__["x_wechat_secret_key"] = None if x_wechat_secret_key is None else pulumi.Output.secret(x_wechat_secret_key)
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["xAuthorizeLoginid", "xAuthorizeTransactionkey", "xFacebookAppSecret", "xFacebookWifiGwSecret", "xGoogleClientSecret", "xIppayTerminalid", "xMerchantwarriorApikey", "xMerchantwarriorApipassphrase", "xMerchantwarriorMerchantuuid", "xPassword", "xPaypalPassword", "xPaypalSignature", "xPaypalUsername", "xQuickpayAgreementid", "xQuickpayApikey", "xQuickpayMerchantid", "xStripeApiKey", "xWechatAppSecret", "xWechatSecretKey"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(SettingGuestAcces, __self__).__init__(
             'unifi-native:guest_access:SettingGuestAcces',
             resource_name,

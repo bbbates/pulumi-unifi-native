@@ -37,6 +37,7 @@ components:
                     type: integer
                 x_password:
                     type: string
+                    x-pulumi-secret: true
             type: object
         AccountCreateRequest:
             properties:
@@ -74,6 +75,7 @@ components:
                     type: integer
                 x_password:
                     type: string
+                    x-pulumi-secret: true
             type: object
         AccountResponse:
             properties:
@@ -120,6 +122,7 @@ components:
                     type: integer
                 x_password:
                     type: string
+                    x-pulumi-secret: true
             type: object
         BroadcastGroup:
             properties:
@@ -1642,6 +1645,7 @@ components:
                     type: string
                 x_password:
                     type: string
+                    x-pulumi-secret: true
             type: object
         DynamicDNSCreateRequest:
             properties:
@@ -1675,6 +1679,7 @@ components:
                     type: string
                 x_password:
                     type: string
+                    x-pulumi-secret: true
             type: object
         DynamicDNSResponse:
             properties:
@@ -1717,6 +1722,7 @@ components:
                     type: string
                 x_password:
                     type: string
+                    x-pulumi-secret: true
             type: object
         FirewallGroup:
             properties:
@@ -2772,6 +2778,7 @@ components:
                     type: string
                 x_password:
                     type: string
+                    x-pulumi-secret: true
             type: object
         HotspotOpCreateRequest:
             properties:
@@ -2793,6 +2800,7 @@ components:
                     type: string
                 x_password:
                     type: string
+                    x-pulumi-secret: true
             type: object
         HotspotOpResponse:
             properties:
@@ -2823,6 +2831,7 @@ components:
                     type: string
                 x_password:
                     type: string
+                    x-pulumi-secret: true
             type: object
         HotspotPackage:
             properties:
@@ -6803,42 +6812,61 @@ components:
                     type: string
                 x_authorize_loginid:
                     type: string
+                    x-pulumi-secret: true
                 x_authorize_transactionkey:
                     type: string
+                    x-pulumi-secret: true
                 x_facebook_app_secret:
                     type: string
+                    x-pulumi-secret: true
                 x_facebook_wifi_gw_secret:
                     type: string
+                    x-pulumi-secret: true
                 x_google_client_secret:
                     type: string
+                    x-pulumi-secret: true
                 x_ippay_terminalid:
                     type: string
+                    x-pulumi-secret: true
                 x_merchantwarrior_apikey:
                     type: string
+                    x-pulumi-secret: true
                 x_merchantwarrior_apipassphrase:
                     type: string
+                    x-pulumi-secret: true
                 x_merchantwarrior_merchantuuid:
                     type: string
+                    x-pulumi-secret: true
                 x_password:
                     type: string
+                    x-pulumi-secret: true
                 x_paypal_password:
                     type: string
+                    x-pulumi-secret: true
                 x_paypal_signature:
                     type: string
+                    x-pulumi-secret: true
                 x_paypal_username:
                     type: string
+                    x-pulumi-secret: true
                 x_quickpay_agreementid:
                     type: string
+                    x-pulumi-secret: true
                 x_quickpay_apikey:
                     type: string
+                    x-pulumi-secret: true
                 x_quickpay_merchantid:
                     type: string
+                    x-pulumi-secret: true
                 x_stripe_api_key:
                     type: string
+                    x-pulumi-secret: true
                 x_wechat_app_secret:
                     type: string
+                    x-pulumi-secret: true
                 x_wechat_secret_key:
                     type: string
+                    x-pulumi-secret: true
             type: object
         SettingGuestAccessResponse:
             properties:
@@ -7027,42 +7055,61 @@ components:
                     type: string
                 x_authorize_loginid:
                     type: string
+                    x-pulumi-secret: true
                 x_authorize_transactionkey:
                     type: string
+                    x-pulumi-secret: true
                 x_facebook_app_secret:
                     type: string
+                    x-pulumi-secret: true
                 x_facebook_wifi_gw_secret:
                     type: string
+                    x-pulumi-secret: true
                 x_google_client_secret:
                     type: string
+                    x-pulumi-secret: true
                 x_ippay_terminalid:
                     type: string
+                    x-pulumi-secret: true
                 x_merchantwarrior_apikey:
                     type: string
+                    x-pulumi-secret: true
                 x_merchantwarrior_apipassphrase:
                     type: string
+                    x-pulumi-secret: true
                 x_merchantwarrior_merchantuuid:
                     type: string
+                    x-pulumi-secret: true
                 x_password:
                     type: string
+                    x-pulumi-secret: true
                 x_paypal_password:
                     type: string
+                    x-pulumi-secret: true
                 x_paypal_signature:
                     type: string
+                    x-pulumi-secret: true
                 x_paypal_username:
                     type: string
+                    x-pulumi-secret: true
                 x_quickpay_agreementid:
                     type: string
+                    x-pulumi-secret: true
                 x_quickpay_apikey:
                     type: string
+                    x-pulumi-secret: true
                 x_quickpay_merchantid:
                     type: string
+                    x-pulumi-secret: true
                 x_stripe_api_key:
                     type: string
+                    x-pulumi-secret: true
                 x_wechat_app_secret:
                     type: string
+                    x-pulumi-secret: true
                 x_wechat_secret_key:
                     type: string
+                    x-pulumi-secret: true
             type: object
         SettingIps:
             properties:
@@ -8243,6 +8290,7 @@ components:
                     type: string
                 x_password:
                     type: string
+                    x-pulumi-secret: true
             type: object
         SettingSnmpResponse:
             properties:
@@ -8279,6 +8327,7 @@ components:
                     type: string
                 x_password:
                     type: string
+                    x-pulumi-secret: true
             type: object
         SettingSslInspection:
             properties:
@@ -8922,6 +8971,7 @@ components:
                     type: string
                 x_password:
                     type: string
+                    x-pulumi-secret: true
             type: object
         SettingSuperSmtpResponse:
             properties:
@@ -8966,6 +9016,7 @@ components:
                     type: string
                 x_password:
                     type: string
+                    x-pulumi-secret: true
             type: object
         SettingTeleport:
             properties:
@@ -10094,10 +10145,13 @@ components:
                     type: boolean
                 x_iapp_key:
                     type: string
+                    x-pulumi-secret: true
                 x_passphrase:
                     type: string
+                    x-pulumi-secret: true
                 x_wep:
                     type: string
+                    x-pulumi-secret: true
             type: object
         WLANCapab:
             properties:
@@ -10331,10 +10385,13 @@ components:
                     type: boolean
                 x_iapp_key:
                     type: string
+                    x-pulumi-secret: true
                 x_passphrase:
                     type: string
+                    x-pulumi-secret: true
                 x_wep:
                     type: string
+                    x-pulumi-secret: true
             type: object
         WLANFriendlyName:
             properties:
@@ -10752,10 +10809,13 @@ components:
                     type: boolean
                 x_iapp_key:
                     type: string
+                    x-pulumi-secret: true
                 x_passphrase:
                     type: string
+                    x-pulumi-secret: true
                 x_wep:
                     type: string
+                    x-pulumi-secret: true
             type: object
         WLANVenueName:
             properties:
@@ -32343,6 +32403,6 @@ paths:
                 - Device
 servers:
     - description: Unifi Controller API
-      url: /proxy/network/api
+      url: https://unifi.ui.com/proxy/network/api
     - description: Unifi Controller API
-      url: /api
+      url: https://unifi.ui.com/api

@@ -203,7 +203,9 @@ class HotspotOp(pulumi.CustomResource):
             __props__.__dict__["name"] = name
             __props__.__dict__["note"] = note
             __props__.__dict__["site_id"] = site_id
-            __props__.__dict__["x_password"] = x_password
+            __props__.__dict__["x_password"] = None if x_password is None else pulumi.Output.secret(x_password)
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["xPassword"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(HotspotOp, __self__).__init__(
             'unifi-native:hotspotop:HotspotOp',
             resource_name,
