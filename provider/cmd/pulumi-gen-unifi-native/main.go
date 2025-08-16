@@ -3,7 +3,9 @@
 package main
 
 import (
+	"context"
 	_ "embed"
+	"github.com/getkin/kin-openapi/openapi3"
 
 	"encoding/json"
 	"flag"
@@ -16,8 +18,6 @@ import (
 	providerSchemaGen "github.com/bbbates/pulumi-unifi-native/provider/pkg/gen"
 	providerVersion "github.com/bbbates/pulumi-unifi-native/provider/pkg/version"
 
-	"github.com/cloudy-sky-software/pulumi-provider-framework/openapi"
-
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
@@ -27,6 +27,9 @@ import (
 
 //go:embed openapi.yml
 var openapiDocBytes []byte
+
+//go:embed v2-openapi.yml
+var v2openapiDocBytes []byte
 
 // TemplateDir is the path to the base directory for code generator templates.
 var TemplateDir string
@@ -67,12 +70,14 @@ func main() {
 
 	switch language {
 	case Schema:
-		openAPIDoc := openapi.GetOpenAPISpec(openapiDocBytes)
+		openAPIDoc := getOpenAPISpec(v2openapiDocBytes)
 
-		err := providerSchemaGen.FixOpenAPIDoc(openAPIDoc)
+		err := providerSchemaGen.FixV2OpenAPIDoc(openAPIDoc)
 		if err != nil {
 			panic(err)
 		}
+
+		validateOpenAPISpec(openAPIDoc)
 
 		schemaSpec, metadata, updatedOpenAPIDoc := providerSchemaGen.PulumiSchema(*openAPIDoc)
 		providerDir := filepath.Join(".", "provider", "cmd", "pulumi-resource-unifi-native")
@@ -90,13 +95,32 @@ func main() {
 	}
 }
 
+func getOpenAPISpec(data []byte) *openapi3.T {
+	doc, err := openapi3.NewLoader().LoadFromData(data)
+	if err != nil {
+		contract.Failf("Failed to load openapi.yml: %v", err)
+	}
+
+	return doc
+}
+
+func validateOpenAPISpec(doc *openapi3.T) {
+	ctx := context.Background()
+	// For the purposes of building a Pulumi schema, we don't care about
+	// examples that may have been added to the spec by the cloud provider,
+	// ignore those as those tend to have errors.
+	if err := doc.Validate(ctx, openapi3.DisableExamplesValidation()); err != nil {
+		contract.Failf("OpenAPI spec failed validation: %v", err)
+	}
+}
+
 func mustWritePulumiSchema(pkgSpec schema.PackageSpec, outdir string) {
 	pkgSpec.Version = ""
 	schemaJSON, err := json.MarshalIndent(pkgSpec, "", "    ")
 	if err != nil {
 		panic(errors.Wrap(err, "marshaling Pulumi schema"))
 	}
-	mustWriteFile(outdir, "schema.json", schemaJSON)
+	mustWriteFile(outdir, "schemav2.json", schemaJSON)
 }
 
 func mustWriteFile(rootDir, filename string, contents []byte) {
