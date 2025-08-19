@@ -113,7 +113,7 @@ func mergeAndExtractSchema(v1OpenApiDoc *openapi3.T, v2OpenApiDoc *openapi3.T) {
 
 	// Write the metadata.json file as well.
 	metadataBytes, _ := json.Marshal(metadata)
-	mustWriteFile(providerDir, "metadata.yml", metadataBytes)
+	mustWriteFile(providerDir, "metadata.json", metadataBytes)
 
 	updatedOpenAPIDocBytes, _ := yaml.Marshal(updatedOpenAPIDoc)
 	// Also copy the raw OpenAPI spec file to the provider dir.

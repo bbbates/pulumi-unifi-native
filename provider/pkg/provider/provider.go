@@ -91,7 +91,9 @@ func (p *unifiNativeProvider) extractOutput(outputs interface{}, id string, reso
 		data["id"] = data["_id"] // need to massage the _id from unifi to match Pulumi's expectations
 		delete(data, "_id")      // leaving the API _id field in the results seems to cause trouble with the refresh operation
 		data["siteId"] = p.siteId
+		data["siteName"] = p.siteId
 		data["site_id"] = p.siteId
+		data["site_name"] = p.siteId
 
 		// If the resource type if provided, and the type is a Device, then remove the unnecessary fields
 		// and change the ID field to use the mac field
@@ -224,8 +226,10 @@ func (p *unifiNativeProvider) OnConfigure(_ context.Context, req *pulumirpc.Conf
 func (p *unifiNativeProvider) GetGlobalPathParams(_ context.Context, _ *pulumirpc.ConfigureRequest) (map[string]string, error) {
 	if p.siteId != "" {
 		return map[string]string{
-			"siteId":  p.siteId,
-			"site_id": p.siteId,
+			"siteId":    p.siteId,
+			"site_id":   p.siteId,
+			"siteName":  p.siteId,
+			"site_name": p.siteId,
 		}, nil
 	} else {
 		return nil, nil

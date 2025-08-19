@@ -122,3 +122,5 @@ require (
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	lukechampine.com/frand v1.5.1 // indirect
 )
+
+replace github.com/cloudy-sky-software/pulschema v0.0.0-20250726035356-40a774f9df11 => ../../pulschema
