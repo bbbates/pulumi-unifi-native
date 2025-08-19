@@ -70,29 +70,54 @@ func main() {
 
 	switch language {
 	case Schema:
-		openAPIDoc := getOpenAPISpec(v2openapiDocBytes)
+		fmt.Printf("Generating schema for legacy API (v1)\n")
+		v1OpenApiDoc := extractFixAndValidateOpenApiSchema(openapiDocBytes, providerSchemaGen.FixOpenAPIDoc)
+		fmt.Printf("Generating schema for API v2\n")
+		v2OpenApiDoc := extractFixAndValidateOpenApiSchema(v2openapiDocBytes, providerSchemaGen.FixV2OpenAPIDoc)
 
-		err := providerSchemaGen.FixV2OpenAPIDoc(openAPIDoc)
-		if err != nil {
-			panic(err)
-		}
-
-		validateOpenAPISpec(openAPIDoc)
-
-		schemaSpec, metadata, updatedOpenAPIDoc := providerSchemaGen.PulumiSchema(*openAPIDoc)
-		providerDir := filepath.Join(".", "provider", "cmd", "pulumi-resource-unifi-native")
-		mustWritePulumiSchema(schemaSpec, providerDir)
-
-		// Write the metadata.json file as well.
-		metadataBytes, _ := json.Marshal(metadata)
-		mustWriteFile(providerDir, "metadata.json", metadataBytes)
-
-		updatedOpenAPIDocBytes, _ := yaml.Marshal(updatedOpenAPIDoc)
-		// Also copy the raw OpenAPI spec file to the provider dir.
-		mustWriteFile(providerDir, "openapi_generated.yml", updatedOpenAPIDocBytes)
+		mergeAndExtractSchema(v1OpenApiDoc, v2OpenApiDoc)
 	default:
 		panic(fmt.Sprintf("Unrecognized language '%s'", language))
 	}
+}
+
+func extractFixAndValidateOpenApiSchema(openApiDocBytes []byte, fixFunc func(openAPIDoc *openapi3.T) error) *openapi3.T {
+	openAPIDoc := getOpenAPISpec(openApiDocBytes)
+
+	err := fixFunc(openAPIDoc)
+	if err != nil {
+		panic(err)
+	}
+
+	validateOpenAPISpec(openAPIDoc)
+
+	return openAPIDoc
+}
+
+func mergeAndExtractSchema(v1OpenApiDoc *openapi3.T, v2OpenApiDoc *openapi3.T) {
+	openApiDoc := v1OpenApiDoc
+
+	for path, pathItem := range v2OpenApiDoc.Paths.Map() {
+		openApiDoc.Paths.Set(path, pathItem)
+	}
+
+	for schemaPath, schemaRef := range v2OpenApiDoc.Components.Schemas {
+		openApiDoc.Components.Schemas[schemaPath] = schemaRef
+	}
+
+	validateOpenAPISpec(openApiDoc)
+
+	schemaSpec, metadata, updatedOpenAPIDoc := providerSchemaGen.PulumiSchema(*openApiDoc)
+	providerDir := filepath.Join(".", "provider", "cmd", "pulumi-resource-unifi-native")
+	mustWritePulumiSchema(schemaSpec, providerDir, "schema.json")
+
+	// Write the metadata.json file as well.
+	metadataBytes, _ := json.Marshal(metadata)
+	mustWriteFile(providerDir, "metadata.yml", metadataBytes)
+
+	updatedOpenAPIDocBytes, _ := yaml.Marshal(updatedOpenAPIDoc)
+	// Also copy the raw OpenAPI spec file to the provider dir.
+	mustWriteFile(providerDir, "openapi_generated.yml", updatedOpenAPIDocBytes)
 }
 
 func getOpenAPISpec(data []byte) *openapi3.T {
@@ -114,13 +139,13 @@ func validateOpenAPISpec(doc *openapi3.T) {
 	}
 }
 
-func mustWritePulumiSchema(pkgSpec schema.PackageSpec, outdir string) {
+func mustWritePulumiSchema(pkgSpec schema.PackageSpec, outdir string, fileName string) {
 	pkgSpec.Version = ""
 	schemaJSON, err := json.MarshalIndent(pkgSpec, "", "    ")
 	if err != nil {
 		panic(errors.Wrap(err, "marshaling Pulumi schema"))
 	}
-	mustWriteFile(outdir, "schemav2.json", schemaJSON)
+	mustWriteFile(outdir, fileName, schemaJSON)
 }
 
 func mustWriteFile(rootDir, filename string, contents []byte) {

@@ -13,6 +13,20 @@ import (
 func FixOpenAPIDoc(openAPIDoc *openapi3.T) error {
 	// So the hosts can be configured, change the server URLs to relative paths.
 	// This will satisfy the Router.FindRoute method
+	//TODO
+
+	// Prefix all paths with /proxy/network/api so they can be merged with the /v2 api
+	for _, path := range openAPIDoc.Paths.InMatchingOrder() {
+		openAPIDoc.Paths.Set("/proxy/network/api"+path, openAPIDoc.Paths.Find(path))
+		openAPIDoc.Paths.Delete(path)
+	}
+
+	// replace the server list to support the mergeable api specs
+	openAPIDoc.Servers = nil
+	openAPIDoc.AddServer(&openapi3.Server{
+		URL:         "https://unifi.ui.com/",
+		Description: "Added by pulumi unifi native provider",
+	})
 
 	return nil
 }
@@ -311,14 +325,18 @@ func FixV2OpenAPIDoc(openAPIDoc *openapi3.T) error {
 		openAPIDoc.Paths.Delete(path)
 	}
 
+	// add the /v2 prefix to the start of each path
+	for _, path := range openAPIDoc.Paths.InMatchingOrder() {
+		openAPIDoc.Paths.Set("/v2"+path, openAPIDoc.Paths.Find(path))
+		openAPIDoc.Paths.Delete(path)
+	}
+
 	// Fix all the component schema names that have space in their names, convert these to CamelCase
 	newSchemas := make(map[string]*openapi3.SchemaRef)
 	for key, schema := range openAPIDoc.Components.Schemas {
 		fmt.Printf("Fixing schema: %s -> %s\n", key, pkg.ToPascalCase(key))
 		newSchemas[pkg.ToPascalCase(key)] = schema
-
 	}
-
 	openAPIDoc.Components.Schemas = newSchemas
 
 	return nil
