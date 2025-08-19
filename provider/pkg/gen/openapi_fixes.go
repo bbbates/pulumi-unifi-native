@@ -254,6 +254,7 @@ var V2PathsToRemove = []string{
 	"/api/site/{siteName}/uid/client-info/{clientMac}",
 	"/api/site/{siteName}/uid/vpn-server/kick/{username}",
 	"/api/site/{siteName}/uid/wlan",
+	"/api/site/{siteName}/uid/wlan/{wlanId}",
 	"/api/site/{siteName}/utilization/last_days",
 	"/api/site/{siteName}/utilization/time_range",
 	"/api/site/{siteName}/vendor-ids",
@@ -316,6 +317,11 @@ var V2PathsToRemove = []string{
 	"/api/site/{siteName}/vpn/openvpn/configuration",
 }
 
+var V2ProblematicSchemasToRemove = []string{
+	"WLAN Configuration",
+	"UnifiDeviceDto",
+}
+
 func FixV2OpenAPIDoc(openAPIDoc *openapi3.T) error {
 	// remove license from header, just causes issues
 	openAPIDoc.Info.License = nil
@@ -331,6 +337,16 @@ func FixV2OpenAPIDoc(openAPIDoc *openapi3.T) error {
 		openAPIDoc.Paths.Delete(path)
 	}
 
+	// remove problematic schemas that aren't used and cause issues if left
+	// TODO: this should be improved to remove all orphaned schemas, to tidy things up
+	for _, schemaRef := range V2ProblematicSchemasToRemove {
+		delete(openAPIDoc.Components.Schemas, schemaRef)
+		fmt.Printf("Removing schema: %s\n", schemaRef)
+		if openAPIDoc.Components.Schemas[schemaRef] != nil {
+			fmt.Printf(">>>>> %s still exists!\n", schemaRef)
+		}
+	}
+
 	// Fix all the component schema names that have space in their names, convert these to CamelCase
 	newSchemas := make(map[string]*openapi3.SchemaRef)
 	for key, schema := range openAPIDoc.Components.Schemas {
@@ -341,3 +357,9 @@ func FixV2OpenAPIDoc(openAPIDoc *openapi3.T) error {
 
 	return nil
 }
+
+// TODO Fixes v2:
+/*
+- "Configuration" Wlan Load balancing namespace?
+-
+*/

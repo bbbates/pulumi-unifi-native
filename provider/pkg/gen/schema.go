@@ -165,7 +165,7 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 	openAPICtx := &openapigen.OpenAPIContext{
 		Doc:                       openapiDoc,
 		Pkg:                       &pkg,
-		ExcludedPaths:             []string{},
+		ExcludedPaths:             V2PathsToRemove,
 		UseParentResourceAsModule: true,
 		AllowedPluralResources: []string{
 			"Ips",
