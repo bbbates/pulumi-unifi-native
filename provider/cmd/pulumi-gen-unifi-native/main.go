@@ -5,11 +5,10 @@ package main
 import (
 	"context"
 	_ "embed"
-	"github.com/getkin/kin-openapi/openapi3"
-
 	"encoding/json"
 	"flag"
 	"fmt"
+	"github.com/getkin/kin-openapi/openapi3"
 	"os"
 	"path/filepath"
 
@@ -116,6 +115,9 @@ func mergeAndExtractSchema(v1OpenApiDoc *openapi3.T, v2OpenApiDoc *openapi3.T) {
 	mustWriteFile(providerDir, "metadata.json", metadataBytes)
 
 	updatedOpenAPIDocBytes, _ := yaml.Marshal(updatedOpenAPIDoc)
+
+	// load the spec again to force full validation to run
+	_ = getOpenAPISpec(updatedOpenAPIDocBytes)
 	// Also copy the raw OpenAPI spec file to the provider dir.
 	mustWriteFile(providerDir, "openapi_generated.yml", updatedOpenAPIDocBytes)
 }
