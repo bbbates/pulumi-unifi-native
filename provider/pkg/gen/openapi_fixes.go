@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"github.com/cloudy-sky-software/pulschema/pkg"
 	"github.com/getkin/kin-openapi/openapi3"
+	"github.com/golang/glog"
+	"strings"
 )
 
 // FixOpenAPIDoc applies patches to the raw OpenAPI spec
@@ -38,6 +40,7 @@ var V2PathsToRemove = []string{
 	"/api/alarm-manager/scope/clients",
 	"/api/alarm-manager/scope/devices",
 	"/api/alarm-manager/scope/sites",
+	"/api/alarm-manager/modify-alarms",
 	"/api/cloud/application/event/{eventName}",
 	"/api/device_info",
 	"/api/features",
@@ -49,12 +52,14 @@ var V2PathsToRemove = []string{
 	"/api/magicsitetositevpn/speedtest/stop",
 	"/api/mfa/email/{id}/send",
 	"/api/mfa/sms/{id}/send",
+	"/api/mfa/push/{id}/send",
 	"/api/notifications",
 	"/api/notifications/dismiss-global",
 	"/api/notifications/{name}",
 	"/api/radio-ai/optimize/{calculationId}",
 	"/api/settings/super-mgmt/defaults",
 	"/api/sites",
+	"/api/sites/overview",
 	"/api/site/{siteName}/access-points/{apMac}/wifi-activity",
 	"/api/site/{siteName}/access-points/{apMac}/wifi-stats",
 	"/api/site/{siteName}/acl-rules/batch-delete",
@@ -96,6 +101,7 @@ var V2PathsToRemove = []string{
 	"/api/site/{siteName}/device/{mac}/gateway/adopt-as-secondary",
 	"/api/site/{siteName}/device/{mac}/wifi_experience/incorrect",
 	"/api/site/{siteName}/device/{mac}/wireless-links",
+	"/api/site/{siteName}/device/{mac}/ble",
 	"/api/site/{siteName}/dhcp-import",
 	"/api/site/{siteName}/dhcp/resolve-wan-subnet-conflict",
 	"/api/site/{siteName}/downtime",
@@ -130,6 +136,7 @@ var V2PathsToRemove = []string{
 	"/api/site/{siteName}/isp/status",
 	"/api/site/{siteName}/lan/defaults",
 	"/api/site/{siteName}/lan/enriched-configuration",
+	"/api/site/{siteName}/lan/enable-lte-failover",
 	"/api/site/{siteName}/lan/migrate-to-layer3/{networkConfId}",
 	"/api/site/{siteName}/lcm/wakeup",
 	"/api/site/{siteName}/loop-detection/info",
@@ -149,6 +156,7 @@ var V2PathsToRemove = []string{
 	"/api/site/{siteName}/notifications",
 	"/api/site/{siteName}/ospf/neighbors",
 	"/api/site/{siteName}/pcap-get/{mac}",
+	"/api/site/{siteName}/pcap-start",
 	"/api/site/{siteName}/pcap-status/{mac}",
 	"/api/site/{siteName}/pcap-stop/{mac}",
 	"/api/site/{siteName}/pcap-upload/{mac}",
@@ -225,6 +233,7 @@ var V2PathsToRemove = []string{
 	"/api/site/{siteName}/system-log/network-ai/logs",
 	"/api/site/{siteName}/system-log/next-ai-alert",
 	"/api/site/{siteName}/system-log/remote-settings",
+	"/api/site/{siteName}/system-log/setting", // needs some schemas that don't work
 	"/api/site/{siteName}/system-log/setting/defaults",
 	"/api/site/{siteName}/system-log/system-critical-alert",
 	"/api/site/{siteName}/system-log/threat-alert",
@@ -271,6 +280,7 @@ var V2PathsToRemove = []string{
 	"/api/site/{siteName}/wan/load-balancing/status",
 	"/api/site/{siteName}/wan/magic/speedtest",
 	"/api/site/{siteName}/wan/magic/subscription",
+	"/api/site/{siteName}/wan/provider-capabilities",
 	"/api/site/{siteName}/wan/provider-capabilities/legacy",
 	"/api/site/{siteName}/wan-slas/batch-delete",
 	"/api/site/{siteName}/wan/{wanNetworkGroup}/isp-status",
@@ -320,6 +330,42 @@ var V2PathsToRemove = []string{
 var V2ProblematicSchemasToRemove = []string{
 	"WLAN Configuration",
 	"UnifiDeviceDto",
+	"AP scan neighbors",
+	"Alert setting update payload",
+	"TrafficFlowDto",
+	"TrafficFlowEndpointDto",
+	"TrafficFlowBasicEndpointDto",
+	"TrafficFlowClientCounterDto",
+	"HostFingerprintDto",
+	"ClientExcludedIpDto",
+	"Client Ping Latency Result",
+	"Filtering Insights watchlist entry",
+	"NetworkConf",
+	"super",
+	"WifiClientDetailsDto",
+	"WifiConnectivityEventsGroupDto",
+	"ClientTrafficDto",
+	"DeviceListDto",
+	"VisualProgrammingResponseDto",
+	"Enriched LAN Configuration",
+	"Enriched WAN Configuration",
+	"EnrichedWlanConfiguration",
+	"ExcludedIpDto",
+	"Feature limitation",
+	"Feature with description",
+	"Filtering Insights statistics",
+	"Filtering Insights watchlist",
+	"Gateway Engine Log",
+	"Gateway Engine Utilization",
+	"SpeedtestDto",
+	"IspStatusDto",
+	"ImmutableListSpeedtestDto",
+	"Historical speedtest results",
+	"LastSpeedTestDto",
+	"SpeedTestOverviewDto",
+	"ISP utilization",
+	"ImmutableListWAN Utilization Info",
+	"Map of MAC to Alias",
 }
 
 func FixV2OpenAPIDoc(openAPIDoc *openapi3.T) error {
@@ -331,31 +377,73 @@ func FixV2OpenAPIDoc(openAPIDoc *openapi3.T) error {
 		openAPIDoc.Paths.Delete(path)
 	}
 
-	// add the /v2 prefix to the start of each path
-	for _, path := range openAPIDoc.Paths.InMatchingOrder() {
-		openAPIDoc.Paths.Set("/v2"+path, openAPIDoc.Paths.Find(path))
-		openAPIDoc.Paths.Delete(path)
-	}
-
 	// remove problematic schemas that aren't used and cause issues if left
 	// TODO: this should be improved to remove all orphaned schemas, to tidy things up
 	for _, schemaRef := range V2ProblematicSchemasToRemove {
 		delete(openAPIDoc.Components.Schemas, schemaRef)
-		fmt.Printf("Removing schema: %s\n", schemaRef)
-		if openAPIDoc.Components.Schemas[schemaRef] != nil {
-			fmt.Printf(">>>>> %s still exists!\n", schemaRef)
+	}
+
+	// add the /v2 prefix to the start of each path
+	// and TODO: fix request body and response body schema references
+	for _, path := range openAPIDoc.Paths.InMatchingOrder() {
+		pathItem := openAPIDoc.Paths.Find(path)
+		openAPIDoc.Paths.Set("/v2"+path, pathItem)
+		openAPIDoc.Paths.Delete(path)
+
+		if pathItem.Put != nil && pathItem.Put.RequestBody != nil {
+			updateRefForRequestBody(pathItem.Put.RequestBody, path, "PUT")
+			updateRefForResponseBody(pathItem.Put.Responses, path, "PUT")
+		} else if pathItem.Post != nil && pathItem.Post.RequestBody != nil {
+			updateRefForRequestBody(pathItem.Post.RequestBody, path, "POST")
+			updateRefForResponseBody(pathItem.Post.Responses, path, "POST")
+		} else if pathItem.Get != nil && pathItem.Get.Responses != nil {
+			updateRefForResponseBody(pathItem.Get.Responses, path, "GET")
 		}
 	}
 
-	// Fix all the component schema names that have space in their names, convert these to CamelCase
+	// Fix all the remaining component schema names that have space in their names, convert these to CamelCase
 	newSchemas := make(map[string]*openapi3.SchemaRef)
 	for key, schema := range openAPIDoc.Components.Schemas {
-		fmt.Printf("Fixing schema: %s -> %s\n", key, pkg.ToPascalCase(key))
-		newSchemas[pkg.ToPascalCase(key)] = schema
+		newRef := pkg.ToPascalCase(key)
+		schema.Ref = fmt.Sprintf("#/components/schemas/%s", newRef)
+		newSchemas[newRef] = schema
+
+		// TODO walk the schema properties and fix ref names
+
 	}
 	openAPIDoc.Components.Schemas = newSchemas
 
 	return nil
+}
+
+func updateRefForResponseBody(responses *openapi3.Responses, path string, method string) {
+	okStatusCode := 200
+	if responses.Status(okStatusCode) == nil {
+		okStatusCode = 201
+	}
+	body := responses.Status(okStatusCode).Value.Content.Get("application/json")
+	updateBodyRef(body, fmt.Sprintf("responseBody %d", okStatusCode), method, path)
+}
+
+func updateRefForRequestBody(requestBody *openapi3.RequestBodyRef, path string, method string) {
+	body := requestBody.Value.Content.Get("application/json")
+	updateBodyRef(body, "responseBody", method, path)
+}
+
+func updateBodyRef(body *openapi3.MediaType, logNote string, method string, path string) {
+	var ref string
+	var updater func(string)
+
+	if body.Schema.Value.Items != nil {
+		ref = body.Schema.Value.Items.Ref
+		updater = func(ref string) { body.Schema.Value.Items.Ref = ref }
+	} else {
+		ref = body.Schema.Ref
+		updater = func(ref string) { body.Schema.Ref = ref }
+	}
+	refId := strings.Split(ref, "/")[len(strings.Split(ref, "/"))-1]
+	glog.Infof("%s %s %s $Ref: %s -> %s", method, path, logNote, ref, pkg.ToPascalCase(refId))
+	updater(fmt.Sprintf("#/components/schemas/%s", pkg.ToPascalCase(refId)))
 }
 
 // TODO Fixes v2:

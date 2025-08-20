@@ -22,7 +22,6 @@
                 "apgroups": "Apgroups",
                 "auto_speedtest": "AutoSpeedtest",
                 "baresip": "Baresip",
-                "ble": "Ble",
                 "broadcast": "Broadcast",
                 "broadcastgroup": "Broadcastgroup",
                 "channelplan": "Channelplan",
@@ -42,7 +41,6 @@
                 "dpigroup": "Dpigroup",
                 "dynamicdns": "Dynamicdns",
                 "element_adopt": "ElementAdopt",
-                "enable-lte-failover": "EnableLteFailover",
                 "ether_lighting": "EtherLighting",
                 "evaluation_score": "EvaluationScore",
                 "excluded-ips": "ExcludedIps",
@@ -78,7 +76,6 @@
                 "micro-segment-group": "MicroSegmentGroup",
                 "micro-segment-groups": "MicroSegmentGroups",
                 "models": "Models",
-                "modify-alarms": "ModifyAlarms",
                 "nat": "Nat",
                 "netflow": "Netflow",
                 "network": "Network",
@@ -88,8 +85,6 @@
                 "networkconf": "Networkconf",
                 "networkgroups": "Networkgroups",
                 "ntp": "Ntp",
-                "overview": "Overview",
-                "pcap-start": "PcapStart",
                 "poe-info": "PoeInfo",
                 "porta": "Porta",
                 "portconf": "Portconf",
@@ -97,7 +92,6 @@
                 "power": "Power",
                 "predefined": "Predefined",
                 "profiles": "Profiles",
-                "provider-capabilities": "ProviderCapabilities",
                 "qos-rules": "QosRules",
                 "radio_ai": "RadioAi",
                 "radius": "Radius",
@@ -107,8 +101,6 @@
                 "routing": "Routing",
                 "rsyslogd": "Rsyslogd",
                 "scheduletask": "Scheduletask",
-                "send": "Send",
-                "setting": "Setting",
                 "shape": "Shape",
                 "snmp": "Snmp",
                 "spatialrecord": "Spatialrecord",
@@ -11223,226 +11215,6 @@
             },
             "type": "object"
         },
-        "unifi-native:overview:SiteOverviewCountsDto": {
-            "properties": {
-                "criticalNotification": {
-                    "type": "integer"
-                },
-                "gatewayDevice": {
-                    "type": "integer"
-                },
-                "guestClient": {
-                    "type": "integer"
-                },
-                "lanConfiguration": {
-                    "type": "integer"
-                },
-                "offlineDevice": {
-                    "type": "integer"
-                },
-                "offlineGatewayDevice": {
-                    "type": "integer"
-                },
-                "offlineWifiDevice": {
-                    "type": "integer"
-                },
-                "offlineWiredDevice": {
-                    "type": "integer"
-                },
-                "pendingUpdateDevice": {
-                    "type": "integer"
-                },
-                "totalDevice": {
-                    "type": "integer"
-                },
-                "wanConfiguration": {
-                    "type": "integer"
-                },
-                "wifiClient": {
-                    "type": "integer"
-                },
-                "wifiConfiguration": {
-                    "type": "integer"
-                },
-                "wifiDevice": {
-                    "type": "integer"
-                },
-                "wiredClient": {
-                    "type": "integer"
-                },
-                "wiredDevice": {
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "unifi-native:overview:SiteOverviewDto": {
-            "properties": {
-                "counts": {
-                    "$ref": "#/types/unifi-native:overview:SiteOverviewCountsDto"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "percentages": {
-                    "$ref": "#/types/unifi-native:overview:SiteOverviewPercentagesDto"
-                }
-            },
-            "type": "object"
-        },
-        "unifi-native:overview:SiteOverviewPercentagesDto": {
-            "properties": {
-                "successfulAssociation": {
-                    "type": "number"
-                },
-                "txRetry": {
-                    "type": "number"
-                },
-                "wanUptime": {
-                    "type": "number"
-                }
-            },
-            "type": "object"
-        },
-        "unifi-native:overview:SortByField": {
-            "type": "string",
-            "enum": [
-                {
-                    "name": "Description",
-                    "value": "DESCRIPTION"
-                },
-                {
-                    "name": "CriticalNotificationCount",
-                    "value": "CRITICAL_NOTIFICATION_COUNT"
-                },
-                {
-                    "name": "GatewayDeviceCount",
-                    "value": "GATEWAY_DEVICE_COUNT"
-                },
-                {
-                    "name": "WifiDeviceCount",
-                    "value": "WIFI_DEVICE_COUNT"
-                },
-                {
-                    "name": "WiredDeviceCount",
-                    "value": "WIRED_DEVICE_COUNT"
-                },
-                {
-                    "name": "TotalDeviceCount",
-                    "value": "TOTAL_DEVICE_COUNT"
-                },
-                {
-                    "name": "OfflineGatewayDeviceCount",
-                    "value": "OFFLINE_GATEWAY_DEVICE_COUNT"
-                },
-                {
-                    "name": "OfflineWifiDeviceCount",
-                    "value": "OFFLINE_WIFI_DEVICE_COUNT"
-                },
-                {
-                    "name": "OfflineWiredDeviceCount",
-                    "value": "OFFLINE_WIRED_DEVICE_COUNT"
-                },
-                {
-                    "name": "OfflineDeviceCount",
-                    "value": "OFFLINE_DEVICE_COUNT"
-                },
-                {
-                    "name": "PendingUpdateDeviceCount",
-                    "value": "PENDING_UPDATE_DEVICE_COUNT"
-                },
-                {
-                    "name": "WanConfigurationCount",
-                    "value": "WAN_CONFIGURATION_COUNT"
-                },
-                {
-                    "name": "LanConfigurationCount",
-                    "value": "LAN_CONFIGURATION_COUNT"
-                },
-                {
-                    "name": "WifiConfigurationCount",
-                    "value": "WIFI_CONFIGURATION_COUNT"
-                },
-                {
-                    "name": "WifiClientCount",
-                    "value": "WIFI_CLIENT_COUNT"
-                },
-                {
-                    "name": "WiredClientCount",
-                    "value": "WIRED_CLIENT_COUNT"
-                },
-                {
-                    "name": "GuestClientCount",
-                    "value": "GUEST_CLIENT_COUNT"
-                },
-                {
-                    "name": "WanUptimePercentage",
-                    "value": "WAN_UPTIME_PERCENTAGE"
-                },
-                {
-                    "name": "TxRetryPercentage",
-                    "value": "TX_RETRY_PERCENTAGE"
-                },
-                {
-                    "name": "SuccessfulAssociation",
-                    "value": "SUCCESSFUL_ASSOCIATION"
-                }
-            ]
-        },
-        "unifi-native:overview:SortDirection": {
-            "type": "string",
-            "enum": [
-                {
-                    "name": "Ascending",
-                    "value": "ASCENDING"
-                },
-                {
-                    "name": "Descending",
-                    "value": "DESCENDING"
-                }
-            ]
-        },
-        "unifi-native:pcap-start:RadioBandsItem": {
-            "type": "string",
-            "enum": [
-                {
-                    "name": "Ad",
-                    "value": "ad"
-                },
-                {
-                    "name": "Na",
-                    "value": "na"
-                },
-                {
-                    "name": "Ng",
-                    "value": "ng"
-                },
-                {
-                    "name": "6e",
-                    "value": "6e"
-                }
-            ]
-        },
-        "unifi-native:pcap-start:TrafficType": {
-            "description": "Type of traffic to capture",
-            "type": "string",
-            "enum": [
-                {
-                    "name": "Wired",
-                    "value": "WIRED"
-                },
-                {
-                    "name": "Wireless",
-                    "value": "WIRELESS"
-                }
-            ]
-        },
         "unifi-native:poe-info:PoeDeviceInfoDto": {
             "properties": {
                 "poeHostDeviceInfo": {
@@ -13235,71 +13007,6 @@
                 }
             },
             "type": "object"
-        },
-        "unifi-native:setting:AlertSettingPreference": {
-            "type": "string",
-            "enum": [
-                {
-                    "name": "Off",
-                    "value": "OFF"
-                },
-                {
-                    "name": "Auto",
-                    "value": "AUTO"
-                },
-                {
-                    "name": "On",
-                    "value": "ON"
-                }
-            ]
-        },
-        "unifi-native:setting:SystemLogSettingPreference": {
-            "type": "string",
-            "enum": [
-                {
-                    "name": "Off",
-                    "value": "OFF"
-                },
-                {
-                    "name": "Auto",
-                    "value": "AUTO"
-                },
-                {
-                    "name": "On",
-                    "value": "ON"
-                }
-            ]
-        },
-        "unifi-native:setting:SystemLogSettings": {
-            "properties": {
-                "SystemLogEventSettings": {
-                    "$ref": "pulumi.json#/Any"
-                },
-                "SystemLogSettingPreference": {
-                    "$ref": "#/types/unifi-native:setting:SystemLogSettingsSystemLogSettingPreference"
-                }
-            },
-            "type": "object",
-            "required": [
-                "SystemLogSettingPreference"
-            ]
-        },
-        "unifi-native:setting:SystemLogSettingsSystemLogSettingPreference": {
-            "type": "string",
-            "enum": [
-                {
-                    "name": "Off",
-                    "value": "OFF"
-                },
-                {
-                    "name": "Auto",
-                    "value": "AUTO"
-                },
-                {
-                    "name": "On",
-                    "value": "ON"
-                }
-            ]
         },
         "unifi-native:shape:FloorPlanShapeDto": {
             "properties": {
@@ -17927,25 +17634,6 @@
                 }
             }
         },
-        "unifi-native:ble:BleSetting": {
-            "properties": {
-                "useBleSetupConfiguration": {
-                    "type": "boolean"
-                }
-            },
-            "type": "object",
-            "inputProperties": {
-                "mac": {
-                    "type": "string"
-                },
-                "siteName": {
-                    "type": "string"
-                },
-                "useBleSetupConfiguration": {
-                    "type": "boolean"
-                }
-            }
-        },
         "unifi-native:broadcast:SettingBroadcast": {
             "properties": {
                 "Id": {
@@ -19784,34 +19472,6 @@
                     "type": "string"
                 }
             }
-        },
-        "unifi-native:enable-lte-failover:EnableLteFailoverForNetwork": {
-            "properties": {
-                "ListOfNetworkConfIDs": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "type": "object",
-            "required": [
-                "ListOfNetworkConfIDs"
-            ],
-            "inputProperties": {
-                "ListOfNetworkConfIDs": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "siteName": {
-                    "type": "string"
-                }
-            },
-            "requiredInputs": [
-                "ListOfNetworkConfIDs"
-            ]
         },
         "unifi-native:ether_lighting:SettingEtherLighting": {
             "properties": {
@@ -25223,138 +24883,6 @@
                 }
             }
         },
-        "unifi-native:overview:ListSitesOverview": {
-            "properties": {
-                "data": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/unifi-native:overview:SiteOverviewDto"
-                    }
-                },
-                "hasNext": {
-                    "type": "boolean"
-                },
-                "orMore": {
-                    "type": "boolean",
-                    "description": "True if there can be more elements than based on the total number of page"
-                },
-                "pageNumber": {
-                    "type": "integer"
-                },
-                "pageSize": {
-                    "type": "integer"
-                },
-                "searchText": {
-                    "type": "string"
-                },
-                "sortByField": {
-                    "$ref": "#/types/unifi-native:overview:SortByField"
-                },
-                "sortDirection": {
-                    "$ref": "#/types/unifi-native:overview:SortDirection"
-                },
-                "totalElementCount": {
-                    "type": "integer",
-                    "description": "Number of total matched elements searching by the given criteria"
-                },
-                "totalPageCount": {
-                    "type": "integer"
-                }
-            },
-            "type": "object",
-            "inputProperties": {
-                "pageNumber": {
-                    "type": "integer"
-                },
-                "pageSize": {
-                    "type": "integer"
-                },
-                "searchText": {
-                    "type": "string"
-                },
-                "sortByField": {
-                    "$ref": "#/types/unifi-native:overview:SortByField"
-                },
-                "sortDirection": {
-                    "$ref": "#/types/unifi-native:overview:SortDirection"
-                }
-            }
-        },
-        "unifi-native:pcap-start:StartCapture": {
-            "properties": {
-                "duration": {
-                    "type": "integer",
-                    "description": "Duration of the packet capture in seconds"
-                },
-                "mac": {
-                    "type": "string",
-                    "description": "MAC address of the device to capture packets"
-                },
-                "maxSize": {
-                    "type": "integer",
-                    "description": "Maximum size of the packet capture file in kilobytes"
-                },
-                "networkId": {
-                    "type": "string",
-                    "description": "Network ID of the network to capture packets"
-                },
-                "radioBands": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/unifi-native:pcap-start:RadioBandsItem"
-                    },
-                    "description": "Radios to capture packets from"
-                },
-                "trafficType": {
-                    "$ref": "#/types/unifi-native:pcap-start:TrafficType",
-                    "description": "Type of traffic to capture"
-                }
-            },
-            "type": "object",
-            "required": [
-                "mac",
-                "networkId",
-                "trafficType"
-            ],
-            "inputProperties": {
-                "duration": {
-                    "type": "integer",
-                    "description": "Duration of the packet capture in seconds"
-                },
-                "mac": {
-                    "type": "string",
-                    "description": "MAC address of the device to capture packets"
-                },
-                "maxSize": {
-                    "type": "integer",
-                    "description": "Maximum size of the packet capture file in kilobytes"
-                },
-                "networkId": {
-                    "type": "string",
-                    "description": "Network ID of the network to capture packets"
-                },
-                "radioBands": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/unifi-native:pcap-start:RadioBandsItem"
-                    },
-                    "description": "Radios to capture packets from"
-                },
-                "siteName": {
-                    "type": "string",
-                    "description": "Site Name"
-                },
-                "trafficType": {
-                    "$ref": "#/types/unifi-native:pcap-start:TrafficType",
-                    "description": "Type of traffic to capture"
-                }
-            },
-            "requiredInputs": [
-                "mac",
-                "networkId",
-                "trafficType"
-            ]
-        },
         "unifi-native:porta:SettingPorta": {
             "properties": {
                 "Id": {
@@ -25962,36 +25490,6 @@
             },
             "requiredInputs": [
                 "authServers"
-            ]
-        },
-        "unifi-native:provider-capabilities:ActiveWanProviderCapabilitie": {
-            "properties": {
-                "downloadKilobitsPerSecond": {
-                    "type": "integer"
-                },
-                "uploadKilobitsPerSecond": {
-                    "type": "integer"
-                }
-            },
-            "type": "object",
-            "required": [
-                "downloadKilobitsPerSecond",
-                "uploadKilobitsPerSecond"
-            ],
-            "inputProperties": {
-                "downloadKilobitsPerSecond": {
-                    "type": "integer"
-                },
-                "siteName": {
-                    "type": "string"
-                },
-                "uploadKilobitsPerSecond": {
-                    "type": "integer"
-                }
-            },
-            "requiredInputs": [
-                "downloadKilobitsPerSecond",
-                "uploadKilobitsPerSecond"
             ]
         },
         "unifi-native:qos-rules:QosRule": {
@@ -27025,63 +26523,6 @@
                     }
                 }
             }
-        },
-        "unifi-native:send:SendMfaPush": {
-            "properties": {
-                "mfaCookie": {
-                    "type": "string"
-                }
-            },
-            "type": "object",
-            "inputProperties": {
-                "id": {
-                    "type": "string"
-                },
-                "mfaCookie": {
-                    "type": "string"
-                }
-            }
-        },
-        "unifi-native:setting:SystemLogSetting": {
-            "properties": {
-                "AlertEventSettings": {
-                    "$ref": "pulumi.json#/Any"
-                },
-                "AlertSettingPreference": {
-                    "$ref": "#/types/unifi-native:setting:AlertSettingPreference"
-                },
-                "AlertTypeSettings": {
-                    "$ref": "pulumi.json#/Any"
-                },
-                "SystemLogEventSettings": {
-                    "$ref": "pulumi.json#/Any"
-                },
-                "SystemLogSettingPreference": {
-                    "$ref": "#/types/unifi-native:setting:SystemLogSettingPreference"
-                }
-            },
-            "type": "object",
-            "required": [
-                "AlertSettingPreference",
-                "SystemLogSettingPreference"
-            ],
-            "inputProperties": {
-                "AlertEventSettings": {
-                    "$ref": "pulumi.json#/Any"
-                },
-                "AlertSettingPreference": {
-                    "$ref": "#/types/unifi-native:setting:AlertSettingPreference"
-                },
-                "AlertTypeSettings": {
-                    "$ref": "pulumi.json#/Any"
-                },
-                "siteName": {
-                    "type": "string"
-                }
-            },
-            "requiredInputs": [
-                "AlertSettingPreference"
-            ]
         },
         "unifi-native:snmp:SettingSnmp": {
             "properties": {
@@ -32473,21 +31914,6 @@
             },
             "outputs": {
                 "$ref": "#/types/unifi-native:scheduletask:ScheduleTaskResponse"
-            }
-        },
-        "unifi-native:setting:getSystemLogSetting": {
-            "inputs": {
-                "properties": {
-                    "siteName": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "siteName"
-                ]
-            },
-            "outputs": {
-                "$ref": "#/types/unifi-native:setting:SystemLogSettings"
             }
         },
         "unifi-native:shape:listAllShapes": {
