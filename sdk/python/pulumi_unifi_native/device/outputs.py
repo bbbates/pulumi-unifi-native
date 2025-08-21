@@ -15,14 +15,12 @@ else:
     from typing_extensions import NotRequired, TypedDict, TypeAlias
 from .. import _utilities
 from . import outputs
-from ._enums import *
 
 __all__ = [
     'Device',
     'DeviceConfigNetwork',
     'DeviceEtherLighting',
     'DeviceEthernetOverrides',
-    'DeviceLogDto',
     'DeviceOutletOverrides',
     'DevicePortOverrides',
     'DeviceQOSMarking',
@@ -34,7 +32,6 @@ __all__ = [
     'DeviceRpsOverride',
     'DeviceRpsPortTable',
     'Meta',
-    'UnifiDeviceDto',
 ]
 
 @pulumi.output_type
@@ -929,67 +926,6 @@ class DeviceEthernetOverrides(dict):
     @pulumi.getter
     def networkgroup(self) -> Optional[builtins.str]:
         return pulumi.get(self, "networkgroup")
-
-
-@pulumi.output_type
-class DeviceLogDto(dict):
-    def __init__(__self__, *,
-                 id: Optional[builtins.str] = None,
-                 key: Optional['DeviceLogDtoKey'] = None,
-                 message: Optional[builtins.str] = None,
-                 message_raw: Optional[builtins.str] = None,
-                 parameters: Optional[Any] = None,
-                 target: Optional['DeviceLogDtoTarget'] = None,
-                 timestamp: Optional[builtins.int] = None):
-        if id is not None:
-            pulumi.set(__self__, "id", id)
-        if key is not None:
-            pulumi.set(__self__, "key", key)
-        if message is not None:
-            pulumi.set(__self__, "message", message)
-        if message_raw is not None:
-            pulumi.set(__self__, "message_raw", message_raw)
-        if parameters is not None:
-            pulumi.set(__self__, "parameters", parameters)
-        if target is not None:
-            pulumi.set(__self__, "target", target)
-        if timestamp is not None:
-            pulumi.set(__self__, "timestamp", timestamp)
-
-    @property
-    @pulumi.getter
-    def id(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter
-    def key(self) -> Optional['DeviceLogDtoKey']:
-        return pulumi.get(self, "key")
-
-    @property
-    @pulumi.getter
-    def message(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "message")
-
-    @property
-    @pulumi.getter(name="messageRaw")
-    def message_raw(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "message_raw")
-
-    @property
-    @pulumi.getter
-    def parameters(self) -> Optional[Any]:
-        return pulumi.get(self, "parameters")
-
-    @property
-    @pulumi.getter
-    def target(self) -> Optional['DeviceLogDtoTarget']:
-        return pulumi.get(self, "target")
-
-    @property
-    @pulumi.getter
-    def timestamp(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "timestamp")
 
 
 @pulumi.output_type
@@ -2069,204 +2005,5 @@ class Meta(dict):
     @pulumi.getter
     def rc(self) -> Optional[builtins.str]:
         return pulumi.get(self, "rc")
-
-
-@pulumi.output_type
-class UnifiDeviceDto(dict):
-    def __init__(__self__, *,
-                 controller_that_could_manage_this_device: Optional['UnifiDeviceDtoControllerThatCouldManageThisDevice'] = None,
-                 device_ip_v4_lease_expiration_timestamp_in_seconds: Optional[builtins.int] = None,
-                 device_model_shortname: Optional[builtins.str] = None,
-                 device_name: Optional[builtins.str] = None,
-                 download_speed_in_bytes_per_second: Optional[builtins.int] = None,
-                 experience: Optional[builtins.int] = None,
-                 firmware_version: Optional[builtins.str] = None,
-                 firmware_version_in_user_friendly_form: Optional[builtins.str] = None,
-                 ip_address: Optional[builtins.str] = None,
-                 mac_address: Optional[builtins.str] = None,
-                 network_id_where_the_device_is_connected_to: Optional[builtins.str] = None,
-                 network_name_where_the_device_is_connected_to: Optional[builtins.str] = None,
-                 object_id: Optional[builtins.str] = None,
-                 stacking_group_that_the_device_belongs_to: Optional[builtins.str] = None,
-                 state: Optional[builtins.int] = None,
-                 upload_speed_in_bytes: Optional[builtins.int] = None,
-                 uptime_in_seconds: Optional[builtins.int] = None,
-                 _24h_usage_in_bytes_per_second: Optional[builtins.float] = None,
-                 default: Optional[builtins.bool] = None,
-                 device_type: Optional['UnifiDeviceDtoDeviceType'] = None,
-                 last_connection_network_id: Optional[builtins.str] = None,
-                 last_connection_network_name: Optional[builtins.str] = None,
-                 last_seen: Optional[builtins.int] = None):
-        """
-        :param 'UnifiDeviceDtoDeviceType' device_type: Information whether the device is considered a client or device from the NET point of view
-        :param builtins.int last_seen: Information about when the device was seen for the last time in unix timestamp in seconds
-        """
-        if controller_that_could_manage_this_device is not None:
-            pulumi.set(__self__, "controller_that_could_manage_this_device", controller_that_could_manage_this_device)
-        if device_ip_v4_lease_expiration_timestamp_in_seconds is not None:
-            pulumi.set(__self__, "device_ip_v4_lease_expiration_timestamp_in_seconds", device_ip_v4_lease_expiration_timestamp_in_seconds)
-        if device_model_shortname is not None:
-            pulumi.set(__self__, "device_model_shortname", device_model_shortname)
-        if device_name is not None:
-            pulumi.set(__self__, "device_name", device_name)
-        if download_speed_in_bytes_per_second is not None:
-            pulumi.set(__self__, "download_speed_in_bytes_per_second", download_speed_in_bytes_per_second)
-        if experience is not None:
-            pulumi.set(__self__, "experience", experience)
-        if firmware_version is not None:
-            pulumi.set(__self__, "firmware_version", firmware_version)
-        if firmware_version_in_user_friendly_form is not None:
-            pulumi.set(__self__, "firmware_version_in_user_friendly_form", firmware_version_in_user_friendly_form)
-        if ip_address is not None:
-            pulumi.set(__self__, "ip_address", ip_address)
-        if mac_address is not None:
-            pulumi.set(__self__, "mac_address", mac_address)
-        if network_id_where_the_device_is_connected_to is not None:
-            pulumi.set(__self__, "network_id_where_the_device_is_connected_to", network_id_where_the_device_is_connected_to)
-        if network_name_where_the_device_is_connected_to is not None:
-            pulumi.set(__self__, "network_name_where_the_device_is_connected_to", network_name_where_the_device_is_connected_to)
-        if object_id is not None:
-            pulumi.set(__self__, "object_id", object_id)
-        if stacking_group_that_the_device_belongs_to is not None:
-            pulumi.set(__self__, "stacking_group_that_the_device_belongs_to", stacking_group_that_the_device_belongs_to)
-        if state is not None:
-            pulumi.set(__self__, "state", state)
-        if upload_speed_in_bytes is not None:
-            pulumi.set(__self__, "upload_speed_in_bytes", upload_speed_in_bytes)
-        if uptime_in_seconds is not None:
-            pulumi.set(__self__, "uptime_in_seconds", uptime_in_seconds)
-        if _24h_usage_in_bytes_per_second is not None:
-            pulumi.set(__self__, "_24h_usage_in_bytes_per_second", _24h_usage_in_bytes_per_second)
-        if default is not None:
-            pulumi.set(__self__, "default", default)
-        if device_type is not None:
-            pulumi.set(__self__, "device_type", device_type)
-        if last_connection_network_id is not None:
-            pulumi.set(__self__, "last_connection_network_id", last_connection_network_id)
-        if last_connection_network_name is not None:
-            pulumi.set(__self__, "last_connection_network_name", last_connection_network_name)
-        if last_seen is not None:
-            pulumi.set(__self__, "last_seen", last_seen)
-
-    @property
-    @pulumi.getter(name="ControllerThatCouldManageThisDevice")
-    def controller_that_could_manage_this_device(self) -> Optional['UnifiDeviceDtoControllerThatCouldManageThisDevice']:
-        return pulumi.get(self, "controller_that_could_manage_this_device")
-
-    @property
-    @pulumi.getter(name="DeviceIpV4LeaseExpirationTimestampInSeconds")
-    def device_ip_v4_lease_expiration_timestamp_in_seconds(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "device_ip_v4_lease_expiration_timestamp_in_seconds")
-
-    @property
-    @pulumi.getter(name="DeviceModelShortname")
-    def device_model_shortname(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "device_model_shortname")
-
-    @property
-    @pulumi.getter(name="DeviceName")
-    def device_name(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "device_name")
-
-    @property
-    @pulumi.getter(name="DownloadSpeedInBytesPerSecond")
-    def download_speed_in_bytes_per_second(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "download_speed_in_bytes_per_second")
-
-    @property
-    @pulumi.getter(name="Experience")
-    def experience(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "experience")
-
-    @property
-    @pulumi.getter(name="FirmwareVersion")
-    def firmware_version(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "firmware_version")
-
-    @property
-    @pulumi.getter(name="FirmwareVersionInUserFriendlyForm")
-    def firmware_version_in_user_friendly_form(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "firmware_version_in_user_friendly_form")
-
-    @property
-    @pulumi.getter(name="IPAddress")
-    def ip_address(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "ip_address")
-
-    @property
-    @pulumi.getter(name="MACAddress")
-    def mac_address(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "mac_address")
-
-    @property
-    @pulumi.getter(name="NetworkIdWhereTheDeviceIsConnectedTo")
-    def network_id_where_the_device_is_connected_to(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "network_id_where_the_device_is_connected_to")
-
-    @property
-    @pulumi.getter(name="NetworkNameWhereTheDeviceIsConnectedTo")
-    def network_name_where_the_device_is_connected_to(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "network_name_where_the_device_is_connected_to")
-
-    @property
-    @pulumi.getter(name="ObjectId")
-    def object_id(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "object_id")
-
-    @property
-    @pulumi.getter(name="StackingGroupThatTheDeviceBelongsTo")
-    def stacking_group_that_the_device_belongs_to(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "stacking_group_that_the_device_belongs_to")
-
-    @property
-    @pulumi.getter(name="State")
-    def state(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "state")
-
-    @property
-    @pulumi.getter(name="UploadSpeedInBytes")
-    def upload_speed_in_bytes(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "upload_speed_in_bytes")
-
-    @property
-    @pulumi.getter(name="UptimeInSeconds")
-    def uptime_in_seconds(self) -> Optional[builtins.int]:
-        return pulumi.get(self, "uptime_in_seconds")
-
-    @property
-    @pulumi.getter(name="_24hUsageInBytesPerSecond")
-    def _24h_usage_in_bytes_per_second(self) -> Optional[builtins.float]:
-        return pulumi.get(self, "_24h_usage_in_bytes_per_second")
-
-    @property
-    @pulumi.getter
-    def default(self) -> Optional[builtins.bool]:
-        return pulumi.get(self, "default")
-
-    @property
-    @pulumi.getter(name="deviceType")
-    def device_type(self) -> Optional['UnifiDeviceDtoDeviceType']:
-        """
-        Information whether the device is considered a client or device from the NET point of view
-        """
-        return pulumi.get(self, "device_type")
-
-    @property
-    @pulumi.getter(name="lastConnectionNetworkId")
-    def last_connection_network_id(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "last_connection_network_id")
-
-    @property
-    @pulumi.getter(name="lastConnectionNetworkName")
-    def last_connection_network_name(self) -> Optional[builtins.str]:
-        return pulumi.get(self, "last_connection_network_name")
-
-    @property
-    @pulumi.getter(name="lastSeen")
-    def last_seen(self) -> Optional[builtins.int]:
-        """
-        Information about when the device was seen for the last time in unix timestamp in seconds
-        """
-        return pulumi.get(self, "last_seen")
 
 

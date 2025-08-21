@@ -82,7 +82,9 @@ var V2PathsToRemove = []string{
 	"/api/site/{siteName}/client/{clientMac}/experience/incorrect",
 	"/api/site/{siteName}/client/{clientMac}/traffic-insights",
 	"/api/site/{siteName}/clients/active",
+	"/api/site/{siteName}/clients/active/{clientMac}",
 	"/api/site/{siteName}/clients/history",
+	"/api/site/{siteName}/clients/local/{clientMac}",
 	"/api/site/{siteName}/clients/metadata",
 	"/api/site/{siteName}/client/stats/fingerprint-os",
 	"/api/site/{siteName}/clients/traffic-control",
@@ -92,6 +94,8 @@ var V2PathsToRemove = []string{
 	"/api/site/{siteName}/country-traffic",
 	"/api/site/{siteName}/dashboard",
 	"/api/site/{siteName}/described-features",
+	"/api/site/{siteName}/device",
+	"/api/site/{siteName}/device/wireless-links",
 	"/api/site/{siteName}/device/{deviceMac}/24hr-satisfaction",
 	"/api/site/{siteName}/device/{deviceMac}/24hr-tx-retries",
 	"/api/site/{siteName}/device/{deviceMac}/battery/action",
@@ -225,6 +229,7 @@ var V2PathsToRemove = []string{
 	"/api/site/{siteName}/system-log/critical",
 	"/api/site/{siteName}/system-log/critical/{alertId}/mark-as-read",
 	"/api/site/{siteName}/system-log/critical/mark-all-as-read",
+	"/api/site/{siteName}/system-log/device/{deviceMac}",
 	"/api/site/{siteName}/system-log/device-alert",
 	"/api/site/{siteName}/system-log/display-options/admins",
 	"/api/site/{siteName}/system-log/{id}/cef",
@@ -318,6 +323,7 @@ var V2PathsToRemove = []string{
 	"/api/site/{siteName}/device/{deviceMac}/battery/update",
 	"/api/site/default/ips_alerts",
 	"/api/site/{siteName}/shadowmode/managed/group",
+	"/api/site/{siteName}/excluded-ips",
 	"/api/site/{siteName}/excluded-ips/{networkId}",
 	"/api/site/{siteName}/vpn/connections",
 	"/api/site/{siteName}/wan/magic/configuration",
@@ -366,6 +372,7 @@ var V2ProblematicSchemasToRemove = []string{
 	"ISP utilization",
 	"ImmutableListWAN Utilization Info",
 	"Map of MAC to Alias",
+	"A",
 }
 
 func FixV2OpenAPIDoc(openAPIDoc *openapi3.T) error {
@@ -377,27 +384,35 @@ func FixV2OpenAPIDoc(openAPIDoc *openapi3.T) error {
 		openAPIDoc.Paths.Delete(path)
 	}
 
-	// remove problematic schemas that aren't used and cause issues if left
-	// TODO: this should be improved to remove all orphaned schemas, to tidy things up
-	for _, schemaRef := range V2ProblematicSchemasToRemove {
-		delete(openAPIDoc.Components.Schemas, schemaRef)
-	}
-
 	// add the /v2 prefix to the start of each path
-	// and TODO: fix request body and response body schema references
+	referredSchemas := make(map[string]bool)
+	// special cases that are used throughout the schema
+	referredSchemas["GlobalDeviceUpdateStatusDto"] = true
+	referredSchemas["ErrorMessage"] = true
+	referredSchemas["Site"] = true
+
 	for _, path := range openAPIDoc.Paths.InMatchingOrder() {
 		pathItem := openAPIDoc.Paths.Find(path)
 		openAPIDoc.Paths.Set("/v2"+path, pathItem)
 		openAPIDoc.Paths.Delete(path)
 
 		if pathItem.Put != nil && pathItem.Put.RequestBody != nil {
-			updateRefForRequestBody(pathItem.Put.RequestBody, path, "PUT")
-			updateRefForResponseBody(pathItem.Put.Responses, path, "PUT")
-		} else if pathItem.Post != nil && pathItem.Post.RequestBody != nil {
-			updateRefForRequestBody(pathItem.Post.RequestBody, path, "POST")
-			updateRefForResponseBody(pathItem.Post.Responses, path, "POST")
-		} else if pathItem.Get != nil && pathItem.Get.Responses != nil {
-			updateRefForResponseBody(pathItem.Get.Responses, path, "GET")
+			req := updateRefForRequestBody(pathItem.Put.RequestBody, path, "PUT")
+			referredSchemas[req] = true
+			res := updateRefForResponseBody(pathItem.Put.Responses, path, "PUT")
+			referredSchemas[res] = true
+		}
+
+		if pathItem.Post != nil && pathItem.Post.RequestBody != nil {
+			req := updateRefForRequestBody(pathItem.Post.RequestBody, path, "POST")
+			referredSchemas[req] = true
+			res := updateRefForResponseBody(pathItem.Post.Responses, path, "POST")
+			referredSchemas[res] = true
+		}
+
+		if pathItem.Get != nil && pathItem.Get.Responses != nil {
+			res := updateRefForResponseBody(pathItem.Get.Responses, path, "GET")
+			referredSchemas[res] = true
 		}
 	}
 
@@ -405,36 +420,55 @@ func FixV2OpenAPIDoc(openAPIDoc *openapi3.T) error {
 	newSchemas := make(map[string]*openapi3.SchemaRef)
 	for key, schema := range openAPIDoc.Components.Schemas {
 		newRef := pkg.ToPascalCase(key)
-		schema.Ref = fmt.Sprintf("#/components/schemas/%s", newRef)
 		newSchemas[newRef] = schema
 
-		// TODO walk the schema properties and fix ref names
-
+		// This is not a complete fix but it will work with the simplistic way that the v2 api is structured
+		for _, prop := range schema.Value.Properties {
+			if prop.Ref != "" {
+				propId := strings.Split(prop.Ref, "/")[len(strings.Split(prop.Ref, "/"))-1]
+				newPropRef := pkg.ToPascalCase(propId)
+				prop.Ref = fmt.Sprintf("#/components/schemas/%s", newPropRef)
+			} else if prop.Value.Items != nil && prop.Value.Items.Ref != "" {
+				propId := strings.Split(prop.Value.Items.Ref, "/")[len(strings.Split(prop.Value.Items.Ref, "/"))-1]
+				newPropRef := pkg.ToPascalCase(propId)
+				prop.Value.Items.Ref = fmt.Sprintf("#/components/schemas/%s", newPropRef)
+			}
+		}
 	}
+
+	walkReferredSchemas(referredSchemas, newSchemas)
+
+	for ref, _ := range newSchemas {
+		if _, ok := referredSchemas[ref]; !ok {
+			glog.Infof("%s is not referred to in other schemas, removing...", ref)
+			delete(newSchemas, ref)
+		}
+	}
+
 	openAPIDoc.Components.Schemas = newSchemas
 
 	return nil
 }
 
-func updateRefForResponseBody(responses *openapi3.Responses, path string, method string) {
+func updateRefForResponseBody(responses *openapi3.Responses, path string, method string) string {
 	okStatusCode := 200
 	if responses.Status(okStatusCode) == nil {
 		okStatusCode = 201
 	}
 	body := responses.Status(okStatusCode).Value.Content.Get("application/json")
-	updateBodyRef(body, fmt.Sprintf("responseBody %d", okStatusCode), method, path)
+	return updateBodyRef(body, fmt.Sprintf("responseBody %d", okStatusCode), method, path)
 }
 
-func updateRefForRequestBody(requestBody *openapi3.RequestBodyRef, path string, method string) {
+func updateRefForRequestBody(requestBody *openapi3.RequestBodyRef, path string, method string) string {
 	body := requestBody.Value.Content.Get("application/json")
-	updateBodyRef(body, "responseBody", method, path)
+	return updateBodyRef(body, "responseBody", method, path)
 }
 
-func updateBodyRef(body *openapi3.MediaType, logNote string, method string, path string) {
+func updateBodyRef(body *openapi3.MediaType, logNote string, method string, path string) string {
 	var ref string
 	var updater func(string)
 
-	if body.Schema.Value.Items != nil {
+	if body.Schema.Value.Items != nil && body.Schema.Value.Items.Ref != "" {
 		ref = body.Schema.Value.Items.Ref
 		updater = func(ref string) { body.Schema.Value.Items.Ref = ref }
 	} else {
@@ -442,8 +476,46 @@ func updateBodyRef(body *openapi3.MediaType, logNote string, method string, path
 		updater = func(ref string) { body.Schema.Ref = ref }
 	}
 	refId := strings.Split(ref, "/")[len(strings.Split(ref, "/"))-1]
-	glog.Infof("%s %s %s $Ref: %s -> %s", method, path, logNote, ref, pkg.ToPascalCase(refId))
-	updater(fmt.Sprintf("#/components/schemas/%s", pkg.ToPascalCase(refId)))
+	newRefId := pkg.ToPascalCase(refId)
+	if newRefId != "" && newRefId != refId {
+		glog.Infof("%s %s %s $Ref: %s -> %s", method, path, logNote, ref, newRefId)
+		updater(fmt.Sprintf("#/components/schemas/%s", pkg.ToPascalCase(refId)))
+	}
+	return newRefId
+}
+
+func walkReferredSchemas(referredSchemas map[string]bool, newSchemas map[string]*openapi3.SchemaRef) {
+	//glog.Infof("Schemas: %v", newSchemas)
+	// recursively walk all the referred schemas to find other referred schemas
+	var walkRefInner func(ref string)
+	walkRefInner = func(ref string) {
+		referredSchemas[ref] = true
+
+		schemaRef, ok := newSchemas[ref]
+		if !ok {
+			glog.Errorf("Schema %s not found in components", ref)
+			return
+		}
+
+		for _, prop := range schemaRef.Value.Properties {
+			if prop.Ref != "" {
+				propId := strings.Split(prop.Ref, "/")[len(strings.Split(prop.Ref, "/"))-1]
+				if _, ok := referredSchemas[propId]; !ok {
+					//glog.Infof("%s ref %s -> referred", ref, )
+					walkRefInner(propId)
+				}
+			} else if prop.Value.Items != nil && prop.Value.Items.Ref != "" {
+				propId := strings.Split(prop.Value.Items.Ref, "/")[len(strings.Split(prop.Value.Items.Ref, "/"))-1]
+				if _, ok := referredSchemas[propId]; !ok {
+					walkRefInner(propId)
+				}
+			}
+		}
+	}
+
+	for ref, _ := range referredSchemas {
+		walkRefInner(ref)
+	}
 }
 
 // TODO Fixes v2:
