@@ -20,8 +20,6 @@ if typing.TYPE_CHECKING:
     auto_speedtest = __auto_speedtest
     import pulumi_unifi_native.baresip as __baresip
     baresip = __baresip
-    import pulumi_unifi_native.ble as __ble
-    ble = __ble
     import pulumi_unifi_native.broadcast as __broadcast
     broadcast = __broadcast
     import pulumi_unifi_native.broadcastgroup as __broadcastgroup
@@ -60,14 +58,10 @@ if typing.TYPE_CHECKING:
     dynamicdns = __dynamicdns
     import pulumi_unifi_native.element_adopt as __element_adopt
     element_adopt = __element_adopt
-    import pulumi_unifi_native.enable_lte_failover as __enable_lte_failover
-    enable_lte_failover = __enable_lte_failover
     import pulumi_unifi_native.ether_lighting as __ether_lighting
     ether_lighting = __ether_lighting
     import pulumi_unifi_native.evaluation_score as __evaluation_score
     evaluation_score = __evaluation_score
-    import pulumi_unifi_native.excluded_ips as __excluded_ips
-    excluded_ips = __excluded_ips
     import pulumi_unifi_native.features as __features
     features = __features
     import pulumi_unifi_native.fingerprint_override as __fingerprint_override
@@ -148,10 +142,6 @@ if typing.TYPE_CHECKING:
     networkgroups = __networkgroups
     import pulumi_unifi_native.ntp as __ntp
     ntp = __ntp
-    import pulumi_unifi_native.overview as __overview
-    overview = __overview
-    import pulumi_unifi_native.pcap_start as __pcap_start
-    pcap_start = __pcap_start
     import pulumi_unifi_native.poe_info as __poe_info
     poe_info = __poe_info
     import pulumi_unifi_native.porta as __porta
@@ -166,8 +156,6 @@ if typing.TYPE_CHECKING:
     predefined = __predefined
     import pulumi_unifi_native.profiles as __profiles
     profiles = __profiles
-    import pulumi_unifi_native.provider_capabilities as __provider_capabilities
-    provider_capabilities = __provider_capabilities
     import pulumi_unifi_native.qos_rules as __qos_rules
     qos_rules = __qos_rules
     import pulumi_unifi_native.radio_ai as __radio_ai
@@ -186,10 +174,6 @@ if typing.TYPE_CHECKING:
     rsyslogd = __rsyslogd
     import pulumi_unifi_native.scheduletask as __scheduletask
     scheduletask = __scheduletask
-    import pulumi_unifi_native.send as __send
-    send = __send
-    import pulumi_unifi_native.setting as __setting
-    setting = __setting
     import pulumi_unifi_native.shape as __shape
     shape = __shape
     import pulumi_unifi_native.snmp as __snmp
@@ -246,8 +230,6 @@ if typing.TYPE_CHECKING:
     wan_slas = __wan_slas
     import pulumi_unifi_native.wifiman as __wifiman
     wifiman = __wifiman
-    import pulumi_unifi_native.wireless_links as __wireless_links
-    wireless_links = __wireless_links
     import pulumi_unifi_native.wlan_capabilities as __wlan_capabilities
     wlan_capabilities = __wlan_capabilities
     import pulumi_unifi_native.wlanconf as __wlanconf
@@ -262,7 +244,6 @@ else:
     apgroups = _utilities.lazy_import('pulumi_unifi_native.apgroups')
     auto_speedtest = _utilities.lazy_import('pulumi_unifi_native.auto_speedtest')
     baresip = _utilities.lazy_import('pulumi_unifi_native.baresip')
-    ble = _utilities.lazy_import('pulumi_unifi_native.ble')
     broadcast = _utilities.lazy_import('pulumi_unifi_native.broadcast')
     broadcastgroup = _utilities.lazy_import('pulumi_unifi_native.broadcastgroup')
     channelplan = _utilities.lazy_import('pulumi_unifi_native.channelplan')
@@ -282,10 +263,8 @@ else:
     dpigroup = _utilities.lazy_import('pulumi_unifi_native.dpigroup')
     dynamicdns = _utilities.lazy_import('pulumi_unifi_native.dynamicdns')
     element_adopt = _utilities.lazy_import('pulumi_unifi_native.element_adopt')
-    enable_lte_failover = _utilities.lazy_import('pulumi_unifi_native.enable_lte_failover')
     ether_lighting = _utilities.lazy_import('pulumi_unifi_native.ether_lighting')
     evaluation_score = _utilities.lazy_import('pulumi_unifi_native.evaluation_score')
-    excluded_ips = _utilities.lazy_import('pulumi_unifi_native.excluded_ips')
     features = _utilities.lazy_import('pulumi_unifi_native.features')
     fingerprint_override = _utilities.lazy_import('pulumi_unifi_native.fingerprint_override')
     fingerprint_overrides = _utilities.lazy_import('pulumi_unifi_native.fingerprint_overrides')
@@ -326,8 +305,6 @@ else:
     networkconf = _utilities.lazy_import('pulumi_unifi_native.networkconf')
     networkgroups = _utilities.lazy_import('pulumi_unifi_native.networkgroups')
     ntp = _utilities.lazy_import('pulumi_unifi_native.ntp')
-    overview = _utilities.lazy_import('pulumi_unifi_native.overview')
-    pcap_start = _utilities.lazy_import('pulumi_unifi_native.pcap_start')
     poe_info = _utilities.lazy_import('pulumi_unifi_native.poe_info')
     porta = _utilities.lazy_import('pulumi_unifi_native.porta')
     portconf = _utilities.lazy_import('pulumi_unifi_native.portconf')
@@ -335,7 +312,6 @@ else:
     power = _utilities.lazy_import('pulumi_unifi_native.power')
     predefined = _utilities.lazy_import('pulumi_unifi_native.predefined')
     profiles = _utilities.lazy_import('pulumi_unifi_native.profiles')
-    provider_capabilities = _utilities.lazy_import('pulumi_unifi_native.provider_capabilities')
     qos_rules = _utilities.lazy_import('pulumi_unifi_native.qos_rules')
     radio_ai = _utilities.lazy_import('pulumi_unifi_native.radio_ai')
     radius = _utilities.lazy_import('pulumi_unifi_native.radius')
@@ -345,8 +321,6 @@ else:
     routing = _utilities.lazy_import('pulumi_unifi_native.routing')
     rsyslogd = _utilities.lazy_import('pulumi_unifi_native.rsyslogd')
     scheduletask = _utilities.lazy_import('pulumi_unifi_native.scheduletask')
-    send = _utilities.lazy_import('pulumi_unifi_native.send')
-    setting = _utilities.lazy_import('pulumi_unifi_native.setting')
     shape = _utilities.lazy_import('pulumi_unifi_native.shape')
     snmp = _utilities.lazy_import('pulumi_unifi_native.snmp')
     spatialrecord = _utilities.lazy_import('pulumi_unifi_native.spatialrecord')
@@ -375,7 +349,6 @@ else:
     vpn_server = _utilities.lazy_import('pulumi_unifi_native.vpn_server')
     wan_slas = _utilities.lazy_import('pulumi_unifi_native.wan_slas')
     wifiman = _utilities.lazy_import('pulumi_unifi_native.wifiman')
-    wireless_links = _utilities.lazy_import('pulumi_unifi_native.wireless_links')
     wlan_capabilities = _utilities.lazy_import('pulumi_unifi_native.wlan_capabilities')
     wlanconf = _utilities.lazy_import('pulumi_unifi_native.wlanconf')
     wlangroup = _utilities.lazy_import('pulumi_unifi_native.wlangroup')
@@ -422,14 +395,6 @@ _utilities.register(
   "fqn": "pulumi_unifi_native.baresip",
   "classes": {
    "unifi-native:baresip:SettingBaresip": "SettingBaresip"
-  }
- },
- {
-  "pkg": "unifi-native",
-  "mod": "ble",
-  "fqn": "pulumi_unifi_native.ble",
-  "classes": {
-   "unifi-native:ble:BleSetting": "BleSetting"
   }
  },
  {
@@ -559,14 +524,6 @@ _utilities.register(
   "fqn": "pulumi_unifi_native.element_adopt",
   "classes": {
    "unifi-native:element_adopt:SettingElementAdopt": "SettingElementAdopt"
-  }
- },
- {
-  "pkg": "unifi-native",
-  "mod": "enable-lte-failover",
-  "fqn": "pulumi_unifi_native.enable_lte_failover",
-  "classes": {
-   "unifi-native:enable-lte-failover:EnableLteFailoverForNetwork": "EnableLteFailoverForNetwork"
   }
  },
  {
@@ -843,22 +800,6 @@ _utilities.register(
  },
  {
   "pkg": "unifi-native",
-  "mod": "overview",
-  "fqn": "pulumi_unifi_native.overview",
-  "classes": {
-   "unifi-native:overview:ListSitesOverview": "ListSitesOverview"
-  }
- },
- {
-  "pkg": "unifi-native",
-  "mod": "pcap-start",
-  "fqn": "pulumi_unifi_native.pcap_start",
-  "classes": {
-   "unifi-native:pcap-start:StartCapture": "StartCapture"
-  }
- },
- {
-  "pkg": "unifi-native",
   "mod": "porta",
   "fqn": "pulumi_unifi_native.porta",
   "classes": {
@@ -895,14 +836,6 @@ _utilities.register(
   "fqn": "pulumi_unifi_native.profiles",
   "classes": {
    "unifi-native:profiles:RadiusProfile": "RadiusProfile"
-  }
- },
- {
-  "pkg": "unifi-native",
-  "mod": "provider-capabilities",
-  "fqn": "pulumi_unifi_native.provider_capabilities",
-  "classes": {
-   "unifi-native:provider-capabilities:ActiveWanProviderCapabilitie": "ActiveWanProviderCapabilitie"
   }
  },
  {
@@ -975,22 +908,6 @@ _utilities.register(
   "fqn": "pulumi_unifi_native.scheduletask",
   "classes": {
    "unifi-native:scheduletask:ScheduleTask": "ScheduleTask"
-  }
- },
- {
-  "pkg": "unifi-native",
-  "mod": "send",
-  "fqn": "pulumi_unifi_native.send",
-  "classes": {
-   "unifi-native:send:SendMfaPush": "SendMfaPush"
-  }
- },
- {
-  "pkg": "unifi-native",
-  "mod": "setting",
-  "fqn": "pulumi_unifi_native.setting",
-  "classes": {
-   "unifi-native:setting:SystemLogSetting": "SystemLogSetting"
   }
  },
  {
