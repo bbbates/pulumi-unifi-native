@@ -13269,7 +13269,7 @@ info:
     title: Unifi API
     version: 9.1.120
 paths:
-    /proxy/network/api/s/{siteId}/get/setting/auto_speedtest:
+    /api/s/{siteId}/get/setting/auto_speedtest:
         get:
             operationId: GetSettingAutoSpeedtest
             parameters:
@@ -13303,7 +13303,7 @@ paths:
                     description: ""
             tags:
                 - SettingAutoSpeedtest
-    /proxy/network/api/s/{siteId}/get/setting/baresip:
+    /api/s/{siteId}/get/setting/baresip:
         get:
             operationId: GetSettingBaresip
             parameters:
@@ -13337,7 +13337,7 @@ paths:
                     description: ""
             tags:
                 - SettingBaresip
-    /proxy/network/api/s/{siteId}/get/setting/broadcast:
+    /api/s/{siteId}/get/setting/broadcast:
         get:
             operationId: GetSettingBroadcast
             parameters:
@@ -13371,7 +13371,7 @@ paths:
                     description: ""
             tags:
                 - SettingBroadcast
-    /proxy/network/api/s/{siteId}/get/setting/connectivity:
+    /api/s/{siteId}/get/setting/connectivity:
         get:
             operationId: GetSettingConnectivity
             parameters:
@@ -13405,7 +13405,7 @@ paths:
                     description: ""
             tags:
                 - SettingConnectivity
-    /proxy/network/api/s/{siteId}/get/setting/country:
+    /api/s/{siteId}/get/setting/country:
         get:
             operationId: GetSettingCountry
             parameters:
@@ -13439,7 +13439,7 @@ paths:
                     description: ""
             tags:
                 - SettingCountry
-    /proxy/network/api/s/{siteId}/get/setting/dashboard:
+    /api/s/{siteId}/get/setting/dashboard:
         get:
             operationId: GetSettingDashboard
             parameters:
@@ -13473,7 +13473,7 @@ paths:
                     description: ""
             tags:
                 - SettingDashboard
-    /proxy/network/api/s/{siteId}/get/setting/doh:
+    /api/s/{siteId}/get/setting/doh:
         get:
             operationId: GetSettingDoh
             parameters:
@@ -13507,7 +13507,7 @@ paths:
                     description: ""
             tags:
                 - SettingDoh
-    /proxy/network/api/s/{siteId}/get/setting/dpi:
+    /api/s/{siteId}/get/setting/dpi:
         get:
             operationId: GetSettingDpi
             parameters:
@@ -13541,7 +13541,7 @@ paths:
                     description: ""
             tags:
                 - SettingDpi
-    /proxy/network/api/s/{siteId}/get/setting/element_adopt:
+    /api/s/{siteId}/get/setting/element_adopt:
         get:
             operationId: GetSettingElementAdopt
             parameters:
@@ -13575,7 +13575,7 @@ paths:
                     description: ""
             tags:
                 - SettingElementAdopt
-    /proxy/network/api/s/{siteId}/get/setting/ether_lighting:
+    /api/s/{siteId}/get/setting/ether_lighting:
         get:
             operationId: GetSettingEtherLighting
             parameters:
@@ -13609,7 +13609,7 @@ paths:
                     description: ""
             tags:
                 - SettingEtherLighting
-    /proxy/network/api/s/{siteId}/get/setting/evaluation_score:
+    /api/s/{siteId}/get/setting/evaluation_score:
         get:
             operationId: GetSettingEvaluationScore
             parameters:
@@ -13643,7 +13643,7 @@ paths:
                     description: ""
             tags:
                 - SettingEvaluationScore
-    /proxy/network/api/s/{siteId}/get/setting/global_ap:
+    /api/s/{siteId}/get/setting/global_ap:
         get:
             operationId: GetSettingGlobalAp
             parameters:
@@ -13677,7 +13677,7 @@ paths:
                     description: ""
             tags:
                 - SettingGlobalAp
-    /proxy/network/api/s/{siteId}/get/setting/global_nat:
+    /api/s/{siteId}/get/setting/global_nat:
         get:
             operationId: GetSettingGlobalNat
             parameters:
@@ -13711,7 +13711,7 @@ paths:
                     description: ""
             tags:
                 - SettingGlobalNat
-    /proxy/network/api/s/{siteId}/get/setting/global_switch:
+    /api/s/{siteId}/get/setting/global_switch:
         get:
             operationId: GetSettingGlobalSwitch
             parameters:
@@ -13745,7 +13745,7 @@ paths:
                     description: ""
             tags:
                 - SettingGlobalSwitch
-    /proxy/network/api/s/{siteId}/get/setting/guest_access:
+    /api/s/{siteId}/get/setting/guest_access:
         get:
             operationId: GetSettingGuestAccess
             parameters:
@@ -13779,7 +13779,7 @@ paths:
                     description: ""
             tags:
                 - SettingGuestAccess
-    /proxy/network/api/s/{siteId}/get/setting/ips:
+    /api/s/{siteId}/get/setting/ips:
         get:
             operationId: GetSettingIps
             parameters:
@@ -13813,7 +13813,7 @@ paths:
                     description: ""
             tags:
                 - SettingIps
-    /proxy/network/api/s/{siteId}/get/setting/lcm:
+    /api/s/{siteId}/get/setting/lcm:
         get:
             operationId: GetSettingLcm
             parameters:
@@ -13847,7 +13847,7 @@ paths:
                     description: ""
             tags:
                 - SettingLcm
-    /proxy/network/api/s/{siteId}/get/setting/locale:
+    /api/s/{siteId}/get/setting/locale:
         get:
             operationId: GetSettingLocale
             parameters:
@@ -13881,7 +13881,7 @@ paths:
                     description: ""
             tags:
                 - SettingLocale
-    /proxy/network/api/s/{siteId}/get/setting/magic_site_to_site_vpn:
+    /api/s/{siteId}/get/setting/magic_site_to_site_vpn:
         get:
             operationId: GetSettingMagicSiteToSiteVpn
             parameters:
@@ -13915,7 +13915,7 @@ paths:
                     description: ""
             tags:
                 - SettingMagicSiteToSiteVpn
-    /proxy/network/api/s/{siteId}/get/setting/mdns:
+    /api/s/{siteId}/get/setting/mdns:
         get:
             operationId: GetSettingMdns
             parameters:
@@ -13949,7 +13949,7 @@ paths:
                     description: ""
             tags:
                 - SettingMdns
-    /proxy/network/api/s/{siteId}/get/setting/mgmt:
+    /api/s/{siteId}/get/setting/mgmt:
         get:
             operationId: GetSettingMgmt
             parameters:
@@ -13983,7 +13983,7 @@ paths:
                     description: ""
             tags:
                 - SettingMgmt
-    /proxy/network/api/s/{siteId}/get/setting/netflow:
+    /api/s/{siteId}/get/setting/netflow:
         get:
             operationId: GetSettingNetflow
             parameters:
@@ -14017,7 +14017,7 @@ paths:
                     description: ""
             tags:
                 - SettingNetflow
-    /proxy/network/api/s/{siteId}/get/setting/network_optimization:
+    /api/s/{siteId}/get/setting/network_optimization:
         get:
             operationId: GetSettingNetworkOptimization
             parameters:
@@ -14051,7 +14051,7 @@ paths:
                     description: ""
             tags:
                 - SettingNetworkOptimization
-    /proxy/network/api/s/{siteId}/get/setting/ntp:
+    /api/s/{siteId}/get/setting/ntp:
         get:
             operationId: GetSettingNtp
             parameters:
@@ -14085,7 +14085,7 @@ paths:
                     description: ""
             tags:
                 - SettingNtp
-    /proxy/network/api/s/{siteId}/get/setting/porta:
+    /api/s/{siteId}/get/setting/porta:
         get:
             operationId: GetSettingPorta
             parameters:
@@ -14119,7 +14119,7 @@ paths:
                     description: ""
             tags:
                 - SettingPorta
-    /proxy/network/api/s/{siteId}/get/setting/radio_ai:
+    /api/s/{siteId}/get/setting/radio_ai:
         get:
             operationId: GetSettingRadioAi
             parameters:
@@ -14153,7 +14153,7 @@ paths:
                     description: ""
             tags:
                 - SettingRadioAi
-    /proxy/network/api/s/{siteId}/get/setting/radius:
+    /api/s/{siteId}/get/setting/radius:
         get:
             operationId: GetSettingRadius
             parameters:
@@ -14187,7 +14187,7 @@ paths:
                     description: ""
             tags:
                 - SettingRadius
-    /proxy/network/api/s/{siteId}/get/setting/rsyslogd:
+    /api/s/{siteId}/get/setting/rsyslogd:
         get:
             operationId: GetSettingRsyslogd
             parameters:
@@ -14221,7 +14221,7 @@ paths:
                     description: ""
             tags:
                 - SettingRsyslogd
-    /proxy/network/api/s/{siteId}/get/setting/snmp:
+    /api/s/{siteId}/get/setting/snmp:
         get:
             operationId: GetSettingSnmp
             parameters:
@@ -14255,7 +14255,7 @@ paths:
                     description: ""
             tags:
                 - SettingSnmp
-    /proxy/network/api/s/{siteId}/get/setting/ssl_inspection:
+    /api/s/{siteId}/get/setting/ssl_inspection:
         get:
             operationId: GetSettingSslInspection
             parameters:
@@ -14289,7 +14289,7 @@ paths:
                     description: ""
             tags:
                 - SettingSslInspection
-    /proxy/network/api/s/{siteId}/get/setting/super_cloudaccess:
+    /api/s/{siteId}/get/setting/super_cloudaccess:
         get:
             operationId: GetSettingSuperCloudaccess
             parameters:
@@ -14323,7 +14323,7 @@ paths:
                     description: ""
             tags:
                 - SettingSuperCloudaccess
-    /proxy/network/api/s/{siteId}/get/setting/super_events:
+    /api/s/{siteId}/get/setting/super_events:
         get:
             operationId: GetSettingSuperEvents
             parameters:
@@ -14357,7 +14357,7 @@ paths:
                     description: ""
             tags:
                 - SettingSuperEvents
-    /proxy/network/api/s/{siteId}/get/setting/super_fwupdate:
+    /api/s/{siteId}/get/setting/super_fwupdate:
         get:
             operationId: GetSettingSuperFwupdate
             parameters:
@@ -14391,7 +14391,7 @@ paths:
                     description: ""
             tags:
                 - SettingSuperFwupdate
-    /proxy/network/api/s/{siteId}/get/setting/super_identity:
+    /api/s/{siteId}/get/setting/super_identity:
         get:
             operationId: GetSettingSuperIdentity
             parameters:
@@ -14425,7 +14425,7 @@ paths:
                     description: ""
             tags:
                 - SettingSuperIdentity
-    /proxy/network/api/s/{siteId}/get/setting/super_mail:
+    /api/s/{siteId}/get/setting/super_mail:
         get:
             operationId: GetSettingSuperMail
             parameters:
@@ -14459,7 +14459,7 @@ paths:
                     description: ""
             tags:
                 - SettingSuperMail
-    /proxy/network/api/s/{siteId}/get/setting/super_mgmt:
+    /api/s/{siteId}/get/setting/super_mgmt:
         get:
             operationId: GetSettingSuperMgmt
             parameters:
@@ -14493,7 +14493,7 @@ paths:
                     description: ""
             tags:
                 - SettingSuperMgmt
-    /proxy/network/api/s/{siteId}/get/setting/super_sdn:
+    /api/s/{siteId}/get/setting/super_sdn:
         get:
             operationId: GetSettingSuperSdn
             parameters:
@@ -14527,7 +14527,7 @@ paths:
                     description: ""
             tags:
                 - SettingSuperSdn
-    /proxy/network/api/s/{siteId}/get/setting/super_smtp:
+    /api/s/{siteId}/get/setting/super_smtp:
         get:
             operationId: GetSettingSuperSmtp
             parameters:
@@ -14561,7 +14561,7 @@ paths:
                     description: ""
             tags:
                 - SettingSuperSmtp
-    /proxy/network/api/s/{siteId}/get/setting/teleport:
+    /api/s/{siteId}/get/setting/teleport:
         get:
             operationId: GetSettingTeleport
             parameters:
@@ -14595,7 +14595,7 @@ paths:
                     description: ""
             tags:
                 - SettingTeleport
-    /proxy/network/api/s/{siteId}/get/setting/traffic_flow:
+    /api/s/{siteId}/get/setting/traffic_flow:
         get:
             operationId: GetSettingTrafficFlow
             parameters:
@@ -14629,7 +14629,7 @@ paths:
                     description: ""
             tags:
                 - SettingTrafficFlow
-    /proxy/network/api/s/{siteId}/get/setting/usg:
+    /api/s/{siteId}/get/setting/usg:
         get:
             operationId: GetSettingUsg
             parameters:
@@ -14663,7 +14663,7 @@ paths:
                     description: ""
             tags:
                 - SettingUsg
-    /proxy/network/api/s/{siteId}/get/setting/usw:
+    /api/s/{siteId}/get/setting/usw:
         get:
             operationId: GetSettingUsw
             parameters:
@@ -14697,7 +14697,7 @@ paths:
                     description: ""
             tags:
                 - SettingUsw
-    /proxy/network/api/s/{siteId}/rest/account:
+    /api/s/{siteId}/rest/account:
         get:
             operationId: ListAccount
             parameters:
@@ -14851,7 +14851,7 @@ paths:
                     description: No Content
             tags:
                 - Account
-    /proxy/network/api/s/{siteId}/rest/account/{id}:
+    /api/s/{siteId}/rest/account/{id}:
         delete:
             operationId: DeleteAccount
             parameters:
@@ -15163,7 +15163,7 @@ paths:
                     description: Created
             tags:
                 - Account
-    /proxy/network/api/s/{siteId}/rest/broadcastgroup:
+    /api/s/{siteId}/rest/broadcastgroup:
         get:
             operationId: ListBroadcastGroup
             parameters:
@@ -15317,7 +15317,7 @@ paths:
                     description: No Content
             tags:
                 - BroadcastGroup
-    /proxy/network/api/s/{siteId}/rest/broadcastgroup/{id}:
+    /api/s/{siteId}/rest/broadcastgroup/{id}:
         delete:
             operationId: DeleteBroadcastGroup
             parameters:
@@ -15629,7 +15629,7 @@ paths:
                     description: Created
             tags:
                 - BroadcastGroup
-    /proxy/network/api/s/{siteId}/rest/channelplan:
+    /api/s/{siteId}/rest/channelplan:
         get:
             operationId: ListChannelPlan
             parameters:
@@ -15783,7 +15783,7 @@ paths:
                     description: No Content
             tags:
                 - ChannelPlan
-    /proxy/network/api/s/{siteId}/rest/channelplan/{id}:
+    /api/s/{siteId}/rest/channelplan/{id}:
         delete:
             operationId: DeleteChannelPlan
             parameters:
@@ -16095,7 +16095,7 @@ paths:
                     description: Created
             tags:
                 - ChannelPlan
-    /proxy/network/api/s/{siteId}/rest/dashboard:
+    /api/s/{siteId}/rest/dashboard:
         get:
             operationId: ListDashboard
             parameters:
@@ -16249,7 +16249,7 @@ paths:
                     description: No Content
             tags:
                 - Dashboard
-    /proxy/network/api/s/{siteId}/rest/dashboard/{id}:
+    /api/s/{siteId}/rest/dashboard/{id}:
         delete:
             operationId: DeleteDashboard
             parameters:
@@ -16561,7 +16561,7 @@ paths:
                     description: Created
             tags:
                 - Dashboard
-    /proxy/network/api/s/{siteId}/rest/device:
+    /api/s/{siteId}/rest/device:
         post:
             operationId: CreateDevice
             parameters:
@@ -16580,7 +16580,7 @@ paths:
                     description: No Content
             tags:
                 - Device
-    /proxy/network/api/s/{siteId}/rest/device/{id}:
+    /api/s/{siteId}/rest/device/{id}:
         delete:
             operationId: DeleteDevice
             parameters:
@@ -16854,7 +16854,7 @@ paths:
                     description: Created
             tags:
                 - Device
-    /proxy/network/api/s/{siteId}/rest/dhcpoption:
+    /api/s/{siteId}/rest/dhcpoption:
         get:
             operationId: ListDHCPOption
             parameters:
@@ -17008,7 +17008,7 @@ paths:
                     description: No Content
             tags:
                 - DHCPOption
-    /proxy/network/api/s/{siteId}/rest/dhcpoption/{id}:
+    /api/s/{siteId}/rest/dhcpoption/{id}:
         delete:
             operationId: DeleteDHCPOption
             parameters:
@@ -17320,7 +17320,7 @@ paths:
                     description: Created
             tags:
                 - DHCPOption
-    /proxy/network/api/s/{siteId}/rest/dpiapp:
+    /api/s/{siteId}/rest/dpiapp:
         get:
             operationId: ListDpiApp
             parameters:
@@ -17474,7 +17474,7 @@ paths:
                     description: No Content
             tags:
                 - DpiApp
-    /proxy/network/api/s/{siteId}/rest/dpiapp/{id}:
+    /api/s/{siteId}/rest/dpiapp/{id}:
         delete:
             operationId: DeleteDpiApp
             parameters:
@@ -17786,7 +17786,7 @@ paths:
                     description: Created
             tags:
                 - DpiApp
-    /proxy/network/api/s/{siteId}/rest/dpigroup:
+    /api/s/{siteId}/rest/dpigroup:
         get:
             operationId: ListDpiGroup
             parameters:
@@ -17940,7 +17940,7 @@ paths:
                     description: No Content
             tags:
                 - DpiGroup
-    /proxy/network/api/s/{siteId}/rest/dpigroup/{id}:
+    /api/s/{siteId}/rest/dpigroup/{id}:
         delete:
             operationId: DeleteDpiGroup
             parameters:
@@ -18252,7 +18252,7 @@ paths:
                     description: Created
             tags:
                 - DpiGroup
-    /proxy/network/api/s/{siteId}/rest/dynamicdns:
+    /api/s/{siteId}/rest/dynamicdns:
         get:
             operationId: ListDynamicDNS
             parameters:
@@ -18406,7 +18406,7 @@ paths:
                     description: No Content
             tags:
                 - DynamicDNS
-    /proxy/network/api/s/{siteId}/rest/dynamicdns/{id}:
+    /api/s/{siteId}/rest/dynamicdns/{id}:
         delete:
             operationId: DeleteDynamicDNS
             parameters:
@@ -18718,7 +18718,7 @@ paths:
                     description: Created
             tags:
                 - DynamicDNS
-    /proxy/network/api/s/{siteId}/rest/firewallgroup:
+    /api/s/{siteId}/rest/firewallgroup:
         get:
             operationId: ListFirewallGroup
             parameters:
@@ -18872,7 +18872,7 @@ paths:
                     description: No Content
             tags:
                 - FirewallGroup
-    /proxy/network/api/s/{siteId}/rest/firewallgroup/{id}:
+    /api/s/{siteId}/rest/firewallgroup/{id}:
         delete:
             operationId: DeleteFirewallGroup
             parameters:
@@ -19184,7 +19184,7 @@ paths:
                     description: Created
             tags:
                 - FirewallGroup
-    /proxy/network/api/s/{siteId}/rest/firewallrule:
+    /api/s/{siteId}/rest/firewallrule:
         get:
             operationId: ListFirewallRule
             parameters:
@@ -19338,7 +19338,7 @@ paths:
                     description: No Content
             tags:
                 - FirewallRule
-    /proxy/network/api/s/{siteId}/rest/firewallrule/{id}:
+    /api/s/{siteId}/rest/firewallrule/{id}:
         delete:
             operationId: DeleteFirewallRule
             parameters:
@@ -19650,7 +19650,7 @@ paths:
                     description: Created
             tags:
                 - FirewallRule
-    /proxy/network/api/s/{siteId}/rest/heatmap:
+    /api/s/{siteId}/rest/heatmap:
         get:
             operationId: ListHeatMap
             parameters:
@@ -19804,7 +19804,7 @@ paths:
                     description: No Content
             tags:
                 - HeatMap
-    /proxy/network/api/s/{siteId}/rest/heatmap/{id}:
+    /api/s/{siteId}/rest/heatmap/{id}:
         delete:
             operationId: DeleteHeatMap
             parameters:
@@ -20122,7 +20122,7 @@ paths:
                     description: Created
             tags:
                 - HeatMap
-    /proxy/network/api/s/{siteId}/rest/heatmappoint:
+    /api/s/{siteId}/rest/heatmappoint:
         get:
             operationId: ListHeatMapPoint
             parameters:
@@ -20276,7 +20276,7 @@ paths:
                     description: No Content
             tags:
                 - HeatMapPoint
-    /proxy/network/api/s/{siteId}/rest/heatmappoint/{id}:
+    /api/s/{siteId}/rest/heatmappoint/{id}:
         delete:
             operationId: DeleteHeatMapPoint
             parameters:
@@ -20594,7 +20594,7 @@ paths:
                     description: Created
             tags:
                 - HeatMapPoint
-    /proxy/network/api/s/{siteId}/rest/hotspot2conf:
+    /api/s/{siteId}/rest/hotspot2conf:
         get:
             operationId: ListHotspot2Conf
             parameters:
@@ -20748,7 +20748,7 @@ paths:
                     description: No Content
             tags:
                 - Hotspot2Conf
-    /proxy/network/api/s/{siteId}/rest/hotspot2conf/{id}:
+    /api/s/{siteId}/rest/hotspot2conf/{id}:
         delete:
             operationId: DeleteHotspot2Conf
             parameters:
@@ -21060,7 +21060,7 @@ paths:
                     description: Created
             tags:
                 - Hotspot2Conf
-    /proxy/network/api/s/{siteId}/rest/hotspotop:
+    /api/s/{siteId}/rest/hotspotop:
         get:
             operationId: ListHotspotOp
             parameters:
@@ -21214,7 +21214,7 @@ paths:
                     description: No Content
             tags:
                 - HotspotOp
-    /proxy/network/api/s/{siteId}/rest/hotspotop/{id}:
+    /api/s/{siteId}/rest/hotspotop/{id}:
         delete:
             operationId: DeleteHotspotOp
             parameters:
@@ -21526,7 +21526,7 @@ paths:
                     description: Created
             tags:
                 - HotspotOp
-    /proxy/network/api/s/{siteId}/rest/hotspotpackage:
+    /api/s/{siteId}/rest/hotspotpackage:
         get:
             operationId: ListHotspotPackage
             parameters:
@@ -21680,7 +21680,7 @@ paths:
                     description: No Content
             tags:
                 - HotspotPackage
-    /proxy/network/api/s/{siteId}/rest/hotspotpackage/{id}:
+    /api/s/{siteId}/rest/hotspotpackage/{id}:
         delete:
             operationId: DeleteHotspotPackage
             parameters:
@@ -21992,7 +21992,7 @@ paths:
                     description: Created
             tags:
                 - HotspotPackage
-    /proxy/network/api/s/{siteId}/rest/map:
+    /api/s/{siteId}/rest/map:
         get:
             operationId: ListMap
             parameters:
@@ -22146,7 +22146,7 @@ paths:
                     description: No Content
             tags:
                 - Map
-    /proxy/network/api/s/{siteId}/rest/map/{id}:
+    /api/s/{siteId}/rest/map/{id}:
         delete:
             operationId: DeleteMap
             parameters:
@@ -22458,7 +22458,7 @@ paths:
                     description: Created
             tags:
                 - Map
-    /proxy/network/api/s/{siteId}/rest/mediafile:
+    /api/s/{siteId}/rest/mediafile:
         get:
             operationId: ListMediaFile
             parameters:
@@ -22612,7 +22612,7 @@ paths:
                     description: No Content
             tags:
                 - MediaFile
-    /proxy/network/api/s/{siteId}/rest/mediafile/{id}:
+    /api/s/{siteId}/rest/mediafile/{id}:
         delete:
             operationId: DeleteMediaFile
             parameters:
@@ -22924,7 +22924,7 @@ paths:
                     description: Created
             tags:
                 - MediaFile
-    /proxy/network/api/s/{siteId}/rest/networkconf:
+    /api/s/{siteId}/rest/networkconf:
         get:
             operationId: ListNetwork
             parameters:
@@ -23078,7 +23078,7 @@ paths:
                     description: No Content
             tags:
                 - Network
-    /proxy/network/api/s/{siteId}/rest/networkconf/{id}:
+    /api/s/{siteId}/rest/networkconf/{id}:
         delete:
             operationId: DeleteNetwork
             parameters:
@@ -23390,7 +23390,7 @@ paths:
                     description: Created
             tags:
                 - Network
-    /proxy/network/api/s/{siteId}/rest/portconf:
+    /api/s/{siteId}/rest/portconf:
         get:
             operationId: ListPortProfile
             parameters:
@@ -23544,7 +23544,7 @@ paths:
                     description: No Content
             tags:
                 - PortProfile
-    /proxy/network/api/s/{siteId}/rest/portconf/{id}:
+    /api/s/{siteId}/rest/portconf/{id}:
         delete:
             operationId: DeletePortProfile
             parameters:
@@ -23856,7 +23856,7 @@ paths:
                     description: Created
             tags:
                 - PortProfile
-    /proxy/network/api/s/{siteId}/rest/portforward:
+    /api/s/{siteId}/rest/portforward:
         get:
             operationId: ListPortForward
             parameters:
@@ -24010,7 +24010,7 @@ paths:
                     description: No Content
             tags:
                 - PortForward
-    /proxy/network/api/s/{siteId}/rest/portforward/{id}:
+    /api/s/{siteId}/rest/portforward/{id}:
         delete:
             operationId: DeletePortForward
             parameters:
@@ -24322,7 +24322,7 @@ paths:
                     description: Created
             tags:
                 - PortForward
-    /proxy/network/api/s/{siteId}/rest/radiusprofile:
+    /api/s/{siteId}/rest/radiusprofile:
         get:
             operationId: ListRADIUSProfile
             parameters:
@@ -24476,7 +24476,7 @@ paths:
                     description: No Content
             tags:
                 - RADIUSProfile
-    /proxy/network/api/s/{siteId}/rest/radiusprofile/{id}:
+    /api/s/{siteId}/rest/radiusprofile/{id}:
         delete:
             operationId: DeleteRADIUSProfile
             parameters:
@@ -24788,7 +24788,7 @@ paths:
                     description: Created
             tags:
                 - RADIUSProfile
-    /proxy/network/api/s/{siteId}/rest/routing:
+    /api/s/{siteId}/rest/routing:
         get:
             operationId: ListRouting
             parameters:
@@ -24942,7 +24942,7 @@ paths:
                     description: No Content
             tags:
                 - Routing
-    /proxy/network/api/s/{siteId}/rest/routing/{id}:
+    /api/s/{siteId}/rest/routing/{id}:
         delete:
             operationId: DeleteRouting
             parameters:
@@ -25254,7 +25254,7 @@ paths:
                     description: Created
             tags:
                 - Routing
-    /proxy/network/api/s/{siteId}/rest/scheduletask:
+    /api/s/{siteId}/rest/scheduletask:
         get:
             operationId: ListScheduleTask
             parameters:
@@ -25408,7 +25408,7 @@ paths:
                     description: No Content
             tags:
                 - ScheduleTask
-    /proxy/network/api/s/{siteId}/rest/scheduletask/{id}:
+    /api/s/{siteId}/rest/scheduletask/{id}:
         delete:
             operationId: DeleteScheduleTask
             parameters:
@@ -25720,7 +25720,7 @@ paths:
                     description: Created
             tags:
                 - ScheduleTask
-    /proxy/network/api/s/{siteId}/rest/spatialrecord:
+    /api/s/{siteId}/rest/spatialrecord:
         get:
             operationId: ListSpatialRecord
             parameters:
@@ -25874,7 +25874,7 @@ paths:
                     description: No Content
             tags:
                 - SpatialRecord
-    /proxy/network/api/s/{siteId}/rest/spatialrecord/{id}:
+    /api/s/{siteId}/rest/spatialrecord/{id}:
         delete:
             operationId: DeleteSpatialRecord
             parameters:
@@ -26186,7 +26186,7 @@ paths:
                     description: Created
             tags:
                 - SpatialRecord
-    /proxy/network/api/s/{siteId}/rest/tag:
+    /api/s/{siteId}/rest/tag:
         get:
             operationId: ListTag
             parameters:
@@ -26340,7 +26340,7 @@ paths:
                     description: No Content
             tags:
                 - Tag
-    /proxy/network/api/s/{siteId}/rest/tag/{id}:
+    /api/s/{siteId}/rest/tag/{id}:
         delete:
             operationId: DeleteTag
             parameters:
@@ -26652,7 +26652,7 @@ paths:
                     description: Created
             tags:
                 - Tag
-    /proxy/network/api/s/{siteId}/rest/user:
+    /api/s/{siteId}/rest/user:
         get:
             operationId: ListUser
             parameters:
@@ -26806,7 +26806,7 @@ paths:
                     description: No Content
             tags:
                 - User
-    /proxy/network/api/s/{siteId}/rest/user/{id}:
+    /api/s/{siteId}/rest/user/{id}:
         delete:
             operationId: DeleteUser
             parameters:
@@ -27118,7 +27118,7 @@ paths:
                     description: Created
             tags:
                 - User
-    /proxy/network/api/s/{siteId}/rest/usergroup:
+    /api/s/{siteId}/rest/usergroup:
         get:
             operationId: ListUserGroup
             parameters:
@@ -27272,7 +27272,7 @@ paths:
                     description: No Content
             tags:
                 - UserGroup
-    /proxy/network/api/s/{siteId}/rest/usergroup/{id}:
+    /api/s/{siteId}/rest/usergroup/{id}:
         delete:
             operationId: DeleteUserGroup
             parameters:
@@ -27590,7 +27590,7 @@ paths:
                     description: Created
             tags:
                 - UserGroup
-    /proxy/network/api/s/{siteId}/rest/virtualdevice:
+    /api/s/{siteId}/rest/virtualdevice:
         get:
             operationId: ListVirtualDevice
             parameters:
@@ -27744,7 +27744,7 @@ paths:
                     description: No Content
             tags:
                 - VirtualDevice
-    /proxy/network/api/s/{siteId}/rest/virtualdevice/{id}:
+    /api/s/{siteId}/rest/virtualdevice/{id}:
         delete:
             operationId: DeleteVirtualDevice
             parameters:
@@ -28056,7 +28056,7 @@ paths:
                     description: Created
             tags:
                 - VirtualDevice
-    /proxy/network/api/s/{siteId}/rest/wlanconf:
+    /api/s/{siteId}/rest/wlanconf:
         get:
             operationId: ListWLAN
             parameters:
@@ -28210,7 +28210,7 @@ paths:
                     description: No Content
             tags:
                 - WLAN
-    /proxy/network/api/s/{siteId}/rest/wlanconf/{id}:
+    /api/s/{siteId}/rest/wlanconf/{id}:
         delete:
             operationId: DeleteWLAN
             parameters:
@@ -28522,7 +28522,7 @@ paths:
                     description: Created
             tags:
                 - WLAN
-    /proxy/network/api/s/{siteId}/rest/wlangroup:
+    /api/s/{siteId}/rest/wlangroup:
         get:
             operationId: ListWLANGroup
             parameters:
@@ -28676,7 +28676,7 @@ paths:
                     description: No Content
             tags:
                 - WLANGroup
-    /proxy/network/api/s/{siteId}/rest/wlangroup/{id}:
+    /api/s/{siteId}/rest/wlangroup/{id}:
         delete:
             operationId: DeleteWLANGroup
             parameters:
@@ -28988,7 +28988,7 @@ paths:
                     description: Created
             tags:
                 - WLANGroup
-    /proxy/network/api/s/{siteId}/set/setting/auto_speedtest:
+    /api/s/{siteId}/set/setting/auto_speedtest:
         put:
             operationId: UpdateSettingAutoSpeedtest
             parameters:
@@ -29123,7 +29123,7 @@ paths:
                     description: Created
             tags:
                 - SettingAutoSpeedtest
-    /proxy/network/api/s/{siteId}/set/setting/baresip:
+    /api/s/{siteId}/set/setting/baresip:
         put:
             operationId: UpdateSettingBaresip
             parameters:
@@ -29258,7 +29258,7 @@ paths:
                     description: Created
             tags:
                 - SettingBaresip
-    /proxy/network/api/s/{siteId}/set/setting/broadcast:
+    /api/s/{siteId}/set/setting/broadcast:
         put:
             operationId: UpdateSettingBroadcast
             parameters:
@@ -29393,7 +29393,7 @@ paths:
                     description: Created
             tags:
                 - SettingBroadcast
-    /proxy/network/api/s/{siteId}/set/setting/connectivity:
+    /api/s/{siteId}/set/setting/connectivity:
         put:
             operationId: UpdateSettingConnectivity
             parameters:
@@ -29528,7 +29528,7 @@ paths:
                     description: Created
             tags:
                 - SettingConnectivity
-    /proxy/network/api/s/{siteId}/set/setting/country:
+    /api/s/{siteId}/set/setting/country:
         put:
             operationId: UpdateSettingCountry
             parameters:
@@ -29663,7 +29663,7 @@ paths:
                     description: Created
             tags:
                 - SettingCountry
-    /proxy/network/api/s/{siteId}/set/setting/dashboard:
+    /api/s/{siteId}/set/setting/dashboard:
         put:
             operationId: UpdateSettingDashboard
             parameters:
@@ -29798,7 +29798,7 @@ paths:
                     description: Created
             tags:
                 - SettingDashboard
-    /proxy/network/api/s/{siteId}/set/setting/doh:
+    /api/s/{siteId}/set/setting/doh:
         put:
             operationId: UpdateSettingDoh
             parameters:
@@ -29933,7 +29933,7 @@ paths:
                     description: Created
             tags:
                 - SettingDoh
-    /proxy/network/api/s/{siteId}/set/setting/dpi:
+    /api/s/{siteId}/set/setting/dpi:
         put:
             operationId: UpdateSettingDpi
             parameters:
@@ -30068,7 +30068,7 @@ paths:
                     description: Created
             tags:
                 - SettingDpi
-    /proxy/network/api/s/{siteId}/set/setting/element_adopt:
+    /api/s/{siteId}/set/setting/element_adopt:
         put:
             operationId: UpdateSettingElementAdopt
             parameters:
@@ -30203,7 +30203,7 @@ paths:
                     description: Created
             tags:
                 - SettingElementAdopt
-    /proxy/network/api/s/{siteId}/set/setting/ether_lighting:
+    /api/s/{siteId}/set/setting/ether_lighting:
         put:
             operationId: UpdateSettingEtherLighting
             parameters:
@@ -30338,7 +30338,7 @@ paths:
                     description: Created
             tags:
                 - SettingEtherLighting
-    /proxy/network/api/s/{siteId}/set/setting/evaluation_score:
+    /api/s/{siteId}/set/setting/evaluation_score:
         put:
             operationId: UpdateSettingEvaluationScore
             parameters:
@@ -30473,7 +30473,7 @@ paths:
                     description: Created
             tags:
                 - SettingEvaluationScore
-    /proxy/network/api/s/{siteId}/set/setting/global_ap:
+    /api/s/{siteId}/set/setting/global_ap:
         put:
             operationId: UpdateSettingGlobalAp
             parameters:
@@ -30608,7 +30608,7 @@ paths:
                     description: Created
             tags:
                 - SettingGlobalAp
-    /proxy/network/api/s/{siteId}/set/setting/global_nat:
+    /api/s/{siteId}/set/setting/global_nat:
         put:
             operationId: UpdateSettingGlobalNat
             parameters:
@@ -30743,7 +30743,7 @@ paths:
                     description: Created
             tags:
                 - SettingGlobalNat
-    /proxy/network/api/s/{siteId}/set/setting/global_switch:
+    /api/s/{siteId}/set/setting/global_switch:
         put:
             operationId: UpdateSettingGlobalSwitch
             parameters:
@@ -30878,7 +30878,7 @@ paths:
                     description: Created
             tags:
                 - SettingGlobalSwitch
-    /proxy/network/api/s/{siteId}/set/setting/guest_access:
+    /api/s/{siteId}/set/setting/guest_access:
         put:
             operationId: UpdateSettingGuestAccess
             parameters:
@@ -31013,7 +31013,7 @@ paths:
                     description: Created
             tags:
                 - SettingGuestAccess
-    /proxy/network/api/s/{siteId}/set/setting/ips:
+    /api/s/{siteId}/set/setting/ips:
         put:
             operationId: UpdateSettingIps
             parameters:
@@ -31148,7 +31148,7 @@ paths:
                     description: Created
             tags:
                 - SettingIps
-    /proxy/network/api/s/{siteId}/set/setting/lcm:
+    /api/s/{siteId}/set/setting/lcm:
         put:
             operationId: UpdateSettingLcm
             parameters:
@@ -31283,7 +31283,7 @@ paths:
                     description: Created
             tags:
                 - SettingLcm
-    /proxy/network/api/s/{siteId}/set/setting/locale:
+    /api/s/{siteId}/set/setting/locale:
         put:
             operationId: UpdateSettingLocale
             parameters:
@@ -31418,7 +31418,7 @@ paths:
                     description: Created
             tags:
                 - SettingLocale
-    /proxy/network/api/s/{siteId}/set/setting/magic_site_to_site_vpn:
+    /api/s/{siteId}/set/setting/magic_site_to_site_vpn:
         put:
             operationId: UpdateSettingMagicSiteToSiteVpn
             parameters:
@@ -31553,7 +31553,7 @@ paths:
                     description: Created
             tags:
                 - SettingMagicSiteToSiteVpn
-    /proxy/network/api/s/{siteId}/set/setting/mdns:
+    /api/s/{siteId}/set/setting/mdns:
         put:
             operationId: UpdateSettingMdns
             parameters:
@@ -31688,7 +31688,7 @@ paths:
                     description: Created
             tags:
                 - SettingMdns
-    /proxy/network/api/s/{siteId}/set/setting/mgmt:
+    /api/s/{siteId}/set/setting/mgmt:
         put:
             operationId: UpdateSettingMgmt
             parameters:
@@ -31823,7 +31823,7 @@ paths:
                     description: Created
             tags:
                 - SettingMgmt
-    /proxy/network/api/s/{siteId}/set/setting/netflow:
+    /api/s/{siteId}/set/setting/netflow:
         put:
             operationId: UpdateSettingNetflow
             parameters:
@@ -31958,7 +31958,7 @@ paths:
                     description: Created
             tags:
                 - SettingNetflow
-    /proxy/network/api/s/{siteId}/set/setting/network_optimization:
+    /api/s/{siteId}/set/setting/network_optimization:
         put:
             operationId: UpdateSettingNetworkOptimization
             parameters:
@@ -32093,7 +32093,7 @@ paths:
                     description: Created
             tags:
                 - SettingNetworkOptimization
-    /proxy/network/api/s/{siteId}/set/setting/ntp:
+    /api/s/{siteId}/set/setting/ntp:
         put:
             operationId: UpdateSettingNtp
             parameters:
@@ -32228,7 +32228,7 @@ paths:
                     description: Created
             tags:
                 - SettingNtp
-    /proxy/network/api/s/{siteId}/set/setting/porta:
+    /api/s/{siteId}/set/setting/porta:
         put:
             operationId: UpdateSettingPorta
             parameters:
@@ -32363,7 +32363,7 @@ paths:
                     description: Created
             tags:
                 - SettingPorta
-    /proxy/network/api/s/{siteId}/set/setting/radio_ai:
+    /api/s/{siteId}/set/setting/radio_ai:
         put:
             operationId: UpdateSettingRadioAi
             parameters:
@@ -32498,7 +32498,7 @@ paths:
                     description: Created
             tags:
                 - SettingRadioAi
-    /proxy/network/api/s/{siteId}/set/setting/radius:
+    /api/s/{siteId}/set/setting/radius:
         put:
             operationId: UpdateSettingRadius
             parameters:
@@ -32633,7 +32633,7 @@ paths:
                     description: Created
             tags:
                 - SettingRadius
-    /proxy/network/api/s/{siteId}/set/setting/rsyslogd:
+    /api/s/{siteId}/set/setting/rsyslogd:
         put:
             operationId: UpdateSettingRsyslogd
             parameters:
@@ -32768,7 +32768,7 @@ paths:
                     description: Created
             tags:
                 - SettingRsyslogd
-    /proxy/network/api/s/{siteId}/set/setting/snmp:
+    /api/s/{siteId}/set/setting/snmp:
         put:
             operationId: UpdateSettingSnmp
             parameters:
@@ -32903,7 +32903,7 @@ paths:
                     description: Created
             tags:
                 - SettingSnmp
-    /proxy/network/api/s/{siteId}/set/setting/ssl_inspection:
+    /api/s/{siteId}/set/setting/ssl_inspection:
         put:
             operationId: UpdateSettingSslInspection
             parameters:
@@ -33038,7 +33038,7 @@ paths:
                     description: Created
             tags:
                 - SettingSslInspection
-    /proxy/network/api/s/{siteId}/set/setting/super_cloudaccess:
+    /api/s/{siteId}/set/setting/super_cloudaccess:
         put:
             operationId: UpdateSettingSuperCloudaccess
             parameters:
@@ -33173,7 +33173,7 @@ paths:
                     description: Created
             tags:
                 - SettingSuperCloudaccess
-    /proxy/network/api/s/{siteId}/set/setting/super_events:
+    /api/s/{siteId}/set/setting/super_events:
         put:
             operationId: UpdateSettingSuperEvents
             parameters:
@@ -33308,7 +33308,7 @@ paths:
                     description: Created
             tags:
                 - SettingSuperEvents
-    /proxy/network/api/s/{siteId}/set/setting/super_fwupdate:
+    /api/s/{siteId}/set/setting/super_fwupdate:
         put:
             operationId: UpdateSettingSuperFwupdate
             parameters:
@@ -33443,7 +33443,7 @@ paths:
                     description: Created
             tags:
                 - SettingSuperFwupdate
-    /proxy/network/api/s/{siteId}/set/setting/super_identity:
+    /api/s/{siteId}/set/setting/super_identity:
         put:
             operationId: UpdateSettingSuperIdentity
             parameters:
@@ -33578,7 +33578,7 @@ paths:
                     description: Created
             tags:
                 - SettingSuperIdentity
-    /proxy/network/api/s/{siteId}/set/setting/super_mail:
+    /api/s/{siteId}/set/setting/super_mail:
         put:
             operationId: UpdateSettingSuperMail
             parameters:
@@ -33713,7 +33713,7 @@ paths:
                     description: Created
             tags:
                 - SettingSuperMail
-    /proxy/network/api/s/{siteId}/set/setting/super_mgmt:
+    /api/s/{siteId}/set/setting/super_mgmt:
         put:
             operationId: UpdateSettingSuperMgmt
             parameters:
@@ -33848,7 +33848,7 @@ paths:
                     description: Created
             tags:
                 - SettingSuperMgmt
-    /proxy/network/api/s/{siteId}/set/setting/super_sdn:
+    /api/s/{siteId}/set/setting/super_sdn:
         put:
             operationId: UpdateSettingSuperSdn
             parameters:
@@ -33983,7 +33983,7 @@ paths:
                     description: Created
             tags:
                 - SettingSuperSdn
-    /proxy/network/api/s/{siteId}/set/setting/super_smtp:
+    /api/s/{siteId}/set/setting/super_smtp:
         put:
             operationId: UpdateSettingSuperSmtp
             parameters:
@@ -34118,7 +34118,7 @@ paths:
                     description: Created
             tags:
                 - SettingSuperSmtp
-    /proxy/network/api/s/{siteId}/set/setting/teleport:
+    /api/s/{siteId}/set/setting/teleport:
         put:
             operationId: UpdateSettingTeleport
             parameters:
@@ -34253,7 +34253,7 @@ paths:
                     description: Created
             tags:
                 - SettingTeleport
-    /proxy/network/api/s/{siteId}/set/setting/traffic_flow:
+    /api/s/{siteId}/set/setting/traffic_flow:
         put:
             operationId: UpdateSettingTrafficFlow
             parameters:
@@ -34388,7 +34388,7 @@ paths:
                     description: Created
             tags:
                 - SettingTrafficFlow
-    /proxy/network/api/s/{siteId}/set/setting/usg:
+    /api/s/{siteId}/set/setting/usg:
         put:
             operationId: UpdateSettingUsg
             parameters:
@@ -34523,7 +34523,7 @@ paths:
                     description: Created
             tags:
                 - SettingUsg
-    /proxy/network/api/s/{siteId}/set/setting/usw:
+    /api/s/{siteId}/set/setting/usw:
         put:
             operationId: UpdateSettingUsw
             parameters:
@@ -34658,7 +34658,7 @@ paths:
                     description: Created
             tags:
                 - SettingUsw
-    /proxy/network/api/s/{siteId}/stat/device:
+    /api/s/{siteId}/stat/device:
         get:
             operationId: ListDevice
             parameters:
@@ -34794,7 +34794,7 @@ paths:
                     description: OK
             tags:
                 - Device
-    /proxy/network/api/s/{siteId}/stat/device/{id}:
+    /api/s/{siteId}/stat/device/{id}:
         get:
             operationId: GetDevice
             parameters:
@@ -34966,7 +34966,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -35028,7 +35028,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -35094,7 +35094,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -35165,7 +35165,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: ruleId
                   required: true
@@ -35226,7 +35226,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: ruleId
                   required: true
@@ -35298,7 +35298,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -35358,7 +35358,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -35420,7 +35420,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -35486,7 +35486,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -35547,7 +35547,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -35619,7 +35619,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: clientMac
                   required: true
@@ -35685,7 +35685,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -35748,7 +35748,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -35809,7 +35809,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -35881,7 +35881,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: query
                   name: includeSystemFeatures
                   schema:
@@ -35949,7 +35949,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -36011,7 +36011,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -36082,7 +36082,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -36143,7 +36143,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -36215,7 +36215,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -36277,7 +36277,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -36344,7 +36344,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -36405,7 +36405,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -36470,7 +36470,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -36542,7 +36542,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -36614,7 +36614,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -36676,7 +36676,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -36743,7 +36743,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: zoneId
                   required: true
@@ -36804,7 +36804,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: zoneId
                   required: true
@@ -36877,7 +36877,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -36940,7 +36940,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -37008,7 +37008,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: planId
                   required: true
@@ -37070,7 +37070,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: planId
                   required: true
@@ -37143,7 +37143,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -37206,7 +37206,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -37274,7 +37274,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: shapeId
                   required: true
@@ -37336,7 +37336,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: shapeId
                   required: true
@@ -37409,7 +37409,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -37470,7 +37470,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -37538,7 +37538,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -37599,7 +37599,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -37662,7 +37662,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -37724,7 +37724,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -37791,7 +37791,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: mclagGroupId
                   required: true
@@ -37852,7 +37852,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: mclagGroupId
                   required: true
@@ -37924,7 +37924,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -37991,7 +37991,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -38052,7 +38052,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -38117,7 +38117,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -38189,7 +38189,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -38252,7 +38252,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -38313,7 +38313,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: modelName
                   required: true
@@ -38379,7 +38379,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -38441,7 +38441,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -38507,7 +38507,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -38578,7 +38578,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -38639,7 +38639,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -38704,7 +38704,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -38776,7 +38776,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -38843,7 +38843,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -38904,7 +38904,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -38969,7 +38969,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -39041,7 +39041,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -39105,7 +39105,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -39168,7 +39168,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -39235,7 +39235,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -39297,7 +39297,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -39369,7 +39369,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: query
                   name: mac
                   required: true
@@ -39435,7 +39435,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -39497,7 +39497,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -39564,7 +39564,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -39625,7 +39625,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -39690,7 +39690,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -39762,7 +39762,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -39824,7 +39824,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -39891,7 +39891,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: profileId
                   required: true
@@ -39952,7 +39952,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: profileId
                   required: true
@@ -40025,7 +40025,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -40086,7 +40086,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -40146,7 +40146,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -40208,7 +40208,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -40275,7 +40275,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: stackingGroupId
                   required: true
@@ -40336,7 +40336,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: stackingGroupId
                   required: true
@@ -40401,7 +40401,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: stackingGroupId
                   required: true
@@ -40473,7 +40473,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -40534,7 +40534,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -40600,7 +40600,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -40660,7 +40660,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -40731,7 +40731,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -40793,7 +40793,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: mac
                   required: true
@@ -40853,7 +40853,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: mac
                   required: true
@@ -40924,7 +40924,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: clientId
                   required: true
@@ -40986,7 +40986,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -41048,7 +41048,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -41115,7 +41115,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: routeId
                   required: true
@@ -41176,7 +41176,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: routeId
                   required: true
@@ -41248,7 +41248,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: ruleId
                   required: true
@@ -41314,7 +41314,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -41376,7 +41376,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -41443,7 +41443,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: ruleId
                   required: true
@@ -41504,7 +41504,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: ruleId
                   required: true
@@ -41576,7 +41576,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -41636,7 +41636,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -41703,7 +41703,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "204":
                     description: No Content
@@ -41759,7 +41759,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -41819,7 +41819,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -41886,7 +41886,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -41948,7 +41948,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -42015,7 +42015,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -42076,7 +42076,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -42141,7 +42141,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: id
                   required: true
@@ -42214,7 +42214,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -42275,7 +42275,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -42342,7 +42342,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: query
                   name: uptime
                   schema:
@@ -42408,7 +42408,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -42471,7 +42471,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
                 - in: path
                   name: clientIp
                   required: true
@@ -42539,7 +42539,7 @@ paths:
                   name: siteName
                   required: true
                   schema:
-                    $ref: '#/components/schemas/Site'
+                    type: string
             responses:
                 "200":
                     content:
@@ -42648,4 +42648,4 @@ paths:
                 - UniFi Core Info
 servers:
     - description: Added by pulumi unifi native provider
-      url: https://unifi.ui.com/
+      url: https://unifi.ui.com/proxy/network
