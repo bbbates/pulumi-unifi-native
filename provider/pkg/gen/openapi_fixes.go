@@ -19,14 +19,14 @@ func FixOpenAPIDoc(openAPIDoc *openapi3.T) error {
 
 	// Prefix all paths with /proxy/network/api so they can be merged with the /v2 api
 	for _, path := range openAPIDoc.Paths.InMatchingOrder() {
-		openAPIDoc.Paths.Set("/proxy/network/api"+path, openAPIDoc.Paths.Find(path))
+		openAPIDoc.Paths.Set("/api"+path, openAPIDoc.Paths.Find(path))
 		openAPIDoc.Paths.Delete(path)
 	}
 
 	// replace the server list to support the mergeable api specs
 	openAPIDoc.Servers = nil
 	openAPIDoc.AddServer(&openapi3.Server{
-		URL:         "https://unifi.ui.com/",
+		URL:         "https://unifi.ui.com/proxy/network",
 		Description: "Added by pulumi unifi native provider",
 	})
 
@@ -333,48 +333,6 @@ var V2PathsToRemove = []string{
 	"/api/site/{siteName}/vpn/openvpn/configuration",
 }
 
-var V2ProblematicSchemasToRemove = []string{
-	"WLAN Configuration",
-	"UnifiDeviceDto",
-	"AP scan neighbors",
-	"Alert setting update payload",
-	"TrafficFlowDto",
-	"TrafficFlowEndpointDto",
-	"TrafficFlowBasicEndpointDto",
-	"TrafficFlowClientCounterDto",
-	"HostFingerprintDto",
-	"ClientExcludedIpDto",
-	"Client Ping Latency Result",
-	"Filtering Insights watchlist entry",
-	"NetworkConf",
-	"super",
-	"WifiClientDetailsDto",
-	"WifiConnectivityEventsGroupDto",
-	"ClientTrafficDto",
-	"DeviceListDto",
-	"VisualProgrammingResponseDto",
-	"Enriched LAN Configuration",
-	"Enriched WAN Configuration",
-	"EnrichedWlanConfiguration",
-	"ExcludedIpDto",
-	"Feature limitation",
-	"Feature with description",
-	"Filtering Insights statistics",
-	"Filtering Insights watchlist",
-	"Gateway Engine Log",
-	"Gateway Engine Utilization",
-	"SpeedtestDto",
-	"IspStatusDto",
-	"ImmutableListSpeedtestDto",
-	"Historical speedtest results",
-	"LastSpeedTestDto",
-	"SpeedTestOverviewDto",
-	"ISP utilization",
-	"ImmutableListWAN Utilization Info",
-	"Map of MAC to Alias",
-	"A",
-}
-
 func FixV2OpenAPIDoc(openAPIDoc *openapi3.T) error {
 	// remove license from header, just causes issues
 	openAPIDoc.Info.License = nil
@@ -413,6 +371,15 @@ func FixV2OpenAPIDoc(openAPIDoc *openapi3.T) error {
 		if pathItem.Get != nil && pathItem.Get.Responses != nil {
 			res := updateRefForResponseBody(pathItem.Get.Responses, path, "GET")
 			referredSchemas[res] = true
+		}
+
+		// fix the pathName schema type - should just be string
+		for _, op := range pathItem.Operations() {
+			if siteNameParam := op.Parameters.GetByInAndName("path", "siteName"); siteNameParam != nil {
+				siteNameParam.Schema = openapi3.NewSchemaRef("", &openapi3.Schema{
+					Type: (*openapi3.Types)(&[]string{"string"}),
+				})
+			}
 		}
 	}
 
