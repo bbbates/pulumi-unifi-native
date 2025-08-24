@@ -7,6 +7,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource/plugin"
 	"net/http"
 	"os"
+	"reflect"
 	"regexp"
 	"time"
 
@@ -57,83 +58,125 @@ func makeProvider(host *provider.HostClient, name, version string, pulumiSchemaB
 }
 
 func (p *unifiNativeProvider) extractOutput(outputs interface{}, id string, resourceType string, inputProperties *structpb.Struct) (map[string]interface{}, error) {
-	// All create/read/update endpoints return the object under the top-level "data" object.
+	outputType := reflect.TypeOf(outputs)
+	if outputType.Kind() == reflect.Map {
+		result := outputs.(map[string]interface{})
 
-	var result = outputs.(map[string]interface{})
-	if result["data"] != nil {
-		logging.V(3).Infof("Data: %v", result["data"])
-		var dataList = result["data"].([]interface{})
-		if (dataList == nil) || (len(dataList) == 0) {
-			logging.V(3).Infof("No data found in output")
+		if result["meta"] != nil && result["data"] != nil {
+			return p.v1ApiExtractOutput(result, id, resourceType, inputProperties)
+		} else {
+			return p.v2ApiExtractOutput(result, id, resourceType, inputProperties)
+		}
+	} else if outputType.Kind() == reflect.Slice {
+		logging.V(3).Infof("API v2 Data: %v", outputs)
+		// only v2 APIs return slices of results
+		items := outputs.([]interface{})
 
-			if inputProperties == nil {
-				return nil, errors.New("output did not contain a 'data' object and no input properties were provided (not an update operation?)")
-			} else {
-				// Unifi API will return an empty data array for an update if nothing has changed.
-				// This is usually because something has gone wrong in the state mgmt for the Pulumi provider,
-				// but failing the entire update because of it is usually not desired.
-				// Return the existing input properties to ensure the resource still has state
-				logging.V(3).Infof("Marshalled input properties: %v", inputProperties.AsMap())
-				inputs, err := plugin.UnmarshalProperties(inputProperties, state.DefaultUnmarshalOpts)
-				if err != nil {
-					return nil, errors.Wrap(err, "unmarshaling new inputs in check method")
-				}
-				inputsMap := inputs.Mappable()
-				inputsMap["id"] = id // inputProperties will not contain the id, so we need to add it here
-				return inputsMap, nil
-			}
+		for _, itemIt := range items {
+			logging.V(3).Infof("BEFORE %v", itemIt)
+			item := itemIt.(map[string]interface{})
+			item["id"] = item["_id"] // need to massage the _id from unifi to match Pulumi's expectations
+			delete(item, "_id")      // leaving the API _id field in the results seems to cause trouble with the refresh operation
+			item["siteName"] = p.siteId
+			item["site_name"] = p.siteId
+			logging.V(3).Infof("AFTER %v", itemIt)
 		}
 
-		var data = dataList[0].(map[string]interface{})
-		if data["_id"] == nil {
-			return nil, errors.New("output did not contain an '_id' field")
-		}
-		data["id"] = data["_id"] // need to massage the _id from unifi to match Pulumi's expectations
-		delete(data, "_id")      // leaving the API _id field in the results seems to cause trouble with the refresh operation
-		data["siteId"] = p.siteId
-		data["siteName"] = p.siteId
-		data["site_id"] = p.siteId
-		data["site_name"] = p.siteId
-
-		// If the resource type if provided, and the type is a Device, then remove the unnecessary fields
-		// and change the ID field to use the mac field
-		if resourceType == "unifi-native:device:Device" {
-			statPropertiesForRemoval := []string{
-				"active_geo_info",
-				"config_network_lan",
-				"dhcp_excluded_ip_list",
-				"last_uplink",
-				"system-stats",
-				"sys_stats",
-				"detailed_states",
-				"geo_info",
-				"ids_ips_signature",
-				"ipv4_active_leases",
-				"last_geo_info",
-				"last_wan_interfaces",
-				"led_state",
-				"ruleset_interfaces",
-				"speedtest-status",
-				"stat",
-				"switch_caps",
-				"udapi_version",
-				"uplink",
-				"uptime_stats",
-				"wan1",
-				"wan2",
-			}
-			for _, prop := range statPropertiesForRemoval {
-				if _, ok := data[prop]; ok {
-					logging.V(3).Infof("Removing property %s from the output data", prop)
-					delete(data, prop)
-				}
-			}
-		}
-
-		return data, nil
+		result := make(map[string]interface{})
+		result["items"] = items
+		logging.V(3).Infof("After all: %v", outputs)
+		return result, nil
 	}
 
-	return nil, errors.New("output did not contain a 'data' object")
+	// All create/read/update endpoints return the object under the top-level "data" object.
+
+	return nil, errors.New("API version output type could not be determined")
+}
+
+func (p *unifiNativeProvider) v1ApiExtractOutput(result map[string]interface{}, id string, resourceType string, inputProperties *structpb.Struct) (map[string]interface{}, error) {
+	logging.V(3).Infof("API v1 Data: %v", result["data"])
+
+	var dataList = result["data"].([]interface{})
+	if (dataList == nil) || (len(dataList) == 0) {
+		logging.V(3).Infof("No data found in output")
+
+		if inputProperties == nil {
+			return nil, errors.New("output did not contain a 'data' object and no input properties were provided (not an update operation?)")
+		} else {
+			// Unifi API will return an empty data array for an update if nothing has changed.
+			// This is usually because something has gone wrong in the state mgmt for the Pulumi provider,
+			// but failing the entire update because of it is usually not desired.
+			// Return the existing input properties to ensure the resource still has state
+			logging.V(3).Infof("Marshalled input properties: %v", inputProperties.AsMap())
+			inputs, err := plugin.UnmarshalProperties(inputProperties, state.DefaultUnmarshalOpts)
+			if err != nil {
+				return nil, errors.Wrap(err, "unmarshaling new inputs in check method")
+			}
+			inputsMap := inputs.Mappable()
+			inputsMap["id"] = id // inputProperties will not contain the id, so we need to add it here
+			return inputsMap, nil
+		}
+	}
+
+	var data = dataList[0].(map[string]interface{})
+	if data["_id"] == nil {
+		return nil, errors.New("output did not contain an '_id' field")
+	}
+	data["id"] = data["_id"] // need to massage the _id from unifi to match Pulumi's expectations
+	delete(data, "_id")      // leaving the API _id field in the results seems to cause trouble with the refresh operation
+	data["siteId"] = p.siteId
+	data["site_id"] = p.siteId
+
+	// If the resource type if provided, and the type is a Device, then remove the unnecessary fields
+	// and change the ID field to use the mac field
+	if resourceType == "unifi-native:device:Device" {
+		statPropertiesForRemoval := []string{
+			"active_geo_info",
+			"config_network_lan",
+			"dhcp_excluded_ip_list",
+			"last_uplink",
+			"system-stats",
+			"sys_stats",
+			"detailed_states",
+			"geo_info",
+			"ids_ips_signature",
+			"ipv4_active_leases",
+			"last_geo_info",
+			"last_wan_interfaces",
+			"led_state",
+			"ruleset_interfaces",
+			"speedtest-status",
+			"stat",
+			"switch_caps",
+			"udapi_version",
+			"uplink",
+			"uptime_stats",
+			"wan1",
+			"wan2",
+		}
+		for _, prop := range statPropertiesForRemoval {
+			if _, ok := data[prop]; ok {
+				logging.V(3).Infof("Removing property %s from the output data", prop)
+				delete(data, prop)
+			}
+		}
+	}
+
+	return data, nil
+}
+
+func (p *unifiNativeProvider) v2ApiExtractOutput(result map[string]interface{}, id string, resourceType string, properties *structpb.Struct) (map[string]interface{}, error) {
+	logging.V(3).Infof("API v2 Data: %v", result)
+
+	if result["_id"] == nil {
+		return nil, errors.New("output did not contain an '_id' field")
+	}
+	result["id"] = result["_id"] // need to massage the _id from unifi to match Pulumi's expectations
+	delete(result, "_id")        // leaving the API _id field in the results seems to cause trouble with the refresh operation
+	result["siteName"] = p.siteId
+	result["site_name"] = p.siteId
+
+	return result, nil
 }
 
 func (p *unifiNativeProvider) GetAuthorizationHeader() string {
