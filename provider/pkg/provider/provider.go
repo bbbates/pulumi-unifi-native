@@ -32,9 +32,8 @@ type unifiNativeProvider struct {
 	name    string
 	version string
 
-	siteId        string
+	siteID        string
 	apiKey        string
-	apiHost       string
 	allowInsecure bool
 }
 
@@ -64,9 +63,8 @@ func (p *unifiNativeProvider) extractOutput(outputs interface{}, id string, reso
 
 		if result["meta"] != nil && result["data"] != nil {
 			return p.v1ApiExtractOutput(result, id, resourceType, inputProperties)
-		} else {
-			return p.v2ApiExtractOutput(result, id, resourceType, inputProperties)
 		}
+		return p.v2ApiExtractOutput(result)
 	} else if outputType.Kind() == reflect.Slice {
 		logging.V(3).Infof("API v2 Data: %v", outputs)
 		// only v2 APIs return slices of results
@@ -77,8 +75,8 @@ func (p *unifiNativeProvider) extractOutput(outputs interface{}, id string, reso
 			item["id"] = item["_id"] // need to massage the _id from unifi to match Pulumi's expectations
 			item["Id"] = item["_id"]
 			delete(item, "_id") // leaving the API _id field in the results seems to cause trouble with the refresh operation
-			item["siteName"] = p.siteId
-			item["site_name"] = p.siteId
+			item["siteName"] = p.siteID
+			item["site_name"] = p.siteID
 		}
 
 		result := make(map[string]interface{})
@@ -101,20 +99,20 @@ func (p *unifiNativeProvider) v1ApiExtractOutput(result map[string]interface{}, 
 
 		if inputProperties == nil {
 			return nil, errors.New("output did not contain a 'data' object and no input properties were provided (not an update operation?)")
-		} else {
-			// Unifi API will return an empty data array for an update if nothing has changed.
-			// This is usually because something has gone wrong in the state mgmt for the Pulumi provider,
-			// but failing the entire update because of it is usually not desired.
-			// Return the existing input properties to ensure the resource still has state
-			logging.V(3).Infof("Marshalled input properties: %v", inputProperties.AsMap())
-			inputs, err := plugin.UnmarshalProperties(inputProperties, state.DefaultUnmarshalOpts)
-			if err != nil {
-				return nil, errors.Wrap(err, "unmarshaling new inputs in check method")
-			}
-			inputsMap := inputs.Mappable()
-			inputsMap["id"] = id // inputProperties will not contain the id, so we need to add it here
-			return inputsMap, nil
 		}
+
+		// Unifi API will return an empty data array for an update if nothing has changed.
+		// This is usually because something has gone wrong in the state mgmt for the Pulumi provider,
+		// but failing the entire update because of it is usually not desired.
+		// Return the existing input properties to ensure the resource still has state
+		logging.V(3).Infof("Marshalled input properties: %v", inputProperties.AsMap())
+		inputs, err := plugin.UnmarshalProperties(inputProperties, state.DefaultUnmarshalOpts)
+		if err != nil {
+			return nil, errors.Wrap(err, "unmarshaling new inputs in check method")
+		}
+		inputsMap := inputs.Mappable()
+		inputsMap["id"] = id // inputProperties will not contain the id, so we need to add it here
+		return inputsMap, nil
 	}
 
 	var data = dataList[0].(map[string]interface{})
@@ -123,8 +121,8 @@ func (p *unifiNativeProvider) v1ApiExtractOutput(result map[string]interface{}, 
 	}
 	data["id"] = data["_id"] // need to massage the _id from unifi to match Pulumi's expectations
 	delete(data, "_id")      // leaving the API _id field in the results seems to cause trouble with the refresh operation
-	data["siteId"] = p.siteId
-	data["site_id"] = p.siteId
+	data["siteId"] = p.siteID
+	data["site_id"] = p.siteID
 
 	// If the resource type if provided, and the type is a Device, then remove the unnecessary fields
 	// and change the ID field to use the mac field
@@ -164,7 +162,7 @@ func (p *unifiNativeProvider) v1ApiExtractOutput(result map[string]interface{}, 
 	return data, nil
 }
 
-func (p *unifiNativeProvider) v2ApiExtractOutput(result map[string]interface{}, id string, resourceType string, properties *structpb.Struct) (map[string]interface{}, error) {
+func (p *unifiNativeProvider) v2ApiExtractOutput(result map[string]interface{}) (map[string]interface{}, error) {
 	logging.V(3).Infof("API v2 Data: %v", result)
 
 	if result["_id"] == nil {
@@ -173,8 +171,8 @@ func (p *unifiNativeProvider) v2ApiExtractOutput(result map[string]interface{}, 
 	result["id"] = result["_id"] // need to massage the _id from unifi to match Pulumi's expectations
 	result["Id"] = result["_id"]
 	delete(result, "_id") // leaving the API _id field in the results seems to cause trouble with the refresh operation
-	result["siteName"] = p.siteId
-	result["site_name"] = p.siteId
+	result["siteName"] = p.siteID
+	result["site_name"] = p.siteID
 
 	return result, nil
 }
@@ -194,26 +192,26 @@ func (p *unifiNativeProvider) OnPostInvoke(_ context.Context, _ *pulumirpc.Invok
 // OnConfigure is called by the provider framework when Pulumi calls Configure on
 // the resource provider server.
 func (p *unifiNativeProvider) OnConfigure(_ context.Context, req *pulumirpc.ConfigureRequest) (*pulumirpc.ConfigureResponse, error) {
-	siteId, ok := req.GetVariables()["unifi-native:config:siteId"]
+	siteID, ok := req.GetVariables()["unifi-native:config:siteId"]
 	if !ok {
 		// Check if it's set as an env var.
 		envVarNames := handler.GetSchemaSpec().Provider.InputProperties["siteId"].DefaultInfo.Environment
 		for _, n := range envVarNames {
 			v := os.Getenv(n)
 			if v != "" {
-				siteId = v
+				siteID = v
 				ok = true
 			}
 		}
 
 		// else use the default value
 		if !ok {
-			siteId = handler.GetSchemaSpec().Config.Variables["siteId"].Default.(string)
+			siteID = handler.GetSchemaSpec().Config.Variables["siteId"].Default.(string)
 		}
 	}
 
-	logging.V(3).Infof("Configuring Site Id: %s", siteId)
-	p.siteId = siteId
+	logging.V(3).Infof("Configuring Site Id: %s", siteID)
+	p.siteID = siteID
 
 	apiKey, ok := req.GetVariables()["unifi-native:config:apiKey"]
 	if !ok {
@@ -259,7 +257,7 @@ func (p *unifiNativeProvider) OnConfigure(_ context.Context, req *pulumirpc.Conf
 		TLSHandshakeTimeout:   10 * time.Second,
 		ExpectContinueTimeout: 1 * time.Second,
 		TLSClientConfig: &tls.Config{
-			InsecureSkipVerify: p.allowInsecure,
+			InsecureSkipVerify: p.allowInsecure, //nolint:gosec  // Insecure TLS is allowable for this provider, let the user assess the risk
 		},
 	}
 
@@ -267,33 +265,32 @@ func (p *unifiNativeProvider) OnConfigure(_ context.Context, req *pulumirpc.Conf
 }
 
 func (p *unifiNativeProvider) GetGlobalPathParams(_ context.Context, _ *pulumirpc.ConfigureRequest) (map[string]string, error) {
-	if p.siteId != "" {
+	if p.siteID != "" {
 		return map[string]string{
-			"siteId":    p.siteId,
-			"site_id":   p.siteId,
-			"siteName":  p.siteId,
-			"site_name": p.siteId,
+			"siteId":    p.siteID,
+			"site_id":   p.siteID,
+			"siteName":  p.siteID,
+			"site_name": p.siteID,
 		}, nil
-	} else {
-		return nil, nil
 	}
-}
-
-// OnDiff checks what impacts a hypothetical update will have on the resource's properties.
-func (p *unifiNativeProvider) OnDiff(ctx context.Context, req *pulumirpc.DiffRequest, resourceTypeToken string, diff *resource.ObjectDiff, jsonReq *openapi3.MediaType) (*pulumirpc.DiffResponse, error) {
 	return nil, nil
 }
 
-func (p *unifiNativeProvider) OnPreCreate(ctx context.Context, req *pulumirpc.CreateRequest, httpReq *http.Request) error {
+// OnDiff checks what impacts a hypothetical update will have on the resource's properties.
+func (p *unifiNativeProvider) OnDiff(_ context.Context, _ *pulumirpc.DiffRequest, _ string, _ *resource.ObjectDiff, _ *openapi3.MediaType) (*pulumirpc.DiffResponse, error) {
+	return nil, nil
+}
+
+func (p *unifiNativeProvider) OnPreCreate(_ context.Context, _ *pulumirpc.CreateRequest, _ *http.Request) error {
 	return nil
 }
 
 // OnPostCreate allocates a new instance of the provided resource and returns its unique ID afterwards.
-func (p *unifiNativeProvider) OnPostCreate(ctx context.Context, req *pulumirpc.CreateRequest, outputs interface{}) (map[string]interface{}, error) {
+func (p *unifiNativeProvider) OnPostCreate(_ context.Context, req *pulumirpc.CreateRequest, outputs interface{}) (map[string]interface{}, error) {
 	return p.extractOutput(outputs, "", req.Type, nil)
 }
 
-func (p *unifiNativeProvider) OnPreRead(ctx context.Context, req *pulumirpc.ReadRequest, httpReq *http.Request) error {
+func (p *unifiNativeProvider) OnPreRead(_ context.Context, req *pulumirpc.ReadRequest, httpReq *http.Request) error {
 	// if the request is for a Device, and the ID is NOT a mac address (because the device has been previously imported)
 	// change the last part of the URL path to use the mac address instead of the ID
 	if req.Type == "unifi-native:device:Device" {
@@ -310,22 +307,22 @@ func (p *unifiNativeProvider) OnPreRead(ctx context.Context, req *pulumirpc.Read
 	return nil
 }
 
-func (p *unifiNativeProvider) OnPostRead(ctx context.Context, req *pulumirpc.ReadRequest, outputs interface{}) (map[string]interface{}, error) {
+func (p *unifiNativeProvider) OnPostRead(_ context.Context, req *pulumirpc.ReadRequest, outputs interface{}) (map[string]interface{}, error) {
 	return p.extractOutput(outputs, "", req.Type, nil)
 }
 
-func (p *unifiNativeProvider) OnPreUpdate(ctx context.Context, req *pulumirpc.UpdateRequest, httpReq *http.Request) error {
+func (p *unifiNativeProvider) OnPreUpdate(_ context.Context, _ *pulumirpc.UpdateRequest, _ *http.Request) error {
 	return nil
 }
 
-func (p *unifiNativeProvider) OnPostUpdate(ctx context.Context, req *pulumirpc.UpdateRequest, httpReq http.Request, outputs interface{}) (map[string]interface{}, error) {
+func (p *unifiNativeProvider) OnPostUpdate(_ context.Context, req *pulumirpc.UpdateRequest, _ http.Request, outputs interface{}) (map[string]interface{}, error) {
 	return p.extractOutput(outputs, req.Id, req.Type, req.News)
 }
 
-func (p *unifiNativeProvider) OnPreDelete(ctx context.Context, req *pulumirpc.DeleteRequest, httpReq *http.Request) error {
+func (p *unifiNativeProvider) OnPreDelete(_ context.Context, _ *pulumirpc.DeleteRequest, _ *http.Request) error {
 	return nil
 }
 
-func (p *unifiNativeProvider) OnPostDelete(ctx context.Context, req *pulumirpc.DeleteRequest) error {
+func (p *unifiNativeProvider) OnPostDelete(_ context.Context, _ *pulumirpc.DeleteRequest) error {
 	return nil
 }

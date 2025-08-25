@@ -87,9 +87,17 @@ build:: dotnet_sdk go_sdk nodejs_sdk python_sdk
 # Required for the codegen action that runs in pulumi/pulumi
 only_build:: build
 
-lint::
+
+lint-provider::
+	cd provider && golangci-lint run -c ../.golangci.yml --timeout 10m
+lint-sdk::
+	cd sdk && golangci-lint run -c ../.golangci.yml --timeout 10m
+
+lint:: lint-provider lint-sdk
+
+lint-fix::
 	for DIR in "provider" "sdk" ; do \
-		pushd $$DIR && golangci-lint run -c ../.golangci.yml --timeout 10m && popd ; \
+		pushd $$DIR && golangci-lint run -c ../.golangci.yml --timeout 10m --fix && popd ; \
 	done
 
 

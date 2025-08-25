@@ -392,12 +392,12 @@ func FixV2OpenAPIDoc(openAPIDoc *openapi3.T) error {
 		// This is not a complete fix but it will work with the simplistic way that the v2 api is structured
 		for _, prop := range schema.Value.Properties {
 			if prop.Ref != "" {
-				propId := strings.Split(prop.Ref, "/")[len(strings.Split(prop.Ref, "/"))-1]
-				newPropRef := pkg.ToPascalCase(propId)
+				propID := strings.Split(prop.Ref, "/")[len(strings.Split(prop.Ref, "/"))-1]
+				newPropRef := pkg.ToPascalCase(propID)
 				prop.Ref = fmt.Sprintf("#/components/schemas/%s", newPropRef)
 			} else if prop.Value.Items != nil && prop.Value.Items.Ref != "" {
-				propId := strings.Split(prop.Value.Items.Ref, "/")[len(strings.Split(prop.Value.Items.Ref, "/"))-1]
-				newPropRef := pkg.ToPascalCase(propId)
+				propID := strings.Split(prop.Value.Items.Ref, "/")[len(strings.Split(prop.Value.Items.Ref, "/"))-1]
+				newPropRef := pkg.ToPascalCase(propID)
 				prop.Value.Items.Ref = fmt.Sprintf("#/components/schemas/%s", newPropRef)
 			}
 		}
@@ -405,7 +405,7 @@ func FixV2OpenAPIDoc(openAPIDoc *openapi3.T) error {
 
 	walkReferredSchemas(referredSchemas, newSchemas)
 
-	for ref, _ := range newSchemas {
+	for ref := range newSchemas {
 		if _, ok := referredSchemas[ref]; !ok {
 			glog.Infof("%s is not referred to in other schemas, removing...", ref)
 			delete(newSchemas, ref)
@@ -442,13 +442,13 @@ func updateBodyRef(body *openapi3.MediaType, logNote string, method string, path
 		ref = body.Schema.Ref
 		updater = func(ref string) { body.Schema.Ref = ref }
 	}
-	refId := strings.Split(ref, "/")[len(strings.Split(ref, "/"))-1]
-	newRefId := pkg.ToPascalCase(refId)
-	if newRefId != "" && newRefId != refId {
-		glog.Infof("%s %s %s $Ref: %s -> %s", method, path, logNote, ref, newRefId)
-		updater(fmt.Sprintf("#/components/schemas/%s", pkg.ToPascalCase(refId)))
+	refID := strings.Split(ref, "/")[len(strings.Split(ref, "/"))-1]
+	newRefID := pkg.ToPascalCase(refID)
+	if newRefID != "" && newRefID != refID {
+		glog.Infof("%s %s %s $Ref: %s -> %s", method, path, logNote, ref, newRefID)
+		updater(fmt.Sprintf("#/components/schemas/%s", pkg.ToPascalCase(refID)))
 	}
-	return newRefId
+	return newRefID
 }
 
 func walkReferredSchemas(referredSchemas map[string]bool, newSchemas map[string]*openapi3.SchemaRef) {
@@ -466,21 +466,21 @@ func walkReferredSchemas(referredSchemas map[string]bool, newSchemas map[string]
 
 		for _, prop := range schemaRef.Value.Properties {
 			if prop.Ref != "" {
-				propId := strings.Split(prop.Ref, "/")[len(strings.Split(prop.Ref, "/"))-1]
-				if _, ok := referredSchemas[propId]; !ok {
+				propID := strings.Split(prop.Ref, "/")[len(strings.Split(prop.Ref, "/"))-1]
+				if _, ok := referredSchemas[propID]; !ok {
 					//glog.Infof("%s ref %s -> referred", ref, )
-					walkRefInner(propId)
+					walkRefInner(propID)
 				}
 			} else if prop.Value.Items != nil && prop.Value.Items.Ref != "" {
-				propId := strings.Split(prop.Value.Items.Ref, "/")[len(strings.Split(prop.Value.Items.Ref, "/"))-1]
-				if _, ok := referredSchemas[propId]; !ok {
-					walkRefInner(propId)
+				propID := strings.Split(prop.Value.Items.Ref, "/")[len(strings.Split(prop.Value.Items.Ref, "/"))-1]
+				if _, ok := referredSchemas[propID]; !ok {
+					walkRefInner(propID)
 				}
 			}
 		}
 	}
 
-	for ref, _ := range referredSchemas {
+	for ref := range referredSchemas {
 		walkRefInner(ref)
 	}
 }
