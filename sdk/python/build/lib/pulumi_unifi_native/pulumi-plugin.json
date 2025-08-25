@@ -1,5 +1,0 @@
-{
-  "resource": true,
-  "name": "unifi-native",
-  "server": "github://api.github.com/bbbates/pulumi-unifi-native"
-}

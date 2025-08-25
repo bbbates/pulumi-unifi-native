@@ -6,17 +6,17 @@ toolchain go1.24.3
 
 require (
 	github.com/getkin/kin-openapi v0.132.0
-	github.com/pulumi/pulumi/pkg/v3 v3.186.0
-	github.com/pulumi/pulumi/sdk/v3 v3.186.0
+	github.com/pulumi/pulumi/pkg/v3 v3.191.0
+	github.com/pulumi/pulumi/sdk/v3 v3.191.0
 )
 
-require github.com/stretchr/testify v1.10.0
+require github.com/stretchr/testify v1.11.0
 
 require (
-	github.com/cloudy-sky-software/pulschema v0.0.0-20250726035356-40a774f9df11
-	github.com/cloudy-sky-software/pulumi-provider-framework v0.0.0-20250728154050-2bb09189e5f2 // indirect
+	github.com/cloudy-sky-software/pulschema v0.0.0-20250824215724-d08f3502036d
+	github.com/cloudy-sky-software/pulumi-provider-framework v0.0.0-20250824231453-4038acfcdab6 // indirect
 	github.com/pkg/errors v0.9.1
-	google.golang.org/protobuf v1.36.6
+	google.golang.org/protobuf v1.36.7
 	gopkg.in/yaml.v3 v3.0.1
 )
 
@@ -88,7 +88,7 @@ require (
 	github.com/pkg/term v1.1.0 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/pulumi/appdash v0.0.0-20231130102222-75f619a67231 // indirect
-	github.com/pulumi/esc v0.14.3 // indirect
+	github.com/pulumi/esc v0.17.0 // indirect
 	github.com/pulumi/inflector v0.2.1 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
@@ -108,21 +108,17 @@ require (
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	github.com/zclconf/go-cty v1.16.2 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
-	golang.org/x/crypto v0.39.0 // indirect
+	golang.org/x/crypto v0.40.0 // indirect
 	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 // indirect
-	golang.org/x/mod v0.25.0 // indirect
-	golang.org/x/net v0.41.0 // indirect
+	golang.org/x/mod v0.26.0 // indirect
+	golang.org/x/net v0.42.0 // indirect
 	golang.org/x/sync v0.16.0 // indirect
-	golang.org/x/sys v0.33.0 // indirect
-	golang.org/x/term v0.32.0 // indirect
-	golang.org/x/text v0.27.0 // indirect
-	golang.org/x/tools v0.34.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250528174236-200df99c418a // indirect
-	google.golang.org/grpc v1.74.2 // indirect
+	golang.org/x/sys v0.34.0 // indirect
+	golang.org/x/term v0.33.0 // indirect
+	golang.org/x/text v0.28.0 // indirect
+	golang.org/x/tools v0.35.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250707201910-8d1bb00bc6a7 // indirect
+	google.golang.org/grpc v1.75.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	lukechampine.com/frand v1.5.1 // indirect
 )
-
-replace github.com/cloudy-sky-software/pulschema v0.0.0-20250726035356-40a774f9df11 => ../../pulschema
-
-replace github.com/cloudy-sky-software/pulumi-provider-framework v0.0.0-20250728154050-2bb09189e5f2 => ../../pulumi-provider-framework

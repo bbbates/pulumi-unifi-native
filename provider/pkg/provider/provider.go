@@ -73,18 +73,17 @@ func (p *unifiNativeProvider) extractOutput(outputs interface{}, id string, reso
 		items := outputs.([]interface{})
 
 		for _, itemIt := range items {
-			logging.V(3).Infof("BEFORE %v", itemIt)
 			item := itemIt.(map[string]interface{})
 			item["id"] = item["_id"] // need to massage the _id from unifi to match Pulumi's expectations
-			delete(item, "_id")      // leaving the API _id field in the results seems to cause trouble with the refresh operation
+			item["Id"] = item["_id"]
+			delete(item, "_id") // leaving the API _id field in the results seems to cause trouble with the refresh operation
 			item["siteName"] = p.siteId
 			item["site_name"] = p.siteId
-			logging.V(3).Infof("AFTER %v", itemIt)
 		}
 
 		result := make(map[string]interface{})
 		result["items"] = items
-		logging.V(3).Infof("After all: %v", outputs)
+
 		return result, nil
 	}
 
@@ -172,7 +171,8 @@ func (p *unifiNativeProvider) v2ApiExtractOutput(result map[string]interface{}, 
 		return nil, errors.New("output did not contain an '_id' field")
 	}
 	result["id"] = result["_id"] // need to massage the _id from unifi to match Pulumi's expectations
-	delete(result, "_id")        // leaving the API _id field in the results seems to cause trouble with the refresh operation
+	result["Id"] = result["_id"]
+	delete(result, "_id") // leaving the API _id field in the results seems to cause trouble with the refresh operation
 	result["siteName"] = p.siteId
 	result["site_name"] = p.siteId
 
