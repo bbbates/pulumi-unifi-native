@@ -6,6 +6,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 )
 
+//nolint:unused
 func (p *unifiNativeProvider) determineDiffsAndReplacements(d *resource.ObjectDiff, properties openapi3.Schemas) ([]string, []string) {
 	replaces := make([]string, 0)
 	diffs := make([]string, 0)

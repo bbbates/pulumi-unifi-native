@@ -70,18 +70,18 @@ func main() {
 	switch language {
 	case Schema:
 		fmt.Printf("Generating schema for legacy API (v1)\n")
-		v1OpenApiDoc := extractFixAndValidateOpenApiSchema(openapiDocBytes, providerSchemaGen.FixOpenAPIDoc)
+		v1OpenAPIDoc := extractFixAndValidateOpenAPISchema(openapiDocBytes, providerSchemaGen.FixOpenAPIDoc)
 		fmt.Printf("Generating schema for API v2\n")
-		v2OpenApiDoc := extractFixAndValidateOpenApiSchema(v2openapiDocBytes, providerSchemaGen.FixV2OpenAPIDoc)
+		v2OpenAPIDoc := extractFixAndValidateOpenAPISchema(v2openapiDocBytes, providerSchemaGen.FixV2OpenAPIDoc)
 
-		mergeAndExtractSchema(v1OpenApiDoc, v2OpenApiDoc)
+		mergeAndExtractSchema(v1OpenAPIDoc, v2OpenAPIDoc)
 	default:
 		panic(fmt.Sprintf("Unrecognized language '%s'", language))
 	}
 }
 
-func extractFixAndValidateOpenApiSchema(openApiDocBytes []byte, fixFunc func(openAPIDoc *openapi3.T) error) *openapi3.T {
-	openAPIDoc := getOpenAPISpec(openApiDocBytes)
+func extractFixAndValidateOpenAPISchema(openAPIDocBytes []byte, fixFunc func(openAPIDoc *openapi3.T) error) *openapi3.T {
+	openAPIDoc := getOpenAPISpec(openAPIDocBytes)
 
 	err := fixFunc(openAPIDoc)
 	if err != nil {
@@ -93,20 +93,20 @@ func extractFixAndValidateOpenApiSchema(openApiDocBytes []byte, fixFunc func(ope
 	return openAPIDoc
 }
 
-func mergeAndExtractSchema(v1OpenApiDoc *openapi3.T, v2OpenApiDoc *openapi3.T) {
-	openApiDoc := v1OpenApiDoc
+func mergeAndExtractSchema(v1OpenAPIDoc *openapi3.T, v2OpenAPIDoc *openapi3.T) {
+	mergedOpenAPIDoc := v1OpenAPIDoc
 
-	for path, pathItem := range v2OpenApiDoc.Paths.Map() {
-		openApiDoc.Paths.Set(path, pathItem)
+	for path, pathItem := range v2OpenAPIDoc.Paths.Map() {
+		mergedOpenAPIDoc.Paths.Set(path, pathItem)
 	}
 
-	for schemaPath, schemaRef := range v2OpenApiDoc.Components.Schemas {
-		openApiDoc.Components.Schemas[schemaPath] = schemaRef
+	for schemaPath, schemaRef := range v2OpenAPIDoc.Components.Schemas {
+		mergedOpenAPIDoc.Components.Schemas[schemaPath] = schemaRef
 	}
 
-	validateOpenAPISpec(openApiDoc)
+	validateOpenAPISpec(mergedOpenAPIDoc)
 
-	schemaSpec, metadata, updatedOpenAPIDoc := providerSchemaGen.PulumiSchema(*openApiDoc)
+	schemaSpec, metadata, updatedOpenAPIDoc := providerSchemaGen.PulumiSchema(*mergedOpenAPIDoc)
 	providerDir := filepath.Join(".", "provider", "cmd", "pulumi-resource-unifi-native")
 	mustWritePulumiSchema(schemaSpec, providerDir, "schema.json")
 
