@@ -20,24 +20,7 @@ import (
 )
 
 const testCreateJSONPayload = `{
-    "autoDeploy": "yes",
-    "branch": "master",
-    "envVars": [{ "key": "PORT", "value": "8080" }],
-    "name": "An Express.js web service",
-    "ownerId": "usr-somefakeownerid",
-    "repo": "https://github.com/render-examples/express-hello-world",
-    "serviceDetails": {
-        "env": "node",
-        "envSpecificDetails": {
-            "buildCommand": "yarn",
-            "startCommand": "node app.js"
-        },
-        "numInstances": 1,
-        "plan": "starter",
-        "pullRequestPreviewsEnabled": "no",
-        "region": "oregon"
-    },
-    "type": "web_service"
+    
 }
 `
 
@@ -57,20 +40,22 @@ func makeTestProvider(ctx context.Context, t *testing.T) pulumirpc.ResourceProvi
 
 	openapiBytes := readFileFromProviderResourceDir(t, "openapi_generated.yml")
 	d := openapi.GetOpenAPISpec(openapiBytes)
-	d.Servers[0].URL = "http://localhost:8080"
 	openapiBytes, _ = d.MarshalJSON()
 
 	pSchemaBytes := readFileFromProviderResourceDir(t, "schema.json")
 	metadataBytes := readFileFromProviderResourceDir(t, "metadata.json")
 
-	p, err := makeProvider(nil, "", "", pSchemaBytes, openapiBytes, metadataBytes)
+	p, err := makeProvider(nil, "unifi-native", "0.0.0-test", pSchemaBytes, openapiBytes, metadataBytes)
 
 	if err != nil {
 		t.Fatalf("Could not create a provider instance: %v", err)
 	}
 
 	_, err = p.Configure(ctx, &pulumirpc.ConfigureRequest{
-		Variables: map[string]string{"unifi:config:apiKey": "fakeapikey"},
+		Variables: map[string]string{
+			"unifi-native:config:apiKey":  "fakeapikey",
+			"unifi-native:config:apiHost": "localhost:31319",
+		},
 	})
 
 	if err != nil {
@@ -93,7 +78,7 @@ func TestDiff(t *testing.T) {
 	news["name"] = "Test2"
 	newsStruct, _ := plugin.MarshalProperties(resource.NewPropertyMapFromMap(news), state.DefaultMarshalOpts)
 
-	resp, err := p.Diff(ctx, &pulumirpc.DiffRequest{Id: "", Urn: "urn:pulumi:some-stack::some-project::unifi:services:StaticSite::someResourceName", Olds: oldsStruct, News: newsStruct})
+	resp, err := p.Diff(ctx, &pulumirpc.DiffRequest{Id: "", Urn: "urn:pulumi:some-stack::some-project::unifi-native:networkconf:Network::testNetwork", Olds: oldsStruct, News: newsStruct})
 	assert.Nil(t, err)
 	assert.Equal(t, pulumirpc.DiffResponse_DIFF_SOME, resp.Changes)
 	assert.NotEmpty(t, resp.Diffs)
@@ -114,7 +99,7 @@ func TestCreate(t *testing.T) {
 	inputProperties, _ := plugin.MarshalProperties(resource.NewPropertyMapFromMap(inputs), state.DefaultMarshalOpts)
 
 	_, err := p.Create(ctx, &pulumirpc.CreateRequest{
-		Urn:        "urn:pulumi:dev::unifi-ts::unifi:services:WebService::webservice",
+		Urn:        "urn:pulumi:some-stack::some-project::unifi-native:networkconf:Network::testNetwork",
 		Properties: inputProperties,
 	})
 
