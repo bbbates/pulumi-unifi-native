@@ -103,5 +103,4 @@ func TestWithUnifi(t *testing.T) {
 		t.Errorf("error making request to unifi controller: %s", err)
 		panic(err)
 	}
-
 }
