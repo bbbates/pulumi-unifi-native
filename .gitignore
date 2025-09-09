@@ -17,3 +17,4 @@ Pulumi.*.yaml
 
 go.work.sum
 **/.vagrant/
+/examples/unifios/assets/

@@ -1,20 +1,16 @@
 package examples
 
 import (
-	"context"
+	"bytes"
+	"crypto/tls"
+	"encoding/json"
 	"fmt"
-	"github.com/golang/glog"
-	"github.com/testcontainers/testcontainers-go"
-	"github.com/testcontainers/testcontainers-go/network"
-	"github.com/testcontainers/testcontainers-go/wait"
+	"github.com/bmatcuk/go-vagrant"
 	"net/http"
+	"net/http/cookiejar"
 	"os"
+	"os/exec"
 	"testing"
-	"time"
-)
-
-const (
-	UnifiImage = "jacobalberty/unifi:%s"
 )
 
 func TestMain(m *testing.M) {
@@ -22,68 +18,73 @@ func TestMain(m *testing.M) {
 }
 
 func runAcceptanceTests(m *testing.M) int {
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
-
-	nw, err := network.New(ctx)
+	vagrantClient, err := vagrant.NewVagrantClient("unifios")
 	if err != nil {
-		glog.Errorf("failed to create network: %s", err)
+		fmt.Printf("error creating vagrant client: %s", err)
+		return 1
+	}
+
+	fmt.Printf("Bringing up UnifiOS test fixture...\n")
+	upCmd := vagrantClient.Up()
+	if err := upCmd.Run(); err != nil {
+		fmt.Printf("error starting vagrant up: %s", err)
+		return 2
+	}
+	if upCmd.Error != nil {
+		fmt.Printf("error during vagrant up: %s", err)
+		return 3
+	}
+
+	fmt.Printf("UnifiOS test fixture UP, initialising environment...\n")
+
+	sshConfigCmd := vagrantClient.SSHConfig()
+	if err := sshConfigCmd.Run(); err != nil {
+		fmt.Printf("error getting vagrant ssh-config: %s", err)
+		return 4
+	}
+	hostName := fmt.Sprintf("%s:11443", sshConfigCmd.Configs["default"].HostName)
+
+	if err := setupEnvironment(hostName); err != nil {
 		panic(err)
 	}
+
+	destroyCmd := vagrantClient.Destroy()
 	defer func() {
-		if err := nw.Remove(ctx); err != nil {
-			glog.Errorf("failed to remove network: %s", err)
+		err := destroyCmd.Run()
+		if err != nil {
+			fmt.Printf("error during vagrant destroy - ** manual cleanup required before next test run **: %s", err)
 		}
 	}()
-	ctrRequest := testcontainers.ContainerRequest{
-		Image:        fmt.Sprintf(UnifiImage, "v9"), // TODO: read this from env var or file
-		ExposedPorts: []string{"8443/tcp"},
-		WaitingFor:   wait.ForListeningPort("8443/tcp").WithStartupTimeout(time.Second * 30),
-		Files: []testcontainers.ContainerFile{{
-			HostFilePath:      "resources/scripts/init.d/demo-mode",
-			ContainerFilePath: "/usr/local/unifi/init.d/demo-mode",
-			FileMode:          0o644,
-		}},
-		Networks: []string{nw.Name},
+
+	// take a snapshot of the clean state
+	snapshotErr := pushSnapshot()
+	if snapshotErr != nil {
+		fmt.Printf(snapshotErr.Error())
+		return 5
 	}
 
-	ctr, err := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
-		ContainerRequest: ctrRequest,
-		Started:          true,
-	})
-	if err != nil {
-		glog.Errorf("failed to start container: %s", err)
-		panic(err)
-	}
-
-	defer func() {
-		if err := ctr.Terminate(context.Background()); err != nil {
-			panic(err)
-		}
-	}()
-
-	hostname, err := ctr.Host(ctx)
-	if err != nil {
-		panic(err)
-	}
-
-	mappedPort, err := ctr.MappedPort(ctx, "8443")
-	if err != nil {
-		panic(err)
-	}
-
-	glog.Infof("Unifi controller started at %s:%s", hostname, mappedPort.Port())
-
-	if err := setupEnvironment(fmt.Sprintf("%s:%s", hostname, mappedPort.Port())); err != nil {
-		panic(err)
-	}
+	fmt.Printf("UnifiOS fixture initial snapshot taken. Starting tests...\n")
 
 	return m.Run()
 }
 
+func pushSnapshot() error {
+	cmd := exec.Command("vagrant", "snapshot", "push")
+	cmd.Dir = "unifios"
+	if output, err := cmd.CombinedOutput(); err != nil {
+		return fmt.Errorf("error creating vagrant snapshot: %s\nOutput: %s", err, string(output))
+	}
+	return nil
+}
+
 func setupEnvironment(endpoint string) error {
+	apiKey, err := createSessionApiKey(endpoint)
+	if err != nil {
+		return fmt.Errorf("error creating api key: %s", err)
+	}
+
 	settings := map[string]string{
-		"UNIFI_APIKEY":         "keykeykey",
+		"UNIFI_APIKEY":         apiKey,
 		"UNIFI_ALLOW_INSECURE": "true",
 		"UNIFI_API_HOST":       endpoint,
 	}
@@ -94,13 +95,98 @@ func setupEnvironment(endpoint string) error {
 		}
 	}
 
+	fmt.Printf("--- UnifiOS Test Fixture ---\nAPI Host: %s\nAPI Key: %s\n---------------------------\n\n", endpoint, apiKey)
+
 	return nil
+}
+
+type LoginResponse struct {
+	UniqueId string `json:"unique_id"`
+}
+
+type KeyResponseData struct {
+	FullApiKey string `json:"full_api_key"`
+}
+
+type KeyResponse struct {
+	Data KeyResponseData `json:"data"`
+}
+
+func createSessionApiKey(endpoint string) (string, error) {
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{
+			InsecureSkipVerify: true, // required as we don't trust the test fixture TLS cert
+		},
+	}
+	cookieJar, err := cookiejar.New(nil)
+	if err != nil {
+		return "", err
+	}
+	client := &http.Client{Transport: tr, Jar: cookieJar}
+
+	// Step 1: login
+	buf := []byte(`{
+		"username":"admin",
+		"password":"SimpleIsBetter99!",
+		"token":"",
+		"rememberMe":false}`)
+
+	loginRes, err := client.Post(fmt.Sprintf("https://%s/api/auth/login", endpoint),
+		"application/json", bytes.NewBuffer(buf))
+	if err != nil {
+		return "", err
+	}
+	if loginRes.StatusCode != 200 {
+		return "", fmt.Errorf("error logging in, status code: %d", loginRes.StatusCode)
+	}
+
+	csrfToken := loginRes.Header.Get("x-csrf-token")
+	loginResponseBody := &LoginResponse{}
+	decodeErr := json.NewDecoder(loginRes.Body).Decode(loginResponseBody)
+	if decodeErr != nil {
+		return "", fmt.Errorf("error decoding login result %s", decodeErr)
+	}
+
+	// Step 2: create API key
+	keyReqBuf := []byte(`{
+		"name":"test"
+	}`)
+	keyReq, err := http.NewRequest("POST",
+		fmt.Sprintf("https://%s/proxy/users/api/v2/user/%s/keys", endpoint, loginResponseBody.UniqueId),
+		bytes.NewBuffer(keyReqBuf))
+	if err != nil {
+		return "", err
+	}
+	keyReq.Header.Add("Content-Type", "application/json")
+	keyReq.Header.Add("x-csrf-token", csrfToken)
+	keyRes, err := client.Do(keyReq)
+	if err != nil {
+		return "", err
+	}
+	if keyRes.StatusCode != 200 {
+		return "", fmt.Errorf("error creating api key, status code: %d", keyRes.StatusCode)
+	}
+
+	keyResponse := &KeyResponse{}
+	keyDecodeErr := json.NewDecoder(keyRes.Body).Decode(keyResponse)
+	if keyDecodeErr != nil {
+		return "", fmt.Errorf("error decoding key post result %s", keyDecodeErr)
+	}
+
+	return keyResponse.Data.FullApiKey, nil
 }
 
 func TestWithUnifi(t *testing.T) {
 	_, err := http.Get(fmt.Sprintf("https://%s", os.Getenv("UNIFI_API_HOST")))
 	if err != nil {
 		t.Errorf("error making request to unifi controller: %s", err)
-		panic(err)
+		t.Fail()
 	}
 }
+
+// TODO:
+// - snapshot pop after each test
+// - create API key for test suite, add to env
+// - write tests
+// - stop the need for sudo to bring up and destroy the VM
+// - how to get vagrant logs to stdout for debugging?
