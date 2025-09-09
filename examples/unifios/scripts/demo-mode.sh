@@ -1,7 +1,7 @@
 #!/bin/sh
 
 write_config() {
-  echo "${1}=${2}" >> /usr/lib/unifi/data/system.properties
+  echo "${1}=${2}" >> /home/uosserver/.local/share/containers/storage/volumes/uosserver_var_lib_unifi/_data/system.properties
 }
 
 write_config is_simulation true
