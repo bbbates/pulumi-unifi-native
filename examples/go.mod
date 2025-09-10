@@ -6,7 +6,6 @@ toolchain go1.24.3
 
 require (
 	github.com/pulumi/pulumi/pkg/v3 v3.191.0
-	github.com/testcontainers/testcontainers-go v0.38.0
 	github.com/bmatcuk/go-vagrant v1.6.0
 )
 
