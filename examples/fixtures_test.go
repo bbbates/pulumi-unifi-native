@@ -6,10 +6,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bmatcuk/go-vagrant"
+	"github.com/pulumi/pulumi/pkg/v3/testing/integration"
 	"net/http"
 	"net/http/cookiejar"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"testing"
 )
 
@@ -18,43 +20,32 @@ func TestMain(m *testing.M) {
 }
 
 func runAcceptanceTests(m *testing.M) int {
-	vagrantClient, err := vagrant.NewVagrantClient("unifios")
-	if err != nil {
-		fmt.Printf("error creating vagrant client: %s", err)
-		return 1
-	}
+	//vagrantClient, err := vagrantClient()
+	//if err != nil {
+	//	fmt.Printf("error creating vagrant client: %s", err)
+	//	return 1
+	//}
 
 	fmt.Printf("Bringing up UnifiOS test fixture...\n")
-	upCmd := vagrantClient.Up()
-	if err := upCmd.Run(); err != nil {
-		fmt.Printf("error starting vagrant up: %s", err)
-		return 2
-	}
-	if upCmd.Error != nil {
-		fmt.Printf("error during vagrant up: %s", err)
-		return 3
-	}
+	//upCmd := vagrantClient.Up()
+	//if err := upCmd.Run(); err != nil {
+	//	fmt.Printf("error starting vagrant up: %s", err)
+	//	return 2
+	//}
+	//if upCmd.Error != nil {
+	//	fmt.Printf("error during vagrant up: %s", err)
+	//	return 3
+	//}
 
-	fmt.Printf("UnifiOS test fixture UP, initialising environment...\n")
+	//destroyCmd := vagrantClient.Destroy()
+	//defer func() {
+	//	err := destroyCmd.Run()
+	//	if err != nil {
+	//		fmt.Printf("error during vagrant destroy - ** manual cleanup required before next test run **: %s", err)
+	//	}
+	//}()
 
-	sshConfigCmd := vagrantClient.SSHConfig()
-	if err := sshConfigCmd.Run(); err != nil {
-		fmt.Printf("error getting vagrant ssh-config: %s", err)
-		return 4
-	}
-	hostName := fmt.Sprintf("%s:11443", sshConfigCmd.Configs["default"].HostName)
-
-	if err := setupEnvironment(hostName); err != nil {
-		panic(err)
-	}
-
-	destroyCmd := vagrantClient.Destroy()
-	defer func() {
-		err := destroyCmd.Run()
-		if err != nil {
-			fmt.Printf("error during vagrant destroy - ** manual cleanup required before next test run **: %s", err)
-		}
-	}()
+	fmt.Printf("UnifiOS fixture up. Taking initial snapshot...\n")
 
 	// take a snapshot of the clean state
 	snapshotErr := pushSnapshot()
@@ -68,6 +59,23 @@ func runAcceptanceTests(m *testing.M) int {
 	return m.Run()
 }
 
+func vagrantClient() *vagrant.VagrantClient {
+	client, err := vagrant.NewVagrantClient("unifios")
+	if err != nil {
+		panic(err)
+	}
+	return client
+}
+
+func extractHostname(vagrantClient *vagrant.VagrantClient) (string, error) {
+	sshConfigCmd := vagrantClient.SSHConfig()
+	if err := sshConfigCmd.Run(); err != nil {
+		return "", fmt.Errorf("error getting vagrant ssh-config: %s", err)
+	}
+	hostName := fmt.Sprintf("%s:11443", sshConfigCmd.Configs["default"].HostName)
+	return hostName, nil
+}
+
 func pushSnapshot() error {
 	cmd := exec.Command("vagrant", "snapshot", "push")
 	cmd.Dir = "unifios"
@@ -77,27 +85,28 @@ func pushSnapshot() error {
 	return nil
 }
 
-func setupEnvironment(endpoint string) error {
-	apiKey, err := createSessionApiKey(endpoint)
-	if err != nil {
-		return fmt.Errorf("error creating api key: %s", err)
+func popSnapshot() error {
+	cmd := exec.Command("vagrant", "snapshot", "pop")
+	cmd.Dir = "unifios"
+	if output, err := cmd.CombinedOutput(); err != nil {
+		return fmt.Errorf("error restoring vagrant snapshot: %s\nOutput: %s", err, string(output))
 	}
-
-	settings := map[string]string{
-		"UNIFI_APIKEY":         apiKey,
-		"UNIFI_ALLOW_INSECURE": "true",
-		"UNIFI_API_HOST":       endpoint,
-	}
-
-	for name, value := range settings {
-		if err := os.Setenv(name, value); err != nil {
-			return err
-		}
-	}
-
-	fmt.Printf("--- UnifiOS Test Fixture ---\nAPI Host: %s\nAPI Key: %s\n---------------------------\n\n", endpoint, apiKey)
-
 	return nil
+}
+
+func setupEnvironment() (string, string, error) {
+	hostname, err := extractHostname(vagrantClient())
+	if err != nil {
+		return "", "", fmt.Errorf("error creating api key: %s", err)
+	}
+	apiKey, err := createSessionApiKey(hostname)
+	if err != nil {
+		return "", "", fmt.Errorf("error creating api key: %s", err)
+	}
+
+	fmt.Printf("%s <- %s\n", hostname, apiKey)
+
+	return hostname, apiKey, nil
 }
 
 type LoginResponse struct {
@@ -176,12 +185,34 @@ func createSessionApiKey(endpoint string) (string, error) {
 	return keyResponse.Data.FullApiKey, nil
 }
 
-func TestWithUnifi(t *testing.T) {
-	_, err := http.Get(fmt.Sprintf("https://%s", os.Getenv("UNIFI_API_HOST")))
+func getBaseOptions(t *testing.T) integration.ProgramTestOptions {
+	hostname, apiKey, err := setupEnvironment()
 	if err != nil {
-		t.Errorf("error making request to unifi controller: %s", err)
-		t.Fail()
+		panic(err)
 	}
+
+	return integration.ProgramTestOptions{
+		RunUpdateTest:        false,
+		ExpectRefreshChanges: true,
+		Config: map[string]string{
+			"unifi-native:apiHost":       hostname,
+			"unifi-native:allowInsecure": "true",
+		},
+		Secrets: map[string]string{
+			"unifi-native:apiKey": apiKey,
+		},
+		// ensure the resource provider binary located in the bin directory is the one being tested
+		Env: []string{fmt.Sprintf("PATH=%s:%s", filepath.Join(getCwd(t), "..", "bin"), os.Getenv("PATH"))},
+	}
+}
+
+func getCwd(t *testing.T) string {
+	cwd, err := os.Getwd()
+	if err != nil {
+		t.FailNow()
+	}
+
+	return cwd
 }
 
 // TODO:
