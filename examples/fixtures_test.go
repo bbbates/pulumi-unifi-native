@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto/tls"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"github.com/bmatcuk/go-vagrant"
 	"github.com/pulumi/pulumi/pkg/v3/testing/integration"
@@ -16,34 +17,36 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	os.Exit(runAcceptanceTests(m))
+	existingVmFlag := flag.Bool("existingfixture", false, "Use a running instance of a Unifios vagrant vm")
+	flag.Parse()
+	os.Exit(runAcceptanceTests(m, *existingVmFlag))
 }
 
-func runAcceptanceTests(m *testing.M) int {
-	//vagrantClient, err := vagrantClient()
-	//if err != nil {
-	//	fmt.Printf("error creating vagrant client: %s", err)
-	//	return 1
-	//}
+func runAcceptanceTests(m *testing.M, useExistingVm bool) int {
+	vagrantClient := vagrantClient()
 
-	fmt.Printf("Bringing up UnifiOS test fixture...\n")
-	//upCmd := vagrantClient.Up()
-	//if err := upCmd.Run(); err != nil {
-	//	fmt.Printf("error starting vagrant up: %s", err)
-	//	return 2
-	//}
-	//if upCmd.Error != nil {
-	//	fmt.Printf("error during vagrant up: %s", err)
-	//	return 3
-	//}
+	if !useExistingVm {
+		fmt.Printf("Bringing up UnifiOS test fixture...\n")
+		upCmd := vagrantClient.Up()
+		if err := upCmd.Run(); err != nil {
+			fmt.Printf("error starting vagrant up: %s", err)
+			return 2
+		}
+		if upCmd.Error != nil {
+			fmt.Printf("error during vagrant up: %s", upCmd.Error)
+			return 3
+		}
 
-	//destroyCmd := vagrantClient.Destroy()
-	//defer func() {
-	//	err := destroyCmd.Run()
-	//	if err != nil {
-	//		fmt.Printf("error during vagrant destroy - ** manual cleanup required before next test run **: %s", err)
-	//	}
-	//}()
+		destroyCmd := vagrantClient.Destroy()
+		defer func() {
+			err := destroyCmd.Run()
+			if err != nil {
+				fmt.Printf("error during vagrant destroy - ** manual cleanup required before next test run **: %s", err)
+			}
+		}()
+	} else {
+		fmt.Printf("Using existing Unifios VM fixture...\n")
+	}
 
 	fmt.Printf("UnifiOS fixture up. Taking initial snapshot...\n")
 
@@ -202,7 +205,11 @@ func getBaseOptions(t *testing.T) integration.ProgramTestOptions {
 			"unifi-native:apiKey": apiKey,
 		},
 		// ensure the resource provider binary located in the bin directory is the one being tested
-		Env: []string{fmt.Sprintf("PATH=%s:%s", filepath.Join(getCwd(t), "..", "bin"), os.Getenv("PATH"))},
+		Env: []string{fmt.Sprintf("PATH=%s:%s", filepath.Join(getCwd(t), "..", "bin"), os.Getenv("PATH")),
+			// pass through proxy settings if they exist in the test environment
+			fmt.Sprintf("HTTPS_PROXY=%s", os.Getenv("HTTPS_PROXY")),
+			fmt.Sprintf("HTTP_PROXY=%s", os.Getenv("HTTP_PROXY")),
+		},
 	}
 }
 
