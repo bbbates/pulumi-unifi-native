@@ -16,13 +16,16 @@ import (
 	"testing"
 )
 
+var noSnapshots *bool
+
 func TestMain(m *testing.M) {
 	existingVmFlag := flag.Bool("existingfixture", false, "Use a running instance of a Unifios vagrant vm")
+	noSnapshots = flag.Bool("nosnapshots", false, "Don't take or pop snapshots of the vagrant vm")
 	flag.Parse()
-	os.Exit(runAcceptanceTests(m, *existingVmFlag))
+	os.Exit(runAcceptanceTests(m, *existingVmFlag, *noSnapshots))
 }
 
-func runAcceptanceTests(m *testing.M, useExistingVm bool) int {
+func runAcceptanceTests(m *testing.M, useExistingVm bool, noSnapshots bool) int {
 	vagrantClient := vagrantClient()
 
 	if !useExistingVm {
@@ -48,13 +51,15 @@ func runAcceptanceTests(m *testing.M, useExistingVm bool) int {
 		fmt.Printf("Using existing Unifios VM fixture...\n")
 	}
 
-	fmt.Printf("UnifiOS fixture up. Taking initial snapshot...\n")
+	if !noSnapshots {
+		fmt.Printf("UnifiOS fixture up. Taking initial snapshot...\n")
 
-	// take a snapshot of the clean state
-	snapshotErr := pushSnapshot()
-	if snapshotErr != nil {
-		fmt.Printf(snapshotErr.Error())
-		return 5
+		// take a snapshot of the clean state
+		snapshotErr := pushSnapshot()
+		if snapshotErr != nil {
+			fmt.Printf(snapshotErr.Error())
+			return 5
+		}
 	}
 
 	fmt.Printf("UnifiOS fixture initial snapshot taken. Starting tests...\n")
@@ -91,10 +96,20 @@ func pushSnapshot() error {
 func popSnapshot() error {
 	cmd := exec.Command("vagrant", "snapshot", "pop")
 	cmd.Dir = "unifios"
+	fmt.Printf("Restoring vagrant snapshot...\n")
 	if output, err := cmd.CombinedOutput(); err != nil {
 		return fmt.Errorf("error restoring vagrant snapshot: %s\nOutput: %s", err, string(output))
 	}
 	return nil
+}
+
+func cleanupSnapshots() {
+	if !*noSnapshots {
+		err := popSnapshot()
+		if err != nil {
+			fmt.Printf("error popping snapshot - future test results may be inconsistent! %v", err)
+		}
+	}
 }
 
 func setupEnvironment() (string, string, error) {
@@ -129,6 +144,7 @@ func createSessionApiKey(endpoint string) (string, error) {
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: true, // required as we don't trust the test fixture TLS cert
 		},
+		Proxy: http.ProxyFromEnvironment,
 	}
 	cookieJar, err := cookiejar.New(nil)
 	if err != nil {
@@ -169,6 +185,7 @@ func createSessionApiKey(endpoint string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	keyReq.Header.Add("Content-Type", "application/json")
 	keyReq.Header.Add("x-csrf-token", csrfToken)
 	keyRes, err := client.Do(keyReq)
