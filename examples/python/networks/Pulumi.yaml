@@ -1,0 +1,6 @@
+name: unifi-native-example
+description: A minimal Python pulumi-unifi-native program that establishes some network resources
+runtime:
+    name: python
+    options:
+        virtualenv: venv
