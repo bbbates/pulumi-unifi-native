@@ -226,7 +226,11 @@ func getBaseOptions(t *testing.T) integration.ProgramTestOptions {
 			// pass through proxy settings if they exist in the test environment
 			fmt.Sprintf("HTTPS_PROXY=%s", os.Getenv("HTTPS_PROXY")),
 			fmt.Sprintf("HTTP_PROXY=%s", os.Getenv("HTTP_PROXY")),
+			"PULUMI_SKIP_UPDATE_CHECK=true",
 		},
+		DebugLogLevel: 3,
+		DebugUpdates:  true,
+		Verbose:       true,
 	}
 }
 
