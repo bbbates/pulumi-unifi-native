@@ -1,6 +1,0 @@
-name: unifi-native-example
-description: A minimal Python pulumi-unifi-native program
-runtime:
-    name: python
-    options:
-        virtualenv: venv

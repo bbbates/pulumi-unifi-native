@@ -228,9 +228,9 @@ func getBaseOptions(t *testing.T) integration.ProgramTestOptions {
 			fmt.Sprintf("HTTP_PROXY=%s", os.Getenv("HTTP_PROXY")),
 			"PULUMI_SKIP_UPDATE_CHECK=true",
 		},
-		DebugLogLevel: 3,
-		DebugUpdates:  true,
-		Verbose:       true,
+		//DebugLogLevel: 3,
+		//DebugUpdates:  true,
+		//Verbose:       true,
 	}
 }
 
