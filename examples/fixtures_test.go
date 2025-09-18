@@ -211,6 +211,8 @@ func getBaseOptions(t *testing.T) integration.ProgramTestOptions {
 		panic(err)
 	}
 
+	sharedVirtEnv := true
+
 	return integration.ProgramTestOptions{
 		RunUpdateTest:        false,
 		ExpectRefreshChanges: true,
@@ -230,7 +232,8 @@ func getBaseOptions(t *testing.T) integration.ProgramTestOptions {
 		},
 		//DebugLogLevel: 3,
 		//DebugUpdates:  true,
-		//Verbose:       true,
+		Verbose:             true,
+		UseSharedVirtualEnv: &sharedVirtEnv,
 	}
 }
 

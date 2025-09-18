@@ -91,4 +91,18 @@ personal_devices_wlan = unifi.wlanconf.Wlan("wifi_personal",
                                             wlan_band="both",
                                             wlan_bands=["2g", "5g", "6g"])
 
+# Static DNS entries
 
+## A entry -> nas.users.internal
+nas_dns_entry = unifi.static_dns.StaticDnsEntry("nas_dns",
+                                                record_type="A",
+                                                key="nas.users.internal",
+                                                value="192.168.2.100",
+                                                enabled=True,
+                                                ttl=600)
+
+txt_entry = unifi.static_dns.StaticDnsEntry("txt_dns",
+                                            record_type="TXT",
+                                            key="__DUMMY_RECORD",
+                                            value="DUMMYDUMMYDUMMY",
+                                            enabled=True)

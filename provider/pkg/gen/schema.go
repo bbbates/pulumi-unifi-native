@@ -213,13 +213,20 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 	})
 
 	metadata := openapigen.ProviderMetadata{
-		ResourceCRUDMap:  providerMetadata.ResourceCRUDMap,
+		ResourceCRUDMap:  fixResourceCRUDMap(providerMetadata.ResourceCRUDMap),
 		AutoNameMap:      providerMetadata.AutoNameMap,
 		SDKToAPINameMap:  providerMetadata.SDKToAPINameMap,
 		APIToSDKNameMap:  providerMetadata.APIToSDKNameMap,
 		PathParamNameMap: providerMetadata.PathParamNameMap,
 	}
 	return pkg, metadata, updatedOpenAPIDoc
+}
+
+func fixResourceCRUDMap(crudMap map[string]*openapigen.CRUDOperationsMap) map[string]*openapigen.CRUDOperationsMap {
+	// fix static-dns read operation - use the endpoint that returns a list - needs to be handled by the provider
+	crudMap["unifi-native:static-dns:StaticDnsEntry"].R = crudMap["unifi-native:static-dns:listStaticDnsEntries"].R
+
+	return crudMap
 }
 
 func rawMessage(v interface{}) pschema.RawMessage {

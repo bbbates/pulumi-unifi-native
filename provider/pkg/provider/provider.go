@@ -297,8 +297,37 @@ func (p *unifiNativeProvider) OnPreRead(_ context.Context, req *pulumirpc.ReadRe
 	return nil
 }
 
+var (
+	listResourceTypes = []string{
+		"unifi:index:StaticDns",
+	}
+)
+
 func (p *unifiNativeProvider) OnPostRead(_ context.Context, req *pulumirpc.ReadRequest, outputs interface{}) (map[string]interface{}, error) {
-	return p.extractOutput(outputs, "", req.Type, nil)
+	output, err := p.extractOutput(outputs, "", req.Type, nil)
+	if err != nil {
+		return output, err
+	}
+
+	if isListResourceType(req.Type) {
+		for _, item := range output["items"].([]map[string]interface{}) {
+			if item["id"] == req.Id {
+				return item, nil
+			}
+		}
+	}
+
+	return output, nil
+}
+
+func isListResourceType(resourceType string) bool {
+	for _, t := range listResourceTypes {
+		if t == resourceType {
+			return true
+		}
+	}
+
+	return false
 }
 
 func (p *unifiNativeProvider) OnPreUpdate(_ context.Context, _ *pulumirpc.UpdateRequest, _ *http.Request) error {
