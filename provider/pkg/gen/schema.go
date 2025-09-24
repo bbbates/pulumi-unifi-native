@@ -222,9 +222,26 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 	return pkg, metadata, updatedOpenAPIDoc
 }
 
+var ResourceCrudMapFixes = map[string]string{
+	"unifi-native:static-dns:StaticDnsEntry":                   "unifi-native:static-dns:listStaticDnsEntries",
+	"unifi-native:acl-rules:AclRule":                           "unifi-native:acl-rules:listAclRules",
+	"unifi-native:apgroups:ApGroup":                            "unifi-native:apgroups:listApGroups",
+	"unifi-native:configuration:WanLoadBalancingConfiguration": "unifi-native:configuration:getWanLoadBalancingConfiguration",
+	"unifi-native:content-filtering:ContentFilteringRule":      "unifi-native:content-filtering:listContentFilteringRules",
+	"unifi-native:floorplan:FloorPlan":                         "unifi-native:floorplan:listFloorPlans",
+	"unifi-native:trafficroutes:TrafficRoute":                  "unifi-native:trafficroutes:listTrafficRoutes",
+	"unifi-native:trafficrule:TrafficRule":                     "unifi-native:trafficrules:listTrafficRules",
+	"unifi-native:zone:FirewallZone":                           "unifi-native:zone:listFirewallZones",
+	"unifi-native:firewall-app-blocks:SimpleAppBlockRule":      "unifi-native:firewall-app-blocks:listSimpleAppBlockRules",
+}
+
+// FIXME: SimpleAppBlockRule update needs to be fixed in the openAPI docs
+//crudMap["unifi-native:firewall-app-blocks:SimpleAppBlockRule"].R = crudMap["unifi-native:firewall-app-blocks:listSimpleAppBlockRules"].R
+
 func fixResourceCRUDMap(crudMap map[string]*openapigen.CRUDOperationsMap) map[string]*openapigen.CRUDOperationsMap {
-	// fix static-dns read operation - use the endpoint that returns a list - needs to be handled by the provider
-	crudMap["unifi-native:static-dns:StaticDnsEntry"].R = crudMap["unifi-native:static-dns:listStaticDnsEntries"].R
+	for dest, listFuncName := range ResourceCrudMapFixes {
+		crudMap[dest].R = crudMap[listFuncName].R
+	}
 
 	return crudMap
 }
