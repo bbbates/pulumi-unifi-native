@@ -127,36 +127,7 @@ func (p *unifiNativeProvider) v1ApiExtractOutput(result map[string]interface{}, 
 	// If the resource type if provided, and the type is a Device, then remove the unnecessary fields
 	// and change the ID field to use the mac field
 	if resourceType == "unifi-native:device:Device" {
-		statPropertiesForRemoval := []string{
-			"active_geo_info",
-			"config_network_lan",
-			"dhcp_excluded_ip_list",
-			"last_uplink",
-			"system-stats",
-			"sys_stats",
-			"detailed_states",
-			"geo_info",
-			"ids_ips_signature",
-			"ipv4_active_leases",
-			"last_geo_info",
-			"last_wan_interfaces",
-			"led_state",
-			"ruleset_interfaces",
-			"speedtest-status",
-			"stat",
-			"switch_caps",
-			"udapi_version",
-			"uplink",
-			"uptime_stats",
-			"wan1",
-			"wan2",
-		}
-		for _, prop := range statPropertiesForRemoval {
-			if _, ok := data[prop]; ok {
-				logging.V(3).Infof("Removing property %s from the output data", prop)
-				delete(data, prop)
-			}
-		}
+		cleanDeviceData(data)
 	}
 
 	return data, nil

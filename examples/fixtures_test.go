@@ -247,8 +247,7 @@ func getCwd(t *testing.T) string {
 }
 
 // TODO:
-// - snapshot pop after each test
-// - create API key for test suite, add to env
-// - write tests
+// - write more tests for v2 API resources
+// - fix device tests - can we import a device in a test? Might need to migrate to https://github.com/pulumi/providertest/blob/main/pulumitest/README.md
 // - stop the need for sudo to bring up and destroy the VM
 // - how to get vagrant logs to stdout for debugging?
