@@ -35,6 +35,7 @@ func TestExampleDevicesPython(t *testing.T) {
 		With(integration.ProgramTestOptions{
 			Dir: filepath.Join(getCwd(t), "python", "devices"),
 		})
+
 	integration.ProgramTest(t, &test)
 }
 
