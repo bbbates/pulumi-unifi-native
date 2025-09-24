@@ -3,6 +3,7 @@ package provider
 import (
 	"context"
 	"crypto/tls"
+	unifiSchema "github.com/bbbates/pulumi-unifi-native/provider/pkg/gen"
 	"github.com/cloudy-sky-software/pulumi-provider-framework/state"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource/plugin"
 	"net/http"
@@ -14,7 +15,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	structpb "google.golang.org/protobuf/types/known/structpb"
+	"google.golang.org/protobuf/types/known/structpb"
 
 	"github.com/pulumi/pulumi/pkg/v3/resource/provider"
 
@@ -297,12 +298,6 @@ func (p *unifiNativeProvider) OnPreRead(_ context.Context, req *pulumirpc.ReadRe
 	return nil
 }
 
-var (
-	listResourceTypes = []string{
-		"unifi:index:StaticDns",
-	}
-)
-
 func (p *unifiNativeProvider) OnPostRead(_ context.Context, req *pulumirpc.ReadRequest, outputs interface{}) (map[string]interface{}, error) {
 	output, err := p.extractOutput(outputs, "", req.Type, nil)
 	if err != nil {
@@ -310,9 +305,13 @@ func (p *unifiNativeProvider) OnPostRead(_ context.Context, req *pulumirpc.ReadR
 	}
 
 	if isListResourceType(req.Type) {
-		for _, item := range output["items"].([]map[string]interface{}) {
-			if item["id"] == req.Id {
-				return item, nil
+		logging.V(3).Infof("Resource type %s is a list type, searching for id %s in items", req.Type, req.Id)
+
+		items := output["items"].([]interface{})
+		for _, item := range items {
+			itemMap := item.(map[string]interface{})
+			if itemMap["id"] == req.Id {
+				return itemMap, nil
 			}
 		}
 	}
@@ -321,13 +320,8 @@ func (p *unifiNativeProvider) OnPostRead(_ context.Context, req *pulumirpc.ReadR
 }
 
 func isListResourceType(resourceType string) bool {
-	for _, t := range listResourceTypes {
-		if t == resourceType {
-			return true
-		}
-	}
-
-	return false
+	_, ok := unifiSchema.ResourceCrudMapFixes[resourceType]
+	return ok
 }
 
 func (p *unifiNativeProvider) OnPreUpdate(_ context.Context, _ *pulumirpc.UpdateRequest, _ *http.Request) error {
