@@ -59,6 +59,16 @@ The type slugs generally follow the `unifi-native:lowercaseresourcename:CamelCas
 $ pulumi import 'unifi-native:firewallrule:FirewallRule' NameOfFirewallRule 'LONGID'
 ```
 
+### Testing the provider
+
+UnifiOS is loaded in a vagrant box as the test fixture. To run the tests, you will need to have vagrant installed (and libvirt, so only linux hosts for now).
+
+```
+cd examples && go test
+
+# This will create the test fixture and run the tests against it.
+```
+
 
 ### Thanks to
 
