@@ -68,6 +68,33 @@ guest_network = unifi.networkconf.Network("guests",
                                           dhcpd_stop="192.168.4.254",
                                           ipv6_interface_type="none")
 
+# "Global" network settings - these are the settings you would see under the list of networks in the networks settings UI
+
+## Switch settings - how switches in the network behave when routing traffic between VLANs
+global_switch_settings = unifi.global_switch.SettingGlobalSwitch("network_global_switch",
+                                                                 # ACL isolation rules - Only enable if a supported device is present (not present in test fixture)
+                                                                 # isolate all devices in the following networks
+                                                                 # acl_device_isolation=[guest_network.id],
+                                                                 # isolate all devices in guest_network from personal and iot networks
+                                                                 # acl_l3_isolation=[unifi.global_switch.SettingGlobalSwitchAclL3IsolationArgs(
+                                                                 #     source_network=guest_network.id,
+                                                                 #     destination_networks=[iot_devices_network.id, personal_devices_network.id]
+                                                                 # )],
+                                                                 dhcp_snoop=True,
+                                                                 flood_known_protocols=True)
+
+## Multicast network settings
+multicast_settings = unifi.network.GlobalConfig("network_global_multicast",
+                                                # IGMP snooping on
+                                                igmp_snooping_for="some",
+                                                igmp_snooping_for_network_ids=[personal_devices_network.id, iot_devices_network.id, guest_network.id],
+
+                                                # forward mDNS traffic between the IoT and Personal device networks
+                                                mdns_enabled_for="some",
+                                                mdns_enabled_for_network_ids=[personal_devices_network.id, iot_devices_network.id])
+
+
+
 # Wireless LANs
 default_wlan_group = unifi.wlangroup.WLANGroup("default", name="default")
 ap_groups = unifi.apgroups.list_ap_groups().items
@@ -106,3 +133,4 @@ txt_entry = unifi.static_dns.StaticDnsEntry("txt_dns",
                                             key="__DUMMY_RECORD",
                                             value="DUMMYDUMMYDUMMY",
                                             enabled=True)
+

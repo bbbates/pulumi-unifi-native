@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"reflect"
+	"slices"
 	"time"
 
 	"github.com/getkin/kin-openapi/openapi3"
@@ -64,7 +65,7 @@ func (p *unifiNativeProvider) extractOutput(outputs interface{}, id string, reso
 		if result["meta"] != nil && result["data"] != nil {
 			return p.v1ApiExtractOutput(result, id, resourceType, inputProperties)
 		}
-		return p.v2ApiExtractOutput(result)
+		return p.v2ApiExtractOutput(result, resourceType)
 	} else if outputType.Kind() == reflect.Slice {
 		logging.V(3).Infof("API v2 Data: %v", outputs)
 		// only v2 APIs return slices of results
@@ -133,17 +134,25 @@ func (p *unifiNativeProvider) v1ApiExtractOutput(result map[string]interface{}, 
 	return data, nil
 }
 
-func (p *unifiNativeProvider) v2ApiExtractOutput(result map[string]interface{}) (map[string]interface{}, error) {
+func (p *unifiNativeProvider) v2ApiExtractOutput(result map[string]interface{}, resourceType string) (map[string]interface{}, error) {
 	logging.V(3).Infof("API v2 Data: %v", result)
 
-	if result["_id"] == nil {
-		return nil, errors.New("output did not contain an '_id' field")
-	}
-	result["id"] = result["_id"] // need to massage the _id from unifi to match Pulumi's expectations
-	result["Id"] = result["_id"]
-	delete(result, "_id") // leaving the API _id field in the results seems to cause trouble with the refresh operation
 	result["siteName"] = p.siteID
 	result["site_name"] = p.siteID
+
+	// not all v2 API results contain an ID - "config" resources, for example.
+	// for these resources, a static ID value, "SINGLETON" is used for all -
+	// so that pulumi and the pulumi-framework-provider is satisfied
+	if isNonIdentifiableResource(resourceType) {
+		result["id"] = "SINGLETON"
+	} else {
+		if result["_id"] == nil {
+			return nil, errors.New("output did not contain an '_id' field")
+		}
+		result["id"] = result["_id"] // need to massage the _id from unifi to match Pulumi's expectations
+		result["Id"] = result["_id"]
+		delete(result, "_id") // leaving the API _id field in the results seems to cause trouble with the refresh operation
+	}
 
 	return result, nil
 }
@@ -291,7 +300,7 @@ func (p *unifiNativeProvider) OnPostRead(_ context.Context, req *pulumirpc.ReadR
 }
 
 func isListResourceType(resourceType string) bool {
-	_, ok := unifiSchema.ResourceCrudMapFixes[resourceType]
+	_, ok := unifiSchema.ResourceCrudMapReadFixes[resourceType]
 	return ok
 }
 
@@ -312,7 +321,14 @@ func (p *unifiNativeProvider) OnPreDelete(_ context.Context, deleteRequest *pulu
 		if err != nil {
 			return err
 		}
+	} else if slices.Contains(notIdentifiableResources, resourceTypeToken) {
+		logging.V(3).Infof("Deleting a non-identifiable resource, sending a blank PUT request which clears the resource data")
+		err := deleteNonIdentifiableResource(httpReq)
+		if err != nil {
+			return err
+		}
 	}
+
 	return nil
 }
 
