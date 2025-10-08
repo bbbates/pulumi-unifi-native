@@ -10,11 +10,14 @@ require (
 	github.com/pulumi/pulumi/sdk/v3 v3.191.0
 )
 
-require github.com/stretchr/testify v1.11.0
+require (
+	github.com/golang/glog v1.2.5
+	github.com/stretchr/testify v1.11.0
+)
 
 require (
 	github.com/cloudy-sky-software/pulschema v0.0.0-20250824215724-d08f3502036d
-	github.com/cloudy-sky-software/pulumi-provider-framework v0.0.0-20250824231453-4038acfcdab6 // indirect
+	github.com/cloudy-sky-software/pulumi-provider-framework v0.0.0-20250824231453-4038acfcdab6
 	github.com/pkg/errors v0.9.1
 	google.golang.org/protobuf v1.36.7
 	gopkg.in/yaml.v3 v3.0.1
@@ -52,7 +55,6 @@ require (
 	github.com/go-openapi/jsonpointer v0.21.1 // indirect
 	github.com/go-openapi/swag v0.23.1 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
-	github.com/golang/glog v1.2.5 // indirect
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/uuid v1.6.0 // indirect
