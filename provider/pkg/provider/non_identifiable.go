@@ -7,6 +7,7 @@ import (
 	"slices"
 )
 
+// Don't forget to add the matching path to provider/pkg/gen/openapi_fixes.go:338
 var notIdentifiableResources = []string{
 	"unifi-native:network:GlobalConfig",
 }

@@ -5,6 +5,7 @@ import (
 	"github.com/cloudy-sky-software/pulschema/pkg"
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/golang/glog"
+	"slices"
 	"strings"
 )
 
@@ -333,6 +334,11 @@ var V2PathsToRemove = []string{
 	"/api/site/{siteName}/vpn/openvpn/configuration",
 }
 
+// Don't forget to add the matching resource to provider/pkg/provider/non_identifiable.go:10
+var pathsRequiringDummyDeletes = []string{
+	"/api/site/{siteName}/global/config/network",
+}
+
 func FixV2OpenAPIDoc(openAPIDoc *openapi3.T) error {
 	// remove license from header, just causes issues
 	openAPIDoc.Info.License = nil
@@ -380,6 +386,15 @@ func FixV2OpenAPIDoc(openAPIDoc *openapi3.T) error {
 					Type: (*openapi3.Types)(&[]string{"string"}),
 				})
 			}
+		}
+
+		// if the path does not have a delete method, but needs a dummy one so the provider framework will still function
+		// then add it here
+		if slices.Contains(pathsRequiringDummyDeletes, path) {
+			dummyDelete := *pathItem.Put // the dummy delete will be the same as the PUT method - it won't actually be called, it will be replaced in the OnPreDelete provider method
+			dummyDelete.OperationID = strings.ReplaceAll(dummyDelete.OperationID, "update", "delete")
+			dummyDelete.RequestBody = nil
+			pathItem.Delete = &dummyDelete
 		}
 	}
 

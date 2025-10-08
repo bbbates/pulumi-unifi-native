@@ -9,7 +9,6 @@ import (
 	"net/http"
 	"os"
 	"reflect"
-	"slices"
 	"time"
 
 	"github.com/getkin/kin-openapi/openapi3"
@@ -321,7 +320,7 @@ func (p *unifiNativeProvider) OnPreDelete(_ context.Context, deleteRequest *pulu
 		if err != nil {
 			return err
 		}
-	} else if slices.Contains(notIdentifiableResources, resourceTypeToken) {
+	} else if isNonIdentifiableResource(resourceTypeToken) {
 		logging.V(3).Infof("Deleting a non-identifiable resource, sending a blank PUT request which clears the resource data")
 		err := deleteNonIdentifiableResource(httpReq)
 		if err != nil {
