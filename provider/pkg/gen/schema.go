@@ -222,7 +222,7 @@ func PulumiSchema(openapiDoc openapi3.T) (pschema.PackageSpec, openapigen.Provid
 	return pkg, metadata, updatedOpenAPIDoc
 }
 
-var ResourceCrudMapFixes = map[string]string{
+var ResourceCrudMapReadFixes = map[string]string{
 	"unifi-native:static-dns:StaticDnsEntry":                   "unifi-native:static-dns:listStaticDnsEntries",
 	"unifi-native:acl-rules:AclRule":                           "unifi-native:acl-rules:listAclRules",
 	"unifi-native:apgroups:ApGroup":                            "unifi-native:apgroups:listApGroups",
@@ -239,7 +239,7 @@ var ResourceCrudMapFixes = map[string]string{
 //crudMap["unifi-native:firewall-app-blocks:SimpleAppBlockRule"].R = crudMap["unifi-native:firewall-app-blocks:listSimpleAppBlockRules"].R
 
 func fixResourceCRUDMap(crudMap map[string]*openapigen.CRUDOperationsMap) map[string]*openapigen.CRUDOperationsMap {
-	for dest, listFuncName := range ResourceCrudMapFixes {
+	for dest, listFuncName := range ResourceCrudMapReadFixes {
 		crudMap[dest].R = crudMap[listFuncName].R
 	}
 

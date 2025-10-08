@@ -37401,6 +37401,67 @@ paths:
             tags:
                 - Floor Plan
     /v2/api/site/{siteName}/global/config/network:
+        delete:
+            description: 7.2.61
+            operationId: deleteGlobalConfig
+            parameters:
+                - in: path
+                  name: siteName
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GlobalNetworkConfigDto'
+                    description: OK
+                "207":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GlobalDeviceUpdateStatusDto'
+                    description: Multi-Status
+                "400":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorMessage'
+                    description: Bad Request
+                "401":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorMessage'
+                    description: Unauthorized
+                "403":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorMessage'
+                    description: Forbidden
+                "404":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorMessage'
+                    description: Not Found
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorMessage'
+                    description: Internal Server Error
+                "501":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorMessage'
+                    description: Not Implemented
+            summary: Update Global Network config
+            tags:
+                - Global Network Config
         get:
             description: 7.2.61
             operationId: getGlobalConfig
