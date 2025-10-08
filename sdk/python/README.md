@@ -24,6 +24,13 @@ Currently, to manage Unifi resources via Pulumi, you need to make use of one of 
 
 - Documentation is non-existent - this is a task for the future. Will be best to peruse the python SDK packages to get an understanding of what can be done with this provider.
 
+## Examples
+
+Examples can be found here:
+
+* [Network, Global network settings, WLAN, and Static DNS resources](examples/python/networks/__main__.py)
+* [Users (network device configuration)](examples/python/users/__main__.py)
+
 
 ## Build the provider 
 
@@ -51,13 +58,24 @@ The following configuration options are available for the provider:
 
 
 
-### Importing Existing Resources
+## Importing Existing Resources
 
 The type slugs generally follow the `unifi-native:lowercaseresourcename:CamelCaseResourceName. For example:
 
 ```bash
 $ pulumi import 'unifi-native:firewallrule:FirewallRule' NameOfFirewallRule 'LONGID'
 ```
+
+## Testing the provider
+
+UnifiOS is loaded in a vagrant box as the test fixture. To run the tests, you will need to have vagrant installed (and libvirt, so only linux hosts for now).
+
+```
+cd examples && go test
+
+# This will create the test fixture and run the tests against it.
+```
+
 
 
 ### Thanks to
