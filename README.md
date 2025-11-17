@@ -24,6 +24,8 @@ Currently, to manage Unifi resources via Pulumi, you need to make use of one of 
 
 - Documentation is non-existent - this is a task for the future. Will be best to peruse the python SDK packages to get an understanding of what can be done with this provider.
 
+[This issue](https://github.com/bbbates/pulumi-unifi-native/issues/6) tracks progress.
+
 ## Examples
 
 Examples can be found here:
